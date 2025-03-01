@@ -9,6 +9,7 @@ module sample.hustbookstore {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires java.sql;
 
     opens sample.hustbookstore to javafx.fxml;
     exports sample.hustbookstore;
