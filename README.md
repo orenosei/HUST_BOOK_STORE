@@ -3,7 +3,6 @@
 ## Project Overview
 This project aims to provide a comprehensive solution for managing book inventories, sales, and customer interactions within a digital bookstore environment.
 
----
 
 ## Team Information
 ### Group Name: *Duy Vũ bàn bên thỉnh thoảng lại trêu ghẹo Minh Thành bằng Java*
