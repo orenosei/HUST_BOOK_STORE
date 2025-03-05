@@ -123,7 +123,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>sample.hustbookstore/sample.hustbookstore.HelloApplication</mainClass>
+                            <mainClass>sample.hustbookstore/sample.hustbookstore.LaunchApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import java.lang.String?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="white-bg" stylesheets="@homeDesign.css">
+         <children>
+            <AnchorPane prefHeight="90.0" prefWidth="1280.0" styleClass="header" stylesheets="@homeDesign.css">
+               <children>
+                  <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="296.0" layoutY="73.0" size="6em" />
+                  <FontAwesomeIcon fill="WHITE" glyphName="BELL" layoutX="1205.0" layoutY="60.0" size="4em" />
+                  <Text fill="WHITE" layoutX="381.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome,">
+                     <font>
+                        <Font name="Chalkboard SE Regular" size="22.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="380.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trinh Minh Thanh" underline="true">
+                     <font>
+                        <Font name="Chalkboard SE Regular" size="40.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="720.0" prefWidth="260.0" styleClass="side-bar" stylesheets="@homeDesign.css">
+               <children>
+                  <Text fill="WHITE" layoutX="10.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HUST">
+                     <font>
+                        <Font name="Martian Mono ExtraBold" size="50.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="156.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOOK">
+                     <font>
+                        <Font name="Martian Mono ExtraBold" size="22.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="155.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STORE">
+                     <font>
+                        <Font name="Martian Mono ExtraBold" size="22.0" />
+                     </font>
+                  </Text>
+                  <VBox layoutY="90.0" prefHeight="500.0" prefWidth="250.0">
+                     <children>
+                        <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@homeDesign.css">
+                           <children>
+                              <FontAwesomeIcon fill="WHITE" glyphName="HOME" layoutX="14.0" layoutY="59.0" size="4em" />
+                              <Button alignment="BASELINE_CENTER" layoutX="76.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="DASHBOARD" textFill="WHITE" AnchorPane.rightAnchor="0.0">
+                                 <font>
+                                    <Font name="Chalkboard Bold" size="23.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@homeDesign.css">
+                           <children>
+                              <FontAwesomeIcon fill="WHITE" glyphName="ARCHIVE" layoutX="14.0" layoutY="60.0" size="4em" />
+                              <Button alignment="BASELINE_CENTER" layoutX="81.0" layoutY="9.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="INVENTORY" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font name="Chalkboard Bold" size="23.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@homeDesign.css">
+                           <children>
+                              <FontAwesomeIcon fill="WHITE" glyphName="USER_PLUS" layoutX="14.0" layoutY="60.0" size="4em" />
+                              <Button alignment="BASELINE_CENTER" layoutX="81.0" layoutY="9.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="CUSTOMERS" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font name="Chalkboard Bold" size="23.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@homeDesign.css">
+                           <children>
+                              <FontAwesomeIcon fill="WHITE" glyphName="LIST" layoutX="14.0" layoutY="60.0" size="4em" />
+                              <Button alignment="BASELINE_CENTER" layoutX="81.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="OTHERS" textFill="WHITE">
+                                 <font>
+                                    <Font name="Chalkboard Bold" size="23.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@homeDesign.css">
+                           <children>
+                              <FontAwesomeIcon fill="WHITE" glyphName="EMPIRE" layoutX="14.0" layoutY="60.0" size="4em" />
+                              <Button alignment="BASELINE_CENTER" layoutX="77.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="ARYACHAT" textFill="WHITE">
+                                 <font>
+                                    <Font name="Chalkboard Bold" size="23.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@homeDesign.css">
+                           <children>
+                              <FontAwesomeIcon fill="WHITE" glyphName="EDIT" layoutX="14.0" layoutY="60.0" size="4em" />
+                              <Button alignment="BASELINE_CENTER" layoutX="77.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="PROFILE" textFill="WHITE">
+                                 <font>
+                                    <Font name="Chalkboard Bold" size="23.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+                  <AnchorPane layoutX="12.0" layoutY="646.0" prefHeight="50.0" prefWidth="128.0" stylesheets="@homeDesign.css">
+                     <children>
+                        <Button alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="67.0" prefWidth="203.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="SIGN OUT" textFill="WHITE" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font name="Chalkboard Bold" size="16.0" />
+                           </font>
+                        </Button>
+                        <FontAwesomeIcon fill="WHITE" glyphName="SIGN_OUT" layoutX="8.0" layoutY="33.0" size="2em" text="" wrappingWidth="33.21428680419922" />
+                     </children>
+                     <styleClass>
+                        <String fx:value="trans-bg" />
+                        <String fx:value="function" />
+                        <String fx:value="signout-panel" />
+                     </styleClass>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="260.0" layoutY="90.0" prefHeight="630.0" prefWidth="1020.0" styleClass="white-bg" stylesheets="@homeDesign.css">
+               <children>
+                  <AnchorPane layoutX="30.0" layoutY="20.0" prefHeight="200.0" prefWidth="300.0" styleClass="info-panel" stylesheets="@homeDesign.css" AnchorPane.leftAnchor="30.0">
+                     <children>
+                        <Text fill="WHITE" layoutX="107.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trending">
+                           <font>
+                              <Font name="Chalkboard SE Regular" size="22.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="360.0" layoutY="20.0" prefHeight="200.0" prefWidth="300.0" styleClass="info-panel" stylesheets="@homeDesign.css">
+                     <children>
+                        <Text fill="WHITE" layoutX="162.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Income" textAlignment="JUSTIFY">
+                           <font>
+                              <Font name="Chalkboard SE Regular" size="40.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="235.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VND">
+                           <font>
+                              <Font name="Chalkboard" size="25.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="101.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1.234.567" textAlignment="JUSTIFY">
+                           <font>
+                              <Font name="Chalkboard SE Regular" size="40.0" />
+                           </font>
+                        </Text>
+                        <FontAwesomeIcon fill="WHITE" glyphName="DOLLAR" layoutX="7.0" layoutY="171.0" opacity="0.4" size="200px" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="650.0" layoutY="20.0" prefHeight="90.0" prefWidth="300.0" styleClass="info-panel" stylesheets="@homeDesign.css" AnchorPane.rightAnchor="30.0">
+                     <children>
+                        <Text fill="WHITE" layoutX="184.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customers" textAlignment="RIGHT">
+                           <font>
+                              <Font name="Chalkboard SE Regular" size="22.0" />
+                           </font>
+                        </Text>
+                        <FontAwesomeIcon fill="WHITE" glyphName="USERS" layoutX="8.0" layoutY="78.0" opacity="0.4" size="7em" />
+                        <Text fill="WHITE" layoutX="217.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100" textAlignment="JUSTIFY">
+                           <font>
+                              <Font name="Chalkboard SE Regular" size="40.0" />
+                           </font>
+                        </Text>
+                     </children></AnchorPane>
+                  <AnchorPane layoutX="30.0" layoutY="260.0" prefHeight="370.0" prefWidth="465.0" styleClass="chart-panel" stylesheets="@homeDesign.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0">
+                     <children>
+                        <LineChart layoutX="20.0" layoutY="75.0" prefHeight="295.0" prefWidth="445.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="65.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </LineChart>
+                        <Text fill="#92c2da" layoutX="114.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Income's Chart" textAlignment="JUSTIFY">
+                           <font>
+                              <Font name="Chalkboard SE Regular" size="35.0" />
+                           </font>
+                        </Text>
+                     </children></AnchorPane>
+                  <AnchorPane layoutX="538.0" layoutY="260.0" prefHeight="370.0" prefWidth="465.0" styleClass="chart-panel" stylesheets="@homeDesign.css" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="30.0">
+                     <children>
+                        <BarChart layoutX="20.0" layoutY="72.0" prefHeight="298.0" prefWidth="445.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="62.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                        <Text fill="#92c2da" layoutX="89.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customers's Chart" textAlignment="JUSTIFY">
+                           <font>
+                              <Font name="Chalkboard SE Regular" size="35.0" />
+                           </font>
+                        </Text>
+                     </children></AnchorPane>
+                  <AnchorPane layoutX="690.0" layoutY="122.0" prefHeight="90.0" prefWidth="300.0" styleClass="info-panel" stylesheets="@homeDesign.css">
+                     <children>
+                        <Text fill="WHITE" layoutX="150.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sold Products" textAlignment="RIGHT">
+                           <font>
+                              <Font name="Chalkboard SE Regular" size="22.0" />
+                           </font>
+                        </Text>
+                        <FontAwesomeIcon fill="WHITE" glyphName="BOOK" layoutX="9.0" layoutY="82.0" opacity="0.4" size="7em" />
+                        <Text fill="WHITE" layoutX="198.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1000" textAlignment="JUSTIFY" wrappingWidth="94.87956237792969">
+                           <font>
+                              <Font name="Chalkboard SE Regular" size="40.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
