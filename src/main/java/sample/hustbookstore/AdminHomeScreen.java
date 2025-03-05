@@ -1,4 +1,4 @@
 package sample.hustbookstore;
 
-public class AdminHomeView {
+public class AdminHomeScreen {
 }

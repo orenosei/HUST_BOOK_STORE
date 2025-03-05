@@ -16,12 +16,12 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane prefHeight="720.0" prefWidth="1280.0" styleClass="white-form" stylesheets="@Login_demo.css">
+      <AnchorPane prefHeight="720.0" prefWidth="1280.0" styleClass="white-form" stylesheets="@LaunchApplicationDesign.css">
          <children>
-            <AnchorPane layoutY="-11.0" prefHeight="720.0" prefWidth="640.0" styleClass="gradient" stylesheets="@Login_demo.css">
+            <AnchorPane layoutY="-11.0" prefHeight="720.0" prefWidth="640.0" styleClass="gradient" stylesheets="@LaunchApplicationDesign.css">
                <children>
                   <FontAwesomeIcon fill="WHITE" glyphName="BOOK" layoutX="206.0" layoutY="341.0" size="20em" />
-                  <Button layoutX="174.0" layoutY="627.0" minHeight="50.0" mnemonicParsing="false" prefWidth="300.0" stylesheets="@Login_demo.css" text="Create new account">
+                  <Button layoutX="174.0" layoutY="627.0" minHeight="50.0" mnemonicParsing="false" prefWidth="300.0" stylesheets="@LaunchApplicationDesign.css" text="Create new account">
                      <font>
                         <Font size="18.0" />
                      </font>
