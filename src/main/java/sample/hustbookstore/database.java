@@ -10,8 +10,7 @@ public class database {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Kết nối đến cơ sở dữ liệu với JDBC URL
-            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/library", "root", "1qaz0okm");
-            return connect;
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/library", "root", "1qaz0okm");
         } catch (Exception e) {
             e.printStackTrace();
         }
