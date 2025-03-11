@@ -34,6 +34,7 @@
     -fx-border-width: 10px;
     -fx-border-radius: 20px;
 }
+
 .trans-bg{
     -fx-background-color: transparent;
 }
@@ -44,4 +45,28 @@
 }
 .bg-radious{
     -fx-background-radius: 15px;
+}
+
+.purple-bg{
+    -fx-background-color: #9178d1;
+}
+
+.trending-bg{
+    -fx-background-color: #5c0090;
+    -fx-background-radius: 20px 20px 0 0;
+}
+
+.book-bg{
+    -fx-background-color: #9178d1;
+    -fx-background-radius: 20px 20px 0 0;
+}
+
+.stationery-bg{
+    -fx-background-color: #6e83ea;
+    -fx-background-radius: 20px 20px 0 0;
+}
+
+.toy-bg{
+    -fx-background-color: #80abf2;
+    -fx-background-radius: 20px 20px 0 0;
 }
