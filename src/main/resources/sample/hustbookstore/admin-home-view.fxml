@@ -2,7 +2,6 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import java.lang.String?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
@@ -22,31 +21,16 @@
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="white-bg" stylesheets="@homeDesign.css">
          <children>
-            <AnchorPane prefHeight="77.0" prefWidth="1280.0" styleClass="header" stylesheets="@homeDesign.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <AnchorPane prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button layoutX="260.0" layoutY="27.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="180.0" styleClass="trending-bg" stylesheets="@homeDesign.css" text="TRENDING" textFill="WHITE">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <font>
-                        <Font size="23.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="440.0" layoutY="27.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="180.0" styleClass="book-bg" stylesheets="@homeDesign.css" text="BOOK" textFill="WHITE">
-                     <font>
-                        <Font size="23.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="620.0" layoutY="27.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="180.0" styleClass="stationery-bg" stylesheets="@homeDesign.css" text="STATIONERY" textFill="WHITE">
-                     <font>
-                        <Font size="23.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="800.0" layoutY="27.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="180.0" styleClass="toy-bg" stylesheets="@homeDesign.css" text="TOY" textFill="WHITE">
-                     <font>
-                        <Font size="23.0" />
-                     </font>
-                  </Button>
+                  <AnchorPane prefHeight="720.0" prefWidth="295.0" styleClass="payment-panel" stylesheets="@homeDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane prefHeight="45.0" prefWidth="295.0" styleClass="payment-bar" stylesheets="@homeDesign.css" AnchorPane.rightAnchor="0.0" />
+                        <AnchorPane prefHeight="275.0" prefWidth="295.0" styleClass="white-bg" stylesheets="@homeDesign.css" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0" />
+                        <AnchorPane prefHeight="45.0" prefWidth="295.0" styleClass="payment-bar" stylesheets="@homeDesign.css" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="320.0" />
+                        <AnchorPane prefHeight="145.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="90.0" prefWidth="1280.0" styleClass="header" stylesheets="@homeDesign.css" visible="false">
@@ -269,7 +253,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="260.0" prefHeight="720.0" prefWidth="1020.0" visible="false">
+            <AnchorPane prefHeight="720.0" prefWidth="1020.0" visible="false">
                <children>
                   <AnchorPane prefHeight="720.0" prefWidth="1020.0" styleClass="chart-panel" stylesheets="@homeDesign.css" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
                      <children>
@@ -292,16 +276,10 @@
                               <Font size="30.0" />
                            </font>
                         </Text>
-                     </children></AnchorPane>
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="260.0" layoutY="90.0" prefHeight="616.0" prefWidth="700.0" stylesheets="@homeDesign.css" AnchorPane.leftAnchor="265.0">
-               <styleClass>
-                  <String fx:value="purple-bg" />
-                  <String fx:value="bg-radious" />
-               </styleClass>
-            </AnchorPane>
-            <AnchorPane layoutX="980.0" prefHeight="720.0" prefWidth="300.0" styleClass="purple-bg" stylesheets="@homeDesign.css" />
          </children>
       </AnchorPane>
    </children>
