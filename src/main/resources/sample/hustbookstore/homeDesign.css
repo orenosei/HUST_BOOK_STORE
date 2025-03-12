@@ -48,10 +48,10 @@
 }
 
 .purple-bg{
-    -fx-background-color: #9178d1;
+    -fx-background-color: linear-gradient(to bottom, #341c63, #9178d1);
 }
 
-.trending-bg{
+#trending-bg{
     -fx-background-color: #5c0090;
     -fx-background-radius: 20px 20px 0 0;
 }
@@ -89,3 +89,8 @@
     -fx-background-color: #8f9de6;
     -fx-background-radius: 5px 5px 5px 5px;
 }
+
+.tab-header-background {
+    -fx-background-color: transparent;
+}
+
