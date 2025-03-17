@@ -256,14 +256,14 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="720.0" prefWidth="1020.0" visible="false" AnchorPane.rightAnchor="0.0">
+            <AnchorPane prefHeight="720.0" prefWidth="1020.0" AnchorPane.rightAnchor="0.0">
                <children>
                   <AnchorPane prefHeight="720.0" prefWidth="1020.0" styleClass="chart-panel" stylesheets="@homeDesign.css" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
                      <children>
                         <TableView layoutX="20.0" layoutY="99.0" prefHeight="561.0" prefWidth="940.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="89.0">
                           <columns>
-                            <TableColumn prefWidth="87.77182006835938" text="CustomersID" />
-                            <TableColumn prefWidth="235.71978759765625" text="Name" />
+                            <TableColumn prefWidth="112.0" text="CustomersID" />
+                            <TableColumn prefWidth="213.0" text="Name" />
                               <TableColumn prefWidth="126.78021240234375" text="Phone" />
                               <TableColumn prefWidth="105.835205078125" text="Total (VND)" />
                               <TableColumn prefWidth="128.664794921875" text="Date" />
@@ -274,7 +274,17 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <Text layoutX="158.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customers" wrappingWidth="155.11729044166572">
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="535.0" layoutY="60.0" prefHeight="38.0" prefWidth="406.0" styleClass="search-bar" stylesheets="@homeDesign.css">
+                     <children>
+                        <TextField layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="406.0" promptText="Search" styleClass="trans-bg" stylesheets="@homeDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <FontAwesomeIcon fill="#7e60c6" glyphName="SEARCH" layoutX="370.0" layoutY="34.0" size="2em" />
+                        <Text fill="#ba9dff" layoutX="-456.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CUSTOMERS" wrappingWidth="187.11729044166572">
                            <font>
                               <Font size="30.0" />
                            </font>
@@ -283,7 +293,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane prefHeight="720.0" prefWidth="1280.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane layoutX="500.0" layoutY="14.0" prefHeight="38.0" prefWidth="406.0" styleClass="search-bar" stylesheets="@homeDesign.css" AnchorPane.leftAnchor="574.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="14.0">
                      <children>
