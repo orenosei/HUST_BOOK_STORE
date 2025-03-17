@@ -138,14 +138,49 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="720.0" prefWidth="1280.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane prefHeight="720.0" prefWidth="295.0" styleClass="payment-panel" stylesheets="@homeDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <AnchorPane prefHeight="45.0" prefWidth="295.0" styleClass="payment-bar" stylesheets="@homeDesign.css" AnchorPane.rightAnchor="0.0" />
-                        <AnchorPane prefHeight="275.0" prefWidth="295.0" styleClass="white-bg" stylesheets="@homeDesign.css" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0" />
-                        <AnchorPane prefHeight="45.0" prefWidth="295.0" styleClass="payment-bar" stylesheets="@homeDesign.css" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="320.0" />
-                        <AnchorPane prefHeight="145.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <AnchorPane prefHeight="200.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@homeDesign.css" text="Delete all" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="8.0" />
+                              <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="153.0" styleClass="voucher-button" stylesheets="@homeDesign.css" text="Delete selected codes" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="8.0" />
+                              <TextField layoutX="70.0" layoutY="50.0" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@homeDesign.css" AnchorPane.rightAnchor="20.0" />
+                              <TextField layoutX="70.0" layoutY="85.0" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@homeDesign.css" AnchorPane.rightAnchor="20.0" />
+                              <TextField layoutX="70.0" layoutY="120.0" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@homeDesign.css" AnchorPane.rightAnchor="20.0" />
+                              <Text fill="#8f9de6" layoutX="31.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CODE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#8f9de6" layoutX="14.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DISCOUNT">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#8f9de6" layoutX="13.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DURATION">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Text>
+                              <Button layoutX="95.0" layoutY="160.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@homeDesign.css" text="Clear" textFill="WHITE" AnchorPane.bottomAnchor="8.0" />
+                              <Button layoutX="196.0" layoutY="154.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@homeDesign.css" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="20.0" />
+                           </children></AnchorPane>
+                        <TableView prefHeight="280.0" prefWidth="295.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Product" />
+                            <TableColumn prefWidth="110.0" text="Original price" />
+                              <TableColumn prefWidth="110.0" text="New price" />
+                          </columns>
+                        </TableView>
+                        <TableView prefHeight="240.0" prefWidth="295.0" AnchorPane.bottomAnchor="200.0" AnchorPane.rightAnchor="0.0">
+                          <columns>
+                            <TableColumn prefWidth="120.0" text="Available code" />
+                            <TableColumn minWidth="0.0" text="Discount" />
+                              <TableColumn minWidth="0.0" prefWidth="95.0" text="Duration" />
+                          </columns>
+                        </TableView>
                      </children>
                   </AnchorPane>
                </children>
@@ -256,7 +291,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="720.0" prefWidth="1020.0" AnchorPane.rightAnchor="0.0">
+            <AnchorPane prefHeight="720.0" prefWidth="1020.0" visible="false" AnchorPane.rightAnchor="0.0">
                <children>
                   <AnchorPane prefHeight="720.0" prefWidth="1020.0" styleClass="chart-panel" stylesheets="@homeDesign.css" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
                      <children>

@@ -148,3 +148,17 @@
     -fx-border-width: 2px;
     -fx-border-color: #8f9de6;
 }
+
+.voucher-button{
+    -fx-background-color: #8f9de6;
+    -fx-border-radius: 2px;
+    -fx-border-width: 2px;
+    -fx-border-color: #5c74ed;
+}
+
+.vouher-bar{
+    -fx-background-color: white;
+    -fx-border-width: 2px;
+    -fx-border-color: #8f9de6;
+    -fx-border-radius: 5px;
+}
