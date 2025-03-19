@@ -7,7 +7,6 @@ CREATE TABLE admin (
                        password VARCHAR(255) NOT NULL,
                        question VARCHAR(225) NOT NULL,
                        answer VARCHAR(225) NOT NULL,
-                       privacy_code VARCHAR(255) DEFAULT 'abc123',
                        date DATE,
                        PRIMARY KEY (id)
 );
