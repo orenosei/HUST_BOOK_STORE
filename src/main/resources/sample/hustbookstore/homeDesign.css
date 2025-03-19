@@ -56,6 +56,26 @@
     -fx-background-radius: 20px 20px 0 0;
 }
 
+#book-bg{
+    -fx-background-color: #9178d1;
+    -fx-background-radius: 20px 20px 0 0;
+}
+
+#stationery-bg{
+    -fx-background-color: #6e83ea;
+    -fx-background-radius: 20px 20px 0 0;
+}
+
+#toy-bg{
+    -fx-background-color: #80abf2;
+    -fx-background-radius: 20px 20px 0 0;
+}
+
+#trending-bg{
+    -fx-background-color: #5c0090;
+    -fx-background-radius: 20px 20px 0 0;
+}
+
 .book-bg{
     -fx-background-color: #9178d1;
     -fx-background-radius: 20px 20px 0 0;
@@ -92,6 +112,22 @@
 
 .tab-header-background {
     -fx-background-color: transparent;
+}
+
+.tab-header-area {
+    -fx-background-color: transparent;
+    -fx-padding: 5px;
+}
+
+.tab:selected {
+    -fx-border-color: #5c74ed;
+    -fx-border-radius:  20px 20px 0 0;
+    -fx-border-width: 2px 2px 0 0;
+}
+
+.tab-label {
+    -fx-font-size: 25px;
+    -fx-text-fill: #ffffff;
 }
 
 .search-bar{
@@ -147,4 +183,18 @@
     -fx-border-radius: 2px;
     -fx-border-width: 2px;
     -fx-border-color: #8f9de6;
+}
+
+.voucher-button{
+    -fx-background-color: #8f9de6;
+    -fx-border-radius: 2px;
+    -fx-border-width: 2px;
+    -fx-border-color: #5c74ed;
+}
+
+.vouher-bar{
+    -fx-background-color: white;
+    -fx-border-width: 2px;
+    -fx-border-color: #8f9de6;
+    -fx-border-radius: 5px;
 }
