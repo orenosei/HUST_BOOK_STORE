@@ -54,24 +54,32 @@
 #trending-bg{
     -fx-background-color: #5c0090;
     -fx-background-radius: 20px 20px 0 0;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 160px;
 }
 
 #book-bg{
     -fx-background-color: #9178d1;
     -fx-background-radius: 20px 20px 0 0;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 160px;
 }
 
 #stationery-bg{
     -fx-background-color: #6e83ea;
     -fx-background-radius: 20px 20px 0 0;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 160px;
 }
 
 #toy-bg{
     -fx-background-color: #80abf2;
     -fx-background-radius: 20px 20px 0 0;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 160px;
 }
 
-#trending-bg{
+.trending-bg{
     -fx-background-color: #5c0090;
     -fx-background-radius: 20px 20px 0 0;
 }
@@ -115,18 +123,21 @@
 }
 
 .tab-header-area {
-    -fx-background-color: transparent;
-    -fx-padding: 5px;
+    -fx-padding: 0 0 0 0;
+    /*-fx-pref-height: 50px;*/
+
 }
 
 .tab:selected {
     -fx-border-color: #5c74ed;
     -fx-border-radius:  20px 20px 0 0;
-    -fx-border-width: 2px 2px 0 0;
+    -fx-border-width: 2px 2px 0 2px;
+    -fx-pref-height: 50px;
+    /*-fx-translate-y: -5px;*/
 }
 
 .tab-label {
-    -fx-font-size: 25px;
+    -fx-font-size: 20px;
     -fx-text-fill: #ffffff;
 }
 
