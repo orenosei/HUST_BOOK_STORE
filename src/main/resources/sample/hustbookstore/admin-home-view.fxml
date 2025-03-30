@@ -25,9 +25,9 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="white-bg" stylesheets="@homeDesign.css">
+      <AnchorPane fx:id="home_screen" prefHeight="200.0" prefWidth="200.0" styleClass="white-bg" stylesheets="@homeDesign.css">
          <children>
-            <AnchorPane prefHeight="90.0" prefWidth="1280.0" styleClass="header" stylesheets="@homeDesign.css" visible="false">
+            <AnchorPane prefHeight="90.0" prefWidth="1280.0" styleClass="header" stylesheets="@homeDesign.css">
                <children>
                   <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="296.0" layoutY="73.0" size="6em" />
                   <FontAwesomeIcon fill="WHITE" glyphName="BELL" layoutX="1205.0" layoutY="60.0" size="4em" />
@@ -36,7 +36,7 @@
                         <Font name="Chalkboard SE Regular" size="22.0" />
                      </font>
                   </Text>
-                  <Text fill="WHITE" layoutX="380.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trinh Minh Thanh" underline="true">
+                  <Text fx:id="username" fill="WHITE" layoutX="380.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trinh Minh Thanh" underline="true">
                      <font>
                         <Font name="Chalkboard SE Regular" size="40.0" />
                      </font>
@@ -65,7 +65,7 @@
                         <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@homeDesign.css">
                            <children>
                               <FontAwesomeIcon fill="WHITE" glyphName="HOME" layoutX="14.0" layoutY="59.0" size="4em" />
-                              <Button alignment="BASELINE_CENTER" layoutX="76.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="DASHBOARD" textFill="WHITE" AnchorPane.rightAnchor="0.0">
+                              <Button fx:id="dashboard_btn" alignment="BASELINE_CENTER" layoutX="76.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="DASHBOARD" textFill="WHITE" AnchorPane.rightAnchor="0.0">
                                  <font>
                                     <Font name="Chalkboard Bold" size="23.0" />
                                  </font>
@@ -75,7 +75,7 @@
                         <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@homeDesign.css">
                            <children>
                               <FontAwesomeIcon fill="WHITE" glyphName="ARCHIVE" layoutX="14.0" layoutY="60.0" size="4em" />
-                              <Button alignment="BASELINE_CENTER" layoutX="81.0" layoutY="9.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="INVENTORY" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Button fx:id="inventory_btn" alignment="BASELINE_CENTER" layoutX="81.0" layoutY="9.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="INVENTORY" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <font>
                                     <Font name="Chalkboard Bold" size="23.0" />
                                  </font>
@@ -85,7 +85,7 @@
                         <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@homeDesign.css">
                            <children>
                               <FontAwesomeIcon fill="WHITE" glyphName="USER_PLUS" layoutX="14.0" layoutY="60.0" size="4em" />
-                              <Button alignment="BASELINE_CENTER" layoutX="81.0" layoutY="9.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="CUSTOMERS" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Button fx:id="customers_btn" alignment="BASELINE_CENTER" layoutX="81.0" layoutY="9.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="CUSTOMERS" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <font>
                                     <Font name="Chalkboard Bold" size="23.0" />
                                  </font>
@@ -95,7 +95,7 @@
                         <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@homeDesign.css">
                            <children>
                               <FontAwesomeIcon fill="WHITE" glyphName="SHOPPING_CART" layoutX="14.0" layoutY="60.0" size="4em" />
-                              <Button alignment="BASELINE_CENTER" layoutX="81.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="STORE" textFill="WHITE">
+                              <Button fx:id="store_btn" alignment="BASELINE_CENTER" layoutX="81.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="STORE" textFill="WHITE">
                                  <font>
                                     <Font name="Chalkboard Bold" size="23.0" />
                                  </font>
@@ -115,7 +115,7 @@
                         <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@homeDesign.css">
                            <children>
                               <FontAwesomeIcon fill="WHITE" glyphName="EDIT" layoutX="14.0" layoutY="60.0" size="4em" />
-                              <Button alignment="BASELINE_CENTER" layoutX="77.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="PROFILE" textFill="WHITE">
+                              <Button fx:id="profile_btn" alignment="BASELINE_CENTER" layoutX="77.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="PROFILE" textFill="WHITE">
                                  <font>
                                     <Font name="Chalkboard Bold" size="23.0" />
                                  </font>
@@ -126,7 +126,7 @@
                   </VBox>
                   <AnchorPane layoutX="12.0" layoutY="646.0" prefHeight="50.0" prefWidth="128.0" stylesheets="@homeDesign.css">
                      <children>
-                        <Button alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="67.0" prefWidth="203.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="SIGN OUT" textFill="WHITE" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Button fx:id="logout_btn" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="67.0" prefWidth="203.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="SIGN OUT" textFill="WHITE" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <font>
                               <Font name="Chalkboard Bold" size="16.0" />
                            </font>
@@ -141,7 +141,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane prefHeight="720.0" prefWidth="1280.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane prefHeight="720.0" prefWidth="295.0" styleClass="payment-panel" stylesheets="@homeDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
