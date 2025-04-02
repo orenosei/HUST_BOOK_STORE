@@ -7,12 +7,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 
 <AnchorPane prefHeight="720.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.InventoryController">
    <children>
@@ -23,10 +23,10 @@
                   <Font size="18.0" />
                </font>
             </TextField>
-            <FontAwesomeIcon fill="#7e60c6" glyphName="SEARCH" layoutX="359.0" layoutY="37.0" size="2em" />
+            <FontAwesomeIcon fill="#7e60c6" glyphName="SEARCH" layoutX="357.0" layoutY="35.0" size="2em" />
          </children>
       </AnchorPane>
-      <TableView layoutX="160.0" layoutY="324.0" prefHeight="387.0" prefWidth="1000.0" styleClass="inventory-table" stylesheets="@homeDesign.css" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0">
+      <TableView layoutX="160.0" layoutY="324.0" prefHeight="312.0" prefWidth="1000.0" styleClass="inventory-table" stylesheets="@homeDesign.css" AnchorPane.bottomAnchor="328.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0">
          <columns>
             <TableColumn prefWidth="97.73068237304688" text="Product ID" />
             <TableColumn prefWidth="332.2693176269531" text="Product Name" />
@@ -39,43 +39,43 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <AnchorPane layoutX="8.0" layoutY="516.0" prefHeight="234.0" prefWidth="1000.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+      <AnchorPane layoutX="8.0" layoutY="516.0" prefHeight="315.0" prefWidth="1000.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <children>
-            <TextField layoutX="100.0" layoutY="25.0" styleClass="text-box" stylesheets="@homeDesign.css" />
-            <Label layoutX="32.0" layoutY="30.0" text="Product ID" textFill="#947bd0" />
-            <TextField layoutX="100.0" layoutY="60.0" styleClass="text-box" stylesheets="@homeDesign.css" />
-            <Label layoutX="11.0" layoutY="66.0" text="Product Name" textFill="#947bd0" />
-            <Label layoutX="61.0" layoutY="102.0" text="Type" textFill="#947bd0" />
-            <TextField layoutX="365.0" layoutY="23.0" styleClass="text-box" stylesheets="@homeDesign.css" />
-            <Label layoutX="319.0" layoutY="28.0" text="Stocks" textFill="#947bd0" />
-            <TextField layoutX="365.0" layoutY="58.0" styleClass="text-box" stylesheets="@homeDesign.css" />
-            <Label layoutX="291.0" layoutY="64.0" text="Import price" textFill="#947bd0" />
-            <TextField layoutX="365.0" layoutY="93.0" styleClass="text-box" stylesheets="@homeDesign.css" />
-            <Label layoutX="291.0" layoutY="98.0" text="Selling price" textFill="#947bd0" />
-            <TextField layoutX="366.0" layoutY="129.0" styleClass="text-box" stylesheets="@homeDesign.css" />
-            <Label layoutX="299.0" layoutY="133.0" text="Distributor" textFill="#947bd0" />
-            <ComboBox editable="true" layoutX="100.0" layoutY="97.0" prefHeight="29.0" prefWidth="165.0" promptText="Select type" styleClass="type-selection-box" stylesheets="@homeDesign.css" />
-            <Button layoutX="16.0" layoutY="190.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@homeDesign.css" text="Add" textFill="WHITE">
+            <TextField layoutX="220.0" layoutY="168.0" styleClass="text-box" stylesheets="@homeDesign.css" AnchorPane.leftAnchor="220.0" />
+            <Label layoutX="156.0" layoutY="175.0" text="Product ID" textFill="#947bd0" />
+            <TextField layoutX="224.0" layoutY="205.0" styleClass="text-box" stylesheets="@homeDesign.css" AnchorPane.leftAnchor="220.0" />
+            <Label layoutX="135.0" layoutY="211.0" text="Product Name" textFill="#947bd0" />
+            <Label layoutX="185.0" layoutY="247.0" text="Type" textFill="#947bd0" />
+            <TextField layoutX="224.0" layoutY="24.0" styleClass="text-box" stylesheets="@homeDesign.css" AnchorPane.leftAnchor="220.0" />
+            <Label layoutX="178.0" layoutY="29.0" text="Stocks" textFill="#947bd0" />
+            <TextField layoutX="224.0" layoutY="59.0" styleClass="text-box" stylesheets="@homeDesign.css" AnchorPane.leftAnchor="220.0" />
+            <Label layoutX="150.0" layoutY="65.0" text="Import price" textFill="#947bd0" />
+            <TextField layoutX="224.0" layoutY="94.0" styleClass="text-box" stylesheets="@homeDesign.css" AnchorPane.leftAnchor="220.0" />
+            <Label layoutX="150.0" layoutY="99.0" text="Selling price" textFill="#947bd0" />
+            <TextField layoutX="225.0" layoutY="130.0" styleClass="text-box" stylesheets="@homeDesign.css" AnchorPane.leftAnchor="220.0" />
+            <Label layoutX="158.0" layoutY="134.0" text="Distributor" textFill="#947bd0" />
+            <ComboBox editable="true" layoutX="224.0" layoutY="242.0" prefHeight="29.0" prefWidth="165.0" promptText="Select type" styleClass="type-selection-box" stylesheets="@homeDesign.css" AnchorPane.leftAnchor="220.0" />
+            <Button layoutX="10.0" layoutY="51.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@homeDesign.css" text="Add" textFill="WHITE" AnchorPane.leftAnchor="10.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button layoutX="146.0" layoutY="191.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@homeDesign.css" text="Update" textFill="WHITE">
+            <Button layoutX="8.0" layoutY="114.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@homeDesign.css" text="Update" textFill="WHITE" AnchorPane.leftAnchor="10.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button layoutX="275.0" layoutY="191.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@homeDesign.css" text="Clear" textFill="WHITE">
+            <Button layoutX="10.0" layoutY="177.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@homeDesign.css" text="Clear" textFill="WHITE" AnchorPane.leftAnchor="10.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button layoutX="407.0" layoutY="190.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@homeDesign.css" text="Delete" textFill="WHITE">
+            <Button layoutX="10.0" layoutY="239.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@homeDesign.css" text="Delete" textFill="WHITE" AnchorPane.leftAnchor="10.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Button>
-            <AnchorPane layoutX="841.0" layoutY="20.0" prefHeight="176.0" prefWidth="101.0" styleClass="inventory-table" stylesheets="@homeDesign.css">
+            <AnchorPane layoutX="841.0" layoutY="41.0" prefHeight="155.0" prefWidth="116.0" styleClass="inventory-table" stylesheets="@homeDesign.css">
                <children>
                   <ImageView fitHeight="129.0" fitWidth="98.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
                   <Button layoutX="52.0" layoutY="132.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="159.0" styleClass="inventory-button" stylesheets="@homeDesign.css" text="Import" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="132.0">
@@ -85,19 +85,21 @@
                   </Button>
                </children>
             </AnchorPane>
-            <Text fill="#664783" layoutX="822.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Successfully added!">
+            <Text fill="#664783" layoutX="819.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Successfully added!">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
-            <TextField layoutX="634.0" layoutY="22.0" styleClass="text-box" stylesheets="@homeDesign.css" />
-            <Label layoutX="597.0" layoutY="28.0" text="ISBN" textFill="#947bd0" />
-            <TextField layoutX="634.0" layoutY="59.0" styleClass="text-box" stylesheets="@homeDesign.css" />
-            <Label layoutX="588.0" layoutY="66.0" text="Author" textFill="#947bd0" />
-            <Label layoutX="591.0" layoutY="102.0" text="Genre" textFill="#947bd0" />
-            <ComboBox editable="true" layoutX="634.0" layoutY="96.0" prefHeight="29.0" prefWidth="165.0" promptText="Select genre" styleClass="type-selection-box" stylesheets="@homeDesign.css" />
-            <Label layoutX="546.0" layoutY="141.0" text="Published date" textFill="#947bd0" />
-            <DatePicker layoutX="635.0" layoutY="134.0" prefHeight="25.0" prefWidth="165.0" styleClass="type-selection-box" stylesheets="@homeDesign.css" />
+            <TextField layoutX="499.0" layoutY="22.0" styleClass="text-box" stylesheets="@homeDesign.css" AnchorPane.leftAnchor="500.0" />
+            <Label layoutX="462.0" layoutY="28.0" text="ISBN" textFill="#947bd0" />
+            <TextField layoutX="499.0" layoutY="59.0" styleClass="text-box" stylesheets="@homeDesign.css" AnchorPane.leftAnchor="500.0" />
+            <Label layoutX="453.0" layoutY="66.0" text="Author" textFill="#947bd0" />
+            <Label layoutX="456.0" layoutY="102.0" text="Genre" textFill="#947bd0" />
+            <ComboBox editable="true" layoutX="499.0" layoutY="96.0" prefHeight="29.0" prefWidth="165.0" promptText="Select genre" styleClass="type-selection-box" stylesheets="@homeDesign.css" AnchorPane.leftAnchor="500.0" />
+            <Label layoutX="411.0" layoutY="141.0" text="Published date" textFill="#947bd0" />
+            <DatePicker layoutX="500.0" layoutY="134.0" prefHeight="25.0" prefWidth="165.0" styleClass="type-selection-box" stylesheets="@homeDesign.css" AnchorPane.leftAnchor="500.0" />
+            <TextArea layoutX="498.0" layoutY="185.0" prefHeight="112.0" prefWidth="214.0" styleClass="text-box" stylesheets="@homeDesign.css" AnchorPane.leftAnchor="500.0" />
+            <Label layoutX="427.0" layoutY="191.0" text="Description" textFill="#947bd0" />
          </children>
       </AnchorPane>
    </children>
