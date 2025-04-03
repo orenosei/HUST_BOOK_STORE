@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="720.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.CustomersController">
    <children>
-      <AnchorPane prefHeight="720.0" prefWidth="1020.0" styleClass="chart-panel" stylesheets="@homeDesign.css" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+      <AnchorPane prefHeight="720.0" prefWidth="1020.0" styleClass="chart-panel" stylesheets="@Design/homeDesign.css" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
          <children>
             <TableView layoutX="20.0" layoutY="99.0" prefHeight="561.0" prefWidth="940.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="89.0">
                <columns>
@@ -29,9 +29,9 @@
             </TableView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="535.0" layoutY="60.0" prefHeight="38.0" prefWidth="406.0" styleClass="search-bar" stylesheets="@homeDesign.css">
+      <AnchorPane layoutX="535.0" layoutY="60.0" prefHeight="38.0" prefWidth="406.0" styleClass="search-bar" stylesheets="@Design/homeDesign.css">
          <children>
-            <TextField layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="406.0" promptText="Search" styleClass="trans-bg" stylesheets="@homeDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TextField layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="406.0" promptText="Search" styleClass="trans-bg" stylesheets="@Design/homeDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font size="18.0" />
                </font>
