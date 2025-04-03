@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.SidebarController">
    <children>
-      <AnchorPane fx:id="headerPane" layoutX="10.0" layoutY="10.0" prefHeight="90.0" prefWidth="1280.0" styleClass="header" stylesheets="@homeDesign.css">
+      <AnchorPane fx:id="headerPane" layoutX="10.0" layoutY="10.0" prefHeight="90.0" prefWidth="1280.0" styleClass="header" stylesheets="@Design/homeDesign.css">
          <children>
             <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="296.0" layoutY="73.0" size="6em" />
             <FontAwesomeIcon fill="WHITE" glyphName="BELL" layoutX="1205.0" layoutY="60.0" size="4em" />
@@ -26,7 +26,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="260.0" styleClass="side-bar" stylesheets="@homeDesign.css">
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="260.0" styleClass="side-bar" stylesheets="@Design/homeDesign.css">
          <children>
             <Text fill="WHITE" layoutX="10.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HUST">
                <font>
@@ -45,60 +45,60 @@
             </Text>
             <VBox layoutY="90.0" prefHeight="500.0" prefWidth="250.0">
                <children>
-                  <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@homeDesign.css">
+                  <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@Design/homeDesign.css">
                      <children>
                         <FontAwesomeIcon fill="WHITE" glyphName="HOME" layoutX="14.0" layoutY="59.0" size="4em" />
-                        <Button fx:id="dashboard_btn" alignment="BASELINE_CENTER" layoutX="76.0" layoutY="-1.0" mnemonicParsing="false" onAction="#loadDashboard" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="DASHBOARD" textFill="WHITE" AnchorPane.rightAnchor="0.0">
+                        <Button fx:id="dashboard_btn" alignment="BASELINE_CENTER" layoutX="76.0" layoutY="-1.0" mnemonicParsing="false" onAction="#loadDashboard" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@Design/homeDesign.css" text="DASHBOARD" textFill="WHITE" AnchorPane.rightAnchor="0.0">
                            <font>
                               <Font name="Chalkboard Bold" size="23.0" />
                            </font>
                         </Button>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@homeDesign.css">
+                  <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@Design/homeDesign.css">
                      <children>
                         <FontAwesomeIcon fill="WHITE" glyphName="ARCHIVE" layoutX="14.0" layoutY="60.0" size="4em" />
-                        <Button fx:id="inventory_btn" alignment="BASELINE_CENTER" layoutX="81.0" layoutY="9.0" mnemonicParsing="false" onAction="#loadInventory" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="INVENTORY" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Button fx:id="inventory_btn" alignment="BASELINE_CENTER" layoutX="81.0" layoutY="9.0" mnemonicParsing="false" onAction="#loadInventory" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@Design/homeDesign.css" text="INVENTORY" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <font>
                               <Font name="Chalkboard Bold" size="23.0" />
                            </font>
                         </Button>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@homeDesign.css">
+                  <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@Design/homeDesign.css">
                      <children>
                         <FontAwesomeIcon fill="WHITE" glyphName="USER_PLUS" layoutX="14.0" layoutY="60.0" size="4em" />
-                        <Button fx:id="customers_btn" alignment="BASELINE_CENTER" layoutX="81.0" layoutY="9.0" mnemonicParsing="false" onAction="#loadCustomers" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="CUSTOMERS" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Button fx:id="customers_btn" alignment="BASELINE_CENTER" layoutX="81.0" layoutY="9.0" mnemonicParsing="false" onAction="#loadCustomers" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@Design/homeDesign.css" text="CUSTOMERS" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <font>
                               <Font name="Chalkboard Bold" size="23.0" />
                            </font>
                         </Button>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@homeDesign.css">
+                  <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@Design/homeDesign.css">
                      <children>
                         <FontAwesomeIcon fill="WHITE" glyphName="SHOPPING_CART" layoutX="14.0" layoutY="60.0" size="4em" />
-                        <Button fx:id="store_btn" alignment="BASELINE_CENTER" layoutX="81.0" mnemonicParsing="false" onAction="#loadStore" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="STORE" textFill="WHITE">
+                        <Button fx:id="store_btn" alignment="BASELINE_CENTER" layoutX="81.0" mnemonicParsing="false" onAction="#loadStore" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@Design/homeDesign.css" text="STORE" textFill="WHITE">
                            <font>
                               <Font name="Chalkboard Bold" size="23.0" />
                            </font>
                         </Button>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@homeDesign.css">
+                  <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@Design/homeDesign.css">
                      <children>
                         <FontAwesomeIcon fill="WHITE" glyphName="EMPIRE" layoutX="14.0" layoutY="60.0" size="4em" />
-                        <Button alignment="BASELINE_CENTER" layoutX="77.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="ARYACHAT" textFill="WHITE">
+                        <Button alignment="BASELINE_CENTER" layoutX="77.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@Design/homeDesign.css" text="ARYACHAT" textFill="WHITE">
                            <font>
                               <Font name="Chalkboard Bold" size="23.0" />
                            </font>
                         </Button>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@homeDesign.css">
+                  <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@Design/homeDesign.css">
                      <children>
                         <FontAwesomeIcon fill="WHITE" glyphName="EDIT" layoutX="14.0" layoutY="60.0" size="4em" />
-                        <Button fx:id="profile_btn" alignment="BASELINE_CENTER" layoutX="77.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="PROFILE" textFill="WHITE">
+                        <Button fx:id="profile_btn" alignment="BASELINE_CENTER" layoutX="77.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@Design/homeDesign.css" text="PROFILE" textFill="WHITE">
                            <font>
                               <Font name="Chalkboard Bold" size="23.0" />
                            </font>
@@ -107,9 +107,9 @@
                   </AnchorPane>
                </children>
             </VBox>
-            <AnchorPane layoutX="12.0" layoutY="646.0" prefHeight="50.0" prefWidth="128.0" stylesheets="@homeDesign.css">
+            <AnchorPane layoutX="12.0" layoutY="646.0" prefHeight="50.0" prefWidth="128.0" stylesheets="@Design/homeDesign.css">
                <children>
-                  <Button fx:id="logout_btn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#logout" prefHeight="67.0" prefWidth="203.0" styleClass="trans-bg" stylesheets="@homeDesign.css" text="SIGN OUT" textFill="WHITE" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Button fx:id="logout_btn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#logout" prefHeight="67.0" prefWidth="203.0" styleClass="trans-bg" stylesheets="@Design/homeDesign.css" text="SIGN OUT" textFill="WHITE" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font name="Chalkboard Bold" size="16.0" />
                      </font>

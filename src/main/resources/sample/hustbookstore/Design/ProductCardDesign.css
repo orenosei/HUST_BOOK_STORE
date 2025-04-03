@@ -1,0 +1,44 @@
+@font-face {
+    font-family: "Monserrat";
+    src: url('../fonts/Montserrat-Medium.ttf');
+}
+
+.trans-bg{
+    -fx-background-color: transparent;
+    /*-fx-control-inner-background: transparent;*/
+}
+
+.back-bg{
+    -fx-background-color: #49007D;
+    -fx-background-radius: 20;
+}
+.front-bg{
+    -fx-background-color: #dccaca;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, #49007D, 10, 0.5, -10, 10);
+
+}
+
+.text-area {
+    -fx-background-color: transparent; /* Nền ngoài trong suốt */
+    -fx-border-color: transparent; /* Bỏ viền */
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent; /* Làm ScrollPane trong suốt */
+}
+
+.text-area .scroll-pane .viewport {
+    -fx-background-color: transparent; /* Làm Viewport trong suốt */
+}
+
+.text-area .content {
+    -fx-background-color: transparent; /* Làm nội dung trong suốt */
+}
+
+.prod-title{
+    -fx-font-family: "Martian Mono";
+    -fx-font-size: 16;
+    -fx-text-fill: #8365C8;
+    -fx-text-alignment: center;
+}

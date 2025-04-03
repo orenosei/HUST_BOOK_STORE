@@ -14,15 +14,15 @@
 
 <AnchorPane prefHeight="720.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.StoreController">
    <children>
-      <AnchorPane prefHeight="720.0" prefWidth="295.0" styleClass="payment-panel" stylesheets="@homeDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="720.0" prefWidth="295.0" styleClass="payment-panel" stylesheets="@Design/homeDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane prefHeight="200.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@homeDesign.css" text="Delete all" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="8.0" />
-                  <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="153.0" styleClass="voucher-button" stylesheets="@homeDesign.css" text="Delete selected codes" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="8.0" />
-                  <TextField layoutX="70.0" layoutY="50.0" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@homeDesign.css" AnchorPane.rightAnchor="20.0" />
-                  <TextField layoutX="70.0" layoutY="85.0" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@homeDesign.css" AnchorPane.rightAnchor="20.0" />
-                  <TextField layoutX="70.0" layoutY="120.0" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@homeDesign.css" AnchorPane.rightAnchor="20.0" />
+                  <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@Design/homeDesign.css" text="Delete all" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="8.0" />
+                  <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="153.0" styleClass="voucher-button" stylesheets="@Design/homeDesign.css" text="Delete selected codes" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="8.0" />
+                  <TextField layoutX="70.0" layoutY="50.0" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@Design/homeDesign.css" AnchorPane.rightAnchor="20.0" />
+                  <TextField layoutX="70.0" layoutY="85.0" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@Design/homeDesign.css" AnchorPane.rightAnchor="20.0" />
+                  <TextField layoutX="70.0" layoutY="120.0" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@Design/homeDesign.css" AnchorPane.rightAnchor="20.0" />
                   <Text fill="#8f9de6" layoutX="31.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CODE">
                      <font>
                         <Font size="15.0" />
@@ -38,8 +38,8 @@
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Button layoutX="95.0" layoutY="160.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@homeDesign.css" text="Clear" textFill="WHITE" AnchorPane.bottomAnchor="8.0" />
-                  <Button layoutX="196.0" layoutY="154.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@homeDesign.css" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="20.0" />
+                  <Button layoutX="95.0" layoutY="160.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@Design/homeDesign.css" text="Clear" textFill="WHITE" AnchorPane.bottomAnchor="8.0" />
+                  <Button layoutX="196.0" layoutY="154.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@Design/homeDesign.css" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="20.0" />
                </children>
             </AnchorPane>
             <TableView prefHeight="280.0" prefWidth="295.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -58,11 +58,11 @@
             </TableView>
          </children>
       </AnchorPane>
-      <TabPane prefHeight="650.0" prefWidth="700.0" stylesheets="@homeDesign.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0">
+      <TabPane prefHeight="650.0" prefWidth="700.0" stylesheets="@Design/homeDesign.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0">
          <tabs>
             <Tab id="trending-bg" text="     TRENDING">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="700.0" stylesheets="@homeDesign.css">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="700.0" stylesheets="@Design/homeDesign.css">
                      <children>
                         <ScrollPane fitToWidth="true" prefHeight="605.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <content>
