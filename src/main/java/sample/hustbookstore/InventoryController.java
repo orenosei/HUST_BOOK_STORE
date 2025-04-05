@@ -1,4 +1,178 @@
 package sample.hustbookstore;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import org.controlsfx.control.CheckComboBox;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.ResourceBundle;
+
 public class InventoryController {
+
+    @FXML
+    private Button add_btn;
+
+    @FXML
+    private Button clear_btn;
+
+    @FXML
+    private TableColumn<?, ?> col_dateAdded;
+
+    @FXML
+    private TableColumn<?, ?> col_distributor;
+
+    @FXML
+    private TableColumn<?, ?> col_importPrice;
+
+    @FXML
+    private TableColumn<?, ?> col_productID;
+
+    @FXML
+    private TableColumn<?, ?> col_productName;
+
+    @FXML
+    private TableColumn<?, ?> col_sellingPrice;
+
+    @FXML
+    private TableColumn<?, ?> col_type;
+
+    @FXML
+    private Button delete_btn;
+
+    @FXML
+    private Button import_btn;
+
+    @FXML
+    private TextField inventory_ISBN;
+
+    @FXML
+    private TextField inventory_author;
+
+    @FXML
+    private TextField inventory_distributor;
+
+
+    @FXML
+    private CheckComboBox<String> inventory_genre;
+
+    @FXML
+    private ImageView inventory_imageView;
+
+    @FXML
+    private TextField inventory_importPrice;
+
+    @FXML
+    private TextField inventory_productID;
+
+    @FXML
+    private TextField inventory_productName;
+
+    @FXML
+    private DatePicker inventory_publishedDate;
+
+    @FXML
+    private TextField inventory_sellingPrice;
+
+    @FXML
+    private TextField inventory_stocks;
+
+    @FXML
+    private TableView<?> inventory_tableView;
+
+    @FXML
+    private ComboBox<String> inventory_type;
+
+    @FXML
+    private Button update_btn;
+
+
+    public void setTypeList(){
+        List<String> typeL = new ArrayList<String>();
+        typeL.add("Book");
+        typeL.add("Toy");
+        typeL.add("Stationery");
+        ObservableList<String> items = FXCollections.observableArrayList(typeL);
+        inventory_type.setItems(items);
+    }
+
+    public void setGenreList() {
+        List<String> genres = new ArrayList<>();
+        genres.add("Adventure");
+        genres.add("Alternate History");
+        genres.add("Autobiography");
+        genres.add("Biography");
+        genres.add("Business");
+        genres.add("Children's Books");
+        genres.add("Classic Literature");
+        genres.add("Comedy");
+        genres.add("Cooking");
+        genres.add("Crime");
+        genres.add("Cyberpunk");
+        genres.add("Dark Fantasy");
+        genres.add("Drama");
+        genres.add("Dystopian");
+        genres.add("Education");
+        genres.add("Epic Fantasy");
+        genres.add("Fantasy");
+        genres.add("Gothic");
+        genres.add("Graphic Novel");
+        genres.add("Health & Wellness");
+        genres.add("Historical");
+        genres.add("Horror");
+        genres.add("Light Novel");
+        genres.add("LitRPG");
+        genres.add("Magical Realism");
+        genres.add("Manga");
+        genres.add("Manhwa");
+        genres.add("Martial Arts");
+        genres.add("Memoir");
+        genres.add("Mystery");
+        genres.add("Mythology");
+        genres.add("Philosophical");
+        genres.add("Poetry");
+        genres.add("Post-Apocalyptic");
+        genres.add("Psychological");
+        genres.add("Psychology");
+        genres.add("Religious");
+        genres.add("Romance");
+        genres.add("Science");
+        genres.add("Science Fiction");
+        genres.add("Self-Help");
+        genres.add("Slice of Life");
+        genres.add("Space Opera");
+        genres.add("Steampunk");
+        genres.add("Technology");
+        genres.add("Thriller");
+        genres.add("Time Travel");
+        genres.add("Travel");
+        genres.add("Urban Fantasy");
+        genres.add("War & Military");
+        genres.add("Web Novel");
+        genres.add("Young Adult");
+
+        // Sắp xếp danh sách theo thứ tự từ điển
+//        Collections.sort(genres);
+
+        ObservableList<String> genreList = FXCollections.observableArrayList(genres);
+        inventory_genre.getItems().addAll(genreList);
+    }
+
+
+
+
+
+    public void initialize() {    // buộc phải có, giải thích trong buổi họp nhóm tiếp theo
+        setTypeList();
+        setGenreList();
+    }
 }
