@@ -12,6 +12,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import org.controlsfx.control.CheckComboBox;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -95,6 +99,11 @@ public class InventoryController {
     @FXML
     private Button update_btn;
 
+    private Connection connect;
+    private PreparedStatement prepare;
+    private Statement statement;
+    private ResultSet result;
+
 
     public void setTypeList(){
         List<String> typeL = new ArrayList<String>();
@@ -167,7 +176,18 @@ public class InventoryController {
         inventory_genre.getItems().addAll(genreList);
     }
 
+    public ObservableList<Product> dataList(){
+        ObservableList<Product> list = FXCollections.observableArrayList();
+        String sql = "select * from product";
+        connect = database.connectDB();
 
+        try{
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
 
 
