@@ -32,11 +32,12 @@
       </AnchorPane>
       <TableView fx:id="inventory_tableView" layoutX="160.0" layoutY="324.0" prefHeight="312.0" prefWidth="1000.0" styleClass="inventory-table" stylesheets="@Design/homeDesign.css" AnchorPane.bottomAnchor="328.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0">
          <columns>
-            <TableColumn fx:id="col_productID" prefWidth="97.73068237304688" text="Product ID" />
-            <TableColumn fx:id="col_productName" prefWidth="332.2693176269531" text="Product Name" />
+            <TableColumn fx:id="col_productID" prefWidth="96.01204299926758" text="Product ID" />
+            <TableColumn fx:id="col_productName" prefWidth="156.98795318603516" text="Product Name" />
             <TableColumn fx:id="col_type" prefWidth="98.5714111328125" text="Type" />
             <TableColumn fx:id="col_importPrice" prefWidth="126.2489013671875" text="Import Price" />
             <TableColumn fx:id="col_sellingPrice" prefWidth="121.26934814453125" text="Selling Price" />
+            <TableColumn fx:id="col_stocks" prefWidth="190.171630859375" text="Stocks" />
             <TableColumn fx:id="col_distributor" prefWidth="190.171630859375" text="Distributor" />
             <TableColumn fx:id="col_dateAdded" prefWidth="190.171630859375" text="Date Added" />
          </columns>

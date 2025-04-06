@@ -50,6 +50,9 @@ public class InventoryController {
     private TableColumn<?, ?> col_type;
 
     @FXML
+    private TableColumn<?, ?> col_stocks;
+
+    @FXML
     private Button delete_btn;
 
     @FXML
@@ -91,6 +94,7 @@ public class InventoryController {
 
     @FXML
     private TextField inventory_restrictedAge;
+
 
     @FXML
     private TableView<Product> inventory_tableView;
@@ -227,6 +231,6 @@ public class InventoryController {
         setTypeList();
         setGenreList();
         //showData();
-
     }
+
 }
