@@ -11,6 +11,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.CheckComboBox?>
@@ -43,40 +46,73 @@
       </TableView>
       <AnchorPane layoutX="8.0" layoutY="516.0" prefHeight="315.0" prefWidth="1000.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <children>
-            <TextField fx:id="inventory_productID" layoutX="220.0" layoutY="168.0" styleClass="text-box" stylesheets="@Design/homeDesign.css" AnchorPane.leftAnchor="220.0" />
-            <Label layoutX="156.0" layoutY="175.0" text="Product ID" textFill="#947bd0" />
-            <TextField fx:id="inventory_productName" layoutX="224.0" layoutY="205.0" styleClass="text-box" stylesheets="@Design/homeDesign.css" AnchorPane.leftAnchor="220.0" />
-            <Label layoutX="135.0" layoutY="211.0" text="Product Name" textFill="#947bd0" />
-            <Label layoutX="185.0" layoutY="247.0" text="Type" textFill="#947bd0" />
-            <TextField fx:id="inventory_stocks" layoutX="224.0" layoutY="24.0" styleClass="text-box" stylesheets="@Design/homeDesign.css" AnchorPane.leftAnchor="220.0" />
-            <Label layoutX="178.0" layoutY="29.0" text="Stocks" textFill="#947bd0" />
-            <TextField fx:id="inventory_importPrice" layoutX="224.0" layoutY="59.0" styleClass="text-box" stylesheets="@Design/homeDesign.css" AnchorPane.leftAnchor="220.0" />
-            <Label layoutX="150.0" layoutY="65.0" text="Import price" textFill="#947bd0" />
-            <TextField fx:id="inventory_sellingPrice" layoutX="224.0" layoutY="94.0" styleClass="text-box" stylesheets="@Design/homeDesign.css" AnchorPane.leftAnchor="220.0" />
-            <Label layoutX="150.0" layoutY="99.0" text="Selling price" textFill="#947bd0" />
-            <TextField fx:id="inventory_distributor" layoutX="225.0" layoutY="130.0" styleClass="text-box" stylesheets="@Design/homeDesign.css" AnchorPane.leftAnchor="220.0" />
-            <Label layoutX="158.0" layoutY="134.0" text="Distributor" textFill="#947bd0" />
-            <ComboBox fx:id="inventory_type" editable="true" layoutX="224.0" layoutY="242.0" prefHeight="29.0" prefWidth="165.0" promptText="Select type" styleClass="type-selection-box" stylesheets="@Design/homeDesign.css" AnchorPane.leftAnchor="220.0" />
-            <Button fx:id="add_btn" layoutX="10.0" layoutY="51.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@Design/homeDesign.css" text="Add" textFill="WHITE" AnchorPane.leftAnchor="10.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Button>
-            <Button fx:id="update_btn" layoutX="8.0" layoutY="114.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@Design/homeDesign.css" text="Update" textFill="WHITE" AnchorPane.leftAnchor="10.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Button>
-            <Button fx:id="clear_btn" layoutX="10.0" layoutY="177.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@Design/homeDesign.css" text="Clear" textFill="WHITE" AnchorPane.leftAnchor="10.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Button>
-            <Button fx:id="delete_btn" layoutX="10.0" layoutY="239.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@Design/homeDesign.css" text="Delete" textFill="WHITE" AnchorPane.leftAnchor="10.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Button>
+            <GridPane layoutX="131.0" layoutY="15.0" vgap="5.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="89.18696594238281" minWidth="10.0" prefWidth="89.18696594238281" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.13912963867188" minWidth="10.0" prefWidth="156.3130340576172" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <TextField fx:id="inventory_productID" styleClass="text-box" stylesheets="@Design/homeDesign.css" GridPane.columnIndex="1" />
+                  <Label text="Product ID" textFill="#947bd0" />
+                  <TextField fx:id="inventory_productName" styleClass="text-box" stylesheets="@Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="Product Name" textFill="#947bd0" GridPane.rowIndex="2" />
+                  <Label text="Type" textFill="#947bd0" GridPane.rowIndex="1" />
+                  <TextField fx:id="inventory_stocks" styleClass="text-box" stylesheets="@Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <Label text="Stocks" textFill="#947bd0" GridPane.rowIndex="7" />
+                  <TextField fx:id="inventory_importPrice" styleClass="text-box" stylesheets="@Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label text="Import price" textFill="#947bd0" GridPane.rowIndex="5" />
+                  <TextField fx:id="inventory_sellingPrice" styleClass="text-box" stylesheets="@Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label text="Selling price" textFill="#947bd0" GridPane.rowIndex="6" />
+                  <TextField fx:id="inventory_distributor" styleClass="text-box" stylesheets="@Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label text="Distributor" textFill="#947bd0" GridPane.rowIndex="3" />
+                  <ComboBox fx:id="inventory_type" editable="true" prefHeight="29.0" prefWidth="165.0" promptText="Select type" styleClass="type-selection-box" stylesheets="@Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="inventory_restrictedAge" styleClass="text-box" stylesheets="@Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label text="Restricted Age" textFill="#947bd0" GridPane.rowIndex="4" />
+               </children>
+            </GridPane>
+            <GridPane layoutX="10.0" layoutY="51.0" vgap="10.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button fx:id="add_btn" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@Design/homeDesign.css" text="Add" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="update_btn" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@Design/homeDesign.css" text="Update" textFill="WHITE" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="clear_btn" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@Design/homeDesign.css" text="Clear" textFill="WHITE" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="delete_btn" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@Design/homeDesign.css" text="Delete" textFill="WHITE" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </GridPane>
             <AnchorPane layoutX="841.0" layoutY="41.0" prefHeight="155.0" prefWidth="116.0" styleClass="inventory-table" stylesheets="@Design/homeDesign.css">
                <children>
                   <ImageView fx:id="inventory_imageView" fitHeight="129.0" fitWidth="98.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
@@ -92,16 +128,31 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <TextField fx:id="inventory_ISBN" layoutX="502.0" layoutY="137.0" styleClass="text-box" stylesheets="@Design/homeDesign.css" AnchorPane.leftAnchor="502.0" />
-            <Label layoutX="464.0" layoutY="143.0" text="ISBN" textFill="#947bd0" />
-            <TextField fx:id="inventory_author" layoutX="502.0" layoutY="179.0" styleClass="text-box" stylesheets="@Design/homeDesign.css" AnchorPane.leftAnchor="502.0" />
-            <Label layoutX="455.0" layoutY="186.0" text="Author" textFill="#947bd0" />
-            <Label layoutX="458.0" layoutY="225.0" text="Genre" textFill="#947bd0" />
-            <Label layoutX="413.0" layoutY="267.0" text="Published date" textFill="#947bd0" />
-            <DatePicker fx:id="inventory_publishedDate" layoutX="502.0" layoutY="260.0" prefHeight="25.0" prefWidth="165.0" styleClass="type-selection-box" stylesheets="@Design/homeDesign.css" AnchorPane.leftAnchor="502.0" />
-            <TextArea layoutX="502.0" layoutY="13.0" prefHeight="112.0" prefWidth="214.0" styleClass="text-box" stylesheets="@Design/homeDesign.css" AnchorPane.leftAnchor="502.0" />
-            <Label layoutX="426.0" layoutY="18.0" text="Description" textFill="#947bd0" />
-            <CheckComboBox fx:id="inventory_genre" layoutX="502.0" layoutY="221.0" prefHeight="26.0" prefWidth="165.0" />
+            <GridPane layoutX="413.0" layoutY="13.0" vgap="5.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="90.92205810546875" minWidth="10.0" prefWidth="90.92205810546875" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.33026123046875" minWidth="10.0" prefWidth="204.07794189453125" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <TextField fx:id="inventory_ISBN" prefWidth="148.0" styleClass="text-box" stylesheets="@Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="ISBN" textFill="#947bd0" GridPane.rowIndex="1" />
+                  <TextField fx:id="inventory_author" styleClass="text-box" stylesheets="@Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="Author" textFill="#947bd0" GridPane.rowIndex="2" />
+                  <Label text="Genre" textFill="#947bd0" GridPane.rowIndex="3" />
+                  <Label text="Published date" textFill="#947bd0" GridPane.rowIndex="4" />
+                  <DatePicker fx:id="inventory_publishedDate" prefHeight="30.0" prefWidth="209.0" styleClass="type-selection-box" stylesheets="@Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextArea fx:id="inventory_description" prefHeight="112.0" prefWidth="214.0" styleClass="text-box" stylesheets="@Design/homeDesign.css" wrapText="true" GridPane.columnIndex="1" />
+                  <Label text="Description" textFill="#947bd0" />
+                  <CheckComboBox fx:id="inventory_genre" prefHeight="26.0" prefWidth="212.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
          </children>
       </AnchorPane>
    </children>
