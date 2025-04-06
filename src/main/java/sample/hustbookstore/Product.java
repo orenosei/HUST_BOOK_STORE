@@ -27,6 +27,16 @@ public class Product {
         this.addedDate = addedDate;
     }
 
+    public Product(String productID, String productName, double importPrice, double sellingPrice, String distributor, String type, String dateAdded) {
+        this.ID = productID;
+        this.name = productName;
+        this.importPrice = importPrice;
+        this.sellPrice = sellingPrice;
+        this.distributor = distributor;
+        this.type = type;
+        this.addedDate = addedDate;
+    }
+
     public String getID() {
         return ID;
     }
