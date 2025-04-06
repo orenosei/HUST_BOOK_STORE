@@ -9,6 +9,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import org.controlsfx.control.CheckComboBox;
 
@@ -17,9 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class InventoryController {
 
@@ -91,7 +90,10 @@ public class InventoryController {
     private TextField inventory_stocks;
 
     @FXML
-    private TableView<?> inventory_tableView;
+    private TextField inventory_restrictedAge;
+
+    @FXML
+    private TableView<Product> inventory_tableView;
 
     @FXML
     private ComboBox<String> inventory_type;
@@ -178,19 +180,53 @@ public class InventoryController {
 
     public ObservableList<Product> dataList(){
         ObservableList<Product> list = FXCollections.observableArrayList();
-        String sql = "select * from product";
+        String sql = "SELECT * FROM product";
         connect = database.connectDB();
 
-        try{
+        try {
             prepare = connect.prepareStatement(sql);
             result = prepare.executeQuery();
-        }catch(Exception e){
+
+            while(result.next()){
+                list.add(new Product(
+                        result.getString("productID"),
+                        result.getString("productName"),
+                        result.getDouble("importPrice"),
+                        result.getDouble("sellingPrice"),
+                        result.getString("distributor"),
+                        result.getString("type"),
+                        result.getString("dateAdded")
+                ));
+            }
+        } catch (Exception e){
             e.printStackTrace();
         }
+
+        return list;
     }
+
+
+    public void showData() {
+        ObservableList<Product> list = dataList();
+
+        col_productID.setCellValueFactory(new PropertyValueFactory<>("productID"));
+        col_productName.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        col_importPrice.setCellValueFactory(new PropertyValueFactory<>("importPrice"));
+        col_sellingPrice.setCellValueFactory(new PropertyValueFactory<>("sellingPrice"));
+        col_distributor.setCellValueFactory(new PropertyValueFactory<>("distributor"));
+        col_type.setCellValueFactory(new PropertyValueFactory<>("type"));
+        col_dateAdded.setCellValueFactory(new PropertyValueFactory<>("dateAdded"));
+
+        inventory_tableView.setItems(list);
+    }
+
+
+
 
     public void initialize() {    // buộc phải có, giải thích trong buổi họp nhóm tiếp theo
         setTypeList();
         setGenreList();
+        //showData();
+
     }
 }
