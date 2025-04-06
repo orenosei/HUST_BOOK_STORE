@@ -189,8 +189,6 @@ public class InventoryController {
         }
     }
 
-
-
     public void initialize() {    // buộc phải có, giải thích trong buổi họp nhóm tiếp theo
         setTypeList();
         setGenreList();
