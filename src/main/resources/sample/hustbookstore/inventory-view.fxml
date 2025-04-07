@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.CheckComboBox?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.InventoryController">
+<AnchorPane fx:id="inventory_screen" prefHeight="720.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.InventoryController">
    <children>
       <AnchorPane layoutX="611.0" layoutY="16.0" prefHeight="44.0" prefWidth="396.0" styleClass="search-bar" stylesheets="@Design/homeDesign.css" AnchorPane.topAnchor="16.0">
          <children>
@@ -92,7 +92,7 @@
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="add_btn" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@Design/homeDesign.css" text="Add" textFill="WHITE">
+                  <Button fx:id="add_btn" mnemonicParsing="false" onAction="#setAdd_btn" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@Design/homeDesign.css" text="Add" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -114,17 +114,17 @@
                   </Button>
                </children>
             </GridPane>
-            <AnchorPane layoutX="841.0" layoutY="41.0" prefHeight="155.0" prefWidth="116.0" styleClass="inventory-table" stylesheets="@Design/homeDesign.css">
+            <AnchorPane layoutX="841.0" layoutY="41.0" prefHeight="214.0" prefWidth="100.0" styleClass="inventory-table" stylesheets="@Design/homeDesign.css">
                <children>
-                  <ImageView fx:id="inventory_imageView" fitHeight="129.0" fitWidth="98.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button fx:id="import_btn" layoutX="52.0" layoutY="132.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="159.0" styleClass="inventory-button" stylesheets="@Design/homeDesign.css" text="Import" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="132.0">
+                  <ImageView fx:id="inventory_imageView" fitHeight="160.0" fitWidth="100.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button fx:id="import_btn" layoutX="15.0" layoutY="132.0" mnemonicParsing="false" onAction="#setImport_btn" prefHeight="35.0" prefWidth="98.0" styleClass="inventory-button" stylesheets="@Design/homeDesign.css" text="Import" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
                </children>
             </AnchorPane>
-            <Text fill="#664783" layoutX="819.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Successfully added!">
+            <Text fill="#664783" layoutX="825.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Successfully added!">
                <font>
                   <Font size="18.0" />
                </font>

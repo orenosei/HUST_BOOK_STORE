@@ -51,5 +51,3 @@ CREATE TABLE product (
 );
 
 select * from product
-
-SHOW DATABASES;

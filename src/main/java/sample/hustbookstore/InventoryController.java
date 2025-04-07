@@ -3,56 +3,46 @@ package sample.hustbookstore;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import org.controlsfx.control.CheckComboBox;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryController {
 
     @FXML
+    private AnchorPane inventory_screen;
+    @FXML
     private Button add_btn;
 
     @FXML
     private Button clear_btn;
-//
-//    @FXML
-//    private TableColumn<?, ?> col_dateAdded;
-//
-//    @FXML
-//    private TableColumn<?, ?> col_distributor;
-//
-//    @FXML
-//    private TableColumn<?, ?> col_importPrice;
-//
-//    @FXML
-//    private TableColumn<?, ?> col_productID;
-//
-//    @FXML
-//    private TableColumn<?, ?> col_productName;
-//
-//    @FXML
-//    private TableColumn<?, ?> col_sellingPrice;
-//
-//    @FXML
-//    private TableColumn<?, ?> col_type;
-//
-//    @FXML
-//    private TableColumn<?, ?> col_stocks;
-@FXML
-private TableColumn<Product, String> col_productID;
+
+    @FXML
+    private Button delete_btn;
+
+    @FXML
+    private Button update_btn;
+
+    @FXML
+    private Button import_btn;
+
+    @FXML
+    private TableColumn<Product, String> col_productID;
 
     @FXML
     private TableColumn<Product, String> col_productName;
@@ -76,11 +66,6 @@ private TableColumn<Product, String> col_productID;
     private TableColumn<Product, Integer> col_stocks;
 
 
-    @FXML
-    private Button delete_btn;
-
-    @FXML
-    private Button import_btn;
 
     @FXML
     private TextField inventory_ISBN;
@@ -89,9 +74,13 @@ private TableColumn<Product, String> col_productID;
     private TextField inventory_author;
 
     @FXML
+    private TextArea inventory_description;
+
+    @FXML
     private TextField inventory_distributor;
 
-
+    @FXML
+    private DatePicker inventory_publishedDate;
     @FXML
     private CheckComboBox<String> inventory_genre;
 
@@ -106,9 +95,6 @@ private TableColumn<Product, String> col_productID;
 
     @FXML
     private TextField inventory_productName;
-
-    @FXML
-    private DatePicker inventory_publishedDate;
 
     @FXML
     private TextField inventory_sellingPrice;
@@ -126,14 +112,15 @@ private TableColumn<Product, String> col_productID;
     @FXML
     private ComboBox<String> inventory_type;
 
-    @FXML
-    private Button update_btn;
 
     private Connection connect;
     private PreparedStatement prepare;
     private Statement statement;
     private ResultSet result;
 
+
+    private Image image;
+    private String currentImagePath;
 
     public void setTypeList(){
         List<String> typeL = new ArrayList<String>();
@@ -250,6 +237,159 @@ private TableColumn<Product, String> col_productID;
         inventory_tableView.setItems(list);
     }
 
+
+    public void setImport_btn() {
+        FileChooser fileChooser = new FileChooser();
+
+        // Đặt filter cho chỉ file ảnh
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Open Image Files", "*.png", "*.jpg", "*.webp", "*.jpeg"));
+
+        // Mở cửa sổ chọn file
+        File file = fileChooser.showOpenDialog(inventory_screen.getScene().getWindow());
+
+        if (file != null) {
+            // Định vị thư mục đích 'img/' trong 'src/main/resources/sample/hustbookstore/img'
+            String resourcesPath = System.getProperty("user.dir") + "/src/main/resources/sample/hustbookstore/img";
+            File targetDirectory = new File(resourcesPath);
+
+            // Kiểm tra nếu thư mục 'img' không tồn tại thì tạo mới
+            if (!targetDirectory.exists()) {
+                targetDirectory.mkdirs();
+            }
+
+            // Lấy tên file và tạo đường dẫn đích
+            String fileName = file.getName();
+            File targetFile = new File(targetDirectory, fileName);
+
+            try {
+                // Sao chép file vào thư mục đích
+                Files.copy(file.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+                // Cập nhật đường dẫn tương đối
+                currentImagePath = "sample/hustbookstore/img/" + fileName;
+
+                // Hiển thị ảnh trên ImageView
+                image = new Image(targetFile.toURI().toString(), 1000, 1600, true, true);
+                inventory_imageView.setImage(image);
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+        }
+    }
+
+
+    public void setAdd_btn() {
+        if (
+                inventory_productID.getText().isEmpty()
+                        || inventory_productName.getText().isEmpty()
+                        || inventory_importPrice.getText().isEmpty()
+                        || inventory_sellingPrice.getText().isEmpty()
+                        || inventory_distributor.getText().isEmpty()
+                        || inventory_type.getSelectionModel().getSelectedItem() == null
+                        || inventory_restrictedAge.getText().isEmpty()
+                        || inventory_stocks.getText().isEmpty()
+                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_description.getText().isEmpty())
+                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_ISBN.getText().isEmpty())
+                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_author.getText().isEmpty())
+                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_genre.getCheckModel().getCheckedItems().isEmpty())
+                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_publishedDate.getValue() == null)
+        ) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter all the fields correctly.");
+            alert.showAndWait();
+        }
+
+        else{
+            String checkProductID = "SELECT id FROM product WHERE id = '" + inventory_productID.getText() + "'";
+            connect = database.connectDB();
+
+            try{
+                statement = connect.createStatement();
+                result = statement.executeQuery(checkProductID);
+
+                if(result.next()){ // nếu đã tồn tại sản phẩm thì đưa ra cảnh báo
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText(inventory_productID.getText() +  " already exists.");
+                    alert.showAndWait();
+                }
+                else{ //nếu chưa tồn tại sản phẩm thì thêm
+                    String insertToDatabase;
+                    if("Book".equals(inventory_type.getSelectionModel().getSelectedItem())){
+                        insertToDatabase = "INSERT INTO product"
+                                + "(id, type, name, image, distributor, description, added_date, stock, import_price, sell_price, age_restrict, isbn, author, genre, pub_date) "
+                                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        prepare = connect.prepareStatement(insertToDatabase);
+                        prepare.setString(1, inventory_productID.getText());
+                        prepare.setString(2, "Book"); // vì đoạn này đang ở trong điều kiện Book
+                        prepare.setString(3, inventory_productName.getText());
+                        prepare.setString(4, currentImagePath);
+                        prepare.setString(5, inventory_distributor.getText());
+                        prepare.setString(6, inventory_description.getText());
+                        prepare.setDate(7, java.sql.Date.valueOf(LocalDate.now())); // dùng ngày hiện tại
+                        prepare.setInt(8, Integer.parseInt(inventory_stocks.getText()));
+                        prepare.setFloat(9, Float.parseFloat(inventory_importPrice.getText()));
+                        prepare.setFloat(10, Float.parseFloat(inventory_sellingPrice.getText()));
+                        prepare.setInt(11, Integer.parseInt(inventory_restrictedAge.getText()));
+                        prepare.setString(12, inventory_ISBN.getText());
+                        prepare.setString(13, inventory_author.getText());
+                        prepare.setString(14, String.join(", ", inventory_genre.getCheckModel().getCheckedItems()));
+                        prepare.setDate(15, java.sql.Date.valueOf(inventory_publishedDate.getValue()));
+
+                        prepare.executeUpdate();
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Information Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Product added successfully.");
+                        alert.showAndWait();
+                        showData();
+
+                    }
+                    else {
+                        insertToDatabase = "INSERT INTO product "
+                                + "(id, type, name, image, distributor, description, added_date, stock, import_price, sell_price, age_restrict, isbn, author, genre, pub_date) "
+                                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+                        prepare = connect.prepareStatement(insertToDatabase);
+                        prepare.setString(1, inventory_productID.getText());
+                        prepare.setString(2, inventory_type.getSelectionModel().getSelectedItem()); // VD: "Toy", "Stationery"
+                        prepare.setString(3, inventory_productName.getText());
+                        prepare.setString(4, currentImagePath);
+                        prepare.setString(5, inventory_distributor.getText());
+                        prepare.setString(6, inventory_description.getText()); // Mô tả không để trống
+                        prepare.setDate(7, java.sql.Date.valueOf(LocalDate.now()));
+                        prepare.setInt(8, Integer.parseInt(inventory_stocks.getText()));
+                        prepare.setFloat(9, Float.parseFloat(inventory_importPrice.getText()));
+                        prepare.setFloat(10, Float.parseFloat(inventory_sellingPrice.getText()));
+                        prepare.setInt(11, Integer.parseInt(inventory_restrictedAge.getText()));
+
+                        // Các trường đặc trưng của Book để NULL
+                        prepare.setNull(12, java.sql.Types.VARCHAR); // isbn
+                        prepare.setNull(13, java.sql.Types.VARCHAR); // author
+                        prepare.setNull(14, java.sql.Types.VARCHAR); // genre
+                        prepare.setNull(15, java.sql.Types.DATE);    // pub_date
+
+                        prepare.executeUpdate();
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Information Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Product added successfully.");
+                        alert.showAndWait();
+                        showData();
+                    }
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
 
 
 
