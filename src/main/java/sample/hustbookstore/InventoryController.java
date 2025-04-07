@@ -105,6 +105,18 @@ public class InventoryController {
     @FXML
     private TextField inventory_restrictedAge;
 
+    @FXML
+    private Label inventory_genre_label;
+    @FXML
+    private Label inventory_isbn_label;
+    @FXML
+    private Label inventory_pubDate_label;
+    @FXML
+    private Label inventory_description_label;
+    @FXML
+    private Label inventory_author_label;
+
+
 
     @FXML
     private TableView<Product> inventory_tableView;
@@ -235,6 +247,36 @@ public class InventoryController {
         col_dateAdded.setCellValueFactory(new PropertyValueFactory<>("addedDate"));
         col_stocks.setCellValueFactory(new PropertyValueFactory<>("stock"));
         inventory_tableView.setItems(list);
+    }
+
+    public void handleProductTypeChange() {
+        // Kiểm tra xem loại sản phẩm có phải là Book không
+        if ("Book".equals(inventory_type.getSelectionModel().getSelectedItem())) {
+            // Enable các trường liên quan đến sách
+            inventory_genre_label.setDisable(false);
+            inventory_isbn_label.setDisable(false);
+            inventory_pubDate_label.setDisable(false);
+            inventory_ISBN.setDisable(false);
+            inventory_author.setDisable(false);
+            inventory_description.setDisable(false);
+            inventory_description_label.setDisable(false);
+            inventory_author_label.setDisable(false);
+            inventory_publishedDate.setDisable(false);
+            inventory_genre.setDisable(false);
+
+        } else {
+            // Disable các trường liên quan đến sách khi chọn loại khác
+            inventory_genre_label.setDisable(true);
+            inventory_isbn_label.setDisable(true);
+            inventory_pubDate_label.setDisable(true);
+            inventory_ISBN.setDisable(true);
+            inventory_author.setDisable(true);
+            inventory_description.setDisable(true);
+            inventory_description_label.setDisable(true);
+            inventory_author_label.setDisable(true);
+            inventory_publishedDate.setDisable(true);
+            inventory_genre.setDisable(true);
+        }
     }
 
 
@@ -391,11 +433,28 @@ public class InventoryController {
         }
     }
 
+    public void SetClear_btn() {
+        inventory_productID.clear();
+        inventory_productName.clear();
+        inventory_importPrice.clear();
+        inventory_sellingPrice.clear();
+        inventory_restrictedAge.clear();
+        inventory_distributor.clear();
+        inventory_ISBN.clear();
+        inventory_author.clear();
+        inventory_stocks.clear();
+        inventory_description.clear();
+        inventory_publishedDate.setValue(null);
+        inventory_genre.getCheckModel().clearChecks();
+        inventory_type.getSelectionModel().clearSelection();
+        inventory_imageView.setImage(null);
+    }
 
 
     public void initialize() {    // buộc phải có, giải thích trong buổi họp nhóm tiếp theo
         setTypeList();
         setGenreList();
+        handleProductTypeChange();
         showData();
     }
 
