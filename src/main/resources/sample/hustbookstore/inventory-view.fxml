@@ -76,7 +76,7 @@
                   <Label text="Selling price" textFill="#947bd0" GridPane.rowIndex="6" />
                   <TextField fx:id="inventory_distributor" styleClass="text-box" stylesheets="@Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Distributor" textFill="#947bd0" GridPane.rowIndex="3" />
-                  <ComboBox fx:id="inventory_type" editable="true" prefHeight="29.0" prefWidth="165.0" promptText="Select type" styleClass="type-selection-box" stylesheets="@Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="inventory_type" editable="true" onAction="#handleProductTypeChange" prefHeight="29.0" prefWidth="165.0" promptText="Select type" styleClass="type-selection-box" stylesheets="@Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="inventory_restrictedAge" styleClass="text-box" stylesheets="@Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label text="Restricted Age" textFill="#947bd0" GridPane.rowIndex="4" />
                </children>
@@ -102,7 +102,7 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="clear_btn" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@Design/homeDesign.css" text="Clear" textFill="WHITE" GridPane.rowIndex="2">
+                  <Button fx:id="clear_btn" mnemonicParsing="false" onAction="#SetClear_btn" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@Design/homeDesign.css" text="Clear" textFill="WHITE" GridPane.rowIndex="2">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -143,14 +143,14 @@
                </rowConstraints>
                <children>
                   <TextField fx:id="inventory_ISBN" prefWidth="148.0" styleClass="text-box" stylesheets="@Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="ISBN" textFill="#947bd0" GridPane.rowIndex="1" />
+                  <Label fx:id="inventory_isbn_label" text="ISBN" textFill="#947bd0" GridPane.rowIndex="1" />
                   <TextField fx:id="inventory_author" styleClass="text-box" stylesheets="@Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label text="Author" textFill="#947bd0" GridPane.rowIndex="2" />
-                  <Label text="Genre" textFill="#947bd0" GridPane.rowIndex="3" />
-                  <Label text="Published date" textFill="#947bd0" GridPane.rowIndex="4" />
+                  <Label fx:id="inventory_author_label" text="Author" textFill="#947bd0" GridPane.rowIndex="2" />
+                  <Label fx:id="inventory_genre_label" text="Genre" textFill="#947bd0" GridPane.rowIndex="3" />
+                  <Label fx:id="inventory_pubDate_label" text="Published date" textFill="#947bd0" GridPane.rowIndex="4" />
                   <DatePicker fx:id="inventory_publishedDate" prefHeight="30.0" prefWidth="209.0" styleClass="type-selection-box" stylesheets="@Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <TextArea fx:id="inventory_description" prefHeight="112.0" prefWidth="214.0" styleClass="text-box" stylesheets="@Design/homeDesign.css" wrapText="true" GridPane.columnIndex="1" />
-                  <Label text="Description" textFill="#947bd0" />
+                  <Label fx:id="inventory_description_label" text="Description" textFill="#947bd0" />
                   <CheckComboBox fx:id="inventory_genre" prefHeight="26.0" prefWidth="212.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
