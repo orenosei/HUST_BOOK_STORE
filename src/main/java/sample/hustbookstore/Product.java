@@ -26,17 +26,17 @@ public class Product {
         this.description = description;
         this.addedDate = addedDate;
     }
-
-    public Product(String productID, String productName, double importPrice, double sellingPrice, String distributor, String type, String dateAdded) {
-        this.ID = productID;
-        this.name = productName;
+    public Product(String ID, String name, double importPrice, double sellPrice,
+                   String distributor, String type, Date addedDate, int stock) {
+        this.ID = ID;
+        this.name = name;
         this.importPrice = importPrice;
-        this.sellPrice = sellingPrice;
+        this.sellPrice = sellPrice;
         this.distributor = distributor;
         this.type = type;
         this.addedDate = addedDate;
+        this.stock = stock;
     }
-
     public String getID() {
         return ID;
     }

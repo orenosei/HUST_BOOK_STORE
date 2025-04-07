@@ -50,5 +50,6 @@ CREATE TABLE product (
                          PRIMARY KEY (id)
 );
 
+select * from product
 
-
+SHOW DATABASES;

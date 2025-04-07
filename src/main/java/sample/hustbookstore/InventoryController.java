@@ -27,30 +27,54 @@ public class InventoryController {
 
     @FXML
     private Button clear_btn;
+//
+//    @FXML
+//    private TableColumn<?, ?> col_dateAdded;
+//
+//    @FXML
+//    private TableColumn<?, ?> col_distributor;
+//
+//    @FXML
+//    private TableColumn<?, ?> col_importPrice;
+//
+//    @FXML
+//    private TableColumn<?, ?> col_productID;
+//
+//    @FXML
+//    private TableColumn<?, ?> col_productName;
+//
+//    @FXML
+//    private TableColumn<?, ?> col_sellingPrice;
+//
+//    @FXML
+//    private TableColumn<?, ?> col_type;
+//
+//    @FXML
+//    private TableColumn<?, ?> col_stocks;
+@FXML
+private TableColumn<Product, String> col_productID;
 
     @FXML
-    private TableColumn<?, ?> col_dateAdded;
+    private TableColumn<Product, String> col_productName;
 
     @FXML
-    private TableColumn<?, ?> col_distributor;
+    private TableColumn<Product, Double> col_importPrice;
 
     @FXML
-    private TableColumn<?, ?> col_importPrice;
+    private TableColumn<Product, Double> col_sellingPrice;
 
     @FXML
-    private TableColumn<?, ?> col_productID;
+    private TableColumn<Product, String> col_distributor;
 
     @FXML
-    private TableColumn<?, ?> col_productName;
+    private TableColumn<Product, String> col_type;
 
     @FXML
-    private TableColumn<?, ?> col_sellingPrice;
+    private TableColumn<Product, java.sql.Date> col_dateAdded; // hoặc LocalDate nếu bạn dùng kiểu đó
 
     @FXML
-    private TableColumn<?, ?> col_type;
+    private TableColumn<Product, Integer> col_stocks;
 
-    @FXML
-    private TableColumn<?, ?> col_stocks;
 
     @FXML
     private Button delete_btn;
@@ -193,14 +217,16 @@ public class InventoryController {
 
             while(result.next()){
                 list.add(new Product(
-                        result.getString("productID"),
-                        result.getString("productName"),
-                        result.getDouble("importPrice"),
-                        result.getDouble("sellingPrice"),
+                        result.getString("ID"),
+                        result.getString("name"),
+                        result.getDouble("import_price"),
+                        result.getDouble("sell_price"),
                         result.getString("distributor"),
                         result.getString("type"),
-                        result.getString("dateAdded")
+                        result.getDate("added_date"),
+                        result.getInt("stock")
                 ));
+
             }
         } catch (Exception e){
             e.printStackTrace();
@@ -213,14 +239,14 @@ public class InventoryController {
     public void showData() {
         ObservableList<Product> list = dataList();
 
-        col_productID.setCellValueFactory(new PropertyValueFactory<>("productID"));
-        col_productName.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        col_productID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        col_productName.setCellValueFactory(new PropertyValueFactory<>("name"));
         col_importPrice.setCellValueFactory(new PropertyValueFactory<>("importPrice"));
-        col_sellingPrice.setCellValueFactory(new PropertyValueFactory<>("sellingPrice"));
+        col_sellingPrice.setCellValueFactory(new PropertyValueFactory<>("sellPrice"));
         col_distributor.setCellValueFactory(new PropertyValueFactory<>("distributor"));
         col_type.setCellValueFactory(new PropertyValueFactory<>("type"));
-        col_dateAdded.setCellValueFactory(new PropertyValueFactory<>("dateAdded"));
-
+        col_dateAdded.setCellValueFactory(new PropertyValueFactory<>("addedDate"));
+        col_stocks.setCellValueFactory(new PropertyValueFactory<>("stock"));
         inventory_tableView.setItems(list);
     }
 
@@ -230,7 +256,7 @@ public class InventoryController {
     public void initialize() {    // buộc phải có, giải thích trong buổi họp nhóm tiếp theo
         setTypeList();
         setGenreList();
-        //showData();
+        showData();
     }
 
 }
