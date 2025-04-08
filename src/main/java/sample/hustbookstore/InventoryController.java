@@ -21,6 +21,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class InventoryController {
 
@@ -43,27 +44,34 @@ public class InventoryController {
 
     @FXML
     private TableColumn<Product, String> col_productID;
-
     @FXML
     private TableColumn<Product, String> col_productName;
-
     @FXML
     private TableColumn<Product, Double> col_importPrice;
-
     @FXML
     private TableColumn<Product, Double> col_sellingPrice;
-
     @FXML
     private TableColumn<Product, String> col_distributor;
-
     @FXML
     private TableColumn<Product, String> col_type;
-
     @FXML
-    private TableColumn<Product, java.sql.Date> col_dateAdded; // hoặc LocalDate nếu bạn dùng kiểu đó
-
+    private TableColumn<Product, LocalDate> col_dateAdded; // hoặc LocalDate nếu bạn dùng kiểu đó
     @FXML
     private TableColumn<Product, Integer> col_stocks;
+    @FXML
+    private TableColumn<?, ?> col_author;
+    @FXML
+    private TableColumn<?, ?> col_description;
+    @FXML
+    private TableColumn<?, ?> col_genre;
+    @FXML
+    private TableColumn<?, ?> col_imageSource;
+    @FXML
+    private TableColumn<?, ?> col_isbn;
+    @FXML
+    private TableColumn<?, ?> col_pubDate;
+    @FXML
+    private TableColumn<?, ?> col_restrictedAge;
 
 
 
@@ -119,7 +127,7 @@ public class InventoryController {
 
 
     @FXML
-    private TableView<Product> inventory_tableView;
+    private TableView<Book> inventory_tableView;
 
     @FXML
     private ComboBox<String> inventory_type;
@@ -205,8 +213,8 @@ public class InventoryController {
         inventory_genre.getItems().addAll(genreList);
     }
 
-    public ObservableList<Product> dataList(){
-        ObservableList<Product> list = FXCollections.observableArrayList();
+    public ObservableList<Book> dataList() {
+        ObservableList<Book> list = FXCollections.observableArrayList();
         String sql = "SELECT * FROM product";
         connect = database.connectDB();
 
@@ -214,29 +222,35 @@ public class InventoryController {
             prepare = connect.prepareStatement(sql);
             result = prepare.executeQuery();
 
-            while(result.next()){
-                list.add(new Product(
-                        result.getString("ID"),
+            while (result.next()) {
+                list.add(new Book(
+                        result.getString("id"),
                         result.getString("name"),
-                        result.getDouble("import_price"),
-                        result.getDouble("sell_price"),
                         result.getString("distributor"),
+                        result.getDouble("sell_price"),
+                        result.getDouble("import_price"),
+                        result.getInt("stock"),
                         result.getString("type"),
-                        result.getDate("added_date"),
-                        result.getInt("stock")
+                        result.getString("image"), // Lấy đường dẫn ảnh
+                        result.getString("description"), // Lấy mô tả
+                        result.getDate("added_date") != null ? result.getDate("added_date").toLocalDate() : null, // Ngày thêm sản phẩm
+                        result.getInt("age_restrict"), // Giới hạn tuổi
+                        result.getInt("sell_quantity"), // Số lượng bán
+                        result.getString("isbn"), // ISBN
+                        result.getString("genre"), // Thể loại
+                        result.getDate("pub_date") != null ? result.getDate("pub_date").toLocalDate() : null, // Ngày xuất bản
+                        result.getString("author") // Tác giả
                 ));
-
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return list;
     }
 
-
     public void showData() {
-        ObservableList<Product> list = dataList();
+        ObservableList<Book> list = dataList();
 
         col_productID.setCellValueFactory(new PropertyValueFactory<>("ID"));
         col_productName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -246,6 +260,16 @@ public class InventoryController {
         col_type.setCellValueFactory(new PropertyValueFactory<>("type"));
         col_dateAdded.setCellValueFactory(new PropertyValueFactory<>("addedDate"));
         col_stocks.setCellValueFactory(new PropertyValueFactory<>("stock"));
+
+        // Các cột bổ sung
+        col_author.setCellValueFactory(new PropertyValueFactory<>("author"));
+        col_genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
+        col_pubDate.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
+        col_isbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+        col_description.setCellValueFactory(new PropertyValueFactory<>("description"));
+        col_imageSource.setCellValueFactory(new PropertyValueFactory<>("image"));
+        col_restrictedAge.setCellValueFactory(new PropertyValueFactory<>("restrictedAge"));
+
         inventory_tableView.setItems(list);
     }
 
@@ -258,8 +282,6 @@ public class InventoryController {
             inventory_pubDate_label.setDisable(false);
             inventory_ISBN.setDisable(false);
             inventory_author.setDisable(false);
-            inventory_description.setDisable(false);
-            inventory_description_label.setDisable(false);
             inventory_author_label.setDisable(false);
             inventory_publishedDate.setDisable(false);
             inventory_genre.setDisable(false);
@@ -271,14 +293,11 @@ public class InventoryController {
             inventory_pubDate_label.setDisable(true);
             inventory_ISBN.setDisable(true);
             inventory_author.setDisable(true);
-            inventory_description.setDisable(true);
-            inventory_description_label.setDisable(true);
             inventory_author_label.setDisable(true);
             inventory_publishedDate.setDisable(true);
             inventory_genre.setDisable(true);
         }
     }
-
 
     public void setImport_btn() {
         FileChooser fileChooser = new FileChooser();
@@ -319,7 +338,6 @@ public class InventoryController {
             }
         }
     }
-
 
     public void setAdd_btn() {
         if (
@@ -433,7 +451,7 @@ public class InventoryController {
         }
     }
 
-    public void SetClear_btn() {
+    public void setClear_btn() {
         inventory_productID.clear();
         inventory_productName.clear();
         inventory_importPrice.clear();
@@ -449,6 +467,211 @@ public class InventoryController {
         inventory_type.getSelectionModel().clearSelection();
         inventory_imageView.setImage(null);
     }
+
+    public void setUpdate_btn() {
+        if (
+                inventory_productID.getText().isEmpty()
+                        || inventory_productName.getText().isEmpty()
+                        || inventory_importPrice.getText().isEmpty()
+                        || inventory_sellingPrice.getText().isEmpty()
+                        || inventory_distributor.getText().isEmpty()
+                        || inventory_type.getSelectionModel().getSelectedItem() == null
+                        || inventory_restrictedAge.getText().isEmpty()
+                        || inventory_stocks.getText().isEmpty()
+                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_description.getText().isEmpty())
+                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_ISBN.getText().isEmpty())
+                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_author.getText().isEmpty())
+                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_genre.getCheckModel().getCheckedItems().isEmpty())
+                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_publishedDate.getValue() == null)
+        ) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter all the fields correctly.");
+            alert.showAndWait();
+        } else {
+            String updateQuery;
+            connect = database.connectDB();
+
+            try {
+                if ("Book".equals(inventory_type.getSelectionModel().getSelectedItem())) {
+                    updateQuery = "UPDATE product SET "
+                            + "type = ?, name = ?, image = ?, distributor = ?, description = ?, added_date = ?, "
+                            + "stock = ?, import_price = ?, sell_price = ?, age_restrict = ?, isbn = ?, "
+                            + "author = ?, genre = ?, pub_date = ? WHERE id = ?";
+
+                    prepare = connect.prepareStatement(updateQuery);
+                    prepare.setString(1, "Book");
+                    prepare.setString(2, inventory_productName.getText());
+                    prepare.setString(3, currentImagePath);
+                    prepare.setString(4, inventory_distributor.getText());
+                    prepare.setString(5, inventory_description.getText());
+                    prepare.setDate(6, java.sql.Date.valueOf(LocalDate.now()));
+                    prepare.setInt(7, Integer.parseInt(inventory_stocks.getText()));
+                    prepare.setFloat(8, Float.parseFloat(inventory_importPrice.getText()));
+                    prepare.setFloat(9, Float.parseFloat(inventory_sellingPrice.getText()));
+                    prepare.setInt(10, Integer.parseInt(inventory_restrictedAge.getText()));
+                    prepare.setString(11, inventory_ISBN.getText());
+                    prepare.setString(12, inventory_author.getText());
+                    prepare.setString(13, String.join(", ", inventory_genre.getCheckModel().getCheckedItems()));
+                    prepare.setDate(14, java.sql.Date.valueOf(inventory_publishedDate.getValue()));
+                    prepare.setString(15, inventory_productID.getText());
+                } else {
+                    updateQuery = "UPDATE product SET "
+                            + "type = ?, name = ?, image = ?, distributor = ?, description = ?, added_date = ?, "
+                            + "stock = ?, import_price = ?, sell_price = ?, age_restrict = ?, isbn = ?, "
+                            + "author = ?, genre = ?, pub_date = ? WHERE id = ?";
+
+                    prepare = connect.prepareStatement(updateQuery);
+                    prepare.setString(1, inventory_type.getSelectionModel().getSelectedItem());
+                    prepare.setString(2, inventory_productName.getText());
+                    prepare.setString(3, currentImagePath);
+                    prepare.setString(4, inventory_distributor.getText());
+                    prepare.setString(5, inventory_description.getText());
+                    prepare.setDate(6, java.sql.Date.valueOf(LocalDate.now()));
+                    prepare.setInt(7, Integer.parseInt(inventory_stocks.getText()));
+                    prepare.setFloat(8, Float.parseFloat(inventory_importPrice.getText()));
+                    prepare.setFloat(9, Float.parseFloat(inventory_sellingPrice.getText()));
+                    prepare.setInt(10, Integer.parseInt(inventory_restrictedAge.getText()));
+
+                    // Đặt NULL cho các trường không áp dụng với loại sản phẩm không phải Book
+                    prepare.setNull(11, java.sql.Types.VARCHAR); // isbn
+                    prepare.setNull(12, java.sql.Types.VARCHAR); // author
+                    prepare.setNull(13, java.sql.Types.VARCHAR); // genre
+                    prepare.setNull(14, java.sql.Types.DATE);    // pub_date
+                    prepare.setString(15, inventory_productID.getText());
+                }
+
+                // Thực thi truy vấn cập nhật
+                int rowsAffected = prepare.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Product updated successfully.");
+                    alert.showAndWait();
+                    showData();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Product update failed. Please try again.");
+                    alert.showAndWait();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void setDelete_btn() {
+        if (inventory_productID.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a product to delete.");
+            alert.showAndWait();
+        } else {
+            // Hiển thị hộp thoại xác nhận trước khi xóa
+            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmAlert.setTitle("Confirmation Message");
+            confirmAlert.setHeaderText(null);
+            confirmAlert.setContentText("Are you sure you want to delete this product?");
+
+            Optional<ButtonType> result = confirmAlert.showAndWait();
+
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                String deleteQuery = "DELETE FROM product WHERE id = ?";
+                connect = database.connectDB();
+
+                try {
+                    prepare = connect.prepareStatement(deleteQuery);
+                    prepare.setString(1, inventory_productID.getText());
+
+                    int rowsAffected = prepare.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Information Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Product deleted successfully.");
+                        alert.showAndWait();
+                        showData(); // Cập nhật danh sách hiển thị sau khi xóa
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Failed to delete the product. Please try again.");
+                        alert.showAndWait();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+    public void inventorySelectData() {
+        Book prod = inventory_tableView.getSelectionModel().getSelectedItem();
+        int index = inventory_tableView.getSelectionModel().getSelectedIndex();
+
+        // Kiểm tra sản phẩm được chọn
+        if (index < 0 || prod == null) return;
+
+        // Cập nhật dữ liệu từ sản phẩm được chọn vào các trường giao diện
+        inventory_productID.setText(prod.getID());
+        inventory_productName.setText(prod.getName());
+        inventory_distributor.setText(prod.getDistributor());
+        inventory_stocks.setText(String.valueOf(prod.getStock()));
+        inventory_importPrice.setText(String.valueOf(prod.getImportPrice()));
+        inventory_sellingPrice.setText(String.valueOf(prod.getSellPrice()));
+        inventory_restrictedAge.setText(String.valueOf(prod.getRestrictedAge()));
+        inventory_type.getSelectionModel().select(prod.getType());
+        inventory_description.setText(prod.getDescription());
+
+        try {
+            // Kiểm tra đường dẫn ảnh có hợp lệ không
+            if (prod.getImage() != null && !prod.getImage().isEmpty()) {
+                // Chuyển đổi đường dẫn tương đối thành URL
+                String relativePath = prod.getImage(); // sample/hustbookstore/img/pocari.png
+                String imagePath = getClass().getResource("/" + relativePath).toExternalForm();
+
+                // Tạo đối tượng Image từ URL
+                Image img = new Image(imagePath, 1000, 1600, true, true);
+                inventory_imageView.setImage(img);
+            } else {
+                // Xóa ảnh nếu đường dẫn rỗng hoặc null
+                inventory_imageView.setImage(null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // Ghi log nếu có lỗi
+            inventory_imageView.setImage(null); // Xóa ảnh trong trường hợp lỗi
+        }
+
+        if ("Book".equals(prod.getType())) {
+            inventory_author.setText(prod.getAuthor() != null ? prod.getAuthor() : "");
+            inventory_publishedDate.setValue(prod.getPublishedDate());
+            inventory_ISBN.setText(prod.getIsbn() != null ? prod.getIsbn() : "");
+            inventory_genre.getCheckModel().clearChecks();
+            if (prod.getGenre() != null) {
+                String[] genres = prod.getGenre().split(",");
+                for (String g : genres) {
+                    inventory_genre.getCheckModel().check(g.trim());
+                }
+            }
+        } else {
+            // Xóa dữ liệu liên quan đến sách nếu không phải loại sách
+            inventory_author.clear();
+            inventory_publishedDate.setValue(null);
+            inventory_ISBN.clear();
+            inventory_genre.getCheckModel().clearChecks();
+        }
+    }
+
+
+
 
 
     public void initialize() {    // buộc phải có, giải thích trong buổi họp nhóm tiếp theo

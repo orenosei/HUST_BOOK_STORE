@@ -30,7 +30,7 @@
             <FontAwesomeIcon fill="#7e60c6" glyphName="SEARCH" layoutX="357.0" layoutY="35.0" size="2em" />
          </children>
       </AnchorPane>
-      <TableView fx:id="inventory_tableView" layoutX="160.0" layoutY="324.0" prefHeight="312.0" prefWidth="1000.0" styleClass="inventory-table" stylesheets="@Design/homeDesign.css" AnchorPane.bottomAnchor="328.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0">
+      <TableView fx:id="inventory_tableView" layoutX="160.0" layoutY="324.0" onMouseClicked="#inventorySelectData" prefHeight="312.0" prefWidth="1000.0" styleClass="inventory-table" stylesheets="@Design/homeDesign.css" AnchorPane.bottomAnchor="328.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0">
          <columns>
             <TableColumn fx:id="col_productID" prefWidth="96.01204299926758" text="Product ID" />
             <TableColumn fx:id="col_productName" prefWidth="156.98795318603516" text="Product Name" />
@@ -40,6 +40,13 @@
             <TableColumn fx:id="col_stocks" prefWidth="190.171630859375" text="Stocks" />
             <TableColumn fx:id="col_distributor" prefWidth="190.171630859375" text="Distributor" />
             <TableColumn fx:id="col_dateAdded" prefWidth="190.171630859375" text="Date Added" />
+            <TableColumn fx:id="col_restrictedAge" prefWidth="190.171630859375" text="Resctricted Age" />
+            <TableColumn fx:id="col_description" prefWidth="190.171630859375" text="Description" />
+            <TableColumn fx:id="col_isbn" prefWidth="190.171630859375" text="ISBN" />
+            <TableColumn fx:id="col_genre" prefWidth="190.171630859375" text="Genre" />
+            <TableColumn fx:id="col_pubDate" prefWidth="190.171630859375" text="Published Date" />
+            <TableColumn fx:id="col_imageSource" prefWidth="190.171630859375" text="Image Source" />
+            <TableColumn fx:id="col_author" prefWidth="190.171630859375" text="Author" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -97,17 +104,17 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="update_btn" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@Design/homeDesign.css" text="Update" textFill="WHITE" GridPane.rowIndex="1">
+                  <Button fx:id="update_btn" mnemonicParsing="false" onAction="#setUpdate_btn" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@Design/homeDesign.css" text="Update" textFill="WHITE" GridPane.rowIndex="1">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="clear_btn" mnemonicParsing="false" onAction="#SetClear_btn" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@Design/homeDesign.css" text="Clear" textFill="WHITE" GridPane.rowIndex="2">
+                  <Button fx:id="clear_btn" mnemonicParsing="false" onAction="#setClear_btn" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@Design/homeDesign.css" text="Clear" textFill="WHITE" GridPane.rowIndex="2">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="delete_btn" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@Design/homeDesign.css" text="Delete" textFill="WHITE" GridPane.rowIndex="3">
+                  <Button fx:id="delete_btn" mnemonicParsing="false" onAction="#setDelete_btn" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@Design/homeDesign.css" text="Delete" textFill="WHITE" GridPane.rowIndex="3">
                      <font>
                         <Font size="16.0" />
                      </font>
