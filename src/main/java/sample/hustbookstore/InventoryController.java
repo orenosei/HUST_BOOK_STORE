@@ -2,6 +2,8 @@ package sample.hustbookstore;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -130,6 +132,9 @@ public class InventoryController {
     private TableView<Book> inventory_tableView;
 
     @FXML
+    private TextField search_bar;
+
+    @FXML
     private ComboBox<String> inventory_type;
 
 
@@ -249,9 +254,62 @@ public class InventoryController {
         return list;
     }
 
+//    public void showData() {
+//        ObservableList<Book> list = dataList();
+//
+//        col_productID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+//        col_productName.setCellValueFactory(new PropertyValueFactory<>("name"));
+//        col_importPrice.setCellValueFactory(new PropertyValueFactory<>("importPrice"));
+//        col_sellingPrice.setCellValueFactory(new PropertyValueFactory<>("sellPrice"));
+//        col_distributor.setCellValueFactory(new PropertyValueFactory<>("distributor"));
+//        col_type.setCellValueFactory(new PropertyValueFactory<>("type"));
+//        col_dateAdded.setCellValueFactory(new PropertyValueFactory<>("addedDate"));
+//        col_stocks.setCellValueFactory(new PropertyValueFactory<>("stock"));
+//
+//        // Các cột bổ sung
+//        col_author.setCellValueFactory(new PropertyValueFactory<>("author"));
+//        col_genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
+//        col_pubDate.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
+//        col_isbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+//        col_description.setCellValueFactory(new PropertyValueFactory<>("description"));
+//        col_imageSource.setCellValueFactory(new PropertyValueFactory<>("image"));
+//        col_restrictedAge.setCellValueFactory(new PropertyValueFactory<>("restrictedAge"));
+//
+//        inventory_tableView.setItems(list);
+//    }
+
     public void showData() {
         ObservableList<Book> list = dataList();
 
+        // Tạo FilteredList từ danh sách gốc
+        FilteredList<Book> filteredData = new FilteredList<>(list, b -> true);
+
+        // Lắng nghe sự thay đổi trong thanh tìm kiếm
+        search_bar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(book -> {
+                // Nếu thanh tìm kiếm trống, hiển thị tất cả
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                // Kiểm tra các thuộc tính: name, distributor, author, genre, description
+                return (book.getName() != null && book.getName().toLowerCase().contains(lowerCaseFilter))
+                        || (book.getDistributor() != null && book.getDistributor().toLowerCase().contains(lowerCaseFilter))
+                        || (book.getAuthor() != null && book.getAuthor().toLowerCase().contains(lowerCaseFilter))
+                        || (book.getGenre() != null && book.getGenre().toLowerCase().contains(lowerCaseFilter))
+                        || (book.getDescription() != null && book.getDescription().toLowerCase().contains(lowerCaseFilter));
+            });
+        });
+
+        // Bọc FilteredList bằng SortedList
+        SortedList<Book> sortedData = new SortedList<>(filteredData);
+
+        // Ràng buộc SortedList với TableView
+        sortedData.comparatorProperty().bind(inventory_tableView.comparatorProperty());
+
+        // Cập nhật các cột của bảng
         col_productID.setCellValueFactory(new PropertyValueFactory<>("ID"));
         col_productName.setCellValueFactory(new PropertyValueFactory<>("name"));
         col_importPrice.setCellValueFactory(new PropertyValueFactory<>("importPrice"));
@@ -270,8 +328,9 @@ public class InventoryController {
         col_imageSource.setCellValueFactory(new PropertyValueFactory<>("image"));
         col_restrictedAge.setCellValueFactory(new PropertyValueFactory<>("restrictedAge"));
 
-        inventory_tableView.setItems(list);
+        inventory_tableView.setItems(sortedData);
     }
+
 
     public void handleProductTypeChange() {
         // Kiểm tra xem loại sản phẩm có phải là Book không
