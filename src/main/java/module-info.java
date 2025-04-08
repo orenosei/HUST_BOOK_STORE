@@ -10,6 +10,7 @@ module sample.hustbookstore {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.sql;
+    requires mysql.connector.j;
 
     opens sample.hustbookstore to javafx.fxml;
     exports sample.hustbookstore;

@@ -1,5 +1,6 @@
 package sample.hustbookstore;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Product {
@@ -12,9 +13,11 @@ public class Product {
     private String type;
     private String image;
     private String description;
-    private Date addedDate;
+    private LocalDate addedDate;
+    private int restrictedAge;
+    private int sellQuantity;
 
-    public Product(String ID, String name, String distributor, Double sellPrice, Double importPrice, int stock, String type, String image, String description, Date addedDate) {
+    public Product(String ID, String name, String distributor, Double sellPrice, Double importPrice, int stock, String type, String image, String description, LocalDate addedDate, int restrictedAge, int sellQuantity) {
         this.ID = ID;
         this.name = name;
         this.distributor = distributor;
@@ -25,16 +28,8 @@ public class Product {
         this.image = image;
         this.description = description;
         this.addedDate = addedDate;
-    }
-
-    public Product(String productID, String productName, double importPrice, double sellingPrice, String distributor, String type, String dateAdded) {
-        this.ID = productID;
-        this.name = productName;
-        this.importPrice = importPrice;
-        this.sellPrice = sellingPrice;
-        this.distributor = distributor;
-        this.type = type;
-        this.addedDate = addedDate;
+        this.restrictedAge = restrictedAge;
+        this.sellQuantity = sellQuantity;
     }
 
     public String getID() {
@@ -109,11 +104,27 @@ public class Product {
         this.description = description;
     }
 
-    public Date getAddedDate() {
+    public LocalDate getAddedDate() {
         return addedDate;
     }
 
-    public void setAddedDate(Date addedDate) {
+    public void setAddedDate(LocalDate addedDate) {
         this.addedDate = addedDate;
+    }
+
+    public int getRestrictedAge() {
+        return restrictedAge;
+    }
+
+    public void setRestrictedAge(int restrictedAge) {
+        this.restrictedAge = restrictedAge;
+    }
+
+    public int getSellQuantity() {
+        return sellQuantity;
+    }
+
+    public void setSellQuantity(int sellQuantity) {
+        this.sellQuantity = sellQuantity;
     }
 }
