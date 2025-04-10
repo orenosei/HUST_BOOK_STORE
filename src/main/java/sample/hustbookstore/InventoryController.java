@@ -254,30 +254,6 @@ public class InventoryController {
         return list;
     }
 
-//    public void showData() {
-//        ObservableList<Book> list = dataList();
-//
-//        col_productID.setCellValueFactory(new PropertyValueFactory<>("ID"));
-//        col_productName.setCellValueFactory(new PropertyValueFactory<>("name"));
-//        col_importPrice.setCellValueFactory(new PropertyValueFactory<>("importPrice"));
-//        col_sellingPrice.setCellValueFactory(new PropertyValueFactory<>("sellPrice"));
-//        col_distributor.setCellValueFactory(new PropertyValueFactory<>("distributor"));
-//        col_type.setCellValueFactory(new PropertyValueFactory<>("type"));
-//        col_dateAdded.setCellValueFactory(new PropertyValueFactory<>("addedDate"));
-//        col_stocks.setCellValueFactory(new PropertyValueFactory<>("stock"));
-//
-//        // Các cột bổ sung
-//        col_author.setCellValueFactory(new PropertyValueFactory<>("author"));
-//        col_genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
-//        col_pubDate.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
-//        col_isbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
-//        col_description.setCellValueFactory(new PropertyValueFactory<>("description"));
-//        col_imageSource.setCellValueFactory(new PropertyValueFactory<>("image"));
-//        col_restrictedAge.setCellValueFactory(new PropertyValueFactory<>("restrictedAge"));
-//
-//        inventory_tableView.setItems(list);
-//    }
-
     public void showData() {
         ObservableList<Book> list = dataList();
 
@@ -303,10 +279,7 @@ public class InventoryController {
             });
         });
 
-        // Bọc FilteredList bằng SortedList
         SortedList<Book> sortedData = new SortedList<>(filteredData);
-
-        // Ràng buộc SortedList với TableView
         sortedData.comparatorProperty().bind(inventory_tableView.comparatorProperty());
 
         // Cập nhật các cột của bảng
@@ -318,8 +291,6 @@ public class InventoryController {
         col_type.setCellValueFactory(new PropertyValueFactory<>("type"));
         col_dateAdded.setCellValueFactory(new PropertyValueFactory<>("addedDate"));
         col_stocks.setCellValueFactory(new PropertyValueFactory<>("stock"));
-
-        // Các cột bổ sung
         col_author.setCellValueFactory(new PropertyValueFactory<>("author"));
         col_genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
         col_pubDate.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
