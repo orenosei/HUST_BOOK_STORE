@@ -37,6 +37,10 @@ public class Product {
         this.addedDate = addedDate;
         this.stock = stock;
     }
+
+    public Product(String name, String distributor, Double sellPrice, String type, String image, String description) {
+    }
+
     public String getID() {
         return ID;
     }

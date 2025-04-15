@@ -17,6 +17,13 @@ public class Book extends Product
         this.publishedDate = publishedDate;
     }
 
+    public Book(String name, String distributor, Double sellPrice, String type, String image, String description) {
+        super(name, distributor, sellPrice, type, image, description);
+        this.isbn = isbn;
+        this.author = author;
+        this.genre = genre;
+        this.publishedDate = publishedDate;
+    }
 
     public String getIsbn() {
         return isbn;
