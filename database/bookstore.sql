@@ -186,3 +186,5 @@ INSERT INTO product (
           'Gấu bông Totoro đáng yêu, chất liệu mềm mại.', '2023-10-10', '2024-04-03', '2024-04-01',
           40, 40, 60000, 99000, 0, 3
       );
+
+SELECT * FROM product
