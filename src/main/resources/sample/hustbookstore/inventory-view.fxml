@@ -33,7 +33,7 @@
       </AnchorPane>
       <ScrollPane layoutX="10.0" layoutY="80.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="320.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="70.0">
          <content>
-            <TableView fx:id="inventory_tableView" onMouseClicked="#inventorySelectData" prefHeight="310.0" styleClass="inventory-table" stylesheets="@Design/homeDesign.css" tableMenuButtonVisible="true">
+            <TableView fx:id="inventory_tableView" onMouseClicked="#inventorySelectData" prefHeight="310.0" prefWidth="997.0" styleClass="inventory-table" stylesheets="@Design/homeDesign.css" tableMenuButtonVisible="true">
                <columns>
                   <TableColumn fx:id="col_productID" prefWidth="150.0" resizable="false" text="Product ID" />
                   <TableColumn fx:id="col_productName" prefWidth="300.0" resizable="false" text="Product Name" />
@@ -41,15 +41,15 @@
                   <TableColumn fx:id="col_importPrice" prefWidth="150.0" resizable="false" text="Import Price" />
                   <TableColumn fx:id="col_sellingPrice" prefWidth="150.0" resizable="false" text="Selling Price" />
                   <TableColumn fx:id="col_stocks" prefWidth="100.0" resizable="false" text="Stocks" />
-                  <TableColumn fx:id="col_distributor" prefWidth="150.0" resizable="false" text="Distributor" />
-                  <TableColumn fx:id="col_dateAdded" prefWidth="150.0" resizable="false" text="Date Added" />
-                  <TableColumn fx:id="col_restrictedAge" prefWidth="150.0" resizable="false" text="Resctricted Age" />
-                  <TableColumn fx:id="col_description" prefWidth="200.0" resizable="false" text="Description" />
-                  <TableColumn fx:id="col_author" prefWidth="200.0" resizable="false" text="Author" />
-                  <TableColumn fx:id="col_isbn" prefWidth="150.0" resizable="false" text="ISBN" />
-                  <TableColumn fx:id="col_genre" prefWidth="200.0" resizable="false" text="Genre" />
-                  <TableColumn fx:id="col_pubDate" prefWidth="150.0" resizable="false" text="Published Date" />
-                  <TableColumn fx:id="col_imageSource" prefWidth="150.0" resizable="false" text="Image Source" />
+                  <TableColumn fx:id="col_distributor" prefWidth="150.0" resizable="false" text="Distributor" visible="false" />
+                  <TableColumn fx:id="col_dateAdded" prefWidth="150.0" resizable="false" text="Date Added" visible="false" />
+                  <TableColumn fx:id="col_restrictedAge" prefWidth="150.0" resizable="false" text="Resctricted Age" visible="false" />
+                  <TableColumn fx:id="col_description" prefWidth="200.0" resizable="false" text="Description" visible="false" />
+                  <TableColumn fx:id="col_author" prefWidth="200.0" resizable="false" text="Author" visible="false" />
+                  <TableColumn fx:id="col_isbn" prefWidth="150.0" resizable="false" text="ISBN" visible="false" />
+                  <TableColumn fx:id="col_genre" prefWidth="200.0" resizable="false" text="Genre" visible="false" />
+                  <TableColumn fx:id="col_pubDate" prefWidth="150.0" resizable="false" text="Published Date" visible="false" />
+                  <TableColumn fx:id="col_imageSource" prefWidth="150.0" resizable="false" text="Image Source" visible="false" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

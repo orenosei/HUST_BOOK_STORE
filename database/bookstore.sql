@@ -2,14 +2,12 @@ CREATE DATABASE bookstore;
 USE bookstore;
 
 CREATE TABLE admin (
-                       id INT AUTO_INCREMENT,
-                       fullname VARCHAR(255) NOT NULL,
+
                        username VARCHAR(255) NOT NULL,
                        password VARCHAR(255) NOT NULL,
                        question VARCHAR(225) NOT NULL,
                        answer VARCHAR(225) NOT NULL,
-                       privacy_code VARCHAR(255) DEFAULT 'abc123',
-                       PRIMARY KEY (id)
+                       privacy_code VARCHAR(255) DEFAULT 'abc123'
 );
 
 CREATE TABLE user (

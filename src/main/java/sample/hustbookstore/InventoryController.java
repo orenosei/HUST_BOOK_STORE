@@ -257,7 +257,6 @@ public class InventoryController {
     public void showData() {
         ObservableList<Book> list = dataList();
 
-        // Tạo FilteredList từ danh sách gốc
         FilteredList<Book> filteredData = new FilteredList<>(list, b -> true);
 
         // Lắng nghe sự thay đổi trong thanh tìm kiếm
