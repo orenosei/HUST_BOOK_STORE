@@ -40,8 +40,9 @@ public class StoreProductCardController implements Initializable {
         this.prodData = prodData;
         productName.setText(prodData.getName());
         productPrice.setText(String.valueOf(prodData.getSellPrice()));
-        String path = prodData.getImage();
-        image = new Image(path, 100, 160, true, true);
+        String relativePath = prodData.getImage(); // sample/hustbookstore/img/pocari.png
+        String imagePath = getClass().getResource("/" + relativePath).toExternalForm();
+        image = new Image(imagePath, 100, 160, true, true);
         productImage.setImage(image);
 
     }

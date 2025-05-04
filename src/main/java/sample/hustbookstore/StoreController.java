@@ -111,7 +111,7 @@ public class StoreController {
 
     public ObservableList<Book> tabBookGetData() {
 
-        String sql = "SELECT * FROM product";
+        String sql = "SELECT * FROM product where type = 'Book'";
 
         ObservableList<Book> listData = FXCollections.observableArrayList();
         connect = database.connectDB();
@@ -126,7 +126,7 @@ public class StoreController {
                 prod = new Book(
                         result.getString("name"),
                         result.getString("distributor"),
-                        result.getDouble("sellPrice"),
+                        result.getDouble("sell_price"),
                         result.getString("type"),
                         result.getString("image"),
                         result.getString("description")
