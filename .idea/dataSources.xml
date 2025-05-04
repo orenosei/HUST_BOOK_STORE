@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@hustbookstore.c38csaq64wfe.ap-southeast-2.rds.amazonaws.com" uuid="d11d1ced-fa20-4223-97d4-8fef1c159709">
+    <data-source source="LOCAL" name="bookstore@db-mysql-nyc3-64236-do-user-21926172-0.f.db.ondigitalocean.com" uuid="629accd4-20f7-4f84-8a6e-77fd47f0205c">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://hustbookstore.c38csaq64wfe.ap-southeast-2.rds.amazonaws.com:3306</jdbc-url>
+      <jdbc-url>jdbc:mysql://db-mysql-nyc3-64236-do-user-21926172-0.f.db.ondigitalocean.com:25060/bookstore</jdbc-url>
       <jdbc-additional-properties>
         <property name="com.intellij.clouds.kubernetes.db.host.port" />
         <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
+        <property name="com.intellij.clouds.kubernetes.db.resource.type" value="Deployment" />
         <property name="com.intellij.clouds.kubernetes.db.container.port" />
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>

@@ -1,28 +1,23 @@
 package sample.hustbookstore;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Book extends Product
 {
     private String isbn;
     private String genre;
-    private Date publishedDate;
+    private LocalDate publishedDate;
     private String author;
 
-    public Book(String ID, String name, String distributor, Double sellPrice, Double importPrice, int stock, String type, String image, String description, Date addedDate) {
-        super(ID, name, distributor, sellPrice, importPrice, stock, type, image, description, addedDate);
+    public Book(String ID, String name, String distributor, Double sellPrice,
+                Double importPrice, int stock, String type, String image, String description,
+                LocalDate addedDate, int restrictedAge, int sellQuantity,
+                String isbn, String genre, LocalDate publishedDate, String author) {
+        super(ID, name, distributor, sellPrice, importPrice, stock, type, image, description, addedDate, restrictedAge, sellQuantity);
         this.isbn = isbn;
-        this.author = author;
         this.genre = genre;
         this.publishedDate = publishedDate;
-    }
-
-    public Book(String name, String distributor, Double sellPrice, String type, String image, String description) {
-        super(name, distributor, sellPrice, type, image, description);
-        this.isbn = isbn;
         this.author = author;
-        this.genre = genre;
-        this.publishedDate = publishedDate;
     }
 
     public String getIsbn() {
@@ -49,11 +44,11 @@ public class Book extends Product
         this.genre = genre;
     }
 
-    public Date getPublishedDate() {
+    public LocalDate getPublishedDate() {
         return publishedDate;
     }
 
-    public void setPublishedDate(Date publishedDate) {
+    public void setPublishedDate(LocalDate publishedDate) {
         this.publishedDate = publishedDate;
     }
 
