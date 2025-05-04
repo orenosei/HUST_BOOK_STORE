@@ -8,10 +8,10 @@ public class database {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            String url = "jdbc:mysql://hustbookstore.c38csaq64wfe.ap-southeast-2.rds.amazonaws.com:3306/bookstore";
-
-            String user = "admin";
-            String password = "1qaz0okm";
+            // URL mới phù hợp với thông tin DigitalOcean
+            String url = "jdbc:mysql://db-mysql-nyc3-64236-do-user-21926172-0.f.db.ondigitalocean.com:25060/bookstore?sslMode=REQUIRED";
+            String user = "doadmin";
+            String password = "AVNS_AtgscO0H_d3fHTjyx6d";
 
             return DriverManager.getConnection(url, user, password);
         } catch (Exception e) {
