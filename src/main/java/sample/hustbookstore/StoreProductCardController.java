@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -31,6 +32,20 @@ public class StoreProductCardController implements Initializable {
 
     @FXML
     private Spinner<?> productSpinner;
+
+    private Book prodData;
+    private Image image;
+
+    public void setData(Book prodData) {
+        this.prodData = prodData;
+        productName.setText(prodData.getName());
+        productPrice.setText(String.valueOf(prodData.getSellPrice()));
+        String relativePath = prodData.getImage(); // sample/hustbookstore/img/pocari.png
+        String imagePath = getClass().getResource("/" + relativePath).toExternalForm();
+        image = new Image(imagePath, 100, 160, true, true);
+        productImage.setImage(image);
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
