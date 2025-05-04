@@ -119,7 +119,7 @@ public class LaunchApplication extends Application {
             alert.setContentText("Please fill all the fields");
             alert.showAndWait();
         } else {
-            String regData = "INSERT INTO admin (username, password, question, answer, privacy_code) "
+            String regData = "INSERT INTO admin (username, password, question, answer, privacy_code) " //bỏ privacy code nhe
                     + "  VALUES (?,?,?,?,?)";
             connect = database.connectDB();
 
