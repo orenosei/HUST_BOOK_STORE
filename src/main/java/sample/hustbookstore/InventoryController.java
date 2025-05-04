@@ -670,6 +670,8 @@ public class InventoryController {
                 // Tạo đối tượng Image từ URL
                 Image img = new Image(imagePath, 1000, 1600, true, true);
                 inventory_imageView.setImage(img);
+
+                currentImagePath = prod.getImage();
             } else {
                 // Xóa ảnh nếu đường dẫn rỗng hoặc null
                 inventory_imageView.setImage(null);
