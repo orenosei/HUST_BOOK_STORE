@@ -32,6 +32,15 @@ public class Product {
         this.sellQuantity = sellQuantity;
     }
 
+    public Product(String name, String distributor, Double sellPrice, String type, String image, String description) {
+        this.name = name;
+        this.distributor = distributor;
+        this.sellPrice = sellPrice;
+        this.type = type;
+        this.image = image;
+        this.description = description;
+    }
+
     public String getID() {
         return ID;
     }
