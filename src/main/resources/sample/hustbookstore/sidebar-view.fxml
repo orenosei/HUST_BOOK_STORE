@@ -4,6 +4,7 @@
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -48,7 +49,7 @@
                   <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@Design/homeDesign.css">
                      <children>
                         <FontAwesomeIcon fill="WHITE" glyphName="HOME" layoutX="14.0" layoutY="59.0" size="4em" />
-                        <Button fx:id="dashboard_btn" alignment="BASELINE_CENTER" layoutX="76.0" layoutY="-1.0" mnemonicParsing="false" onAction="#loadDashboard" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@Design/homeDesign.css" text="DASHBOARD" textFill="WHITE" AnchorPane.rightAnchor="0.0">
+                        <Button fx:id="dashboard_btn" alignment="BASELINE_CENTER" layoutX="76.0" layoutY="-1.0" mnemonicParsing="false" onAction="#handleSidebarButtonAction" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@Design/homeDesign.css" text="DASHBOARD" textFill="WHITE" AnchorPane.rightAnchor="0.0">
                            <font>
                               <Font name="Chalkboard Bold" size="23.0" />
                            </font>
@@ -58,7 +59,7 @@
                   <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@Design/homeDesign.css">
                      <children>
                         <FontAwesomeIcon fill="WHITE" glyphName="ARCHIVE" layoutX="14.0" layoutY="60.0" size="4em" />
-                        <Button fx:id="inventory_btn" alignment="BASELINE_CENTER" layoutX="81.0" layoutY="9.0" mnemonicParsing="false" onAction="#loadInventory" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@Design/homeDesign.css" text="INVENTORY" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Button fx:id="inventory_btn" alignment="BASELINE_CENTER" layoutX="81.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleSidebarButtonAction" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@Design/homeDesign.css" text="INVENTORY" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <font>
                               <Font name="Chalkboard Bold" size="23.0" />
                            </font>
@@ -68,7 +69,7 @@
                   <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@Design/homeDesign.css">
                      <children>
                         <FontAwesomeIcon fill="WHITE" glyphName="USER_PLUS" layoutX="14.0" layoutY="60.0" size="4em" />
-                        <Button fx:id="customers_btn" alignment="BASELINE_CENTER" layoutX="81.0" layoutY="9.0" mnemonicParsing="false" onAction="#loadCustomers" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@Design/homeDesign.css" text="CUSTOMERS" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Button fx:id="customers_btn" alignment="BASELINE_CENTER" layoutX="81.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleSidebarButtonAction" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@Design/homeDesign.css" text="CUSTOMERS" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <font>
                               <Font name="Chalkboard Bold" size="23.0" />
                            </font>
@@ -78,7 +79,7 @@
                   <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@Design/homeDesign.css">
                      <children>
                         <FontAwesomeIcon fill="WHITE" glyphName="SHOPPING_CART" layoutX="14.0" layoutY="60.0" size="4em" />
-                        <Button fx:id="store_btn" alignment="BASELINE_CENTER" layoutX="81.0" mnemonicParsing="false" onAction="#loadStore" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@Design/homeDesign.css" text="STORE" textFill="WHITE">
+                        <Button fx:id="store_btn" alignment="BASELINE_CENTER" layoutX="81.0" mnemonicParsing="false" onAction="#handleSidebarButtonAction" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@Design/homeDesign.css" text="STORE" textFill="WHITE">
                            <font>
                               <Font name="Chalkboard Bold" size="23.0" />
                            </font>
@@ -88,7 +89,7 @@
                   <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@Design/homeDesign.css">
                      <children>
                         <FontAwesomeIcon fill="WHITE" glyphName="EMPIRE" layoutX="14.0" layoutY="60.0" size="4em" />
-                        <Button alignment="BASELINE_CENTER" layoutX="77.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@Design/homeDesign.css" text="ARYACHAT" textFill="WHITE">
+                        <Button fx:id="others_btn" alignment="BASELINE_CENTER" layoutX="77.0" mnemonicParsing="false" onAction="#handleSidebarButtonAction" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@Design/homeDesign.css" text="OTHERS" textFill="WHITE">
                            <font>
                               <Font name="Chalkboard Bold" size="23.0" />
                            </font>
@@ -98,7 +99,7 @@
                   <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@Design/homeDesign.css">
                      <children>
                         <FontAwesomeIcon fill="WHITE" glyphName="EDIT" layoutX="14.0" layoutY="60.0" size="4em" />
-                        <Button fx:id="profile_btn" alignment="BASELINE_CENTER" layoutX="77.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@Design/homeDesign.css" text="PROFILE" textFill="WHITE">
+                        <Button fx:id="profile_btn" alignment="BASELINE_CENTER" layoutX="77.0" mnemonicParsing="false" onAction="#handleSidebarButtonAction" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@Design/homeDesign.css" text="PROFILE" textFill="WHITE">
                            <font>
                               <Font name="Chalkboard Bold" size="23.0" />
                            </font>
@@ -124,6 +125,23 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="functionArea" prefHeight="720.0" prefWidth="1020.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <StackPane layoutX="270.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane fx:id="dashboardScreen" prefHeight="720.0" prefWidth="1020.0" />
+            <AnchorPane fx:id="inventoryScreen" layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="1020.0" />
+            <AnchorPane fx:id="customersScreen" layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="1020.0" />
+            <AnchorPane fx:id="storeScreen" layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="1020.0" />
+            <AnchorPane fx:id="othersScreen" layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="1020.0" />
+            <AnchorPane fx:id="profileScreen" layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="1020.0" />
+         </children>
+      </StackPane>
+      <Button fx:id="sync_btn" layoutX="280.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleSyncButtonAction" prefHeight="49.0" prefWidth="128.0" styleClass="voucher-button" stylesheets="@Design/homeDesign.css" text="SYNC" textFill="WHITE" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="10.0">
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="REFRESH" size="2em" wrappingWidth="37.282311869675425" />
+         </graphic>
+         <font>
+            <Font name="Chalkboard Bold" size="19.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
