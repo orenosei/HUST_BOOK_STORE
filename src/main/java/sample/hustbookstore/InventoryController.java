@@ -670,15 +670,16 @@ public class InventoryController {
                 // Tạo đối tượng Image từ URL
                 Image img = new Image(imagePath, 1000, 1600, true, true);
                 inventory_imageView.setImage(img);
-
                 currentImagePath = prod.getImage();
             } else {
                 // Xóa ảnh nếu đường dẫn rỗng hoặc null
                 inventory_imageView.setImage(null);
+                currentImagePath = null;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // Ghi log nếu có lỗi
+            e.printStackTrace();
             inventory_imageView.setImage(null); // Xóa ảnh trong trường hợp lỗi
+            currentImagePath = null;
         }
 
         if ("Book".equals(prod.getType())) {
@@ -700,11 +701,7 @@ public class InventoryController {
             inventory_genre.getCheckModel().clearChecks();
         }
     }
-
-
-
-
-
+    
     public void initialize() {    // buộc phải có, giải thích trong buổi họp nhóm tiếp theo
         setTypeList();
         setGenreList();
