@@ -124,13 +124,13 @@ public class LaunchApplication extends Application {
             alert.setContentText("Please fill all the fields");
             alert.showAndWait();
         } else {
-<<<<<<< HEAD
+//<<<<<<< HEAD
             String regData = "INSERT INTO admin (username, password, question, answer) "
                     + "  VALUES (?,?,?,?)";
-=======
+/*=======
             String regData = "INSERT INTO admin (username, password, question, answer, privacy_code) " //bỏ privacy code nhe
                     + "  VALUES (?,?,?,?,?)";
->>>>>>> 2d57a4b978a1356f5bb1cfff992e296335193d18
+>>>>>>> 2d57a4b978a1356f5bb1cfff992e296335193d18*/
             connect = database.connectDB();
 
 
@@ -152,7 +152,7 @@ public class LaunchApplication extends Application {
                     alert.setContentText("Invalid Password, atleast 8 characters are needed");
                     alert.showAndWait();
 
-                } else if(su_privacycode.getText()!="abc123"){
+                } else if(!su_privacycode.getText().equals("abc123")){
                     alert = new Alert(Alert.AlertType.ERROR); //???
                     alert.setTitle("Error Message");
                     alert.setHeaderText(null);
