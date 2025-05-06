@@ -38,7 +38,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="42.0" layoutY="44.0" text="Trinh Minh Thanh">
+            <Label fx:id="profile_label_adminName" layoutX="32.0" layoutY="44.0" text="Trinh Minh Thanh">
                <font>
                   <Font size="30.0" />
                </font>
@@ -80,7 +80,7 @@
                      </font>
                   </Label>
                   <TextField fx:id="profile_adminPassword" layoutX="162.0" layoutY="90.0" prefWidth="200.0" AnchorPane.bottomAnchor="120.0" />
-                  <Button fx:id="profile_changePasswordBtn" layoutX="388.0" layoutY="90.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Change" AnchorPane.bottomAnchor="120.0" AnchorPane.rightAnchor="0.0" />
+                  <Button fx:id="profile_changePasswordBtn" layoutX="388.0" layoutY="90.0" mnemonicParsing="false" onAction="#profileChangePasswordBtn" prefHeight="25.0" prefWidth="125.0" text="Change" AnchorPane.bottomAnchor="120.0" AnchorPane.rightAnchor="0.0" />
                   <Label layoutY="141.0" prefWidth="200.0" text="Recovery Question:" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0">
                      <font>
                         <Font size="20.0" />
@@ -93,7 +93,6 @@
                      </font>
                   </Label>
                   <TextField fx:id="profile_recoAns" layoutX="162.0" layoutY="194.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" />
-                  <Button fx:id="profile_changeRecoAnsBtn" layoutX="388.0" layoutY="194.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Change" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="0.0" />
                   <Label layoutX="35.0" layoutY="-1.0" text="ACCOUNT INFORMATION" AnchorPane.topAnchor="-1.0">
                      <font>
                         <Font size="20.0" />
@@ -105,6 +104,7 @@
                      </font>
                   </Label>
                   <FontAwesomeIcon glyphName="EDIT" layoutY="22.0" selectionEnd="0" selectionStart="0" size="24" />
+                  <Button layoutX="394.0" layoutY="252.0" mnemonicParsing="false" text="Show" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="97.0" layoutY="386.0" prefHeight="200.0" prefWidth="520.0">
@@ -115,21 +115,19 @@
                      </font>
                   </Label>
                   <TextField fx:id="profile_adminName" layoutX="162.0" layoutY="3.0" prefWidth="200.0" AnchorPane.bottomAnchor="120.0" />
-                  <Button fx:id="profile_changeNameBtn" layoutX="402.0" layoutY="3.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Change" AnchorPane.bottomAnchor="120.0" />
                   <Label layoutY="85.0" text="Phone number:" AnchorPane.bottomAnchor="70.0">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
                   <TextField fx:id="profile_adminPhone" layoutX="162.0" layoutY="88.0" prefWidth="200.0" AnchorPane.bottomAnchor="70.0" />
-                  <Button fx:id="profile_changePhoneBtn" layoutX="402.0" layoutY="88.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Change" AnchorPane.bottomAnchor="70.0" />
                   <Label layoutY="136.0" text="Email:" AnchorPane.bottomAnchor="20.0">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
                   <TextField fx:id="profile_adminEmail" layoutX="164.0" layoutY="139.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" />
-                  <Button fx:id="profile_changeEmailBtn" layoutX="402.0" layoutY="139.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Change" AnchorPane.bottomAnchor="20.0" />
+                  <Button fx:id="profile_changeEmailBtn" layoutX="402.0" layoutY="91.0" mnemonicParsing="false" onAction="#profileUpdateBtn" prefHeight="46.0" prefWidth="126.0" text="Update" AnchorPane.bottomAnchor="62.599999999999994" />
                   <Label layoutX="36.0" layoutY="-2.0" text="RECEIVER INFORMATION" AnchorPane.topAnchor="-2.0">
                      <font>
                         <Font size="20.0" />
