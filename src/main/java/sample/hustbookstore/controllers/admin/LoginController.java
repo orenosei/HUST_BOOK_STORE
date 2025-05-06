@@ -1,7 +1,6 @@
-package sample.hustbookstore;
+package sample.hustbookstore.controllers.admin;
 
 import javafx.animation.TranslateTransition;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,17 +21,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javafx.application.Application.launch;
-
-public class LaunchApplication extends Application {
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(LaunchApplication.class.getResource("LaunchApplication.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
-    }
+public class LoginController {
 
     @FXML
     private Hyperlink si_forgotPass;
@@ -154,13 +143,8 @@ public class LaunchApplication extends Application {
             alert.setContentText("Please fill all the fields");
             alert.showAndWait();
         } else {
-//<<<<<<< HEAD
             String regData = "INSERT INTO admin (username, password, question, answer) "
                     + "  VALUES (?,?,?,?)";
-/*=======
-            String regData = "INSERT INTO admin (username, password, question, answer, privacy_code) " //bỏ privacy code nhe
-                    + "  VALUES (?,?,?,?,?)";
->>>>>>> 2d57a4b978a1356f5bb1cfff992e296335193d18*/
             connect = database.connectDB();
 
 
@@ -195,7 +179,7 @@ public class LaunchApplication extends Application {
                     prepare.setString(2, su_password.getText());
                     prepare.setString(3, (String)su_question.getSelectionModel().getSelectedItem());
                     prepare.setString(4, su_answer.getText());
-                   // prepare.setString(5, su_privacycode.getText());
+                    // prepare.setString(5, su_privacycode.getText());
                     prepare.executeUpdate();
 
                     alert = new Alert(Alert.AlertType.INFORMATION); //???
@@ -205,7 +189,7 @@ public class LaunchApplication extends Application {
                     alert.showAndWait();
                     su_username.setText("");
                     su_password.setText("");
-                   // su_privacycode.setText(""); //???
+                    // su_privacycode.setText(""); //???
                     su_question.getSelectionModel().clearSelection();
                     su_answer.setText("");
 
@@ -264,10 +248,5 @@ public class LaunchApplication extends Application {
             slider.play();
         }
 
-    }
-
-
-    public static void main(String[] args) {
-        launch();
     }
 }
