@@ -92,22 +92,7 @@ public class StoreController {
     @FXML
     private ScrollPane tabToyScroll;
 
-
-    public int currentTab() {
-        Tab selectedTab = tabStore.getSelectionModel().getSelectedItem();
-
-        if (selectedTab == tabBook) {
-            return 1;
-        } else if (selectedTab == tabStationery) {
-            return 2;
-        } else if (selectedTab == tabToy) {
-            return 3;
-        } else {
-            return 0;
-        }
-    }
-
-    private ObservableList<Book> cardListData = FXCollections.observableArrayList();
+    private ObservableList<Book> bookListData = FXCollections.observableArrayList();
 
     public ObservableList<Book> tabBookGetData() {
 
@@ -144,8 +129,8 @@ public class StoreController {
 
     public void tabBookDisplayCard() {
 
-        cardListData.clear();
-        cardListData.addAll(tabBookGetData());
+        bookListData.clear();
+        bookListData.addAll(tabBookGetData());
 
         int row = 0;
         int column = 0;
@@ -153,7 +138,7 @@ public class StoreController {
         tabBookGrid.getRowConstraints().clear();
         tabBookGrid.getColumnConstraints().clear();
 
-        for (int q = 0; q < cardListData.size(); q++) {
+        for (int q = 0; q < bookListData.size(); q++) {
 
             try {
 
@@ -161,7 +146,7 @@ public class StoreController {
                 load.setLocation(getClass().getResource("productCard-view.fxml"));
                 AnchorPane pane = load.load();
                 StoreProductCardController cardC = load.getController();
-                cardC.setData(cardListData.get(q));
+                cardC.setData(bookListData.get(q));
 
                 if (column == 2) {
                     column = 0;
@@ -179,10 +164,156 @@ public class StoreController {
 
     }
 
+    private ObservableList<Stationery> stationeryListData = FXCollections.observableArrayList();
 
+    public ObservableList<Stationery> tabStationeryGetData() {
+
+        String sql = "SELECT * FROM product where type = 'Stationery'";
+
+        ObservableList<Stationery> listData = FXCollections.observableArrayList();
+        connect = database.connectDB();
+
+        try {
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+
+            Stationery prod;
+
+            while(result.next()) {
+                prod = new Stationery(
+                        result.getString("name"),
+                        result.getString("distributor"),
+                        result.getDouble("sell_price"),
+                        result.getString("type"),
+                        result.getString("image"),
+                        result.getString("description")
+                );
+                listData.add(prod);
+
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return listData;
+
+    }
+
+    public void tabStationeryDisplayCard() {
+
+        stationeryListData.clear();
+        stationeryListData.addAll(tabStationeryGetData());
+
+        int row = 0;
+        int column = 0;
+
+        tabStationeryGrid.getRowConstraints().clear();
+        tabStationeryGrid.getColumnConstraints().clear();
+
+        for (int q = 0; q < stationeryListData.size(); q++) {
+
+            try {
+
+                FXMLLoader load = new FXMLLoader();
+                load.setLocation(getClass().getResource("productCard-view.fxml"));
+                AnchorPane pane = load.load();
+                StoreProductCardController cardC = load.getController();
+                cardC.setData(stationeryListData.get(q));
+
+                if (column == 2) {
+                    column = 0;
+                    row+=1;
+                }
+
+                tabStationeryGrid.add(pane, column++, row);
+
+
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+    //WIP
+
+    private ObservableList<Toy> toyListData = FXCollections.observableArrayList();
+
+    public ObservableList<Toy> tabToyGetData() {
+
+        String sql = "SELECT * FROM product where type = 'Toy'";
+
+        ObservableList<Toy> listData = FXCollections.observableArrayList();
+        connect = database.connectDB();
+
+        try {
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+
+            Toy prod;
+
+            while(result.next()) {
+                prod = new Toy(
+                        result.getString("name"),
+                        result.getString("distributor"),
+                        result.getDouble("sell_price"),
+                        result.getString("type"),
+                        result.getString("image"),
+                        result.getString("description")
+                );
+                listData.add(prod);
+
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return listData;
+
+    }
+
+    public void tabToyDisplayCard() {
+
+        toyListData.clear();
+        toyListData.addAll(tabToyGetData());
+
+        int row = 0;
+        int column = 0;
+
+        tabToyGrid.getRowConstraints().clear();
+        tabToyGrid.getColumnConstraints().clear();
+
+        for (int q = 0; q < toyListData.size(); q++) {
+
+            try {
+
+                FXMLLoader load = new FXMLLoader();
+                load.setLocation(getClass().getResource("productCard-view.fxml"));
+                AnchorPane pane = load.load();
+                StoreProductCardController cardC = load.getController();
+                cardC.setData(toyListData.get(q));
+
+                if (column == 2) {
+                    column = 0;
+                    row+=1;
+                }
+
+                tabToyGrid.add(pane, column++, row);
+
+
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
 
     public void initialize() {
         tabBookDisplayCard();
+        tabStationeryDisplayCard();
+        tabToyDisplayCard();
     }
 
 }

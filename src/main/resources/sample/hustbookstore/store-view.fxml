@@ -59,13 +59,13 @@
             </TableView>
          </children>
       </AnchorPane>
-      <TabPane fx:id="tabStore" prefHeight="650.0" prefWidth="700.0" stylesheets="@Design/homeDesign.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0">
+      <TabPane fx:id="tabStore" prefHeight="650.0" prefWidth="700.0" stylesheets="@Design/homeDesign.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
          <tabs>
             <Tab id="book-bg" fx:id="tabBook" text="        BOOK">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="700.0">
                      <children>
-                        <ScrollPane fx:id="tabBookScroll" fitToWidth="true" prefHeight="605.0" prefWidth="700.0">
+                        <ScrollPane fx:id="tabBookScroll" fitToWidth="true" prefHeight="605.0" prefWidth="700.0" AnchorPane.leftAnchor="0.0">
                            <content>
                               <GridPane fx:id="tabBookGrid">
                                 <columnConstraints>
