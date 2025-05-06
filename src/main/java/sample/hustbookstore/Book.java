@@ -1,7 +1,6 @@
 package sample.hustbookstore;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Book extends Product
 {
@@ -10,12 +9,19 @@ public class Book extends Product
     private LocalDate publishedDate;
     private String author;
 
-    public Book(String ID, String name, String distributor, Double sellPrice, Double importPrice, int stock, String type, String image, String description, LocalDate addedDate, int restrictedAge, int sellQuantity, String isbn, String genre, LocalDate publishedDate, String author) {
+    public Book(String ID, String name, String distributor, Double sellPrice,
+                Double importPrice, int stock, String type, String image, String description,
+                LocalDate addedDate, int restrictedAge, int sellQuantity,
+                String isbn, String genre, LocalDate publishedDate, String author) {
         super(ID, name, distributor, sellPrice, importPrice, stock, type, image, description, addedDate, restrictedAge, sellQuantity);
         this.isbn = isbn;
         this.genre = genre;
         this.publishedDate = publishedDate;
         this.author = author;
+    }
+
+    public Book(String name, String distributor, Double sellPrice,String type, String image, String description) {
+        super(name, distributor, sellPrice, type, image, description);
     }
 
     public String getIsbn() {
