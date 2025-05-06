@@ -175,7 +175,7 @@ public class LaunchApplication extends Application {
                     alert.showAndWait();
                     su_username.setText("");
                     su_password.setText("");
-                    su_privacycode.setText(""); //???
+                   // su_privacycode.setText(""); //???
                     su_question.getSelectionModel().clearSelection();
                     su_answer.setText("");
 
