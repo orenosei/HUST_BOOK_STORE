@@ -68,6 +68,9 @@ public class ProfileController {
     private Label profile_label_adminID;
 
     @FXML
+    private Label profile_label_adminName;
+
+    @FXML
     private Label profile_label_adminUser;
 
     @FXML
@@ -109,28 +112,103 @@ public class ProfileController {
             result = prepare.executeQuery();
 
             if(result.next()){
-                profile_adminName.setText(result.getString("admin_name"));
-                profile_adminPassword.setText(result.getString("admin_password"));
-                profile_adminPhone.setText(result.getString("admin_phone"));
-                profile_adminEmail.setText(result.getString("admin_email"));
-                profile_recoAns.setText(result.getString("reco_ans"));
-                profile_recoQues.setValue(result.getString("reco_ques"));
-                profile_recoQues.getSelectionModel().select(result.getString("reco_ques"));
+                profile_adminName.setText(result.getString("name"));
+                profile_adminPassword.setText(result.getString("password"));
+                profile_adminPhone.setText(result.getString("phonenumber"));
+                profile_adminEmail.setText(result.getString("email"));
             }
         }catch(Exception e) {e.printStackTrace();}
     }
 
-    public void profilabels(){
+    public void profileLabels(){
         String selectData = "SELECT * FROM admin WHERE id = '"
-                + profile_label_adminID.getText() + "'";
+                    + profile_label_adminID.getText() + "'";
 
         connect = database.connectDB();
+        try{
+            prepare = connect.prepareStatement(selectData);
+            result = prepare.executeQuery();
+            if(result.next()){
+                    profile_label_adminID.setText(result.getString("id"));
+                    profile_label_adminName.setText(result.getString("name"));
+                    profile_label_adminUser.setText(result.getString("username"));
+                    profile_label_email.setText(result.getString("email"));
+                    profile_label_phoneNum.setText(result.getString("phonenumber"));
+            }
+        }catch(Exception e) {e.printStackTrace();}
     }
 
+    public void profileUpdateBtn(){
+        connect = database.connectDB();
+        if(profile_adminName.getText().isEmpty()
+                || profile_adminPhone.getText().isEmpty()
+                || profile_adminEmail.getText().isEmpty()){
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill all the fields");
+            alert.showAndWait();
+        }else{
+            String updateData = "UPDATE admin SET name = ?, phonenumber = ?, email = ? "
+                    + "WHERE id = '"
+                    + profile_label_adminID.getText() + "'";
+            try{
+                prepare = connect.prepareStatement(updateData);
+                prepare.setString(1, profile_adminName.getText());
+                prepare.setString(2, profile_adminPhone.getText());
+                prepare.setString(3, profile_adminEmail.getText());
+                prepare.executeUpdate();
+
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Your information updated successfully.");
+                alert.showAndWait();
+
+                profileLabels();
+            }catch(Exception e) {e.printStackTrace();}
+
+        }
+    }
+
+    public void profileChangePasswordBtn(){
+        connect = database.connectDB();
+        if(profile_adminPassword.getText().isEmpty()){
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter new password");
+            alert.showAndWait();
+        }else{
+            String updateData = "UPDATE admin SET password = ? "
+                    + "WHERE id = '"
+                    + profile_adminPassword.getText() + "'";
+            try {
+                prepare = connect.prepareStatement(updateData);
+                prepare.setString(1, profile_adminPassword.getText());
+                prepare.executeUpdate();
+
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Your password updated successfully.");
+                alert.showAndWait();
+
+            }catch(Exception e) {e.printStackTrace();}
+        }
+    }
+
+    private String localID = "1";
+
+
     public void initialize(){
+
+        profile_label_adminID.setText(localID);
+        profileLabels();
         profileFields();
         profileRecoQues();
 
     }
+
 
 }
