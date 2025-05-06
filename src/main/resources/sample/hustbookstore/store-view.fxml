@@ -8,21 +8,22 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="720.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.StoreController">
+<AnchorPane fx:id="storeForm" prefHeight="720.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.StoreController">
    <children>
       <AnchorPane prefHeight="720.0" prefWidth="295.0" styleClass="payment-panel" stylesheets="@Design/homeDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane prefHeight="200.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@Design/homeDesign.css" text="Delete all" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="8.0" />
-                  <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="153.0" styleClass="voucher-button" stylesheets="@Design/homeDesign.css" text="Delete selected codes" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="8.0" />
-                  <TextField layoutX="70.0" layoutY="50.0" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@Design/homeDesign.css" AnchorPane.rightAnchor="20.0" />
-                  <TextField layoutX="70.0" layoutY="85.0" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@Design/homeDesign.css" AnchorPane.rightAnchor="20.0" />
-                  <TextField layoutX="70.0" layoutY="120.0" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@Design/homeDesign.css" AnchorPane.rightAnchor="20.0" />
+                  <Button fx:id="codeDeleteallButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@Design/homeDesign.css" text="Delete all" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="8.0" />
+                  <Button fx:id="codeDeleteselectedButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="153.0" styleClass="voucher-button" stylesheets="@Design/homeDesign.css" text="Delete selected codes" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="8.0" />
+                  <TextField fx:id="codeCodeField" layoutX="70.0" layoutY="50.0" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@Design/homeDesign.css" AnchorPane.rightAnchor="20.0" />
+                  <TextField fx:id="codeDiscountField" layoutX="70.0" layoutY="85.0" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@Design/homeDesign.css" AnchorPane.rightAnchor="20.0" />
+                  <TextField fx:id="codeDurationField" layoutX="70.0" layoutY="120.0" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@Design/homeDesign.css" AnchorPane.rightAnchor="20.0" />
                   <Text fill="#8f9de6" layoutX="31.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CODE">
                      <font>
                         <Font size="15.0" />
@@ -38,74 +39,73 @@
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Button layoutX="95.0" layoutY="160.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@Design/homeDesign.css" text="Clear" textFill="WHITE" AnchorPane.bottomAnchor="8.0" />
-                  <Button layoutX="196.0" layoutY="154.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@Design/homeDesign.css" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="20.0" />
+                  <Button fx:id="codeClearButton" layoutX="95.0" layoutY="160.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@Design/homeDesign.css" text="Clear" textFill="WHITE" AnchorPane.bottomAnchor="8.0" />
+                  <Button fx:id="codeAddButton" layoutX="196.0" layoutY="154.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@Design/homeDesign.css" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="20.0" />
                </children>
             </AnchorPane>
             <TableView prefHeight="280.0" prefWidth="295.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="Product" />
-                  <TableColumn prefWidth="110.0" text="Original price" />
-                  <TableColumn prefWidth="110.0" text="New price" />
+                  <TableColumn fx:id="productNameCol" prefWidth="75.0" text="Product" />
+                  <TableColumn fx:id="productOriginalpriceCol" prefWidth="110.0" text="Original price" />
+                  <TableColumn fx:id="productNewpriceCol" prefWidth="110.0" text="New price" />
                </columns>
             </TableView>
             <TableView prefHeight="240.0" prefWidth="295.0" AnchorPane.bottomAnchor="200.0" AnchorPane.rightAnchor="0.0">
                <columns>
-                  <TableColumn prefWidth="120.0" text="Available code" />
-                  <TableColumn minWidth="0.0" text="Discount" />
-                  <TableColumn minWidth="0.0" prefWidth="95.0" text="Duration" />
+                  <TableColumn fx:id="codeAvailablecodeCol" prefWidth="120.0" text="Available code" />
+                  <TableColumn fx:id="codeDiscountCol" minWidth="0.0" text="Discount" />
+                  <TableColumn fx:id="codeDurationCol" minWidth="0.0" prefWidth="95.0" text="Duration" />
                </columns>
             </TableView>
          </children>
       </AnchorPane>
-      <TabPane prefHeight="650.0" prefWidth="700.0" stylesheets="@Design/homeDesign.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0">
+      <TabPane fx:id="tabStore" prefHeight="650.0" prefWidth="700.0" stylesheets="@Design/homeDesign.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
          <tabs>
-            <Tab id="trending-bg" text="     TRENDING">
+            <Tab id="book-bg" fx:id="tabBook" text="        BOOK">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="700.0" stylesheets="@Design/homeDesign.css">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="700.0">
                      <children>
-                        <ScrollPane fitToWidth="true" prefHeight="605.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <ScrollPane fx:id="tabBookScroll" fitToWidth="true" prefHeight="605.0" prefWidth="700.0" AnchorPane.leftAnchor="0.0">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="605.0" prefWidth="700.0" />
+                              <GridPane fx:id="tabBookGrid">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                              </GridPane>
                            </content>
                         </ScrollPane>
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab id="book-bg" text="        BOOK">
+            <Tab id="stationery-bg" fx:id="tabStationery" text="   STATIONERY">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="700.0">
                      <children>
-                        <ScrollPane fitToWidth="true" prefHeight="605.0" prefWidth="700.0">
+                        <ScrollPane fx:id="tabStationeryScroll" fitToWidth="true" prefHeight="605.0" prefWidth="700.0">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="605.0" prefWidth="700.0" />
+                              <GridPane fx:id="tabStationeryGrid">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                              </GridPane>
                            </content>
                         </ScrollPane>
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab id="stationery-bg" text="   STATIONERY">
+            <Tab id="toy-bg" fx:id="tabToy" text="          TOY">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="700.0">
                      <children>
-                        <ScrollPane fitToWidth="true" prefHeight="605.0" prefWidth="700.0">
+                        <ScrollPane fx:id="tabToyScroll" fitToWidth="true" prefHeight="605.0" prefWidth="700.0">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="605.0" prefWidth="700.0" />
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab id="toy-bg" text="          TOY">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="700.0">
-                     <children>
-                        <ScrollPane fitToWidth="true" prefHeight="605.0" prefWidth="700.0">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="605.0" prefWidth="700.0" />
+                              <GridPane fx:id="tabToyGrid">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                              </GridPane>
                            </content>
                         </ScrollPane>
                      </children>

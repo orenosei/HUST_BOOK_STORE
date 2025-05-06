@@ -1,6 +1,7 @@
 package sample.hustbookstore;
 
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
@@ -21,13 +22,14 @@ import java.util.ResourceBundle;
 
 public class SidebarController implements Initializable {
 
-
-
     @FXML
     private Button customers_btn;
 
     @FXML
     private Button dashboard_btn;
+
+    @FXML
+    private Button others_btn;
 
     @FXML
     private AnchorPane home_screen;
@@ -47,14 +49,27 @@ public class SidebarController implements Initializable {
     @FXML
     private Text username;
 
-    @FXML
-    private AnchorPane functionArea;
 
     @FXML
     private AnchorPane headerPane;
 
-    private Alert alert;
+    @FXML
+    private AnchorPane inventoryScreen;
+    @FXML
+    private AnchorPane othersScreen;
+    @FXML
+    private AnchorPane profileScreen;
+    @FXML
+    private AnchorPane storeScreen;
+    @FXML
+    private AnchorPane customersScreen;
+    @FXML
+    private AnchorPane dashboardScreen;
 
+    @FXML
+    private Button sync_btn;
+
+    private Alert alert;
 
 
     public void logout(){
@@ -85,15 +100,13 @@ public class SidebarController implements Initializable {
     public void loadDashboard(){
         try{
             Parent root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/dashboard-view.fxml"));
-            functionArea.getChildren().clear();
-            functionArea.getChildren().add(root);
+            dashboardScreen.getChildren().clear();
+            dashboardScreen.getChildren().add(root);
             AnchorPane.setBottomAnchor(root, 0.0); // làm cho dashboard dính phía bottom của anchorpane
 
         }catch(Exception e){
             e.printStackTrace();
         }
-
-        // Hiệu ứng xuất hiện header
         showHeaderAnimation();
 
     }
@@ -101,55 +114,57 @@ public class SidebarController implements Initializable {
     public void loadInventory(){
         try{
             Parent root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/inventory-view.fxml"));
-            functionArea.getChildren().clear();
-            functionArea.getChildren().add(root);
+            inventoryScreen.getChildren().clear();
+            inventoryScreen.getChildren().add(root);
 
         }catch(Exception e){
             e.printStackTrace();
         }
-
-        headerPane.setVisible(false);
     }
 
     public void loadStore(){
         try{
             Parent root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/store-view.fxml"));
-            functionArea.getChildren().clear();
-            functionArea.getChildren().add(root);
+            storeScreen.getChildren().clear();
+            storeScreen.getChildren().add(root);
 
         }catch(Exception e){
             e.printStackTrace();
         }
-
-        headerPane.setVisible(false);
     }
 
     public void loadCustomers(){
         try{
             Parent root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/customers-view.fxml"));
-            functionArea.getChildren().clear();
-            functionArea.getChildren().add(root);
+            customersScreen.getChildren().clear();
+            customersScreen.getChildren().add(root);
 
         }catch(Exception e){
             e.printStackTrace();
         }
-
-        headerPane.setVisible(false);
     }
 
-//    load các chức năng khác, sửa trong cả file fxml (gán fx:id ; onaction click
-//    public void loadDashboard(){
-//        try{
-//            Parent root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/dashboard-view.fxml"));
-//            functionArea.getChildren().clear();
-//            functionArea.getChildren().add(root);
-//
-//        }catch(Exception e){
-//            e.printStackTrace();
-//        }
-//    headerPane.setVisible(false);
+    public void loadOthers(){
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/others-view.fxml"));
+            othersScreen.getChildren().clear();
+            othersScreen.getChildren().add(root);
 
-//    }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void loadProfile(){
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/profile-view.fxml"));
+            profileScreen.getChildren().clear();
+            profileScreen.getChildren().add(root);
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
     private void showHeaderAnimation() {
         headerPane.setTranslateY(-70); // Ẩn header ban đầu (ra ngoài màn hình)
@@ -159,13 +174,104 @@ public class SidebarController implements Initializable {
         tt.setToY(-10); // Trượt xuống vị trí 0
         tt.play();
     }
+
     public void displayUsername(){
         // đợi 2 anh chị kia làm xong login để lấy username
     }
+
+
+    @FXML
+    private void handleSidebarButtonAction(ActionEvent event) {
+        if (event.getSource() == dashboard_btn) {
+            dashboardScreen.setVisible(true);
+            inventoryScreen.setVisible(false);
+            customersScreen.setVisible(false);
+            othersScreen.setVisible(false);
+            profileScreen.setVisible(false);
+            storeScreen.setVisible(false);
+            sync_btn.setVisible(false);
+            showHeaderAnimation();
+
+        } else if (event.getSource() == inventory_btn) {
+            dashboardScreen.setVisible(false);
+            inventoryScreen.setVisible(true);
+            customersScreen.setVisible(false);
+            othersScreen.setVisible(false);
+            profileScreen.setVisible(false);
+            storeScreen.setVisible(false);
+            headerPane.setVisible(false);
+            sync_btn.setVisible(true);
+
+        } else if (event.getSource() == store_btn) {
+            dashboardScreen.setVisible(false);
+            inventoryScreen.setVisible(false);
+            customersScreen.setVisible(false);
+            othersScreen.setVisible(false);
+            profileScreen.setVisible(false);
+            storeScreen.setVisible(true);
+            headerPane.setVisible(false);
+            sync_btn.setVisible(true);
+
+        } else if (event.getSource() == customers_btn) {
+            dashboardScreen.setVisible(false);
+            inventoryScreen.setVisible(false);
+            customersScreen.setVisible(true);
+            othersScreen.setVisible(false);
+            profileScreen.setVisible(false);
+            storeScreen.setVisible(false);
+            headerPane.setVisible(false);
+            sync_btn.setVisible(false);
+
+
+        } else if (event.getSource() == others_btn) {
+            dashboardScreen.setVisible(false);
+            inventoryScreen.setVisible(false);
+            customersScreen.setVisible(false);
+            othersScreen.setVisible(true);
+            profileScreen.setVisible(false);
+            storeScreen.setVisible(false);
+            headerPane.setVisible(false);
+            sync_btn.setVisible(false);
+
+
+        } else if (event.getSource() == profile_btn) {
+            dashboardScreen.setVisible(false);
+            inventoryScreen.setVisible(false);
+            customersScreen.setVisible(false);
+            othersScreen.setVisible(false);
+            profileScreen.setVisible(true);
+            storeScreen.setVisible(false);
+            headerPane.setVisible(false);
+            sync_btn.setVisible(false);
+
+        }
+
+    }
+
+    @FXML
+    public void handleSyncButtonAction(ActionEvent event){
+        if(event.getSource() == sync_btn){loadStore();}
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 //        displayUsername();
         loadDashboard();
+        dashboardScreen.setVisible(true);
+        inventoryScreen.setVisible(false);
+        customersScreen.setVisible(false);
+        othersScreen.setVisible(false);
+        profileScreen.setVisible(false);
+        storeScreen.setVisible(false);
+        sync_btn.setVisible(false);
+        //headerPane.setVisible(true);
+
+        loadInventory();
+        loadStore();
+        loadCustomers();
+        loadOthers();
+        loadProfile();
     }
+
 }

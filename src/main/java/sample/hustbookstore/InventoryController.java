@@ -14,8 +14,6 @@ import javafx.stage.FileChooser;
 import org.controlsfx.control.CheckComboBox;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +22,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+
 
 public class InventoryController {
 
@@ -281,7 +281,6 @@ public class InventoryController {
         SortedList<Book> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(inventory_tableView.comparatorProperty());
 
-        // Cập nhật các cột của bảng
         col_productID.setCellValueFactory(new PropertyValueFactory<>("ID"));
         col_productName.setCellValueFactory(new PropertyValueFactory<>("name"));
         col_importPrice.setCellValueFactory(new PropertyValueFactory<>("importPrice"));
@@ -305,7 +304,6 @@ public class InventoryController {
     public void handleProductTypeChange() {
         // Kiểm tra xem loại sản phẩm có phải là Book không
         if ("Book".equals(inventory_type.getSelectionModel().getSelectedItem())) {
-            // Enable các trường liên quan đến sách
             inventory_genre_label.setDisable(false);
             inventory_isbn_label.setDisable(false);
             inventory_pubDate_label.setDisable(false);
@@ -316,7 +314,6 @@ public class InventoryController {
             inventory_genre.setDisable(false);
 
         } else {
-            // Disable các trường liên quan đến sách khi chọn loại khác
             inventory_genre_label.setDisable(true);
             inventory_isbn_label.setDisable(true);
             inventory_pubDate_label.setDisable(true);
@@ -328,38 +325,52 @@ public class InventoryController {
         }
     }
 
-    public void setImport_btn() {
+    private String currentImageUrl;
+
+    public String getImageUrl(File file) throws Exception {
+        CloudinaryUploader uploader = new CloudinaryUploader();
+        String imageUrl = uploader.uploadImage(file);
+        System.out.println("Uploaded Image URL: " + imageUrl);
+
+        return imageUrl;
+    }
+
+    public void setImport_btn(){
         FileChooser fileChooser = new FileChooser();
-
-        // Đặt filter cho chỉ file ảnh
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Open Image Files", "*.png", "*.jpg", "*.webp", "*.jpeg"));
-
-        // Mở cửa sổ chọn file
         File file = fileChooser.showOpenDialog(inventory_screen.getScene().getWindow());
 
         if (file != null) {
+
+//            CloudinaryUploader uploader = new CloudinaryUploader();
+//            String imageUrl = uploader.uploadImage(file);
+//            System.out.println("Uploaded Image URL: " + imageUrl);
+
+
             // Định vị thư mục đích 'img/' trong 'src/main/resources/sample/hustbookstore/img'
-            String resourcesPath = System.getProperty("user.dir") + "/src/main/resources/sample/hustbookstore/img";
-            File targetDirectory = new File(resourcesPath);
+//            String resourcesPath = System.getProperty("user.dir") + "/src/main/resources/sample/hustbookstore/img";
+//            File targetDirectory = new File(resourcesPath);
+//
+//            // Kiểm tra nếu thư mục 'img' không tồn tại thì tạo mới
+//            if (!targetDirectory.exists()) {
+//                targetDirectory.mkdirs();
+//            }
+//
+//            // Lấy tên file và tạo đường dẫn đích
+//            String fileName = file.getName();
+//            File targetFile = new File(targetDirectory, fileName);
 
-            // Kiểm tra nếu thư mục 'img' không tồn tại thì tạo mới
-            if (!targetDirectory.exists()) {
-                targetDirectory.mkdirs();
-            }
-
-            // Lấy tên file và tạo đường dẫn đích
-            String fileName = file.getName();
-            File targetFile = new File(targetDirectory, fileName);
 
             try {
-                // Sao chép file vào thư mục đích
-                Files.copy(file.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+//                // Sao chép file vào thư mục đích
+//                Files.copy(file.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+//
+//                // Cập nhật đường dẫn tương đối
+//                currentImagePath = "sample/hustbookstore/img/" + fileName;
+                //currentImagePath = file.getAbsolutePath();
+                currentImageUrl = getImageUrl(file);
 
-                // Cập nhật đường dẫn tương đối
-                currentImagePath = "sample/hustbookstore/img/" + fileName;
-
-                // Hiển thị ảnh trên ImageView
-                image = new Image(targetFile.toURI().toString(), 1000, 1600, true, true);
+                image = new Image(file.toURI().toString(), 1000, 1600, true, true);
                 inventory_imageView.setImage(image);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -407,6 +418,7 @@ public class InventoryController {
                     alert.showAndWait();
                 }
                 else{ //nếu chưa tồn tại sản phẩm thì thêm
+
                     String insertToDatabase;
                     if("Book".equals(inventory_type.getSelectionModel().getSelectedItem())){
                         insertToDatabase = "INSERT INTO product"
@@ -416,7 +428,7 @@ public class InventoryController {
                         prepare.setString(1, inventory_productID.getText());
                         prepare.setString(2, "Book"); // vì đoạn này đang ở trong điều kiện Book
                         prepare.setString(3, inventory_productName.getText());
-                        prepare.setString(4, currentImagePath);
+                        prepare.setString(4, currentImageUrl);
                         prepare.setString(5, inventory_distributor.getText());
                         prepare.setString(6, inventory_description.getText());
                         prepare.setDate(7, java.sql.Date.valueOf(LocalDate.now())); // dùng ngày hiện tại
@@ -445,11 +457,11 @@ public class InventoryController {
 
                         prepare = connect.prepareStatement(insertToDatabase);
                         prepare.setString(1, inventory_productID.getText());
-                        prepare.setString(2, inventory_type.getSelectionModel().getSelectedItem()); // VD: "Toy", "Stationery"
+                        prepare.setString(2, inventory_type.getSelectionModel().getSelectedItem());
                         prepare.setString(3, inventory_productName.getText());
-                        prepare.setString(4, currentImagePath);
+                        prepare.setString(4, currentImageUrl);
                         prepare.setString(5, inventory_distributor.getText());
-                        prepare.setString(6, inventory_description.getText()); // Mô tả không để trống
+                        prepare.setString(6, inventory_description.getText());
                         prepare.setDate(7, java.sql.Date.valueOf(LocalDate.now()));
                         prepare.setInt(8, Integer.parseInt(inventory_stocks.getText()));
                         prepare.setFloat(9, Float.parseFloat(inventory_importPrice.getText()));
@@ -472,11 +484,9 @@ public class InventoryController {
                     }
 
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
     }
 
@@ -532,7 +542,7 @@ public class InventoryController {
                     prepare = connect.prepareStatement(updateQuery);
                     prepare.setString(1, "Book");
                     prepare.setString(2, inventory_productName.getText());
-                    prepare.setString(3, currentImagePath);
+                    prepare.setString(3, currentImageUrl);
                     prepare.setString(4, inventory_distributor.getText());
                     prepare.setString(5, inventory_description.getText());
                     prepare.setDate(6, java.sql.Date.valueOf(LocalDate.now()));
@@ -554,7 +564,7 @@ public class InventoryController {
                     prepare = connect.prepareStatement(updateQuery);
                     prepare.setString(1, inventory_type.getSelectionModel().getSelectedItem());
                     prepare.setString(2, inventory_productName.getText());
-                    prepare.setString(3, currentImagePath);
+                    prepare.setString(3, currentImageUrl);
                     prepare.setString(4, inventory_distributor.getText());
                     prepare.setString(5, inventory_description.getText());
                     prepare.setDate(6, java.sql.Date.valueOf(LocalDate.now()));
@@ -571,7 +581,6 @@ public class InventoryController {
                     prepare.setString(15, inventory_productID.getText());
                 }
 
-                // Thực thi truy vấn cập nhật
                 int rowsAffected = prepare.executeUpdate();
 
                 if (rowsAffected > 0) {
@@ -602,7 +611,6 @@ public class InventoryController {
             alert.setContentText("Please select a product to delete.");
             alert.showAndWait();
         } else {
-            // Hiển thị hộp thoại xác nhận trước khi xóa
             Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
             confirmAlert.setTitle("Confirmation Message");
             confirmAlert.setHeaderText(null);
@@ -626,7 +634,7 @@ public class InventoryController {
                         alert.setHeaderText(null);
                         alert.setContentText("Product deleted successfully.");
                         alert.showAndWait();
-                        showData(); // Cập nhật danh sách hiển thị sau khi xóa
+                        showData();
                     } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Error Message");
@@ -646,10 +654,8 @@ public class InventoryController {
         Book prod = inventory_tableView.getSelectionModel().getSelectedItem();
         int index = inventory_tableView.getSelectionModel().getSelectedIndex();
 
-        // Kiểm tra sản phẩm được chọn
         if (index < 0 || prod == null) return;
 
-        // Cập nhật dữ liệu từ sản phẩm được chọn vào các trường giao diện
         inventory_productID.setText(prod.getID());
         inventory_productName.setText(prod.getName());
         inventory_distributor.setText(prod.getDistributor());
@@ -660,26 +666,45 @@ public class InventoryController {
         inventory_type.getSelectionModel().select(prod.getType());
         inventory_description.setText(prod.getDescription());
 
+//        try {
+//            // Kiểm tra đường dẫn ảnh có hợp lệ không
+//            if (prod.getImage() != null && !prod.getImage().isEmpty()) {
+//                // Chuyển đổi đường dẫn tương đối thành URL
+//                String relativePath = prod.getImage(); // sample/hustbookstore/img/pocari.png
+//                String imagePath = getClass().getResource("/" + relativePath).toExternalForm();
+//
+//                // Tạo đối tượng Image từ URL
+//                Image img = new Image(imagePath, 1000, 1600, true, true);
+//                inventory_imageView.setImage(img);
+//                currentImagePath = prod.getImage();
+//            } else {
+//                // Xóa ảnh nếu đường dẫn rỗng hoặc null
+//                inventory_imageView.setImage(null);
+//                currentImagePath = null;
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            inventory_imageView.setImage(null); // Xóa ảnh trong trường hợp lỗi
+//            currentImagePath = null;
+//        }
+
         try {
-            // Kiểm tra đường dẫn ảnh có hợp lệ không
             if (prod.getImage() != null && !prod.getImage().isEmpty()) {
-                // Chuyển đổi đường dẫn tương đối thành URL
-                String relativePath = prod.getImage(); // sample/hustbookstore/img/pocari.png
-                String imagePath = getClass().getResource("/" + relativePath).toExternalForm();
-
-                // Tạo đối tượng Image từ URL
-                Image img = new Image(imagePath, 1000, 1600, true, true);
+                // Sử dụng URL từ cloudinary
+                String imageUrl = prod.getImage();
+                Image img = new Image(imageUrl, 1000, 1600, true, true);
                 inventory_imageView.setImage(img);
-
-                currentImagePath = prod.getImage();
+                currentImageUrl = imageUrl;
             } else {
-                // Xóa ảnh nếu đường dẫn rỗng hoặc null
                 inventory_imageView.setImage(null);
+                currentImageUrl = null;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // Ghi log nếu có lỗi
-            inventory_imageView.setImage(null); // Xóa ảnh trong trường hợp lỗi
+            e.printStackTrace();
+            inventory_imageView.setImage(null);
+            currentImageUrl = null;
         }
+
 
         if ("Book".equals(prod.getType())) {
             inventory_author.setText(prod.getAuthor() != null ? prod.getAuthor() : "");
@@ -700,11 +725,7 @@ public class InventoryController {
             inventory_genre.getCheckModel().clearChecks();
         }
     }
-
-
-
-
-
+    
     public void initialize() {    // buộc phải có, giải thích trong buổi họp nhóm tiếp theo
         setTypeList();
         setGenreList();

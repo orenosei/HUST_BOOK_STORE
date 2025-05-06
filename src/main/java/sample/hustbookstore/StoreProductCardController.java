@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -31,6 +32,34 @@ public class StoreProductCardController implements Initializable {
 
     @FXML
     private Spinner<?> productSpinner;
+
+    private Product prodData;
+    private Image image;
+
+    public void setData(Product prodData) {
+        this.prodData = prodData;
+        productName.setText(prodData.getName());
+        productPrice.setText(String.valueOf(prodData.getSellPrice()));
+       // String relativePath = prodData.getImage(); // sample/hustbookstore/img/pocari.png
+    //    String imagePath = getClass().getResource("/" + relativePath).toExternalForm();
+        //image = new Image(imagePath, 100, 160, true, true);
+        //productImage.setImage(image);
+
+        String relativePath = prodData.getImage(); // e.g. sample/hustbookstore/img/pocari.png
+        URL resourceUrl = getClass().getResource("/" + relativePath);
+
+        if (resourceUrl != null) {
+            String imagePath = resourceUrl.toExternalForm();
+            image = new Image(imagePath, 100, 160, true, true);
+            productImage.setImage(image);
+        } else {
+            System.err.println("Image not found");
+            URL notfoundUrl = getClass().getResource("/" + "sample/hustbookstore/img/notfound.jpg");
+            String notfoundPath = notfoundUrl.toExternalForm();
+            image = new Image(notfoundPath, 100, 160, true, true);
+            productImage.setImage(image);
+        }
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

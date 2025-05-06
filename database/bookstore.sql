@@ -51,3 +51,11 @@ CREATE TABLE `user` (
                         `fav_author` varchar(255) NOT NULL,
                         PRIMARY KEY (`id`)
 );
+
+CREATE TABLE `voucher` (
+                        `voucher_id` INT AUTO_INCREMENT,
+                        `code` varchar(255) NOT NULL,
+                        `discount` float,
+                        `duration` DATE,
+                        PRIMARY KEY (`voucher_id`)
+)
