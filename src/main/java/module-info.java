@@ -11,6 +11,9 @@ module sample.hustbookstore {
     requires eu.hansolo.tilesfx;
     requires java.sql;
     requires mysql.connector.j;
+    requires cloudinary.http5;
+    requires cloudinary.core;
+    requires dotenv.java;
 
     opens sample.hustbookstore to javafx.fxml;
     exports sample.hustbookstore;
