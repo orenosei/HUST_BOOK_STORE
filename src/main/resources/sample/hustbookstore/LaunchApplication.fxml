@@ -44,15 +44,15 @@
                         <Font size="40.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="si_username" layoutX="145.0" layoutY="416.0" prefHeight="50.0" prefWidth="350.0" promptText="Username">
+                  <TextField fx:id="si_username" layoutX="145.0" layoutY="416.0" onAction="#loginBtn" prefHeight="50.0" prefWidth="350.0" promptText="Username">
                      <font>
                         <Font size="21.0" />
                      </font></TextField>
-                  <PasswordField fx:id="si_password" layoutX="145.0" layoutY="499.0" prefHeight="50.0" prefWidth="350.0" promptText="Password">
+                  <PasswordField fx:id="si_password" layoutX="145.0" layoutY="499.0" onAction="#loginBtn" prefHeight="50.0" prefWidth="350.0" promptText="Password">
                      <font>
                         <Font size="21.0" />
                      </font></PasswordField>
-                  <Button fx:id="si_loginBtn" layoutX="395.0" layoutY="576.0" minHeight="40.0" mnemonicParsing="false" prefWidth="100.0" styleClass="login-btn" stylesheets="@Design/LaunchApplicationDesign.css" text="LOGIN" />
+                  <Button fx:id="si_loginBtn" layoutX="395.0" layoutY="576.0" minHeight="40.0" mnemonicParsing="false" onAction="#loginBtn" prefWidth="100.0" styleClass="login-btn" stylesheets="@Design/LaunchApplicationDesign.css" text="LOGIN" />
                   <Hyperlink fx:id="si_forgotPass" layoutX="145.0" layoutY="581.0" text="Forgot Password?">
                      <font>
                         <Font size="18.0" />
@@ -85,19 +85,19 @@
                         <Font size="40.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="su_username" layoutX="144.0" layoutY="233.0" prefHeight="50.0" prefWidth="350.0" promptText="Username">
+                  <TextField fx:id="su_username" layoutX="144.0" layoutY="233.0" onAction="#regBtn" prefHeight="50.0" prefWidth="350.0" promptText="Username">
                      <font>
                         <Font size="21.0" />
                      </font>
                   </TextField>
-                  <PasswordField fx:id="su_password" layoutX="144.0" layoutY="311.0" prefHeight="50.0" prefWidth="350.0" promptText="Password">
+                  <PasswordField fx:id="su_password" layoutX="144.0" layoutY="311.0" onAction="#regBtn" prefHeight="50.0" prefWidth="350.0" promptText="Password">
                      <font>
                         <Font size="21.0" />
                      </font>
                   </PasswordField>
                   <Button fx:id="su_signupBtn" layoutX="340.0" layoutY="630.0" minHeight="40.0" mnemonicParsing="false" onAction="#regBtn" prefHeight="44.0" prefWidth="155.0" styleClass="signup-btn" stylesheets="@Design/LaunchApplicationDesign.css" text="SIGN UP" />
                   <ComboBox fx:id="su_question" layoutX="144.0" layoutY="467.0" prefHeight="50.0" prefWidth="350.0" promptText="Question" styleClass="question-btn" stylesheets="@Design/LaunchApplicationDesign.css" />
-                  <TextField fx:id="su_answer" layoutX="144.0" layoutY="545.0" prefHeight="50.0" prefWidth="350.0" promptText="Answer">
+                  <TextField fx:id="su_answer" layoutX="144.0" layoutY="545.0" onAction="#regBtn" prefHeight="50.0" prefWidth="350.0" promptText="Answer">
                      <font>
                         <Font size="21.0" />
                      </font>

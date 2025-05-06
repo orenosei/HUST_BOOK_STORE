@@ -99,11 +99,16 @@ public class LaunchApplication extends Application {
                     alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Information Message");
                     alert.setHeaderText(null);
-                    alert.setContentText("Successfully logged in");
+                    alert.setContentText("Successfully logged in!");
                     alert.showAndWait();
 
                 }else{
-//phut thu 56
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Incorrect Username or Password");
+                    alert.showAndWait();
+
                 }
             }catch (Exception e){e.printStackTrace();}
         }
@@ -119,8 +124,8 @@ public class LaunchApplication extends Application {
             alert.setContentText("Please fill all the fields");
             alert.showAndWait();
         } else {
-            String regData = "INSERT INTO admin (username, password, question, answer, privacy_code) "
-                    + "  VALUES (?,?,?,?,?)";
+            String regData = "INSERT INTO admin (username, password, question, answer) "
+                    + "  VALUES (?,?,?,?)";
             connect = database.connectDB();
 
 
@@ -142,7 +147,7 @@ public class LaunchApplication extends Application {
                     alert.setContentText("Invalid Password, atleast 8 characters are needed");
                     alert.showAndWait();
 
-                } /*else if(su_privacycode.getText()!="abc123"){
+                } else if(su_privacycode.getText()!="abc123"){
                     alert = new Alert(Alert.AlertType.ERROR); //???
                     alert.setTitle("Error Message");
                     alert.setHeaderText(null);
@@ -155,7 +160,7 @@ public class LaunchApplication extends Application {
                     prepare.setString(2, su_password.getText());
                     prepare.setString(3, (String)su_question.getSelectionModel().getSelectedItem());
                     prepare.setString(4, su_answer.getText());
-                    prepare.setString(5, su_privacycode.getText());
+                   // prepare.setString(5, su_privacycode.getText());
                     prepare.executeUpdate();
 
                     alert = new Alert(Alert.AlertType.INFORMATION); //???
