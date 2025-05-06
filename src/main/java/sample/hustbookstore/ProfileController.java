@@ -40,20 +40,6 @@ public class ProfileController {
     @FXML
     private TextField profile_adminPhone;
 
-    @FXML
-    private Button profile_changeEmailBtn;
-
-    @FXML
-    private Button profile_changeNameBtn;
-
-    @FXML
-    private Button profile_changePasswordBtn;
-
-    @FXML
-    private Button profile_changePhoneBtn;
-
-    @FXML
-    private Button profile_changeRecoAnsBtn;
 
     @FXML
     private ImageView profile_circleimage;
@@ -80,26 +66,14 @@ public class ProfileController {
     private Label profile_label_phoneNum;
 
     @FXML
-    private TextField profile_recoAns;
+    private Button profile_update_btn;
 
-    @FXML
-    private ComboBox<String> profile_recoQues;
 
     private Connection connect;
     private PreparedStatement prepare;
     private ResultSet result;
     private Alert alert;
 
-    private String[] recoQuesList = {"What is your favorite Color?", "What is your favorite food?", "What is your birth date?"};
-    public void profileRecoQues(){
-        List<String> listS = new ArrayList<>();
-        for(String data: recoQuesList){
-            listS.add(data);
-        }
-
-        ObservableList listData = FXCollections.observableList(listS);
-        profile_recoQues.setItems(listData);
-    };
 
     public void profileFields(){
         String selectData = "SELECT * FROM admin WHERE id = '"
@@ -182,7 +156,7 @@ public class ProfileController {
         }else{
             String updateData = "UPDATE admin SET password = ? "
                     + "WHERE id = '"
-                    + profile_adminPassword.getText() + "'";
+                    + profile_label_adminID.getText() + "'";
             try {
                 prepare = connect.prepareStatement(updateData);
                 prepare.setString(1, profile_adminPassword.getText());
@@ -198,15 +172,27 @@ public class ProfileController {
         }
     }
 
-    private String localID = "1";
+    private String localID ;
 
+    public void getIdFromUserName(){
+        String tmpUserName = LaunchApplication.getUserName();
+        connect = database.connectDB();
+        String selectData = "SELECT id FROM admin WHERE username = '"
+                + tmpUserName + "'";
+        try{
+            prepare = connect.prepareStatement(selectData);
+            result = prepare.executeQuery();
+            if(result.next()){
+                localID = result.getString("id");
+            }
+        }catch(Exception e) {e.printStackTrace();}
+    }
 
     public void initialize(){
-
+        getIdFromUserName();
         profile_label_adminID.setText(localID);
         profileLabels();
         profileFields();
-        profileRecoQues();
 
     }
 

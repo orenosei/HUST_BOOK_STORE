@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -79,6 +80,11 @@ public class LaunchApplication extends Application {
     private ResultSet result;
     private Alert alert;
 
+    private static String userName;
+    public static String getUserName(){
+        return userName;
+    }
+
     public void loginBtn(){
         if(si_username.getText().isEmpty() || si_password.getText().isEmpty()){
             alert = new Alert(Alert.AlertType.ERROR);
@@ -92,6 +98,7 @@ public class LaunchApplication extends Application {
             try{
                 prepare = connect.prepareStatement(selectData);
                 prepare.setString(1, si_username.getText());
+                userName = si_username.getText();
                 prepare.setString(2, si_password.getText());
                 result = prepare.executeQuery();
 
@@ -101,6 +108,28 @@ public class LaunchApplication extends Application {
                     alert.setHeaderText(null);
                     alert.setContentText("Successfully logged in!");
                     alert.showAndWait();
+
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("sidebar-view.fxml"));
+                        Stage currentStage = (Stage) si_loginBtn.getScene().getWindow();
+                        currentStage.close();
+
+                        Stage stage = new Stage();
+                        Scene scene = new Scene(root);
+
+                        stage.setTitle("HUSTBookStore");
+                        stage.setMinWidth(1280);
+                        stage.setMinHeight(720);
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Failed to load main window!");
+                        alert.showAndWait();
+                    }
 
                 }else{
                     alert = new Alert(Alert.AlertType.ERROR);
