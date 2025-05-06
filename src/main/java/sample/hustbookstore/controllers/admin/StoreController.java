@@ -119,7 +119,7 @@ public class StoreController {
 
             Book prod;
 
-            while(result.next()) {
+            while (result.next()) {
                 prod = new Book(
                         result.getString("name"),
                         result.getString("distributor"),
@@ -132,7 +132,7 @@ public class StoreController {
 
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return listData;
@@ -155,7 +155,7 @@ public class StoreController {
             try {
 
                 FXMLLoader load = new FXMLLoader();
-                load.setLocation(getClass().getResource("productCard-view.fxml"));
+                load.setLocation(getClass().getResource("/sample/hustbookstore/admin/productCard-view.fxml"));
                 AnchorPane pane = load.load();
                 StoreProductCardController cardC = load.getController();
                 cardC.setData(bookListData.get(q));
@@ -167,7 +167,7 @@ public class StoreController {
                 tabBookGrid.add(pane, column++, row);
 
 
-            } catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -190,7 +190,7 @@ public class StoreController {
 
             Stationery prod;
 
-            while(result.next()) {
+            while (result.next()) {
                 prod = new Stationery(
                         result.getString("name"),
                         result.getString("distributor"),
@@ -203,7 +203,7 @@ public class StoreController {
 
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return listData;
@@ -226,7 +226,7 @@ public class StoreController {
             try {
 
                 FXMLLoader load = new FXMLLoader();
-                load.setLocation(getClass().getResource("productCard-view.fxml"));
+                load.setLocation(getClass().getResource("/sample/hustbookstore/admin/productCard-view.fxml"));
                 AnchorPane pane = load.load();
                 StoreProductCardController cardC = load.getController();
                 cardC.setData(stationeryListData.get(q));
@@ -238,7 +238,7 @@ public class StoreController {
                 tabStationeryGrid.add(pane, column++, row);
 
 
-            } catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -261,7 +261,7 @@ public class StoreController {
 
             Toy prod;
 
-            while(result.next()) {
+            while (result.next()) {
                 prod = new Toy(
                         result.getString("name"),
                         result.getString("distributor"),
@@ -274,7 +274,7 @@ public class StoreController {
 
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return listData;
@@ -297,7 +297,7 @@ public class StoreController {
             try {
 
                 FXMLLoader load = new FXMLLoader();
-                load.setLocation(getClass().getResource("productCard-view.fxml"));
+                load.setLocation(getClass().getResource("/sample/hustbookstore/admin/productCard-view.fxml"));
                 AnchorPane pane = load.load();
                 StoreProductCardController cardC = load.getController();
                 cardC.setData(toyListData.get(q));
@@ -309,7 +309,7 @@ public class StoreController {
                 tabToyGrid.add(pane, column++, row);
 
 
-            } catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 

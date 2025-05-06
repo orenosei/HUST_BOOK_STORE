@@ -1,8 +1,10 @@
 package sample.hustbookstore.controllers.admin;
 
+import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -65,6 +67,9 @@ public class LoginController {
     @FXML
     private PasswordField su_privacycode;
 
+    @FXML
+    private AnchorPane waitingScreen;
+
     private Connection connect;
     private PreparedStatement prepare;
     private ResultSet result;
@@ -92,36 +97,57 @@ public class LoginController {
                 prepare.setString(2, si_password.getText());
                 result = prepare.executeQuery();
 
-                if(result.next()){
-                    alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Information Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Successfully logged in!");
-                    alert.showAndWait();
+                if (result.next()) {
+                    waitingScreen.setVisible(true);
 
-                    try {
-                        Parent root = FXMLLoader.load(getClass().getResource("home-view.fxml"));
-                        Stage currentStage = (Stage) si_loginBtn.getScene().getWindow();
-                        currentStage.close();
+                    Task<AnchorPane> loadTask = new Task<>() {
+                        @Override
+                        protected AnchorPane call() throws IOException {
+                            return FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/home-view.fxml"));
+                        }
+                    };
+                    loadTask.setOnSucceeded(event -> {
+                        try {
+                            AnchorPane root = loadTask.getValue(); // Nhận kết quả từ Task
+                            Stage currentStage = (Stage) si_loginBtn.getScene().getWindow();
+                            currentStage.close();
 
-                        Stage stage = new Stage();
-                        Scene scene = new Scene(root);
+                            Stage stage = new Stage();
+                            Scene scene = new Scene(root);
 
-                        stage.setTitle("HUSTBookStore");
-                        stage.setMinWidth(1280);
-                        stage.setMinHeight(720);
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (IOException e) {
+                            stage.setTitle("HUSTBookStore");
+                            stage.setMinWidth(1280);
+                            stage.setMinHeight(720);
+                            stage.setScene(scene);
+                            stage.show();
+
+                            waitingScreen.setVisible(false);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Error Message");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Failed to display main window!");
+                            alert.showAndWait();
+                        }
+                    });
+
+                    loadTask.setOnFailed(event -> {
+                        waitingScreen.setVisible(false);
+                        Throwable e = loadTask.getException();
                         e.printStackTrace();
-                        alert = new Alert(Alert.AlertType.ERROR);
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Error Message");
                         alert.setHeaderText(null);
                         alert.setContentText("Failed to load main window!");
                         alert.showAndWait();
-                    }
+                    });
 
-                }else{
+                    new Thread(loadTask).start();
+                }
+
+
+                else{
                     alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error Message");
                     alert.setHeaderText(null);

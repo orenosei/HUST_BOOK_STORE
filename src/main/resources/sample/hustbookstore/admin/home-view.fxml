@@ -6,6 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -135,13 +138,44 @@
             <AnchorPane fx:id="profileScreen" layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="1020.0" />
          </children>
       </StackPane>
-      <Button fx:id="sync_btn" layoutX="280.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleSyncButtonAction" prefHeight="49.0" prefWidth="128.0" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="SYNC" textFill="WHITE" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="10.0">
+      <Button fx:id="sync_btn" alignment="CENTER" graphicTextGap="15.0" layoutX="280.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleSyncButtonAction" prefHeight="49.0" prefWidth="128.0" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="SYNC" textAlignment="RIGHT" textFill="WHITE" AnchorPane.rightAnchor="320.0" AnchorPane.topAnchor="10.0">
          <graphic>
-            <FontAwesomeIcon fill="WHITE" glyphName="REFRESH" size="2em" wrappingWidth="37.282311869675425" />
+            <FontAwesomeIcon fx:id="syncIcon" fill="WHITE" glyphName="REFRESH" size="2em" textAlignment="CENTER" />
          </graphic>
          <font>
             <Font name="Chalkboard Bold" size="19.0" />
          </font>
       </Button>
+      <Text fx:id="waitingText" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75), 10, 0, 2, 2);" text="FETCHING DATA, PLEASE WAIT..." visible="false" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="350.0">
+         <font>
+            <Font size="38.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="0.1285714285714286" endY="0.24285714285714283" startX="0.6142857142857143" startY="0.6571428571428571">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.36666667461395264" blue="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.31879194630872465">
+                     <color>
+                        <Color red="0.36666667461395264" blue="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.7611925028646251">
+                     <color>
+                        <Color green="0.23524414002895355" blue="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color green="0.23524414002895355" blue="0.5" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
    </children>
 </AnchorPane>

@@ -1,6 +1,11 @@
 package sample.hustbookstore.controllers.admin;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import javafx.animation.PauseTransition;
+import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -81,6 +86,9 @@ public class HomeScreenController implements Initializable {
 
             // khi bấm logout, dẫn quay trở lại trang login
             if(option.get().equals(ButtonType.OK)){
+                // Get current stage and close it
+                Stage currentStage = (Stage) logout_btn.getScene().getWindow();
+                currentStage.close();
 
                 Parent root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/LaunchApplication.fxml"));
                 Stage stage = new Stage();
@@ -98,7 +106,7 @@ public class HomeScreenController implements Initializable {
 
     public void loadDashboard(){
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/dashboard-view.fxml"));
+            AnchorPane root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/dashboard-view.fxml"));
             dashboardScreen.getChildren().clear();
             dashboardScreen.getChildren().add(root);
             AnchorPane.setBottomAnchor(root, 0.0); // làm cho dashboard dính phía bottom của anchorpane
@@ -112,7 +120,7 @@ public class HomeScreenController implements Initializable {
 
     public void loadInventory(){
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/inventory-view.fxml"));
+            AnchorPane root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/inventory-view.fxml"));
             inventoryScreen.getChildren().clear();
             inventoryScreen.getChildren().add(root);
 
@@ -121,20 +129,33 @@ public class HomeScreenController implements Initializable {
         }
     }
 
-    public void loadStore(){
-        try{
-            Parent root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/store-view.fxml"));
-            storeScreen.getChildren().clear();
-            storeScreen.getChildren().add(root);
-
-        }catch(Exception e){
+//    public void loadStore(){
+//        try{
+//            AnchorPane root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/store-view.fxml"));
+//            storeScreen.getChildren().clear();
+//            storeScreen.getChildren().add(root);
+//
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+//    }
+    public void loadStore() {
+        try {
+            AnchorPane root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/store-view.fxml"));
+            Platform.runLater(() -> {
+                storeScreen.getChildren().clear();
+                storeScreen.getChildren().add(root);
+            });
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+
+
     public void loadCustomers(){
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/customers-view.fxml"));
+            AnchorPane root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/customers-view.fxml"));
             customersScreen.getChildren().clear();
             customersScreen.getChildren().add(root);
 
@@ -145,7 +166,7 @@ public class HomeScreenController implements Initializable {
 
     public void loadOthers(){
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/others-view.fxml"));
+            AnchorPane root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/others-view.fxml"));
             othersScreen.getChildren().clear();
             othersScreen.getChildren().add(root);
 
@@ -156,7 +177,7 @@ public class HomeScreenController implements Initializable {
 
     public void loadProfile(){
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/profile-view.fxml"));
+            AnchorPane root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/profile-view.fxml"));
             profileScreen.getChildren().clear();
             profileScreen.getChildren().add(root);
 
@@ -175,7 +196,15 @@ public class HomeScreenController implements Initializable {
     }
 
     public void displayUsername(){
-        // đợi 2 anh chị kia làm xong login để lấy username
+        String username = LoginController.getUserName();
+        this.username.setText(username);
+        if(username.length() > 10){
+            this.username.setText(username.substring(0, 10) + "...");
+        }
+        else if(username.length() == 0){
+            this.username.setText("Not logged in");
+        }
+        else{}
     }
 
 
@@ -247,15 +276,63 @@ public class HomeScreenController implements Initializable {
 
     }
 
+
     @FXML
-    public void handleSyncButtonAction(ActionEvent event){
-        if(event.getSource() == sync_btn){loadStore();}
+    private Text waitingText;
+
+    @FXML
+    private FontAwesomeIcon syncIcon;
+
+
+    @FXML
+    public void handleSyncButtonAction(ActionEvent event) {
+        if (event.getSource() == sync_btn) {
+
+            waitingText.setVisible(true);
+            RotateTransition rotateTransition = new RotateTransition(Duration.seconds(1), syncIcon);
+            rotateTransition.setByAngle(360);
+            rotateTransition.setCycleCount(RotateTransition.INDEFINITE);
+            rotateTransition.play();
+
+            // Chạy tác vụ tải trong luồng nền
+            Task<Void> loadTask = new Task<>() {
+                @Override
+                protected Void call() throws Exception {
+                    // Thực hiện công việc nặng
+                    loadStore();
+                    return null;
+                }
+
+                @Override
+                protected void succeeded() {
+                    super.succeeded();
+                    Platform.runLater(() -> {
+                        waitingText.setVisible(false);
+                        rotateTransition.stop();
+                    });
+                }
+
+                @Override
+                protected void failed() {
+                    super.failed();
+                    Platform.runLater(() -> {
+                        waitingText.setVisible(false);
+                        rotateTransition.stop();
+                        System.err.println("Failed to load store: " + getException().getMessage());
+                    });
+                }
+            };
+
+            new Thread(loadTask).start();
+        }
     }
+
+
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        displayUsername();
+        displayUsername();
         loadDashboard();
         dashboardScreen.setVisible(true);
         inventoryScreen.setVisible(false);

@@ -11,8 +11,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import sample.hustbookstore.models.Product;
 
-import java.util.ResourceBundle;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ResourceBundle;
 
 public class StoreProductCardController implements Initializable {
 
@@ -41,25 +42,25 @@ public class StoreProductCardController implements Initializable {
         this.prodData = prodData;
         productName.setText(prodData.getName());
         productPrice.setText(String.valueOf(prodData.getSellPrice()));
-       // String relativePath = prodData.getImage(); // sample/hustbookstore/img/pocari.png
-    //    String imagePath = getClass().getResource("/" + relativePath).toExternalForm();
-        //image = new Image(imagePath, 100, 160, true, true);
-        //productImage.setImage(image);
 
-        String relativePath = prodData.getImage(); // e.g. sample/hustbookstore/img/pocari.png
-        URL resourceUrl = getClass().getResource("/" + relativePath);
-
-        if (resourceUrl != null) {
-            String imagePath = resourceUrl.toExternalForm();
-            image = new Image(imagePath, 100, 160, true, true);
-            productImage.setImage(image);
-        } else {
-            System.err.println("Image not found");
-            URL notfoundUrl = getClass().getResource("/" + "sample/hustbookstore/img/notfound.jpg");
-            String notfoundPath = notfoundUrl.toExternalForm();
-            image = new Image(notfoundPath, 100, 160, true, true);
-            productImage.setImage(image);
+        String imagePath = prodData.getImage();
+        try {
+            if (imagePath != null && !imagePath.isEmpty()) {
+                URL imageUrl = new URL(imagePath);
+                image = new Image(imageUrl.toExternalForm(), 100, 160, true, true);
+            } else {
+                image = new Image(getClass().getResource("/sample/hustbookstore/img/notfound.jpg").toExternalForm(), 100, 160, true, true);
+            }
+        } catch (MalformedURLException e) {
+            URL resourceUrl = getClass().getResource("/" + imagePath);
+            if (resourceUrl != null) {
+                image = new Image(resourceUrl.toExternalForm(), 100, 160, true, true);
+            } else {
+                image = new Image(getClass().getResource("/sample/hustbookstore/img/notfound.jpg").toExternalForm(), 100, 160, true, true);
+            }
         }
+
+        productImage.setImage(image);
     }
 
     @Override

@@ -14,6 +14,7 @@ module sample.hustbookstore {
     requires cloudinary.http5;
     requires cloudinary.core;
     requires dotenv.java;
+    requires fontawesomefx;
 
     opens sample.hustbookstore to javafx.fxml;
     exports sample.hustbookstore;

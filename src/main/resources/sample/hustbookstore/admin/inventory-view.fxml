@@ -21,7 +21,7 @@
 
 <AnchorPane fx:id="inventory_screen" prefHeight="720.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.InventoryController">
    <children>
-      <AnchorPane layoutX="611.0" layoutY="16.0" prefHeight="44.0" prefWidth="396.0" styleClass="search-bar" stylesheets="@../Design/homeDesign.css" AnchorPane.topAnchor="16.0">
+      <AnchorPane layoutX="611.0" layoutY="16.0" prefHeight="44.0" prefWidth="396.0" styleClass="search-bar" stylesheets="@../Design/homeDesign.css" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="10.0">
          <children>
             <TextField fx:id="search_bar" layoutX="165.0" layoutY="10.0" prefHeight="55.0" prefWidth="396.0" promptText="Search" styleClass="trans-bg" stylesheets="@../Design/homeDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>

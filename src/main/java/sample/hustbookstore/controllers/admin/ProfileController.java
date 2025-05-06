@@ -161,7 +161,7 @@ public class ProfileController {
     private String localID ;
 
     public void getIdFromUserName(){
-        String tmpUserName = LaunchApplication.getUserName();
+        String tmpUserName = LoginController.getUserName();
         connect = database.connectDB();
         String selectData = "SELECT id FROM admin WHERE username = '"
                 + tmpUserName + "'";
