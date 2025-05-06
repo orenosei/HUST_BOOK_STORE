@@ -17,4 +17,14 @@ module sample.hustbookstore {
 
     opens sample.hustbookstore to javafx.fxml;
     exports sample.hustbookstore;
+    exports sample.hustbookstore.models.database;
+    opens sample.hustbookstore.models.database to javafx.fxml;
+    exports sample.hustbookstore.models;
+    opens sample.hustbookstore.models to javafx.fxml;
+    exports sample.hustbookstore.utils;
+    opens sample.hustbookstore.utils to javafx.fxml;
+    exports sample.hustbookstore.admin;
+    opens sample.hustbookstore.admin to javafx.fxml;
+    exports sample.hustbookstore.user;
+    opens sample.hustbookstore.user to javafx.fxml;
 }
