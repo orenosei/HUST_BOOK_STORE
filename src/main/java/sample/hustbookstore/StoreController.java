@@ -75,13 +75,13 @@ public class StoreController {
     private AnchorPane storeForm;
 
     @FXML
-    private GridPane tabBookGrid;
+    public GridPane tabBookGrid;
 
     @FXML
     private ScrollPane tabBookScroll;
 
     @FXML
-    private GridPane tabStationeryGrid;
+    public GridPane tabStationeryGrid;
 
     @FXML
     private ScrollPane tabStationeryScroll;
@@ -92,7 +92,15 @@ public class StoreController {
     @FXML
     private ScrollPane tabToyScroll;
 
-    private ObservableList<Book> bookListData = FXCollections.observableArrayList();
+    public ObservableList<Book> bookListData = FXCollections.observableArrayList();
+
+    public int[] updateRowColumn(int column, int row) {
+        if (column == 2) {
+            column = 0;
+            row += 1;
+        }
+        return new int[]{column, row};
+    }
 
     public ObservableList<Book> tabBookGetData() {
 
@@ -148,10 +156,9 @@ public class StoreController {
                 StoreProductCardController cardC = load.getController();
                 cardC.setData(bookListData.get(q));
 
-                if (column == 2) {
-                    column = 0;
-                    row+=1;
-                }
+                int[] updated = updateRowColumn(column, row);
+                column = updated[0];
+                row = updated[1];
 
                 tabBookGrid.add(pane, column++, row);
 
@@ -164,7 +171,7 @@ public class StoreController {
 
     }
 
-    private ObservableList<Stationery> stationeryListData = FXCollections.observableArrayList();
+    public ObservableList<Stationery> stationeryListData = FXCollections.observableArrayList();
 
     public ObservableList<Stationery> tabStationeryGetData() {
 
@@ -220,10 +227,9 @@ public class StoreController {
                 StoreProductCardController cardC = load.getController();
                 cardC.setData(stationeryListData.get(q));
 
-                if (column == 2) {
-                    column = 0;
-                    row+=1;
-                }
+                int[] updated = updateRowColumn(column, row);
+                column = updated[0];
+                row = updated[1];
 
                 tabStationeryGrid.add(pane, column++, row);
 
@@ -235,8 +241,6 @@ public class StoreController {
         }
 
     }
-
-    //WIP
 
     private ObservableList<Toy> toyListData = FXCollections.observableArrayList();
 
@@ -294,10 +298,9 @@ public class StoreController {
                 StoreProductCardController cardC = load.getController();
                 cardC.setData(toyListData.get(q));
 
-                if (column == 2) {
-                    column = 0;
-                    row+=1;
-                }
+                int[] updated = updateRowColumn(column, row);
+                column = updated[0];
+                row = updated[1];
 
                 tabToyGrid.add(pane, column++, row);
 
