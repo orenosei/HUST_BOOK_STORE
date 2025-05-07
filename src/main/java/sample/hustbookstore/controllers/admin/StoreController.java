@@ -95,6 +95,19 @@ public class StoreController {
 
     @FXML
     private ScrollPane tabToyScroll;
+    @FXML
+    private AnchorPane voucherPane;
+
+    public void loadVoucherPane(){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/sample/hustbookstore/admin/voucher-view.fxml"));
+            AnchorPane pane = loader.load();
+            voucherPane.getChildren().setAll(pane);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public ObservableList<Book> bookListData = FXCollections.observableArrayList();
 
@@ -321,6 +334,7 @@ public class StoreController {
         tabBookDisplayCard();
         tabStationeryDisplayCard();
         tabToyDisplayCard();
+        loadVoucherPane();
     }
 
 }
