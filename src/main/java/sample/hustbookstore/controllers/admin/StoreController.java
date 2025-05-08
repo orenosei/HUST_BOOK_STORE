@@ -96,14 +96,24 @@ public class StoreController {
     @FXML
     private ScrollPane tabToyScroll;
     @FXML
-    private AnchorPane voucherPane;
+    private AnchorPane rightPane;
 
-    public void loadVoucherPane(){
+
+    protected String getRightPanelPath() {
+        return "/sample/hustbookstore/admin/voucher-view.fxml";
+    }
+
+    protected String getProductCardPath() {
+        return "/sample/hustbookstore/admin/productCard-view.fxml";
+    }
+    
+
+    public void loadRightPane() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/sample/hustbookstore/admin/voucher-view.fxml"));
+            loader.setLocation(getClass().getResource(getRightPanelPath()));
             AnchorPane pane = loader.load();
-            voucherPane.getChildren().setAll(pane);
+            rightPane.getChildren().setAll(pane);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -168,7 +178,7 @@ public class StoreController {
             try {
 
                 FXMLLoader load = new FXMLLoader();
-                load.setLocation(getClass().getResource("/sample/hustbookstore/admin/productCard-view.fxml"));
+                load.setLocation(getClass().getResource(getProductCardPath()));
                 AnchorPane pane = load.load();
                 StoreProductCardController cardC = load.getController();
                 cardC.setData(bookListData.get(q));
@@ -239,7 +249,7 @@ public class StoreController {
             try {
 
                 FXMLLoader load = new FXMLLoader();
-                load.setLocation(getClass().getResource("/sample/hustbookstore/admin/productCard-view.fxml"));
+                load.setLocation(getClass().getResource(getProductCardPath()));
                 AnchorPane pane = load.load();
                 StoreProductCardController cardC = load.getController();
                 cardC.setData(stationeryListData.get(q));
@@ -310,7 +320,7 @@ public class StoreController {
             try {
 
                 FXMLLoader load = new FXMLLoader();
-                load.setLocation(getClass().getResource("/sample/hustbookstore/admin/productCard-view.fxml"));
+                load.setLocation(getClass().getResource(getProductCardPath()));
                 AnchorPane pane = load.load();
                 StoreProductCardController cardC = load.getController();
                 cardC.setData(toyListData.get(q));
@@ -334,7 +344,7 @@ public class StoreController {
         tabBookDisplayCard();
         tabStationeryDisplayCard();
         tabToyDisplayCard();
-        loadVoucherPane();
+        loadRightPane();
     }
 
 }

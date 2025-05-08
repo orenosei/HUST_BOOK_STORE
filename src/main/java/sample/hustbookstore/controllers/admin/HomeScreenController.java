@@ -1,7 +1,6 @@
 package sample.hustbookstore.controllers.admin;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -75,22 +74,47 @@ public class HomeScreenController implements Initializable {
 
     private Alert alert;
 
+    protected String getLaunchApplicationPath() {
+        return "/sample/hustbookstore/LaunchApplication.fxml";
+    }
 
-    public void logout(){
-        try{
+    protected String getDashboardPath() {
+        return "/sample/hustbookstore/admin/dashboard-view.fxml";
+    }
+
+    protected String getInventoryPath() {
+        return "/sample/hustbookstore/admin/inventory-view.fxml";
+    }
+
+    protected String getStorePath() {
+        return "/sample/hustbookstore/admin/store-view.fxml";
+    }
+
+    protected String getCustomersPath() {
+        return "/sample/hustbookstore/admin/customers-view.fxml";
+    }
+
+    protected String getOthersPath() {
+        return "/sample/hustbookstore/admin/others-view.fxml";
+    }
+
+    protected String getProfilePath() {
+        return "/sample/hustbookstore/admin/profile-view.fxml";
+    }
+
+    public void logout() {
+        try {
             alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);
             alert.setContentText("Are you sure you want to logout?");
             Optional<ButtonType> option = alert.showAndWait();
 
-            // khi bấm logout, dẫn quay trở lại trang login
-            if(option.get().equals(ButtonType.OK)){
-                // Get current stage and close it
+            if (option.get().equals(ButtonType.OK)) {
                 Stage currentStage = (Stage) logout_btn.getScene().getWindow();
                 currentStage.close();
 
-                Parent root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/LaunchApplication.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource(getLaunchApplicationPath()));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
 
@@ -104,44 +128,33 @@ public class HomeScreenController implements Initializable {
         }
     }
 
-    public void loadDashboard(){
-        try{
-            AnchorPane root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/dashboard-view.fxml"));
+    public void loadDashboard() {
+        try {
+            AnchorPane root = FXMLLoader.load(getClass().getResource(getDashboardPath()));
             dashboardScreen.getChildren().clear();
             dashboardScreen.getChildren().add(root);
-            AnchorPane.setBottomAnchor(root, 0.0); // làm cho dashboard dính phía bottom của anchorpane
+            AnchorPane.setBottomAnchor(root, 0.0);
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         showHeaderAnimation();
-
     }
 
-    public void loadInventory(){
-        try{
-            AnchorPane root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/inventory-view.fxml"));
+    public void loadInventory() {
+        try {
+            AnchorPane root = FXMLLoader.load(getClass().getResource(getInventoryPath()));
             inventoryScreen.getChildren().clear();
             inventoryScreen.getChildren().add(root);
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-//    public void loadStore(){
-//        try{
-//            AnchorPane root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/store-view.fxml"));
-//            storeScreen.getChildren().clear();
-//            storeScreen.getChildren().add(root);
-//
-//        }catch(Exception e){
-//            e.printStackTrace();
-//        }
-//    }
     public void loadStore() {
         try {
-            AnchorPane root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/store-view.fxml"));
+            AnchorPane root = FXMLLoader.load(getClass().getResource(getStorePath()));
             Platform.runLater(() -> {
                 storeScreen.getChildren().clear();
                 storeScreen.getChildren().add(root);
@@ -151,42 +164,40 @@ public class HomeScreenController implements Initializable {
         }
     }
 
-
-
-    public void loadCustomers(){
-        try{
-            AnchorPane root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/customers-view.fxml"));
+    public void loadCustomers() {
+        try {
+            AnchorPane root = FXMLLoader.load(getClass().getResource(getCustomersPath()));
             customersScreen.getChildren().clear();
             customersScreen.getChildren().add(root);
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void loadOthers(){
-        try{
-            AnchorPane root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/others-view.fxml"));
+    public void loadOthers() {
+        try {
+            AnchorPane root = FXMLLoader.load(getClass().getResource(getOthersPath()));
             othersScreen.getChildren().clear();
             othersScreen.getChildren().add(root);
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void loadProfile(){
-        try{
-            AnchorPane root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/profile-view.fxml"));
+    public void loadProfile() {
+        try {
+            AnchorPane root = FXMLLoader.load(getClass().getResource(getProfilePath()));
             profileScreen.getChildren().clear();
             profileScreen.getChildren().add(root);
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void showHeaderAnimation() {
+    protected void showHeaderAnimation() {
         headerPane.setTranslateY(-70); // Ẩn header ban đầu (ra ngoài màn hình)
         headerPane.setVisible(true);
 
@@ -195,16 +206,15 @@ public class HomeScreenController implements Initializable {
         tt.play();
     }
 
-    public void displayUsername(){
+    public void displayUsername() {
         String username = LoginController.getUserName();
         this.username.setText(username);
-        if(username.length() > 10){
+        if (username.length() > 10) {
             this.username.setText(username.substring(0, 10) + "...");
-        }
-        else if(username.length() == 0){
+        } else if (username.length() == 0) {
             this.username.setText("Not logged in");
+        } else {
         }
-        else{}
     }
 
 
@@ -326,8 +336,6 @@ public class HomeScreenController implements Initializable {
             new Thread(loadTask).start();
         }
     }
-
-
 
 
     @Override

@@ -9,7 +9,7 @@
 
 <AnchorPane fx:id="storeForm" prefHeight="720.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.StoreController">
    <children>
-      <AnchorPane fx:id="voucherPane" layoutX="720.0" layoutY="10.0" prefWidth="290.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+      <AnchorPane fx:id="rightPane" layoutX="720.0" layoutY="10.0" prefWidth="290.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
       <TabPane fx:id="tabStore" prefHeight="650.0" prefWidth="700.0" stylesheets="@../Design/homeDesign.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
          <tabs>
             <Tab id="book-bg" fx:id="tabBook" text="        BOOK">
