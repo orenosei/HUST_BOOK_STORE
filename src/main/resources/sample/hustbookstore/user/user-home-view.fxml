@@ -47,7 +47,7 @@
                   <Font name="Martian Mono ExtraBold" size="22.0" />
                </font>
             </Text>
-            <VBox layoutY="90.0" prefHeight="500.0" prefWidth="250.0">
+            <VBox layoutY="134.0" prefHeight="456.0" prefWidth="250.0">
                <children>
                   <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@../Design/homeDesign.css">
                      <children>
@@ -61,27 +61,7 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@../Design/homeDesign.css">
                      <children>
-                        <FontAwesomeIcon fill="WHITE" glyphName="ARCHIVE" layoutX="14.0" layoutY="60.0" size="4em" />
-                        <Button fx:id="inventory_btn" alignment="BASELINE_CENTER" layoutX="81.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleSidebarButtonAction" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@../Design/homeDesign.css" text="INVENTORY" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <font>
-                              <Font name="Chalkboard Bold" size="23.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@../Design/homeDesign.css">
-                     <children>
-                        <FontAwesomeIcon fill="WHITE" glyphName="USER_PLUS" layoutX="14.0" layoutY="60.0" size="4em" />
-                        <Button fx:id="customers_btn" alignment="BASELINE_CENTER" layoutX="81.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleSidebarButtonAction" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@../Design/homeDesign.css" text="CUSTOMERS" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <font>
-                              <Font name="Chalkboard Bold" size="23.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@../Design/homeDesign.css">
-                     <children>
-                        <FontAwesomeIcon fill="WHITE" glyphName="SHOPPING_CART" layoutX="14.0" layoutY="60.0" size="4em" />
+                        <FontAwesomeIcon fill="WHITE" glyphName="LIST_ALT" layoutX="14.0" layoutY="60.0" size="4em" />
                         <Button fx:id="store_btn" alignment="BASELINE_CENTER" layoutX="81.0" mnemonicParsing="false" onAction="#handleSidebarButtonAction" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@../Design/homeDesign.css" text="STORE" textFill="WHITE">
                            <font>
                               <Font name="Chalkboard Bold" size="23.0" />
@@ -91,8 +71,8 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@../Design/homeDesign.css">
                      <children>
-                        <FontAwesomeIcon fill="WHITE" glyphName="EMPIRE" layoutX="14.0" layoutY="60.0" size="4em" />
-                        <Button fx:id="others_btn" alignment="BASELINE_CENTER" layoutX="77.0" mnemonicParsing="false" onAction="#handleSidebarButtonAction" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@../Design/homeDesign.css" text="OTHERS" textFill="WHITE">
+                        <FontAwesomeIcon fill="WHITE" glyphName="SHOPPING_CART" layoutX="14.0" layoutY="60.0" size="4em" />
+                        <Button fx:id="cart_btn" alignment="BASELINE_CENTER" layoutX="77.0" mnemonicParsing="false" onAction="#handleSidebarButtonAction" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@../Design/homeDesign.css" text="CART" textFill="WHITE">
                            <font>
                               <Font name="Chalkboard Bold" size="23.0" />
                            </font>
@@ -131,10 +111,8 @@
       <StackPane layoutX="270.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane fx:id="dashboardScreen" prefHeight="720.0" prefWidth="1020.0" />
-            <AnchorPane fx:id="inventoryScreen" layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="1020.0" />
-            <AnchorPane fx:id="customersScreen" layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="1020.0" />
             <AnchorPane fx:id="storeScreen" layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="1020.0" />
-            <AnchorPane fx:id="othersScreen" layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="1020.0" />
+            <AnchorPane fx:id="cartScreen" layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="1020.0" />
             <AnchorPane fx:id="profileScreen" layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="1020.0" />
          </children>
       </StackPane>
