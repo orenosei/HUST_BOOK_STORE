@@ -1,8 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 
 <AnchorPane prefHeight="720.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.user.UserCartController">
-
+   <children>
+      <AnchorPane layoutX="31.0" layoutY="12.0" prefHeight="64.0" prefWidth="159.0">
+         <children>
+            <FontAwesomeIcon glyphName="SHOPPING_CART" layoutX="4.0" layoutY="50.0" size="4em" wrappingWidth="59.744943618774414" />
+            <Text layoutX="71.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CART">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <VBox fillWidth="false" layoutX="10.0" layoutY="10.0" prefHeight="489.0" prefWidth="483.0" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="80.0">
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </VBox>
+      <AnchorPane layoutX="570.0" layoutY="49.0" prefHeight="700.0" prefWidth="506.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Text layoutX="53.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PAYMENT INFORMATION">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Text>
+            <Text layoutX="60.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer:">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+            <Text layoutX="59.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trinh Minh Thanh">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
+            <TextField layoutX="50.0" layoutY="227.0" prefHeight="25.0" prefWidth="416.0" promptText="Customer Name" />
+            <TextField layoutX="50.0" layoutY="269.0" prefHeight="25.0" prefWidth="417.0" promptText="Phone number" />
+            <TextField layoutX="49.0" layoutY="318.0" prefHeight="25.0" prefWidth="109.0" promptText="Province/City" />
+            <TextField layoutX="177.0" layoutY="317.0" prefHeight="25.0" prefWidth="109.0" promptText="District" />
+            <TextField layoutX="308.0" layoutY="317.0" prefHeight="25.0" prefWidth="109.0" promptText="Ward/Commune" />
+            <TextField layoutX="49.0" layoutY="360.0" prefHeight="25.0" prefWidth="417.0" promptText="Specific Address" />
+            <Button layoutX="390.0" layoutY="483.0" mnemonicParsing="false" text="Place Order" />
+         </children>
+      </AnchorPane>
+      <TextField layoutX="162.0" layoutY="512.0" promptText="apply voucher here" />
+      <Button layoutX="336.0" layoutY="512.0" mnemonicParsing="false" text="Apply" />
+      <GridPane layoutX="195.0" layoutY="552.0" prefHeight="34.0" prefWidth="196.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="96.72854614257812" minWidth="10.0" prefWidth="96.72854614257812" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="56.810516357421875" minWidth="10.0" prefWidth="24.271453857421875" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Subtotal:" GridPane.halignment="RIGHT" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Discount:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="123.456" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="23.45" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="VND" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="VND" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <Text layoutX="295.0" layoutY="617.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Amount:">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <Text layoutX="205.0" layoutY="653.0" strokeType="OUTSIDE" strokeWidth="0.0" text="123.456">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Text>
+      <Text layoutX="337.0" layoutY="652.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VND">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Text>
+   </children>
 </AnchorPane>

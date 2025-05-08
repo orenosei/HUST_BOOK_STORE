@@ -14,9 +14,8 @@ public class Product {
     private String description;
     private LocalDate addedDate;
     private int restrictedAge;
-    private int sellQuantity;
 
-    public Product(String ID, String name, String distributor, Double sellPrice, Double importPrice, int stock, String type, String image, String description, LocalDate addedDate, int restrictedAge, int sellQuantity) {
+    public Product(String ID, String name, String distributor, Double sellPrice, Double importPrice, int stock, String type, String image, String description, LocalDate addedDate, int restrictedAge) {
         this.ID = ID;
         this.name = name;
         this.distributor = distributor;
@@ -28,7 +27,6 @@ public class Product {
         this.description = description;
         this.addedDate = addedDate;
         this.restrictedAge = restrictedAge;
-        this.sellQuantity = sellQuantity;
     }
 
     public Product(String name, String distributor, Double sellPrice, String type, String image, String description) {
@@ -128,11 +126,4 @@ public class Product {
         this.restrictedAge = restrictedAge;
     }
 
-    public int getSellQuantity() {
-        return sellQuantity;
-    }
-
-    public void setSellQuantity(int sellQuantity) {
-        this.sellQuantity = sellQuantity;
-    }
 }
