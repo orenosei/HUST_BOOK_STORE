@@ -53,10 +53,9 @@ CREATE TABLE `user` (
 );
 
 CREATE TABLE `voucher` (
-                        `voucher_id` INT AUTO_INCREMENT,
-                        `code` varchar(255) NOT NULL,
+                        `code` varchar(255) NOT NULL UNIQUE ,
                         `discount` float NOT NULL,
                         `duration` DATE NOT NULL,
                         `remaining` int NOT NULL,
-                        PRIMARY KEY (`voucher_id`)
+                        PRIMARY KEY (`code`)
 )
