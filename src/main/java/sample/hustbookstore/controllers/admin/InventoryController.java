@@ -345,33 +345,7 @@ public class InventoryController {
         File file = fileChooser.showOpenDialog(inventory_screen.getScene().getWindow());
 
         if (file != null) {
-
-//            CloudinaryUploader uploader = new CloudinaryUploader();
-//            String imageUrl = uploader.uploadImage(file);
-//            System.out.println("Uploaded Image URL: " + imageUrl);
-
-
-            // Định vị thư mục đích 'img/' trong 'src/main/resources/sample/hustbookstore/img'
-//            String resourcesPath = System.getProperty("user.dir") + "/src/main/resources/sample/hustbookstore/img";
-//            File targetDirectory = new File(resourcesPath);
-//
-//            // Kiểm tra nếu thư mục 'img' không tồn tại thì tạo mới
-//            if (!targetDirectory.exists()) {
-//                targetDirectory.mkdirs();
-//            }
-//
-//            // Lấy tên file và tạo đường dẫn đích
-//            String fileName = file.getName();
-//            File targetFile = new File(targetDirectory, fileName);
-
-
             try {
-//                // Sao chép file vào thư mục đích
-//                Files.copy(file.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-//
-//                // Cập nhật đường dẫn tương đối
-//                currentImagePath = "sample/hustbookstore/img/" + fileName;
-                //currentImagePath = file.getAbsolutePath();
                 currentImageUrl = getImageUrl(file);
 
                 image = new Image(file.toURI().toString(), 1000, 1600, true, true);
@@ -669,28 +643,6 @@ public class InventoryController {
         inventory_restrictedAge.setText(String.valueOf(prod.getRestrictedAge()));
         inventory_type.getSelectionModel().select(prod.getType());
         inventory_description.setText(prod.getDescription());
-
-//        try {
-//            // Kiểm tra đường dẫn ảnh có hợp lệ không
-//            if (prod.getImage() != null && !prod.getImage().isEmpty()) {
-//                // Chuyển đổi đường dẫn tương đối thành URL
-//                String relativePath = prod.getImage(); // sample/hustbookstore/img/pocari.png
-//                String imagePath = getClass().getResource("/" + relativePath).toExternalForm();
-//
-//                // Tạo đối tượng Image từ URL
-//                Image img = new Image(imagePath, 1000, 1600, true, true);
-//                inventory_imageView.setImage(img);
-//                currentImagePath = prod.getImage();
-//            } else {
-//                // Xóa ảnh nếu đường dẫn rỗng hoặc null
-//                inventory_imageView.setImage(null);
-//                currentImagePath = null;
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            inventory_imageView.setImage(null); // Xóa ảnh trong trường hợp lỗi
-//            currentImagePath = null;
-//        }
 
         try {
             if (prod.getImage() != null && !prod.getImage().isEmpty()) {
