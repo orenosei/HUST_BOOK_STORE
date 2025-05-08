@@ -1,4 +1,6 @@
 package sample.hustbookstore.controllers.user;
 
-public class UserStoreProductCardController { //extends admin
+import sample.hustbookstore.controllers.admin.StoreProductCardController;
+
+public class UserStoreProductCardController extends StoreProductCardController { //extends admin
 }
