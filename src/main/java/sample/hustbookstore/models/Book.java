@@ -11,9 +11,9 @@ public class Book extends Product
 
     public Book(String ID, String name, String distributor, Double sellPrice,
                 Double importPrice, int stock, String type, String image, String description,
-                LocalDate addedDate, int restrictedAge, int sellQuantity,
+                LocalDate addedDate, int restrictedAge,
                 String isbn, String genre, LocalDate publishedDate, String author) {
-        super(ID, name, distributor, sellPrice, importPrice, stock, type, image, description, addedDate, restrictedAge, sellQuantity);
+        super(ID, name, distributor, sellPrice, importPrice, stock, type, image, description, addedDate, restrictedAge);
         this.isbn = isbn;
         this.genre = genre;
         this.publishedDate = publishedDate;

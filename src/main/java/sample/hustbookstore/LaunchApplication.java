@@ -9,6 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import sample.hustbookstore.models.Admin;
+import sample.hustbookstore.models.AdminList;
+
 import java.io.IOException;
 
 
@@ -22,6 +25,9 @@ public class LaunchApplication extends Application {
 
     @FXML
     private Button user_btn;
+
+    public static Admin localAdmin;
+
 
     public void switchAdminLogin() {
         try {
@@ -56,6 +62,9 @@ public class LaunchApplication extends Application {
         stage.setTitle("Welcome to HUST Book Store");
         stage.setScene(scene);
         stage.show();
+
+        localAdmin = null;
+        AdminList.initialize();
     }
 
     public static void main(String[] args) {
