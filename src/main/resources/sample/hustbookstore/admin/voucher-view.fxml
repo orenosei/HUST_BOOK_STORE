@@ -13,7 +13,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane maxHeight="700.0" maxWidth="290.0" prefHeight="700.0" prefWidth="290.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="700.0" prefWidth="290.0" style="-fx-border-color: #4C64EF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -43,9 +42,9 @@
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <TextField prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="voucherDiscount" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="voucherDuaration" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="voucherRemain" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Text fill="#8f9de6" strokeType="OUTSIDE" strokeWidth="0.0" text="DISCOUNT" GridPane.rowIndex="1">
                            <font>
                               <Font size="15.0" />
@@ -61,7 +60,7 @@
                               <Font size="15.0" />
                            </font>
                         </Text>
-                        <TextField prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" />
+                        <TextField fx:id="voucherCode" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" />
                         <Text fill="#8f9de6" strokeType="OUTSIDE" strokeWidth="0.0" text="CODE" textAlignment="RIGHT">
                            <font>
                               <Font size="15.0" />
@@ -71,10 +70,10 @@
                   </GridPane>
                   <HBox prefHeight="29.0" prefWidth="288.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="Add" textFill="WHITE" />
-                        <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="Update" textFill="WHITE" />
-                        <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="Clear" textFill="WHITE" />
-                        <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="Delete" textFill="WHITE" />
+                        <Button fx:id="voucherAddBtn" mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="Add" textFill="WHITE" />
+                        <Button fx:id="voucherUpdateBtn" mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="Update" textFill="WHITE" />
+                        <Button fx:id="voucherClearBtn" mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="Clear" textFill="WHITE" />
+                        <Button fx:id="voucherDeleteBtn" mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="Delete" textFill="WHITE" />
                      </children>
                   </HBox>
                </children>
