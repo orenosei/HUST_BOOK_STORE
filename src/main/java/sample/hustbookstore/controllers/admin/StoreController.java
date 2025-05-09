@@ -118,7 +118,6 @@ public class StoreController {
             e.printStackTrace();
         }
     }
-
     public ObservableList<Book> bookListData = FXCollections.observableArrayList();
 
     public int[] updateRowColumn(int column, int row) {

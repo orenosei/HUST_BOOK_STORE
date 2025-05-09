@@ -4,11 +4,11 @@ import java.util.Date;
 
 
 public class Voucher {
-    private int voucher_id;
     private String code;
     private int remaining;
     private float discount;
     private Date duration;
+    private int voucher_id;
 
     public Voucher(String code, int remaining, float discount, Date duration, int voucher_id) {
         this.code = code;
@@ -33,4 +33,13 @@ public class Voucher {
     public Date getDuration() {return (java.sql.Date) duration;}
 
     public void setDuration(Date duration) {this.duration = duration;}
+
+    public int getVoucher_id() {
+        return voucher_id;
+    }
+
+    public void setVoucher_id(int voucher_id) {
+        this.voucher_id = voucher_id;
+    }
+
 }
