@@ -23,6 +23,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static sample.hustbookstore.LaunchApplication.localAdmin;
+
 public class HomeScreenController implements Initializable {
 
     @FXML
@@ -207,7 +209,7 @@ public class HomeScreenController implements Initializable {
     }
 
     public void displayUsername() {
-        String username = LoginController.getUserName();
+        String username = localAdmin.getUsername();
         this.username.setText(username);
         if (username.length() > 10) {
             this.username.setText(username.substring(0, 10) + "...");

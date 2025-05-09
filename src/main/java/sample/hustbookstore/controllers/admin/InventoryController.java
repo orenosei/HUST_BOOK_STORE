@@ -233,7 +233,7 @@ public class InventoryController {
 
             while (result.next()) {
                 list.add(new Book(
-                        result.getString("id"),
+                        result.getString("product_id"),
                         result.getString("name"),
                         result.getString("distributor"),
                         result.getDouble("sell_price"),
@@ -244,7 +244,6 @@ public class InventoryController {
                         result.getString("description"), // Lấy mô tả
                         result.getDate("added_date") != null ? result.getDate("added_date").toLocalDate() : null, // Ngày thêm sản phẩm
                         result.getInt("age_restrict"), // Giới hạn tuổi
-                        result.getInt("sell_quantity"), // Số lượng bán
                         result.getString("isbn"), // ISBN
                         result.getString("genre"), // Thể loại
                         result.getDate("pub_date") != null ? result.getDate("pub_date").toLocalDate() : null, // Ngày xuất bản
@@ -381,7 +380,7 @@ public class InventoryController {
         }
 
         else{
-            String checkProductID = "SELECT id FROM product WHERE id = '" + inventory_productID.getText() + "'";
+            String checkProductID = "SELECT product_id FROM product WHERE product_id = '" + inventory_productID.getText() + "'";
             connect = database.connectDB();
 
             try{
@@ -400,7 +399,7 @@ public class InventoryController {
                     String insertToDatabase;
                     if("Book".equals(inventory_type.getSelectionModel().getSelectedItem())){
                         insertToDatabase = "INSERT INTO product"
-                                + "(id, type, name, image, distributor, description, added_date, stock, import_price, sell_price, age_restrict, isbn, author, genre, pub_date) "
+                                + "(product_id, type, name, image, distributor, description, added_date, stock, import_price, sell_price, age_restrict, isbn, author, genre, pub_date) "
                                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                         prepare = connect.prepareStatement(insertToDatabase);
                         prepare.setString(1, inventory_productID.getText());
@@ -430,7 +429,7 @@ public class InventoryController {
                     }
                     else {
                         insertToDatabase = "INSERT INTO product "
-                                + "(id, type, name, image, distributor, description, added_date, stock, import_price, sell_price, age_restrict, isbn, author, genre, pub_date) "
+                                + "(product_id, type, name, image, distributor, description, added_date, stock, import_price, sell_price, age_restrict, isbn, author, genre, pub_date) "
                                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                         prepare = connect.prepareStatement(insertToDatabase);
@@ -515,7 +514,7 @@ public class InventoryController {
                     updateQuery = "UPDATE product SET "
                             + "type = ?, name = ?, image = ?, distributor = ?, description = ?, added_date = ?, "
                             + "stock = ?, import_price = ?, sell_price = ?, age_restrict = ?, isbn = ?, "
-                            + "author = ?, genre = ?, pub_date = ? WHERE id = ?";
+                            + "author = ?, genre = ?, pub_date = ? WHERE product_id = ?";
 
                     prepare = connect.prepareStatement(updateQuery);
                     prepare.setString(1, "Book");
@@ -537,7 +536,7 @@ public class InventoryController {
                     updateQuery = "UPDATE product SET "
                             + "type = ?, name = ?, image = ?, distributor = ?, description = ?, added_date = ?, "
                             + "stock = ?, import_price = ?, sell_price = ?, age_restrict = ?, isbn = ?, "
-                            + "author = ?, genre = ?, pub_date = ? WHERE id = ?";
+                            + "author = ?, genre = ?, pub_date = ? WHERE product_id = ?";
 
                     prepare = connect.prepareStatement(updateQuery);
                     prepare.setString(1, inventory_type.getSelectionModel().getSelectedItem());
@@ -597,7 +596,7 @@ public class InventoryController {
             Optional<ButtonType> result = confirmAlert.showAndWait();
 
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                String deleteQuery = "DELETE FROM product WHERE id = ?";
+                String deleteQuery = "DELETE FROM product WHERE product_id = ?";
                 connect = database.connectDB();
 
                 try {
