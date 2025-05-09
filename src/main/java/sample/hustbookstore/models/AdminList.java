@@ -42,9 +42,6 @@ public class AdminList {
         }
     }
 
-    // List<Product> getPrd()
-    //
-
     public static boolean isUsernameTaken(String username) {
         String query = "SELECT username FROM admin WHERE username = ?";
         try (PreparedStatement statement = connect.prepareStatement(query)) {

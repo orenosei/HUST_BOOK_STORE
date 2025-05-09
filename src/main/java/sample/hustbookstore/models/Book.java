@@ -20,9 +20,9 @@ public class Book extends Product
         this.author = author;
     }
 
-    public Book(String name, String distributor, Double sellPrice,String type, String image, String description) {
-        super(name, distributor, sellPrice, type, image, description);
-    }
+//    public Book(String name, String distributor, Double sellPrice,String type, String image, String description) {
+//        super(name, distributor, sellPrice, type, image, description);
+//    }
 
     public String getIsbn() {
         return isbn;

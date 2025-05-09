@@ -9,9 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import sample.hustbookstore.models.Admin;
-import sample.hustbookstore.models.AdminList;
-import sample.hustbookstore.models.Voucher;
+import sample.hustbookstore.models.*;
 
 import java.io.IOException;
 
@@ -30,6 +28,10 @@ public class LaunchApplication extends Application {
     public static Admin localAdmin;
 
     public static Voucher localVoucher;
+
+    public static Inventory localInventory = new Inventory();
+
+    public static Store localStore = new Store();
 
 
     public void switchAdminLogin() {
@@ -60,14 +62,18 @@ public class LaunchApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        localAdmin = null;
+        AdminList.initialize();
+        Inventory.initialize();
+        Store.initialize();
+
         FXMLLoader fxmlLoader = new FXMLLoader(LaunchApplication.class.getResource("LaunchApplication.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 640, 720);
         stage.setTitle("Welcome to HUST Book Store");
         stage.setScene(scene);
         stage.show();
 
-        localAdmin = null;
-        AdminList.initialize();
+
     }
 
     public static void main(String[] args) {

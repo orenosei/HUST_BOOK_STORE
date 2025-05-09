@@ -14,7 +14,6 @@ import javafx.stage.FileChooser;
 import org.controlsfx.control.CheckComboBox;
 import sample.hustbookstore.models.Book;
 import sample.hustbookstore.models.Product;
-import sample.hustbookstore.models.database;
 import sample.hustbookstore.utils.CloudinaryUploader;
 
 import java.io.File;
@@ -27,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static sample.hustbookstore.LaunchApplication.localInventory;
 
 
 public class InventoryController {
@@ -61,7 +61,7 @@ public class InventoryController {
     @FXML
     private TableColumn<Product, String> col_type;
     @FXML
-    private TableColumn<Product, LocalDate> col_dateAdded; // hoặc LocalDate nếu bạn dùng kiểu đó
+    private TableColumn<Product, LocalDate> col_dateAdded;
     @FXML
     private TableColumn<Product, Integer> col_stocks;
     @FXML
@@ -222,43 +222,9 @@ public class InventoryController {
         inventory_genre.getItems().addAll(genreList);
     }
 
-    public ObservableList<Book> dataList() {
-        ObservableList<Book> list = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM product";
-        connect = database.connectDB();
-
-        try {
-            prepare = connect.prepareStatement(sql);
-            result = prepare.executeQuery();
-
-            while (result.next()) {
-                list.add(new Book(
-                        result.getString("product_id"),
-                        result.getString("name"),
-                        result.getString("distributor"),
-                        result.getDouble("sell_price"),
-                        result.getDouble("import_price"),
-                        result.getInt("stock"),
-                        result.getString("type"),
-                        result.getString("image"), // Lấy đường dẫn ảnh
-                        result.getString("description"), // Lấy mô tả
-                        result.getDate("added_date") != null ? result.getDate("added_date").toLocalDate() : null, // Ngày thêm sản phẩm
-                        result.getInt("age_restrict"), // Giới hạn tuổi
-                        result.getString("isbn"), // ISBN
-                        result.getString("genre"), // Thể loại
-                        result.getDate("pub_date") != null ? result.getDate("pub_date").toLocalDate() : null, // Ngày xuất bản
-                        result.getString("author") // Tác giả
-                ));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return list;
-    }
 
     public void showData() {
-        ObservableList<Book> list = dataList();
+        ObservableList<Book> list = localInventory.getAllProducts();
 
         FilteredList<Book> filteredData = new FilteredList<>(list, b -> true);
 
@@ -269,7 +235,6 @@ public class InventoryController {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-
                 String lowerCaseFilter = newValue.toLowerCase();
 
                 // Kiểm tra các thuộc tính: name, distributor, author, genre, description
@@ -356,116 +321,74 @@ public class InventoryController {
         }
     }
 
-    public void setAdd_btn() {
-        if (
-                inventory_productID.getText().isEmpty()
-                        || inventory_productName.getText().isEmpty()
-                        || inventory_importPrice.getText().isEmpty()
-                        || inventory_sellingPrice.getText().isEmpty()
-                        || inventory_distributor.getText().isEmpty()
-                        || inventory_type.getSelectionModel().getSelectedItem() == null
-                        || inventory_restrictedAge.getText().isEmpty()
-                        || inventory_stocks.getText().isEmpty()
-                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_description.getText().isEmpty())
-                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_ISBN.getText().isEmpty())
-                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_author.getText().isEmpty())
-                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_genre.getCheckModel().getCheckedItems().isEmpty())
-                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_publishedDate.getValue() == null)
-        ) {
+public void setAdd_btn() {
+    if (
+            inventory_productID.getText().isEmpty()
+                    || inventory_productName.getText().isEmpty()
+                    || inventory_importPrice.getText().isEmpty()
+                    || inventory_sellingPrice.getText().isEmpty()
+                    || inventory_distributor.getText().isEmpty()
+                    || inventory_type.getSelectionModel().getSelectedItem() == null
+                    || inventory_restrictedAge.getText().isEmpty()
+                    || inventory_stocks.getText().isEmpty()
+                    || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_description.getText().isEmpty())
+                    || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_ISBN.getText().isEmpty())
+                    || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_author.getText().isEmpty())
+                    || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_genre.getCheckModel().getCheckedItems().isEmpty())
+                    || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_publishedDate.getValue() == null)
+    ) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error Message");
+        alert.setHeaderText(null);
+        alert.setContentText("Please enter all the fields correctly.");
+        alert.showAndWait();
+        return;
+    }
+
+    if (localInventory.isProductExists(inventory_productID.getText())) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error Message");
+        alert.setHeaderText(null);
+        alert.setContentText(inventory_productID.getText() + " already exists.");
+        alert.showAndWait();
+    } else {
+        String type = inventory_type.getSelectionModel().getSelectedItem();
+
+        boolean success = localInventory.addProduct(
+                inventory_productID.getText(),
+                inventory_productName.getText(),
+                inventory_distributor.getText(),
+                Double.parseDouble(inventory_sellingPrice.getText()),
+                Double.parseDouble(inventory_importPrice.getText()),
+                Integer.parseInt(inventory_stocks.getText()),
+                type,
+                currentImageUrl,
+                inventory_description.getText(),
+                LocalDate.now(),
+                Integer.parseInt(inventory_restrictedAge.getText()),
+                "Book".equals(type) ? inventory_ISBN.getText() : null,
+                "Book".equals(type) ? String.join(", ", inventory_genre.getCheckModel().getCheckedItems()) : null,
+                "Book".equals(type) ? inventory_publishedDate.getValue() : null,
+                "Book".equals(type) ? inventory_author.getText() : null
+        );
+
+        if (success) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Product added successfully.");
+            alert.showAndWait();
+            showData();
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);
-            alert.setContentText("Please enter all the fields correctly.");
+            alert.setContentText("Failed to add product.");
             alert.showAndWait();
         }
-
-        else{
-            String checkProductID = "SELECT product_id FROM product WHERE product_id = '" + inventory_productID.getText() + "'";
-            connect = database.connectDB();
-
-            try{
-                statement = connect.createStatement();
-                result = statement.executeQuery(checkProductID);
-
-                if(result.next()){ // nếu đã tồn tại sản phẩm thì đưa ra cảnh báo
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText(inventory_productID.getText() +  " already exists.");
-                    alert.showAndWait();
-                }
-                else{ //nếu chưa tồn tại sản phẩm thì thêm
-
-                    String insertToDatabase;
-                    if("Book".equals(inventory_type.getSelectionModel().getSelectedItem())){
-                        insertToDatabase = "INSERT INTO product"
-                                + "(product_id, type, name, image, distributor, description, added_date, stock, import_price, sell_price, age_restrict, isbn, author, genre, pub_date) "
-                                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                        prepare = connect.prepareStatement(insertToDatabase);
-                        prepare.setString(1, inventory_productID.getText());
-                        prepare.setString(2, "Book"); // vì đoạn này đang ở trong điều kiện Book
-                        prepare.setString(3, inventory_productName.getText());
-                        prepare.setString(4, currentImageUrl);
-                        prepare.setString(5, inventory_distributor.getText());
-                        prepare.setString(6, inventory_description.getText());
-                        prepare.setDate(7, java.sql.Date.valueOf(LocalDate.now())); // dùng ngày hiện tại
-                        prepare.setInt(8, Integer.parseInt(inventory_stocks.getText()));
-                        prepare.setFloat(9, Float.parseFloat(inventory_importPrice.getText()));
-                        prepare.setFloat(10, Float.parseFloat(inventory_sellingPrice.getText()));
-                        prepare.setInt(11, Integer.parseInt(inventory_restrictedAge.getText()));
-                        prepare.setString(12, inventory_ISBN.getText());
-                        prepare.setString(13, inventory_author.getText());
-                        prepare.setString(14, String.join(", ", inventory_genre.getCheckModel().getCheckedItems()));
-                        prepare.setDate(15, java.sql.Date.valueOf(inventory_publishedDate.getValue()));
-
-                        prepare.executeUpdate();
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Information Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Product added successfully.");
-                        alert.showAndWait();
-                        showData();
-
-                    }
-                    else {
-                        insertToDatabase = "INSERT INTO product "
-                                + "(product_id, type, name, image, distributor, description, added_date, stock, import_price, sell_price, age_restrict, isbn, author, genre, pub_date) "
-                                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-                        prepare = connect.prepareStatement(insertToDatabase);
-                        prepare.setString(1, inventory_productID.getText());
-                        prepare.setString(2, inventory_type.getSelectionModel().getSelectedItem());
-                        prepare.setString(3, inventory_productName.getText());
-                        prepare.setString(4, currentImageUrl);
-                        prepare.setString(5, inventory_distributor.getText());
-                        prepare.setString(6, inventory_description.getText());
-                        prepare.setDate(7, java.sql.Date.valueOf(LocalDate.now()));
-                        prepare.setInt(8, Integer.parseInt(inventory_stocks.getText()));
-                        prepare.setFloat(9, Float.parseFloat(inventory_importPrice.getText()));
-                        prepare.setFloat(10, Float.parseFloat(inventory_sellingPrice.getText()));
-                        prepare.setInt(11, Integer.parseInt(inventory_restrictedAge.getText()));
-
-                        // Các trường đặc trưng của Book để NULL
-                        prepare.setNull(12, java.sql.Types.VARCHAR); // isbn
-                        prepare.setNull(13, java.sql.Types.VARCHAR); // author
-                        prepare.setNull(14, java.sql.Types.VARCHAR); // genre
-                        prepare.setNull(15, java.sql.Types.DATE);    // pub_date
-
-                        prepare.executeUpdate();
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Information Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Product added successfully.");
-                        alert.showAndWait();
-                        showData();
-                    }
-
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
+}
+
 
     public void setClear_btn() {
         inventory_productID.clear();
@@ -484,101 +407,67 @@ public class InventoryController {
         inventory_imageView.setImage(null);
     }
 
-    public void setUpdate_btn() {
-        if (
-                inventory_productID.getText().isEmpty()
-                        || inventory_productName.getText().isEmpty()
-                        || inventory_importPrice.getText().isEmpty()
-                        || inventory_sellingPrice.getText().isEmpty()
-                        || inventory_distributor.getText().isEmpty()
-                        || inventory_type.getSelectionModel().getSelectedItem() == null
-                        || inventory_restrictedAge.getText().isEmpty()
-                        || inventory_stocks.getText().isEmpty()
-                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_description.getText().isEmpty())
-                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_ISBN.getText().isEmpty())
-                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_author.getText().isEmpty())
-                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_genre.getCheckModel().getCheckedItems().isEmpty())
-                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_publishedDate.getValue() == null)
-        ) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Please enter all the fields correctly.");
-            alert.showAndWait();
-        } else {
-            String updateQuery;
-            connect = database.connectDB();
-
-            try {
-                if ("Book".equals(inventory_type.getSelectionModel().getSelectedItem())) {
-                    updateQuery = "UPDATE product SET "
-                            + "type = ?, name = ?, image = ?, distributor = ?, description = ?, added_date = ?, "
-                            + "stock = ?, import_price = ?, sell_price = ?, age_restrict = ?, isbn = ?, "
-                            + "author = ?, genre = ?, pub_date = ? WHERE product_id = ?";
-
-                    prepare = connect.prepareStatement(updateQuery);
-                    prepare.setString(1, "Book");
-                    prepare.setString(2, inventory_productName.getText());
-                    prepare.setString(3, currentImageUrl);
-                    prepare.setString(4, inventory_distributor.getText());
-                    prepare.setString(5, inventory_description.getText());
-                    prepare.setDate(6, java.sql.Date.valueOf(LocalDate.now()));
-                    prepare.setInt(7, Integer.parseInt(inventory_stocks.getText()));
-                    prepare.setFloat(8, Float.parseFloat(inventory_importPrice.getText()));
-                    prepare.setFloat(9, Float.parseFloat(inventory_sellingPrice.getText()));
-                    prepare.setInt(10, Integer.parseInt(inventory_restrictedAge.getText()));
-                    prepare.setString(11, inventory_ISBN.getText());
-                    prepare.setString(12, inventory_author.getText());
-                    prepare.setString(13, String.join(", ", inventory_genre.getCheckModel().getCheckedItems()));
-                    prepare.setDate(14, java.sql.Date.valueOf(inventory_publishedDate.getValue()));
-                    prepare.setString(15, inventory_productID.getText());
-                } else {
-                    updateQuery = "UPDATE product SET "
-                            + "type = ?, name = ?, image = ?, distributor = ?, description = ?, added_date = ?, "
-                            + "stock = ?, import_price = ?, sell_price = ?, age_restrict = ?, isbn = ?, "
-                            + "author = ?, genre = ?, pub_date = ? WHERE product_id = ?";
-
-                    prepare = connect.prepareStatement(updateQuery);
-                    prepare.setString(1, inventory_type.getSelectionModel().getSelectedItem());
-                    prepare.setString(2, inventory_productName.getText());
-                    prepare.setString(3, currentImageUrl);
-                    prepare.setString(4, inventory_distributor.getText());
-                    prepare.setString(5, inventory_description.getText());
-                    prepare.setDate(6, java.sql.Date.valueOf(LocalDate.now()));
-                    prepare.setInt(7, Integer.parseInt(inventory_stocks.getText()));
-                    prepare.setFloat(8, Float.parseFloat(inventory_importPrice.getText()));
-                    prepare.setFloat(9, Float.parseFloat(inventory_sellingPrice.getText()));
-                    prepare.setInt(10, Integer.parseInt(inventory_restrictedAge.getText()));
-
-                    // Đặt NULL cho các trường không áp dụng với loại sản phẩm không phải Book
-                    prepare.setNull(11, java.sql.Types.VARCHAR); // isbn
-                    prepare.setNull(12, java.sql.Types.VARCHAR); // author
-                    prepare.setNull(13, java.sql.Types.VARCHAR); // genre
-                    prepare.setNull(14, java.sql.Types.DATE);    // pub_date
-                    prepare.setString(15, inventory_productID.getText());
-                }
-
-                int rowsAffected = prepare.executeUpdate();
-
-                if (rowsAffected > 0) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Information Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Product updated successfully.");
-                    alert.showAndWait();
-                    showData();
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Product update failed. Please try again.");
-                    alert.showAndWait();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+public void setUpdate_btn() {
+    if (
+            inventory_productID.getText().isEmpty()
+                    || inventory_productName.getText().isEmpty()
+                    || inventory_importPrice.getText().isEmpty()
+                    || inventory_sellingPrice.getText().isEmpty()
+                    || inventory_distributor.getText().isEmpty()
+                    || inventory_type.getSelectionModel().getSelectedItem() == null
+                    || inventory_restrictedAge.getText().isEmpty()
+                    || inventory_stocks.getText().isEmpty()
+                    || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && (
+                    inventory_description.getText().isEmpty()
+                            || inventory_ISBN.getText().isEmpty()
+                            || inventory_author.getText().isEmpty()
+                            || inventory_genre.getCheckModel().getCheckedItems().isEmpty()
+                            || inventory_publishedDate.getValue() == null
+            ))
+    ) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error Message");
+        alert.setHeaderText(null);
+        alert.setContentText("Please enter all the fields correctly.");
+        alert.showAndWait();
+        return;
     }
+
+    String type = inventory_type.getSelectionModel().getSelectedItem();
+    boolean isUpdated = localInventory.updateProduct(
+            inventory_productID.getText(),
+            type,
+            inventory_productName.getText(),
+            currentImageUrl,
+            inventory_distributor.getText(),
+            inventory_description.getText(),
+            LocalDate.now(),
+            Integer.parseInt(inventory_stocks.getText()),
+            Float.parseFloat(inventory_importPrice.getText()),
+            Float.parseFloat(inventory_sellingPrice.getText()),
+            Integer.parseInt(inventory_restrictedAge.getText()),
+            "Book".equals(type) ? inventory_ISBN.getText() : null,
+            "Book".equals(type) ? inventory_author.getText() : null,
+            "Book".equals(type) ? String.join(", ", inventory_genre.getCheckModel().getCheckedItems()) : null,
+            "Book".equals(type) ? inventory_publishedDate.getValue() : null
+    );
+
+    if (isUpdated) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information Message");
+        alert.setHeaderText(null);
+        alert.setContentText("Product updated successfully.");
+        alert.showAndWait();
+        showData();
+    } else {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error Message");
+        alert.setHeaderText(null);
+        alert.setContentText("Product update failed. Please try again.");
+        alert.showAndWait();
+    }
+}
+
 
     public void setDelete_btn() {
         if (inventory_productID.getText().isEmpty()) {
@@ -587,44 +476,37 @@ public class InventoryController {
             alert.setHeaderText(null);
             alert.setContentText("Please select a product to delete.");
             alert.showAndWait();
-        } else {
-            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmAlert.setTitle("Confirmation Message");
-            confirmAlert.setHeaderText(null);
-            confirmAlert.setContentText("Are you sure you want to delete this product?");
+            return;
+        }
 
-            Optional<ButtonType> result = confirmAlert.showAndWait();
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmation Message");
+        confirmAlert.setHeaderText(null);
+        confirmAlert.setContentText("Are you sure you want to delete this product?");
 
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                String deleteQuery = "DELETE FROM product WHERE product_id = ?";
-                connect = database.connectDB();
+        Optional<ButtonType> result = confirmAlert.showAndWait();
 
-                try {
-                    prepare = connect.prepareStatement(deleteQuery);
-                    prepare.setString(1, inventory_productID.getText());
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            boolean isDeleted = localInventory.deleteProduct(inventory_productID.getText());
 
-                    int rowsAffected = prepare.executeUpdate();
-
-                    if (rowsAffected > 0) {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Information Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Product deleted successfully.");
-                        alert.showAndWait();
-                        showData();
-                    } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Error Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Failed to delete the product. Please try again.");
-                        alert.showAndWait();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            if (isDeleted) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Product deleted successfully.");
+                alert.showAndWait();
+                setClear_btn();
+                showData();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Failed to delete the product. Please try again.");
+                alert.showAndWait();
             }
         }
     }
+
 
 
     public void inventorySelectData() {
