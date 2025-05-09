@@ -11,6 +11,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import sample.hustbookstore.models.Admin;
 import sample.hustbookstore.models.AdminList;
+import sample.hustbookstore.models.Voucher;
 
 import java.io.IOException;
 
@@ -27,6 +28,8 @@ public class LaunchApplication extends Application {
     private Button user_btn;
 
     public static Admin localAdmin;
+
+    public static Voucher localVoucher;
 
 
     public void switchAdminLogin() {
