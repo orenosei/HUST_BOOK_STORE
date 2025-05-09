@@ -18,12 +18,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import sample.hustbookstore.models.Store;
 
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static sample.hustbookstore.LaunchApplication.localAdmin;
+import static sample.hustbookstore.LaunchApplication.localStore;
 
 public class HomeScreenController implements Initializable {
 
@@ -311,6 +313,7 @@ public class HomeScreenController implements Initializable {
                 @Override
                 protected Void call() throws Exception {
                     // Thực hiện công việc nặng
+                    Store.initialize();
                     loadStore();
                     return null;
                 }
