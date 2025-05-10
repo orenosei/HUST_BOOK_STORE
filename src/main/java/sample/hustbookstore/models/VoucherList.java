@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class VoucherList {
 
@@ -16,15 +17,18 @@ public class VoucherList {
         }
     }
 
-    public static boolean updateVoucher(Voucher voucher) {
-        String query = "UPDATE admin SET code=?, discount=?, duration=?, remaining=? WHERE voucher_id=?";
-        try (PreparedStatement statement = connect.prepareStatement(query)) {
-            statement.setString(1, voucher.getCode());
-            statement.setFloat(2, voucher.getDiscount());
-            statement.setDate(3, (Date) voucher.getDuration());
-            statement.setInt(4, voucher.getRemaining());
+    public static boolean updateVoucher(String code, int remaining, float discount, LocalDate duration, int voucher_id) {
+        String updateQuery = "UPDATE voucher "
+                + "SET code=?, remaining=?, discount=?, duration=?"
+                + "WHERE voucher_id=?";
+        try (PreparedStatement prepare = connect.prepareStatement(updateQuery)) {
+            prepare.setString(1, code);
+            prepare.setInt(2, remaining);
+            prepare.setFloat(3, discount);
+            prepare.setDate(4, java.sql.Date.valueOf(duration));
+            prepare.setInt(5, voucher_id);
 
-            int rowsAffected = statement.executeUpdate();
+            int rowsAffected = prepare.executeUpdate();
             return rowsAffected > 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -45,7 +49,7 @@ public class VoucherList {
                         result.getString("code"),
                         result.getInt("remaining"),
                         result.getFloat("discount"),
-                        result.getDate("duration"),
+                        result.getDate("duration").toLocalDate(),
                         result.getInt("voucher_id")
                 ));
             }
@@ -56,10 +60,10 @@ public class VoucherList {
         return voucherList;
     }
 
-    public boolean isVoucherExists(int voucherID) {
-        String query = "SELECT voucher_id FROM voucher WHERE voucher_id = ?";
+    public boolean isVoucherExists(String voucherCode) {
+        String query = "SELECT code FROM voucher WHERE code = ?";
         try (PreparedStatement statement = connect.prepareStatement(query)) {
-            statement.setInt(1, voucherID);
+            statement.setString(1, voucherCode);
             try (ResultSet result = statement.executeQuery()) {
                 return result.next();
             }
@@ -70,17 +74,17 @@ public class VoucherList {
     }
 
 
-    public boolean addVoucher(String code, int remaining, float discount, Date duration, int voucherID) {
-        String insertQuery = "INSERT INTO product "
-                + "(code, remaining, discount, duration, voucher_id)"
-                + " VALUES (?, ?, ?, ?, ?)";
+    public boolean addVoucher(String code, int remaining, float discount, Date duration) {
+        String insertQuery = "INSERT INTO voucher "
+                + "(code, remaining, discount, duration)"
+                + " VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement prepare = connect.prepareStatement(insertQuery)) {
             prepare.setString(1, code);
             prepare.setInt(2, remaining);
             prepare.setFloat(3, discount);
             prepare.setDate(4, (Date) duration);
-            prepare.setInt(5, voucherID);
+
 
             prepare.executeUpdate();
             return true;
@@ -90,11 +94,11 @@ public class VoucherList {
         return false;
     }
 
-    public boolean deleteProduct(int voucherId) {
-        String deleteQuery = "DELETE FROM voucher WHERE voucher_id = ?";
+    public boolean deleteVoucher(String voucherCode) {
+        String deleteQuery = "DELETE FROM voucher WHERE code = ?";
 
         try (PreparedStatement prepare = connect.prepareStatement(deleteQuery)) {
-            prepare.setInt(1, voucherId);
+            prepare.setString(1, voucherCode);
             int rowsAffected = prepare.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException e) {

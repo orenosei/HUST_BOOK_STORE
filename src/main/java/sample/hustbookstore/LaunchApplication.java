@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import sample.hustbookstore.models.*;
 
 import java.io.IOException;
+import java.util.Date;
 
 
 public class LaunchApplication extends Application {
@@ -27,11 +28,13 @@ public class LaunchApplication extends Application {
 
     public static Admin localAdmin;
 
-    public static Voucher localVoucher;
+    public static VoucherList localVoucher = new VoucherList();
 
     public static Inventory localInventory = new Inventory();
 
     public static Store localStore = new Store();
+
+    public static Date localDate = new Date();
 
 
     public void switchAdminLogin() {
@@ -66,6 +69,7 @@ public class LaunchApplication extends Application {
         AdminList.initialize();
         Inventory.initialize();
         Store.initialize();
+        VoucherList.initialize();
 
         FXMLLoader fxmlLoader = new FXMLLoader(LaunchApplication.class.getResource("LaunchApplication.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 640, 720);
