@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.user.UserLoginController">
+    <children>
+        <AnchorPane prefHeight="720.0" prefWidth="1280.0" styleClass="white-form" stylesheets="@../Design/LaunchApplicationDesign.css">
+            <children>
+                <AnchorPane layoutX="640.0" prefHeight="720.0" prefWidth="640.0">
+                    <children>
+                        <FontAwesomeIcon glyphName="USER" layoutX="272.0" layoutY="220.0" size="10em" styleClass="gradient">
+                            <fill>
+                                <LinearGradient endX="1.0" endY="1.0">
+                                    <stops>
+                                        <Stop>
+                                            <color>
+                                                <Color red="0.5686274766921997" green="0.47058823704719543" blue="0.8196078538894653" />
+                                            </color>
+                                        </Stop>
+                                        <Stop offset="1.0">
+                                            <color>
+                                                <Color red="0.7137255072593689" green="0.8627451062202454" blue="1.0" />
+                                            </color>
+                                        </Stop>
+                                    </stops>
+                                </LinearGradient>
+                            </fill>
+                        </FontAwesomeIcon>
+                        <Label layoutX="261.0" layoutY="252.0" text="LOGIN" textFill="#9178d1">
+                            <font>
+                                <Font size="40.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="si_username" layoutX="145.0" layoutY="416.0" onAction="#loginBtn" prefHeight="50.0" prefWidth="350.0" promptText="Username">
+                            <font>
+                                <Font size="21.0" />
+                            </font></TextField>
+                        <PasswordField fx:id="si_password" layoutX="145.0" layoutY="499.0" onAction="#loginBtn" prefHeight="50.0" prefWidth="350.0" promptText="Password">
+                            <font>
+                                <Font size="21.0" />
+                            </font></PasswordField>
+                        <Button fx:id="si_loginBtn" layoutX="395.0" layoutY="576.0" minHeight="40.0" mnemonicParsing="false" onAction="#loginBtn" prefWidth="100.0" styleClass="login-btn" stylesheets="@../Design/LaunchApplicationDesign.css" text="LOGIN" />
+                        <Hyperlink fx:id="si_forgotPass" layoutX="145.0" layoutY="581.0" text="Forgot Password?">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Hyperlink>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="su_signupForm" prefHeight="720.0" prefWidth="640.0">
+                    <children>
+                        <FontAwesomeIcon glyphName="USER" layoutX="274.0" layoutY="112.0" size="10em" styleClass="gradient">
+                            <fill>
+                                <LinearGradient endX="1.0" endY="1.0">
+                                    <stops>
+                                        <Stop>
+                                            <color>
+                                                <Color red="0.5686274766921997" green="0.47058823704719543" blue="0.8196078538894653" />
+                                            </color>
+                                        </Stop>
+                                        <Stop offset="1.0">
+                                            <color>
+                                                <Color red="0.7137255072593689" green="0.8627451062202454" blue="1.0" />
+                                            </color>
+                                        </Stop>
+                                    </stops>
+                                </LinearGradient>
+                            </fill>
+                        </FontAwesomeIcon>
+                        <Label layoutX="139.0" layoutY="151.0" text="REGISTER ACCOUNT" textFill="#9178d1">
+                            <font>
+                                <Font size="40.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="su_username" layoutX="144.0" layoutY="233.0" onAction="#regBtn" prefHeight="50.0" prefWidth="350.0" promptText="Username">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </TextField>
+                        <PasswordField fx:id="su_password" layoutX="144.0" layoutY="311.0" onAction="#regBtn" prefHeight="50.0" prefWidth="350.0" promptText="Password">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </PasswordField>
+                        <Button fx:id="su_signupBtn" layoutX="340.0" layoutY="630.0" minHeight="40.0" mnemonicParsing="false" onAction="#regBtn" prefHeight="44.0" prefWidth="155.0" styleClass="signup-btn" stylesheets="@../Design/LaunchApplicationDesign.css" text="SIGN UP" />
+                        <ComboBox fx:id="su_question" layoutX="144.0" layoutY="467.0" prefHeight="50.0" prefWidth="350.0" promptText="Question" styleClass="question-btn" stylesheets="@../Design/LaunchApplicationDesign.css" />
+                        <TextField fx:id="su_answer" layoutX="144.0" layoutY="545.0" onAction="#regBtn" prefHeight="50.0" prefWidth="350.0" promptText="Answer">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </TextField>
+                        <PasswordField fx:id="su_privacycode" layoutX="144.0" layoutY="389.0" onAction="#regBtn" prefHeight="50.0" prefWidth="350.0" promptText="Privacy Code">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </PasswordField>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="side_form" prefHeight="720.0" prefWidth="640.0" styleClass="gradient" stylesheets="@../Design/LaunchApplicationDesign.css">
+                    <children>
+                        <FontAwesomeIcon fill="WHITE" glyphName="BOOK" layoutX="206.0" layoutY="341.0" size="20em" />
+                        <Button fx:id="side_CreateBtn" layoutX="174.0" layoutY="627.0" minHeight="50.0" mnemonicParsing="false" onAction="#switchForm" prefWidth="300.0" styleClass="create-btn" stylesheets="@../Design/LaunchApplicationDesign.css" text="Create new account">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="side_alreadyHave" layoutX="174.0" layoutY="627.0" minHeight="50.0" mnemonicParsing="false" onAction="#switchForm" prefWidth="300.0" styleClass="create-btn" stylesheets="@../Design/LaunchApplicationDesign.css" text="Already have an account " visible="false">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Button>
+                        <Label layoutX="240.0" layoutY="580.0" text="New account?" textFill="WHITE">
+                            <font>
+                                <Font size="26.0" />
+                            </font>
+                        </Label>
+                        <Text fill="WHITE" layoutX="184.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HUST">
+                            <font>
+                                <Font name="Bauhaus 93" size="68.0" />
+                            </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="341.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOOK">
+                            <font>
+                                <Font name="Bauhaus 93" size="26.0" />
+                            </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="340.0" layoutY="435.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STORE">
+                            <font>
+                                <Font name="Bauhaus 93" size="26.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+      <AnchorPane fx:id="waitingScreen" prefHeight="200.0" prefWidth="200.0" styleClass="gradient" stylesheets="@../Design/LaunchApplicationDesign.css" visible="false">
+         <children>
+            <FontAwesomeIcon fill="WHITE" glyphName="BOOK" layoutX="87.0" layoutY="414.0" size="25em" wrappingWidth="313.42857360839844" />
+            <Text fill="WHITE" layoutX="98.0" layoutY="526.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HUST">
+               <font>
+                  <Font name="Bauhaus 93" size="68.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="279.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOOK">
+               <font>
+                  <Font name="Bauhaus 93" size="26.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="279.0" layoutY="525.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STORE">
+               <font>
+                  <Font name="Bauhaus 93" size="26.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="110.0" layoutY="684.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login successfully, downloading resources...">
+               <font>
+                  <Font size="38.0" />
+               </font>
+            </Text>
+            <FontAwesomeIcon fill="WHITE" glyphName="DOWNLOAD" layoutX="50.0" layoutY="688.0" size="3em" />
+            <TextArea layoutX="613.0" layoutY="98.0" prefHeight="548.0" prefWidth="612.0" text="1. Introduction&#10;Welcome to HUSTBookStore Management Software (&quot;the Software&quot;). By using the Software, you agree to be bound by these Terms of Use. If you do not agree, please refrain from using the Software.&#10;&#10;2. License and Access&#10;The Software is licensed, not sold. HUSTBookStore grants you a non-exclusive, non-transferable, revocable license to use the Software strictly in accordance with these Terms of Use. Unauthorized use or distribution is prohibited.&#10;&#10;3. User Responsibilities&#10;- You agree to use the Software solely for lawful purposes and in a manner consistent with its intended functionality.&#10;- You are responsible for maintaining the confidentiality of your account credentials.&#10;- You agree not to reverse-engineer, decompile, or attempt to derive the source code of the Software.&#10;&#10;4. Data and Privacy&#10;The Software may store and process data related to book inventory, sales, customer information, and other business-related details. HUSTBookStore respects your privacy and will not share your data without your consent unless required by law.&#10;&#10;5. Contact Information&#10;For any questions or concerns regarding these Terms of Use, please contact:&#10;HUSTBookStore Support TeamEmail: support@hustbookstore.comPhone: +[Your Contact Number]Address: [Your Office Address]&#10;By using the Software, you acknowledge that you have read, understood, and agreed to these Terms of Use." wrapText="true">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextArea>
+            <Text fill="WHITE" layoutX="627.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Term of Use">
+               <font>
+                  <Font name="Bauhaus 93" size="68.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+    </children>
+</StackPane>
