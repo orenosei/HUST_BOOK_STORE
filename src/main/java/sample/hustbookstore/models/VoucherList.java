@@ -1,11 +1,9 @@
 package sample.hustbookstore.models;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-import static sample.hustbookstore.LaunchApplication.localAdmin;
+import java.sql.*;
 
 public class VoucherList {
 
@@ -33,22 +31,78 @@ public class VoucherList {
             return false;
         }
     }
-//    public VoucherList(List<Voucher> vouchers) {
-//        this.vouchers = vouchers;
-//    }
 
-//    public int voucherCount() {
-//        return vouchers.size();
-//    }
-//
-//    public List<Voucher> getVouchers() {
-//        // select * from voucher;
-//        // vouchers = nhung gi lay duoc tu database
-//        return vouchers;
-//    }
 
-    public void addVoucher(Voucher voucher) {}
+    public ObservableList<Voucher> getAllVouchers() {
+        ObservableList<Voucher> voucherList = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM voucher";
 
-    public void removeVoucher(Voucher voucher) {}
+        try (PreparedStatement prepare = connect.prepareStatement(sql);
+             ResultSet result = prepare.executeQuery()) {
+
+            while (result.next()) {
+                voucherList.add(new Voucher(
+                        result.getString("code"),
+                        result.getInt("remaining"),
+                        result.getFloat("discount"),
+                        result.getDate("duration"),
+                        result.getInt("voucher_id")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return voucherList;
+    }
+
+    public boolean isVoucherExists(int voucherID) {
+        String query = "SELECT voucher_id FROM voucher WHERE voucher_id = ?";
+        try (PreparedStatement statement = connect.prepareStatement(query)) {
+            statement.setInt(1, voucherID);
+            try (ResultSet result = statement.executeQuery()) {
+                return result.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    public boolean addVoucher(String code, int remaining, float discount, Date duration, int voucherID) {
+        String insertQuery = "INSERT INTO product "
+                + "(code, remaining, discount, duration, voucher_id)"
+                + " VALUES (?, ?, ?, ?, ?)";
+
+        try (PreparedStatement prepare = connect.prepareStatement(insertQuery)) {
+            prepare.setString(1, code);
+            prepare.setInt(2, remaining);
+            prepare.setFloat(3, discount);
+            prepare.setDate(4, (Date) duration);
+            prepare.setInt(5, voucherID);
+
+            prepare.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean deleteProduct(int voucherId) {
+        String deleteQuery = "DELETE FROM voucher WHERE voucher_id = ?";
+
+        try (PreparedStatement prepare = connect.prepareStatement(deleteQuery)) {
+            prepare.setInt(1, voucherId);
+            int rowsAffected = prepare.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 
 }
