@@ -1,5 +1,6 @@
 package sample.hustbookstore.models;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -7,10 +8,10 @@ public class Voucher {
     private String code;
     private int remaining;
     private float discount;
-    private Date duration;
+    private LocalDate duration;
     private int voucher_id;
 
-    public Voucher(String code, int remaining, float discount, Date duration, int voucher_id) {
+    public Voucher(String code, int remaining, float discount, LocalDate duration, int voucher_id) {
         this.code = code;
         this.remaining = remaining;
         this.discount = discount;
@@ -30,9 +31,9 @@ public class Voucher {
 
     public void setDiscount(float discount) {this.discount = discount;}
 
-    public Date getDuration() {return (java.sql.Date) duration;}
+    public LocalDate getDuration() {return duration;}
 
-    public void setDuration(Date duration) {this.duration = duration;}
+    public void setDuration(LocalDate duration) {this.duration = duration;}
 
     public int getVoucher_id() {
         return voucher_id;
