@@ -21,6 +21,15 @@ public class Admin {
         this.adminId = adminId;
     }
 
+    public Admin(String username, String password, String question, String answer, String name, String phoneNumber, String email) {
+        this.username = username;
+        this.password = password;
+        this.question = question;
+        this.answer = answer;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+    }
+
     public Admin(String username, String password, String question, String answer) {
         this.username = username;
         this.password = password;
