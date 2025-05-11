@@ -28,13 +28,14 @@ public class LaunchApplication extends Application {
 
     public static Admin localAdmin;
 
+    public static User localUser;
+
     public static VoucherList localVoucher = new VoucherList();
 
     public static Inventory localInventory = new Inventory();
 
     public static Store localStore = new Store();
 
-    public static Date localDate = new Date();
 
 
     public void switchAdminLogin() {
@@ -51,7 +52,7 @@ public class LaunchApplication extends Application {
 
     public void switchUserLogin() {
         try {
-            StackPane root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/user-login-view.fxml"));
+            StackPane root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/user/user-login-view.fxml"));
             Scene scene = new Scene(root, root.prefWidth(-1), root.prefHeight(-1));
             Stage stage = (Stage) welcomeScreen.getScene().getWindow();
             stage.setScene(scene);
@@ -66,7 +67,9 @@ public class LaunchApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         localAdmin = null;
+        localUser = null;
         AdminList.initialize();
+        UserList.initialize();
         Inventory.initialize();
         Store.initialize();
         VoucherList.initialize();

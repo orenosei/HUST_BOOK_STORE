@@ -96,7 +96,7 @@ public class UserHomeScreenController extends HomeScreenController {
             profileScreen.setVisible(false);
             storeScreen.setVisible(false);
             cartScreen.setVisible(false);
-//            sync_btn.setVisible(false);
+            sync_btn.setVisible(false);
             showHeaderAnimation();
 
 
@@ -106,7 +106,7 @@ public class UserHomeScreenController extends HomeScreenController {
             storeScreen.setVisible(true);
             headerPane.setVisible(false);
             cartScreen.setVisible(false);
-//            sync_btn.setVisible(true);
+            sync_btn.setVisible(true);
 
 
         } else if (event.getSource() == profile_btn) {
@@ -115,7 +115,7 @@ public class UserHomeScreenController extends HomeScreenController {
             storeScreen.setVisible(false);
             headerPane.setVisible(false);
             cartScreen.setVisible(false);
-//            sync_btn.setVisible(false);
+            sync_btn.setVisible(false);
 
         }
         else if (event.getSource() == cart_btn) {
@@ -123,6 +123,10 @@ public class UserHomeScreenController extends HomeScreenController {
             profileScreen.setVisible(false);
             storeScreen.setVisible(false);
             cartScreen.setVisible(true);
+            sync_btn.setVisible(false);
+            headerPane.setVisible(false);
+
+
         }
 
     }

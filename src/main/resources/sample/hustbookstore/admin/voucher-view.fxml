@@ -33,7 +33,7 @@
             </TableView>
             <AnchorPane prefHeight="200.0" prefWidth="288.0">
                <children>
-                  <Label fx:id="voucher_label_ID" text="Hiden ID" />
+                  <Label fx:id="voucher_label_ID" text="Hiden ID" visible="false" />
                   <GridPane hgap="10.0" layoutX="13.0" layoutY="20.0" vgap="8.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <columnConstraints>
                         <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" />
