@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import sample.hustbookstore.models.Cart;
 import sample.hustbookstore.models.User;
 import sample.hustbookstore.models.UserList;
 import sample.hustbookstore.models.database;
@@ -22,6 +23,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
+import static sample.hustbookstore.LaunchApplication.localCart;
+import static sample.hustbookstore.LaunchApplication.localUser;
 
 public class UserLoginController {
     @FXML
@@ -113,6 +117,7 @@ public class UserLoginController {
         if (si_username.getText().isEmpty() || si_password.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Incorrect Username or Password");
         } else if (userList.login(si_username.getText(), si_password.getText())) {
+            localCart = Cart.getCartFromDatabase(localUser.getUserId());
             loadHomeScreen();
         } else {
             showAlert(Alert.AlertType.ERROR, "Incorrect Username or Password");

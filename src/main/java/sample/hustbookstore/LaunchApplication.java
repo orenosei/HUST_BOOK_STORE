@@ -30,6 +30,8 @@ public class LaunchApplication extends Application {
 
     public static User localUser;
 
+    public static Cart localCart;
+
     public static VoucherList localVoucher = new VoucherList();
 
     public static Inventory localInventory = new Inventory();
@@ -73,6 +75,7 @@ public class LaunchApplication extends Application {
         Inventory.initialize();
         Store.initialize();
         VoucherList.initialize();
+        Cart.initialize();
 
         FXMLLoader fxmlLoader = new FXMLLoader(LaunchApplication.class.getResource("LaunchApplication.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 640, 720);
