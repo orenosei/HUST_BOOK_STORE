@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 
 <AnchorPane prefHeight="700.0" prefWidth="290.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.user.AryaChatController">
    <children>
@@ -12,5 +14,12 @@
             <Font size="11.0" />
          </font>
       </Text>
+      <AnchorPane layoutY="629.0" prefHeight="70.0" prefWidth="290.0">
+         <children>
+            <TextField fx:id="inputField" layoutX="14.0" layoutY="12.0" prefHeight="46.0" prefWidth="213.0" promptText="Send your message here..." />
+            <Button fx:id="sendButton" layoutX="234.0" layoutY="12.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="46.0" text="Send" />
+         </children>
+      </AnchorPane>
+      <TextArea fx:id="chatArea" layoutY="63.0" prefHeight="559.0" prefWidth="290.0" promptText="Chat with Arya here" />
    </children>
 </AnchorPane>
