@@ -142,7 +142,7 @@
                         <Font size="21.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="fp_back" layoutX="278.0" layoutY="645.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="71.0" styleClass="login-btn" text="Back">
+                  <Button fx:id="fp_back" layoutX="278.0" layoutY="645.0" mnemonicParsing="false" onAction="#backToLoginForm" prefHeight="38.0" prefWidth="71.0" styleClass="login-btn" text="Back">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -182,8 +182,8 @@
                         <Font size="40.0" />
                      </font>
                   </Label>
-                  <Button fx:id="np_changePassBtn" layoutX="328.0" layoutY="576.0" minHeight="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="167.0" styleClass="login-btn" stylesheets="@../Design/LaunchApplicationDesign.css" text="CHANGE PASSWORD" />
-                  <Button fx:id="np_back" layoutX="278.0" layoutY="645.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="71.0" styleClass="login-btn" text="Back">
+                  <Button fx:id="np_changePassBtn" layoutX="328.0" layoutY="576.0" minHeight="40.0" mnemonicParsing="false" onAction="#changePassBtn" prefHeight="40.0" prefWidth="167.0" styleClass="login-btn" stylesheets="@../Design/LaunchApplicationDesign.css" text="CHANGE PASSWORD" />
+                  <Button fx:id="np_back" layoutX="278.0" layoutY="645.0" mnemonicParsing="false" onAction="#backToQuestionForm" prefHeight="38.0" prefWidth="71.0" styleClass="login-btn" text="Back">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -191,12 +191,12 @@
                         <FontAwesomeIcon fill="WHITE" glyphName="ANGLE_LEFT" size="1.5em" />
                      </graphic>
                   </Button>
-                  <PasswordField fx:id="np_newPassword" layoutX="145.0" layoutY="416.0" prefHeight="50.0" prefWidth="350.0" promptText="New Password">
+                  <PasswordField fx:id="np_newPassword" layoutX="145.0" layoutY="416.0" onAction="#changePassBtn" prefHeight="50.0" prefWidth="350.0" promptText="New Password">
                      <font>
                         <Font size="21.0" />
                      </font>
                   </PasswordField>
-                  <PasswordField fx:id="np_confirmPassword" layoutX="145.0" layoutY="499.0" prefHeight="50.0" prefWidth="350.0" promptText="Confirmation Password">
+                  <PasswordField fx:id="np_confirmPassword" layoutX="145.0" layoutY="499.0" onAction="#changePassBtn" prefHeight="50.0" prefWidth="350.0" promptText="Confirmation Password">
                      <font>
                         <Font size="21.0" />
                      </font>

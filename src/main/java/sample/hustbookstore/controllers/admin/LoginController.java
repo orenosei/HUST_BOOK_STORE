@@ -23,6 +23,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import static sample.hustbookstore.LaunchApplication.localAdmin;
+
 public class LoginController {
     @FXML
     private TextField fp_answer;
@@ -217,7 +219,7 @@ public class LoginController {
         forgotPassQuestionList();
     }
 
-    private Connection connect;
+    private Connection connect = database.connectDB();;
     public void proceedBtn(){
         if(fp_username.getText().isEmpty()||fp_question.getSelectionModel().getSelectedItem()==null
         || fp_answer.getText().isEmpty()){
@@ -251,6 +253,62 @@ public class LoginController {
 
         }
 
+    }
+
+    public void changePassBtn(){
+        if(np_newPassword.getText().isEmpty()||np_confirmPassword.getText().isEmpty()){
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill all blank fields");
+            alert.showAndWait();
+        }else{
+            if(np_newPassword.getText().equals(np_confirmPassword.getText())) {
+
+                String query = "UPDATE admin SET password=? WHERE username=?";
+                try(PreparedStatement prepare = connect.prepareStatement(query)){
+
+                    prepare.setString(1, np_newPassword.getText());
+                    prepare.setString(2, fp_username.getText());
+
+                    prepare.executeUpdate();
+
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Your password updated successfully.");
+                    alert.showAndWait();
+
+                    si_loginForm.setVisible(true);
+                    np_newPassForm.setVisible(false);
+
+                    np_confirmPassword.setText("");
+                    np_newPassword.setText("");
+                    fp_question.getSelectionModel().clearSelection();
+                    fp_answer.setText("");
+                    fp_username.setText("");
+                }catch(Exception e){e.printStackTrace();}
+
+
+            } else {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Not match");
+                alert.showAndWait();
+            }
+        }
+    }
+
+    public void backToLoginForm(){
+        si_loginForm.setVisible(true);
+        fp_questionForm.setVisible(false);
+
+    }
+
+    public void backToQuestionForm(){
+        fp_questionForm.setVisible(true);
+        np_newPassForm.setVisible(false);
     }
 
     public void forgotPassQuestionList(){
