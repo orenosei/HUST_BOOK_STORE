@@ -11,6 +11,15 @@ public class User extends Admin{
         this.userId = userId;
     }
 
+    public User(String username, String password, String question, String answer, String name, String phoneNumber, String email, String address) {
+        super(username, password, question, answer, name, phoneNumber, email);
+        this.address = address;
+    }
+
+    public User(String username, String password, String question, String answer) {
+        super(username, password, question, answer);
+    }
+
     public String getAddress() {
         return address;
     }
