@@ -28,6 +28,7 @@ public class Admin {
         this.answer = answer;
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.email = email;
     }
 
     public Admin(String username, String password, String question, String answer) {
