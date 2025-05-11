@@ -19,6 +19,11 @@
 
 }
 
+.front-bg-no-shadow{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 20;
+}
+
 .text-area {
     -fx-background-color: transparent; /* Nền ngoài trong suốt */
     -fx-border-color: transparent; /* Bỏ viền */

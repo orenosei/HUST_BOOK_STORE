@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import sample.hustbookstore.controllers.user.UserStoreProductCardController;
 import sample.hustbookstore.models.Book;
 import sample.hustbookstore.models.Stationery;
 import sample.hustbookstore.models.Toy;
@@ -140,7 +139,7 @@ public class UserStoreController{
                 load.setLocation(getClass().getResource(getProductCardPath()));
                 AnchorPane pane = load.load();
                 UserStoreProductCardController cardC = load.getController();
-                cardC.setData(bookListData.get(q));
+                cardC.setBookData(bookListData.get(q));
 
                 int[] updated = updateRowColumn(column, row);
                 column = updated[0];
@@ -172,7 +171,7 @@ public class UserStoreController{
                 load.setLocation(getClass().getResource(getProductCardPath()));
                 AnchorPane pane = load.load();
                 UserStoreProductCardController cardC = load.getController();
-                cardC.setData(stationeryListData.get(q));
+                cardC.setStationeryData(stationeryListData.get(q));
 
                 int[] updated = updateRowColumn(column, row);
                 column = updated[0];
@@ -205,7 +204,7 @@ public class UserStoreController{
                 load.setLocation(getClass().getResource(getProductCardPath()));
                 AnchorPane pane = load.load();
                 UserStoreProductCardController cardC = load.getController();
-                cardC.setData(toyListData.get(q));
+                cardC.setToyData(toyListData.get(q));
 
                 int[] updated = updateRowColumn(column, row);
                 column = updated[0];
