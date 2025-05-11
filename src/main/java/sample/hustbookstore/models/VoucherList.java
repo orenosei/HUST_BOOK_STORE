@@ -1,11 +1,10 @@
 package sample.hustbookstore.models;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-import static sample.hustbookstore.LaunchApplication.localAdmin;
+import java.sql.*;
+import java.time.LocalDate;
 
 public class VoucherList {
 
@@ -18,37 +17,96 @@ public class VoucherList {
         }
     }
 
-    public static boolean updateVoucher(Voucher voucher) {
-        String query = "UPDATE admin SET code=?, discount=?, duration=?, remaining=? WHERE voucher_id=?";
-        try (PreparedStatement statement = connect.prepareStatement(query)) {
-            statement.setString(1, voucher.getCode());
-            statement.setFloat(2, voucher.getDiscount());
-            statement.setDate(3, (Date) voucher.getDuration());
-            statement.setInt(4, voucher.getRemaining());
+    public static boolean updateVoucher(String code, int remaining, float discount, LocalDate duration, int voucher_id) {
+        String updateQuery = "UPDATE voucher "
+                + "SET code=?, remaining=?, discount=?, duration=?"
+                + "WHERE voucher_id=?";
+        try (PreparedStatement prepare = connect.prepareStatement(updateQuery)) {
+            prepare.setString(1, code);
+            prepare.setInt(2, remaining);
+            prepare.setFloat(3, discount);
+            prepare.setDate(4, java.sql.Date.valueOf(duration));
+            prepare.setInt(5, voucher_id);
 
-            int rowsAffected = statement.executeUpdate();
+            int rowsAffected = prepare.executeUpdate();
             return rowsAffected > 0;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
-//    public VoucherList(List<Voucher> vouchers) {
-//        this.vouchers = vouchers;
-//    }
 
-//    public int voucherCount() {
-//        return vouchers.size();
-//    }
-//
-//    public List<Voucher> getVouchers() {
-//        // select * from voucher;
-//        // vouchers = nhung gi lay duoc tu database
-//        return vouchers;
-//    }
 
-    public void addVoucher(Voucher voucher) {}
+    public ObservableList<Voucher> getAllVouchers() {
+        ObservableList<Voucher> voucherList = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM voucher";
 
-    public void removeVoucher(Voucher voucher) {}
+        try (PreparedStatement prepare = connect.prepareStatement(sql);
+             ResultSet result = prepare.executeQuery()) {
+
+            while (result.next()) {
+                voucherList.add(new Voucher(
+                        result.getString("code"),
+                        result.getInt("remaining"),
+                        result.getFloat("discount"),
+                        result.getDate("duration").toLocalDate(),
+                        result.getInt("voucher_id")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return voucherList;
+    }
+
+    public boolean isVoucherExists(String voucherCode) {
+        String query = "SELECT code FROM voucher WHERE code = ?";
+        try (PreparedStatement statement = connect.prepareStatement(query)) {
+            statement.setString(1, voucherCode);
+            try (ResultSet result = statement.executeQuery()) {
+                return result.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    public boolean addVoucher(String code, int remaining, float discount, Date duration) {
+        String insertQuery = "INSERT INTO voucher "
+                + "(code, remaining, discount, duration)"
+                + " VALUES (?, ?, ?, ?)";
+
+        try (PreparedStatement prepare = connect.prepareStatement(insertQuery)) {
+            prepare.setString(1, code);
+            prepare.setInt(2, remaining);
+            prepare.setFloat(3, discount);
+            prepare.setDate(4, (Date) duration);
+
+
+            prepare.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean deleteVoucher(String voucherCode) {
+        String deleteQuery = "DELETE FROM voucher WHERE code = ?";
+
+        try (PreparedStatement prepare = connect.prepareStatement(deleteQuery)) {
+            prepare.setString(1, voucherCode);
+            int rowsAffected = prepare.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 
 }

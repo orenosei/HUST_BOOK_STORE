@@ -1,32 +1,30 @@
 package sample.hustbookstore.controllers.admin;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import sample.hustbookstore.models.Customer;
 
 
 public class CustomersController {
-    @FXML
-    private TableView<Customer> customerTable;
 
     @FXML
-    private TableColumn<Customer, String> idColumn;
+    private TableColumn<?, ?> addressColumn;
 
     @FXML
-    private TableColumn<Customer, String> nameColumn;
+    private TableView<?> customerTable;
 
     @FXML
-    private TableColumn<Customer, String> phoneColumn;
+    private TableColumn<?, ?> idColumn;
 
     @FXML
-    private TableColumn<Customer, String> addressColumn;
+    private TableColumn<?, ?> nameColumn;
 
     @FXML
-    private TableColumn<Customer, Number> totalColumn;
+    private TableColumn<?, ?> phoneColumn;
+
+    @FXML
+    private TableColumn<?, ?> totalColumn;
 
     public void initialize() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -35,12 +33,5 @@ public class CustomersController {
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
         totalColumn.setCellValueFactory(new PropertyValueFactory<>("total"));
 
-        ObservableList<Customer> customerList = FXCollections.observableArrayList(
-                new Customer("AAAA", "Pham Xuan Thinh", "123456789", "Hell", 694200),
-                new Customer("BBBB", "Trinh Minh Thanh", "987654321", "Idk", 230000),
-                new Customer("CCCC", "Le Duy Vu", "555123456", "Idk", 120000)
-        );
-
-        customerTable.setItems(customerList);
     }
 }

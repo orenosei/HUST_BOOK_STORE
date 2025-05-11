@@ -124,6 +124,5 @@ public class ProfileController {
     public void initialize(){
         profileLabels();
         profileFields();
-
     }
 }

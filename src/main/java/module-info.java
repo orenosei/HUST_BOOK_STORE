@@ -16,6 +16,7 @@ module sample.hustbookstore {
     requires dotenv.java;
     requires fontawesomefx;
     requires java.net.http;
+    requires java.desktop;
 
     opens sample.hustbookstore to javafx.fxml;
     exports sample.hustbookstore;
