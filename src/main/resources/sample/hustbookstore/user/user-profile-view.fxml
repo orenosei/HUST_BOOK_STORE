@@ -79,7 +79,7 @@
                      </font>
                   </Label>
                   <TextField fx:id="profile_adminPassword" layoutX="162.0" layoutY="90.0" prefWidth="200.0" AnchorPane.bottomAnchor="120.0" />
-                  <Button fx:id="profile_changePasswordBtn" layoutX="388.0" layoutY="90.0" mnemonicParsing="false" onAction="#profileChangePasswordBtn" prefHeight="25.0" prefWidth="125.0" text="Change" AnchorPane.bottomAnchor="120.0" AnchorPane.rightAnchor="0.0" />
+                  <Button fx:id="profile_changePasswordBtn" layoutX="388.0" layoutY="90.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Change" AnchorPane.bottomAnchor="120.0" AnchorPane.rightAnchor="0.0" />
                   <Label layoutX="35.0" layoutY="-1.0" text="ACCOUNT INFORMATION" AnchorPane.topAnchor="-1.0">
                      <font>
                         <Font size="20.0" />
@@ -113,7 +113,7 @@
                      </font>
                   </Label>
                   <TextField fx:id="profile_adminEmail" layoutX="164.0" layoutY="139.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" />
-                  <Button fx:id="profile_update_btn" layoutX="402.0" layoutY="91.0" mnemonicParsing="false" onAction="#profileUpdateBtn" prefHeight="46.0" prefWidth="126.0" text="Update" AnchorPane.bottomAnchor="62.599999999999994" />
+                  <Button fx:id="profile_update_btn" layoutX="402.0" layoutY="91.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="126.0" text="Update" AnchorPane.bottomAnchor="62.599999999999994" />
                   <Label layoutX="36.0" layoutY="-2.0" text="RECEIVER INFORMATION" AnchorPane.topAnchor="-2.0">
                      <font>
                         <Font size="20.0" />
