@@ -18,9 +18,6 @@ import java.util.ResourceBundle;
 public class StoreProductCardController implements Initializable {
 
     @FXML
-    private Button productAdd;
-
-    @FXML
     private AnchorPane productCard;
 
     @FXML
@@ -30,10 +27,12 @@ public class StoreProductCardController implements Initializable {
     private TextArea productName;
 
     @FXML
-    private TextField productPrice;
+    private TextField productImportPrice;
 
     @FXML
-    private Spinner<?> productSpinner;
+    private TextField productSellPrice;
+
+
 
     private Product prodData;
     private Image image;
@@ -41,7 +40,8 @@ public class StoreProductCardController implements Initializable {
     public void setData(Product prodData) {
         this.prodData = prodData;
         productName.setText(prodData.getName());
-        productPrice.setText(String.valueOf(prodData.getSellPrice()));
+        productSellPrice.setText(String.valueOf(prodData.getSellPrice()));
+        productImportPrice.setText(String.valueOf(prodData.getImportPrice()));
 
         String imagePath = prodData.getImage();
         try {
