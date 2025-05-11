@@ -135,7 +135,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="profile_adminAddress" layoutX="160.0" layoutY="205.0" prefHeight="110.0" prefWidth="200.0" />
+                  <TextField fx:id="profile_adminAddress" alignment="TOP_LEFT" layoutX="160.0" layoutY="205.0" prefHeight="110.0" prefWidth="200.0" />
                </children>
             </AnchorPane>
          </children>
