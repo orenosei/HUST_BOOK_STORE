@@ -14,6 +14,78 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class AryaChatController {
+    private final String API_KEY = "AIzaSyAv-OyfoHUo9Vh2xifmvbzXNdiM195ai9c";
+    private final String API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+
+    @FXML private TextArea chatArea;
+    @FXML private TextField inputField;
+    @FXML private Button sendButton;
+
+    @FXML
+    private void handleEnterKey(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            handleSendMessage();
+        }
+    }
+
+    @FXML
+    private void handleSendMessage() {
+        String userMessage = inputField.getText().trim();
+        if (userMessage.isEmpty()) return;
+        appendMessage("You: " + userMessage);
+        inputField.clear();
+        String requestBody = new JSONObject()
+                .put("contents", new JSONObject[]{
+                        new JSONObject()
+                                .put("parts", new JSONObject[]{
+                                new JSONObject().put("text", userMessage)
+                        })
+                })
+                .toString();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(API_URL + "?key=" + API_KEY))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                .build();
+        HttpClient.newHttpClient()
+                .sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenAccept(response -> {
+                    String aiResponse = parseResponse(response.body());
+                    appendMessage("Bot: " + aiResponse);
+                })
+                .exceptionally(e -> {
+                    appendMessage("Error: Failed to get response");
+                    e.printStackTrace();
+                    return null;
+                });
+    }
+
+    private String parseResponse(String jsonResponse) {
+        try {
+            JSONObject response = new JSONObject(jsonResponse);
+            return response.getJSONArray("candidates")
+                    .getJSONObject(0)
+                    .getJSONObject("content")
+                    .getJSONArray("parts")
+                    .getJSONObject(0)
+                    .getString("text");
+        } catch (Exception e) {
+            return "Error parsing response";
+        }
+    }
+
+    private void appendMessage(String message) {
+        chatArea.appendText(message + "\n\n");
+        chatArea.setScrollTop(Double.MAX_VALUE);
+    }
+    @FXML
+    public void initialize() {
+        chatArea.setEditable(false);
+        chatArea.setWrapText(true);
+        inputField.setOnKeyPressed(this::handleEnterKey);
+        sendButton.setOnAction(event -> handleSendMessage());
+    }
+
 
     //curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=GEMINI_API_KEY" \
     //-H 'Content-Type: application/json' \
