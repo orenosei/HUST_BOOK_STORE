@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import static sample.hustbookstore.LaunchApplication.localCart;
 import static sample.hustbookstore.LaunchApplication.localUser;
 
 public class UserList {
@@ -34,6 +35,7 @@ public class UserList {
                         resultSet.getString("address"),
                         resultSet.getInt("user_id")
                 );
+
                 return true;
             }
             return false;

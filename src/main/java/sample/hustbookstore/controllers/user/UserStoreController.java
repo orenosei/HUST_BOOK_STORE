@@ -18,18 +18,6 @@ public class UserStoreController{
     @FXML
     private AnchorPane rightPane;
 
-
-    protected String getRightPanelPath(){
-        return "/sample/hustbookstore/user/arya-chat.fxml";
-    }
-
-
-    protected String getProductCardPath() {
-        return "/sample/hustbookstore/user/user-productCard-view.fxml";
-    }
-
-
-
     @FXML
     private Tab tabBook;
 
@@ -101,6 +89,16 @@ public class UserStoreController{
 
     @FXML
     private ScrollPane tabToyScroll;
+
+
+    protected String getRightPanelPath(){
+        return "/sample/hustbookstore/user/arya-chat.fxml";
+    }
+
+
+    protected String getProductCardPath() {
+        return "/sample/hustbookstore/user/user-productCard-view.fxml";
+    }
 
 
     public void loadRightPane() {
