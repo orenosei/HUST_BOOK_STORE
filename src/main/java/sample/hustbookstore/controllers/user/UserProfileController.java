@@ -80,7 +80,7 @@ public class UserProfileController {
     }
 
     public void profileLabels(){
-        profile_label_adminID.setText(String.valueOf(localUser.getAdminId()));
+        profile_label_adminID.setText(String.valueOf(localUser.getUserId()));
         profile_label_adminName.setText(localUser.getName());
         profile_label_adminUser.setText(localUser.getUsername());
         profile_label_email.setText(localUser.getEmail());
