@@ -14,12 +14,51 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import sample.hustbookstore.models.Admin;
 import sample.hustbookstore.models.AdminList;
+import sample.hustbookstore.models.database;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import static sample.hustbookstore.LaunchApplication.localAdmin;
+
 public class LoginController {
+    @FXML
+    private TextField fp_answer;
+
+    @FXML
+    private Button fp_back;
+
+    @FXML
+    private Button fp_proceedBtn;
+
+    @FXML
+    private ComboBox<?> fp_question;
+
+    @FXML
+    private TextField fp_username;
+
+    @FXML
+    private AnchorPane fp_questionForm;
+
+    @FXML
+    private Button np_back;
+
+    @FXML
+    private Button np_changePassBtn;
+
+    @FXML
+    private PasswordField np_confirmPassword;
+
+    @FXML
+    private AnchorPane np_newPassForm;
+
+    @FXML
+    private PasswordField np_newPassword;
+
     @FXML
     private Hyperlink si_forgotPass;
 
@@ -31,6 +70,9 @@ public class LoginController {
 
     @FXML
     private TextField si_username;
+
+    @FXML
+    private AnchorPane si_loginForm;
 
     @FXML
     private Button side_CreateBtn;
@@ -171,20 +213,133 @@ public class LoginController {
         su_question.setItems(listData);
     }
 
+    public void switchForgotPass(){
+        fp_questionForm.setVisible(true);
+        si_loginForm.setVisible(false);
+        forgotPassQuestionList();
+    }
+
+    private Connection connect = database.connectDB();;
+    public void proceedBtn(){
+        if(fp_username.getText().isEmpty()||fp_question.getSelectionModel().getSelectedItem()==null
+        || fp_answer.getText().isEmpty()){
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill all blank fields");
+            alert.showAndWait();
+        }else{
+            String selectData = "SELECT username, question, answer FROM admin WHERE username = ? AND question = ? AND answer = ? ";
+            try(PreparedStatement prepare = connect.prepareStatement(selectData)){
+
+                prepare.setString(1, fp_username.getText());
+                prepare.setString(2, (String)fp_question.getSelectionModel().getSelectedItem());
+                prepare.setString(3, fp_answer.getText());
+
+                ResultSet result = prepare.executeQuery();
+                if(result.next()){
+                    np_newPassForm.setVisible(true);
+                    fp_questionForm.setVisible(false);
+
+                }else{
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Incorrect Information");
+                    alert.showAndWait();
+
+                }
+            }catch(Exception e){e.printStackTrace();}
+
+        }
+
+    }
+
+    public void changePassBtn(){
+        if(np_newPassword.getText().isEmpty()||np_confirmPassword.getText().isEmpty()){
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill all blank fields");
+            alert.showAndWait();
+        }else{
+            if(np_newPassword.getText().equals(np_confirmPassword.getText())) {
+
+                String query = "UPDATE admin SET password=? WHERE username=?";
+                try(PreparedStatement prepare = connect.prepareStatement(query)){
+
+                    prepare.setString(1, np_newPassword.getText());
+                    prepare.setString(2, fp_username.getText());
+
+                    prepare.executeUpdate();
+
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Your password updated successfully.");
+                    alert.showAndWait();
+
+                    si_loginForm.setVisible(true);
+                    np_newPassForm.setVisible(false);
+
+                    np_confirmPassword.setText("");
+                    np_newPassword.setText("");
+                    fp_question.getSelectionModel().clearSelection();
+                    fp_answer.setText("");
+                    fp_username.setText("");
+                }catch(Exception e){e.printStackTrace();}
+
+
+            } else {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Not match");
+                alert.showAndWait();
+            }
+        }
+    }
+
+    public void backToLoginForm(){
+        si_loginForm.setVisible(true);
+        fp_questionForm.setVisible(false);
+
+    }
+
+    public void backToQuestionForm(){
+        fp_questionForm.setVisible(true);
+        np_newPassForm.setVisible(false);
+    }
+
+    public void forgotPassQuestionList(){
+        List<String> listQ = new ArrayList<>();
+        for(String data: questionList){
+            listQ.add(data);
+        }
+        ObservableList listData = FXCollections.observableList(listQ);
+        fp_question.setItems(listData);
+
+    }
+
     public void switchForm(ActionEvent event) {
         TranslateTransition slider = new TranslateTransition();
         slider.setNode(side_form);
 
         if (event.getSource() == side_CreateBtn) {
             slider.setToX(640);
+
         } else if (event.getSource() == side_alreadyHave) {
             slider.setToX(0);
+
         }
 
         slider.setDuration(Duration.seconds(.5));
         slider.setOnFinished(e -> {
             side_CreateBtn.setVisible(!side_CreateBtn.isVisible());
             side_alreadyHave.setVisible(!side_alreadyHave.isVisible());
+            fp_questionForm.setVisible(false);
+            si_loginForm.setVisible(true);
+            np_newPassForm.setVisible(false);
         });
 
         slider.play();

@@ -20,7 +20,7 @@
     <children>
         <AnchorPane prefHeight="720.0" prefWidth="1280.0" styleClass="white-form" stylesheets="@../Design/LaunchApplicationDesign.css">
             <children>
-                <AnchorPane layoutX="640.0" prefHeight="720.0" prefWidth="640.0">
+                <AnchorPane fx:id="si_loginForm" layoutX="640.0" prefHeight="720.0" prefWidth="640.0">
                     <children>
                         <FontAwesomeIcon glyphName="USER" layoutX="272.0" layoutY="220.0" size="10em" styleClass="gradient">
                             <fill>
@@ -54,7 +54,7 @@
                                 <Font size="21.0" />
                             </font></PasswordField>
                         <Button fx:id="si_loginBtn" layoutX="395.0" layoutY="576.0" minHeight="40.0" mnemonicParsing="false" onAction="#loginBtn" prefWidth="100.0" styleClass="login-btn" stylesheets="@../Design/LaunchApplicationDesign.css" text="LOGIN" />
-                        <Hyperlink fx:id="si_forgotPass" layoutX="145.0" layoutY="581.0" text="Forgot Password?">
+                        <Hyperlink fx:id="si_forgotPass" layoutX="145.0" layoutY="581.0" onAction="#switchForgotPass" text="Forgot Password?">
                             <font>
                                 <Font size="18.0" />
                             </font>
@@ -110,6 +110,99 @@
                         </PasswordField>
                     </children>
                 </AnchorPane>
+            <AnchorPane fx:id="fp_questionForm" layoutX="639.0" layoutY="9.0" prefHeight="720.0" prefWidth="640.0" visible="false">
+               <children>
+                  <FontAwesomeIcon glyphName="USER" layoutX="272.0" layoutY="220.0" size="10em" styleClass="gradient">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.5686274766921997" green="0.47058823704719543" blue="0.8196078538894653" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.7137255072593689" green="0.8627451062202454" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </FontAwesomeIcon>
+                  <Label layoutX="145.0" layoutY="252.0" text="FORGOT PASSWORD" textFill="#9178d1">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="fp_proceedBtn" layoutX="395.0" layoutY="576.0" minHeight="40.0" mnemonicParsing="false" onAction="#proceedBtn" prefWidth="100.0" styleClass="login-btn" stylesheets="@../Design/LaunchApplicationDesign.css" text="PROCEED" />
+                  <ComboBox fx:id="fp_question" layoutX="145.0" layoutY="416.0" prefHeight="50.0" prefWidth="350.0" promptText="Question" styleClass="question-btn" />
+                  <TextField fx:id="fp_answer" layoutX="145.0" layoutY="499.0" prefHeight="50.0" prefWidth="350.0" promptText="Answer">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </TextField>
+                  <Button fx:id="fp_back" layoutX="278.0" layoutY="645.0" mnemonicParsing="false" onAction="#backToLoginForm" prefHeight="38.0" prefWidth="71.0" styleClass="login-btn" text="Back">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="ANGLE_LEFT" size="1.5em" />
+                     </graphic>
+                  </Button>
+                  <TextField fx:id="fp_username" layoutX="145.0" layoutY="333.0" prefHeight="50.0" prefWidth="350.0" promptText="Username">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="np_newPassForm" layoutX="635.0" layoutY="9.0" prefHeight="720.0" prefWidth="640.0" visible="false">
+               <children>
+                  <FontAwesomeIcon glyphName="EDIT" layoutX="272.0" layoutY="220.0" size="10em" styleClass="gradient">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.5686274766921997" green="0.47058823704719543" blue="0.8196078538894653" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.7137255072593689" green="0.8627451062202454" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </FontAwesomeIcon>
+                  <Label layoutX="145.0" layoutY="252.0" text="FORGOT PASSWORD" textFill="#9178d1">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="np_changePassBtn" layoutX="328.0" layoutY="576.0" minHeight="40.0" mnemonicParsing="false" onAction="#changePassBtn" prefHeight="40.0" prefWidth="167.0" styleClass="login-btn" stylesheets="@../Design/LaunchApplicationDesign.css" text="CHANGE PASSWORD" />
+                  <Button fx:id="np_back" layoutX="278.0" layoutY="645.0" mnemonicParsing="false" onAction="#backToQuestionForm" prefHeight="38.0" prefWidth="71.0" styleClass="login-btn" text="Back">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="ANGLE_LEFT" size="1.5em" />
+                     </graphic>
+                  </Button>
+                  <PasswordField fx:id="np_newPassword" layoutX="145.0" layoutY="416.0" onAction="#changePassBtn" prefHeight="50.0" prefWidth="350.0" promptText="New Password">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </PasswordField>
+                  <PasswordField fx:id="np_confirmPassword" layoutX="145.0" layoutY="499.0" onAction="#changePassBtn" prefHeight="50.0" prefWidth="350.0" promptText="Confirmation Password">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </PasswordField>
+               </children>
+            </AnchorPane>
                 <AnchorPane fx:id="side_form" prefHeight="720.0" prefWidth="640.0" styleClass="gradient" stylesheets="@../Design/LaunchApplicationDesign.css">
                     <children>
                         <FontAwesomeIcon fill="WHITE" glyphName="BOOK" layoutX="206.0" layoutY="341.0" size="20em" />
@@ -123,11 +216,6 @@
                                 <Font size="18.0" />
                             </font>
                         </Button>
-                        <Label layoutX="240.0" layoutY="580.0" text="New account?" textFill="WHITE">
-                            <font>
-                                <Font size="26.0" />
-                            </font>
-                        </Label>
                         <Text fill="WHITE" layoutX="184.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HUST">
                             <font>
                                 <Font name="Bauhaus 93" size="68.0" />
