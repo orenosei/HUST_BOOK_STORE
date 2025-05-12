@@ -254,6 +254,37 @@ public class Inventory {
         return toyList;
     }
 
+    public Product getProductFromProductID(String productId) {
+        Product product = null;
+        String query = "SELECT * FROM product WHERE product_id = ?";
+
+        try (PreparedStatement prepare = connect.prepareStatement(query)) {
+            prepare.setString(1, productId);
+
+            try (ResultSet result = prepare.executeQuery()) {
+                while (result.next()) {
+                    product = new Product(
+                            result.getString("product_id"),
+                            result.getString("name"),
+                            result.getString("distributor"),
+                            result.getDouble("sell_price"),
+                            result.getDouble("import_price"),
+                            result.getInt("stock"),
+                            result.getString("type"),
+                            result.getString("image"),
+                            result.getString("description"),
+                            result.getDate("added_date") != null ? result.getDate("added_date").toLocalDate() : null,
+                            result.getInt("age_restrict")
+                    );
+                }
+            }
+            return product;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
 
 }
