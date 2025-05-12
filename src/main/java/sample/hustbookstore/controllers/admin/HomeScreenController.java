@@ -145,12 +145,27 @@ public class HomeScreenController implements Initializable {
         showHeaderAnimation();
     }
 
+//    public void loadInventory() {
+//        try {
+//            AnchorPane root = FXMLLoader.load(getClass().getResource(getInventoryPath()));
+//            inventoryScreen.getChildren().clear();
+//            inventoryScreen.getChildren().add(root);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
     public void loadInventory() {
         try {
-            AnchorPane root = FXMLLoader.load(getClass().getResource(getInventoryPath()));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(getInventoryPath()));
+            AnchorPane root = loader.load();
+
+            // Lấy controller của inventory và truyền tham chiếu HomeScreenController
+            InventoryController inventoryController = loader.getController();
+            inventoryController.setHomeScreenController(this);
+
             inventoryScreen.getChildren().clear();
             inventoryScreen.getChildren().add(root);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -291,8 +306,8 @@ public class HomeScreenController implements Initializable {
     }
 
 
-    @FXML
-    private Text waitingText;
+//    @FXML
+//    private Text waitingText;
 
     @FXML
     private FontAwesomeIcon syncIcon;
@@ -302,7 +317,6 @@ public class HomeScreenController implements Initializable {
     public void handleSyncButtonAction(ActionEvent event) {
         if (event.getSource() == sync_btn) {
 
-            waitingText.setVisible(true);
             RotateTransition rotateTransition = new RotateTransition(Duration.seconds(1), syncIcon);
             rotateTransition.setByAngle(360);
             rotateTransition.setCycleCount(RotateTransition.INDEFINITE);
@@ -322,7 +336,6 @@ public class HomeScreenController implements Initializable {
                 protected void succeeded() {
                     super.succeeded();
                     Platform.runLater(() -> {
-                        waitingText.setVisible(false);
                         rotateTransition.stop();
                     });
                 }
@@ -331,7 +344,6 @@ public class HomeScreenController implements Initializable {
                 protected void failed() {
                     super.failed();
                     Platform.runLater(() -> {
-                        waitingText.setVisible(false);
                         rotateTransition.stop();
                         System.err.println("Failed to load store: " + getException().getMessage());
                     });
@@ -340,6 +352,43 @@ public class HomeScreenController implements Initializable {
 
             new Thread(loadTask).start();
         }
+    }
+
+    public void reloadStore() {
+        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(1), syncIcon);
+        rotateTransition.setByAngle(360);
+        rotateTransition.setCycleCount(RotateTransition.INDEFINITE);
+        rotateTransition.play();
+
+        // Chạy tác vụ tải trong luồng nền
+        Task<Void> loadTask = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                // Thực hiện công việc nặng
+                Store.initialize();
+                loadStore();
+                return null;
+            }
+
+            @Override
+            protected void succeeded() {
+                super.succeeded();
+                Platform.runLater(() -> {
+                    rotateTransition.stop();
+                });
+            }
+
+            @Override
+            protected void failed() {
+                super.failed();
+                Platform.runLater(() -> {
+                    rotateTransition.stop();
+                    System.err.println("Failed to load store: " + getException().getMessage());
+                });
+            }
+        };
+
+        new Thread(loadTask).start();
     }
 
 

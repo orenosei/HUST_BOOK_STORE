@@ -16,7 +16,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="700.0">
                      <children>
-                        <ScrollPane fx:id="tabBookScroll" fitToWidth="true" prefHeight="610.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <ScrollPane fx:id="tabBookScroll" fitToWidth="true" hbarPolicy="NEVER" prefHeight="610.0" prefWidth="700.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <content>
                               <GridPane fx:id="tabBookGrid">
                                 <columnConstraints>
@@ -33,7 +33,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="700.0">
                      <children>
-                        <ScrollPane fx:id="tabStationeryScroll" fitToWidth="true" prefHeight="610.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <ScrollPane fx:id="tabStationeryScroll" fitToWidth="true" hbarPolicy="NEVER" prefHeight="610.0" prefWidth="700.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <content>
                               <GridPane fx:id="tabStationeryGrid">
                                 <columnConstraints>
@@ -50,7 +50,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="700.0">
                      <children>
-                        <ScrollPane fx:id="tabToyScroll" fitToWidth="true" prefHeight="610.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <ScrollPane fx:id="tabToyScroll" fitToWidth="true" hbarPolicy="NEVER" prefHeight="610.0" prefWidth="700.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <content>
                               <GridPane fx:id="tabToyGrid">
                                 <columnConstraints>

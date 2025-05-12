@@ -117,7 +117,7 @@ public class UserLoginController {
         if (si_username.getText().isEmpty() || si_password.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Incorrect Username or Password");
         } else if (userList.login(si_username.getText(), si_password.getText())) {
-            localCart = Cart.getCartFromDatabase(localUser.getUserId());
+            localCart = localCart.getCartFromDatabase(localUser.getUserId());
             loadHomeScreen();
         } else {
             showAlert(Alert.AlertType.ERROR, "Incorrect Username or Password");

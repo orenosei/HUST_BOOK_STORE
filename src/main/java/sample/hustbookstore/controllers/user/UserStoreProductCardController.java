@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,6 +23,8 @@ import sample.hustbookstore.models.Toy;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static sample.hustbookstore.LaunchApplication.localCart;
 
 public class UserStoreProductCardController implements Initializable {
 
@@ -83,7 +86,10 @@ public class UserStoreProductCardController implements Initializable {
 
     private int currenttype;
 
+    private Product productAddToCart;
+
     public void setProdData(Product prodData) {
+        this.productAddToCart = prodData;
         String imagePath;
         if (prodData instanceof Book) {
             Book prod_to_book = (Book) prodData;
@@ -253,9 +259,57 @@ public class UserStoreProductCardController implements Initializable {
         }
     }
 
-    //public void addButton() {
-//
-   //  }
+//    @FXML
+//    public void handleAddToCartButton(ActionEvent event) {
+//        if (event.getSource() == addToCart_btn) {
+//            boolean success = localCart.addProductToCart(productAddToCart.getID(), productSpinner.getValue());
+//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//            alert.setHeaderText(null);
+//            if (success) {
+//                alert.setContentText("Add product to Cart successfully!");
+//            } else {
+//                alert.setAlertType(Alert.AlertType.ERROR);
+//                alert.setContentText("Failed to add the product to the cart. The requested quantity might exceed the stock.");
+//            }
+//            alert.showAndWait();
+//        }
+//    }
+    @FXML
+    public void handleAddToCartButton(ActionEvent event) {
+        if (event.getSource() == addToCart_btn) {
+            Task<Boolean> addProductTask = new Task<>() {
+                @Override
+                protected Boolean call() {
+                    return localCart.addProductToCart(productAddToCart.getID(), productSpinner.getValue());
+                }
+            };
+            addProductTask.setOnSucceeded(workerStateEvent -> {
+                boolean success = addProductTask.getValue();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText(null);
+                if (success) {
+                    alert.setContentText("Add product to Cart successfully!");
+                } else {
+                    alert.setAlertType(Alert.AlertType.ERROR);
+                    alert.setContentText("Failed to add the product to the cart. The requested quantity might exceed the stock.");
+                }
+                alert.showAndWait();
+            });
+
+            addProductTask.setOnFailed(workerStateEvent -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setContentText("An unexpected error occurred while adding the product to the cart.");
+                alert.showAndWait();
+            });
+
+            Thread thread = new Thread(addProductTask);
+            thread.setDaemon(true);
+            thread.start();
+        }
+    }
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
