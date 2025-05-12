@@ -120,9 +120,7 @@ public class UserStoreController{
         return new int[]{column, row};
     }
 
-    //public ObservableList<Book> bookListData = FXCollections.observableArrayList();
     public void tabBookDisplayCard() {
-//        bookListData.clear();
         ObservableList<Book> bookListData = localStore.getBookListData();
 
         int row = 0;
@@ -151,10 +149,7 @@ public class UserStoreController{
         }
     }
 
-    //public ObservableList<Stationery> stationeryListData = FXCollections.observableArrayList();
     public void tabStationeryDisplayCard() {
-
-        //stationeryListData.clear();
         ObservableList<Stationery> stationeryListData = localStore.getStationeryListData();
 
         int row = 0;
@@ -183,11 +178,9 @@ public class UserStoreController{
         }
     }
 
-    //private ObservableList<Toy> toyListData = FXCollections.observableArrayList();
 
     public void tabToyDisplayCard() {
 
-        // toyListData.clear();
         ObservableList<Toy> toyListData = localStore.getToyListData();
 
         int row = 0;

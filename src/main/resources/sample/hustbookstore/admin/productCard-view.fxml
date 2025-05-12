@@ -26,7 +26,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <TextArea fx:id="productName" layoutX="160.0" layoutY="20.0" prefHeight="108.0" prefWidth="146.0" styleClass="prod-title" stylesheets="@../Design/ProductCardDesign.css" text="Làm bạn với cô nàng dễ thương nhì lớp - Tập 2" wrapText="true" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="20.0">
+            <TextArea fx:id="productName" editable="false" layoutX="160.0" layoutY="20.0" prefHeight="108.0" prefWidth="146.0" styleClass="prod-title" stylesheets="@../Design/ProductCardDesign.css" text="Làm bạn với cô nàng dễ thương nhì lớp - Tập 2" wrapText="true" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="20.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -60,7 +60,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="productSellPrice" alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="86.0" styleClass="text-area" stylesheets="@../Design/ProductCardDesign.css" text="90 000" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                  <TextField fx:id="productSellPrice" alignment="CENTER_RIGHT" editable="false" prefHeight="26.0" prefWidth="86.0" styleClass="text-area" stylesheets="@../Design/ProductCardDesign.css" text="90 000" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <font>
                         <Font size="19.0" />
                      </font>
@@ -70,7 +70,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="productImportPrice" alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="86.0" styleClass="text-area" stylesheets="@../Design/ProductCardDesign.css" text="90 000" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                  <TextField fx:id="productImportPrice" alignment="CENTER_RIGHT" editable="false" prefHeight="26.0" prefWidth="86.0" styleClass="text-area" stylesheets="@../Design/ProductCardDesign.css" text="90 000" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                      <font>
                         <Font size="19.0" />
                      </font>

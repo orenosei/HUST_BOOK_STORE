@@ -1,7 +1,9 @@
 package sample.hustbookstore.models;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import sample.hustbookstore.controllers.user.CartUpdateListener;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,6 +21,7 @@ public class Cart {
     public int getCartId() {
         return cart_id;
     }
+    public Cart(){}
 
     public Cart(int cart_id, int user_id) {
         this.cart_id = cart_id;
@@ -32,7 +35,20 @@ public class Cart {
         }
     }
 
-    public static Cart getCartFromDatabase(int user_id) {
+
+    private static CartUpdateListener listener;
+    public static void setCartUpdateListener(CartUpdateListener cartListener) {
+        listener = cartListener;
+    }
+
+    private static void notifyCartUpdated() {
+        if (listener != null) {
+            Platform.runLater(listener::onCartUpdated);
+        }
+    }
+
+
+    public Cart getCartFromDatabase(int user_id) {
         Cart cart;
 
         String query = "SELECT * FROM cart WHERE user_id = ?";
@@ -45,7 +61,7 @@ public class Cart {
                         resultSet.getInt("cart_id"),
                         resultSet.getInt("user_id")
                 );
-                //System.console().printf("Cart found for user_id: %d %d %f %f\n", cart.cart_id, cart.user_id, cart.total_cost, cart.final_price);
+//                System.console().printf("Cart found for user_id: %d %d\n", cart.cart_id, cart.user_id);
                 return cart;
 
             }
@@ -56,23 +72,75 @@ public class Cart {
         }
     }
 
-    public static boolean addProductToCart(String product_id, int quantity) {
-        String query = "INSERT INTO cart_item (cart_id, product_id, quantity) VALUES (?, ?, ?)";
+    public boolean addProductToCart(String product_id, int quantity) {
+        String checkQuery = "SELECT quantity FROM cart_item WHERE cart_id = ? AND product_id = ?";
+        String stockQuery = "SELECT stock FROM product WHERE product_id = ?";
+        String updateQuery = "UPDATE cart_item SET quantity = ? WHERE cart_id = ? AND product_id = ?";
+        String insertQuery = "INSERT INTO cart_item (cart_id, product_id, quantity, is_selected) VALUES (?, ?, ?, false)";
 
-        try (PreparedStatement statement = connect.prepareStatement(query)) {
-            statement.setInt(1, localCart.cart_id);
-            statement.setString(2, product_id);
-            statement.setInt(3, quantity);
-            statement.executeUpdate();
-            return true;
+        try {
+            int currentQuantity = 0;
+            int stock = 0;
+
+            try (PreparedStatement checkStatement = connect.prepareStatement(checkQuery)) {
+                checkStatement.setInt(1, localCart.getCartId());
+                checkStatement.setString(2, product_id);
+                ResultSet rs = checkStatement.executeQuery();
+                if (rs.next()) {
+                    currentQuantity = rs.getInt("quantity");
+                }
+            }
+
+            try (PreparedStatement stockStatement = connect.prepareStatement(stockQuery)) {
+                stockStatement.setString(1, product_id);
+                ResultSet rs = stockStatement.executeQuery();
+                if (rs.next()) {
+                    stock = rs.getInt("stock");
+                }
+            }
+
+            if (currentQuantity + quantity > stock) {
+                System.out.println("Exceeds stock!");
+                return false;
+            }
+
+            boolean success = false;
+
+            if (currentQuantity > 0) {
+                try (PreparedStatement updateStatement = connect.prepareStatement(updateQuery)) {
+                    updateStatement.setInt(1, currentQuantity + quantity);
+                    updateStatement.setInt(2, localCart.getCartId());
+                    updateStatement.setString(3, product_id);
+                    updateStatement.executeUpdate();
+                    success = true;
+                }
+            } else {
+                try (PreparedStatement insertStatement = connect.prepareStatement(insertQuery)) {
+                    insertStatement.setInt(1, localCart.getCartId());
+                    insertStatement.setString(2, product_id);
+                    insertStatement.setInt(3, quantity);
+                    insertStatement.executeUpdate();
+                    success = true;
+                }
+            }
+
+            // GỌI LISTENER SAU KHI THÀNH CÔNG
+            if (success && listener != null) {
+//                listener.onCartUpdated();
+                Platform.runLater(listener::onCartUpdated);
+            }
+
+            return success;
+
         } catch (Exception e) {
             e.printStackTrace();
             return false;
-
         }
     }
 
-    public static ObservableList<CartItem> getCartItemList(int cartId) {
+
+
+    public ObservableList<CartItem> getCartItemList(int cartId) {
         ObservableList<CartItem> cartItemList = FXCollections.observableArrayList();
         String query = "SELECT * FROM cart_item WHERE cart_id = ?";
 
@@ -84,31 +152,24 @@ public class Cart {
                     cartItemList.add(new CartItem(
                             result.getString("product_id"),
                             result.getInt("quantity"),
-                            false
+                            result.getBoolean("is_selected")
                     ));
                 }
             }
-            System.out.println(cartId);
-            System.out.println("Item test:");
-            cartItemList.forEach(item -> {
-                System.out.println("CartItem: Product ID = " + item.getProductId() +
-                        ", Quantity = " + item.getQuantity() +
-                        ", Selected = " + item.isSelected());
-            });
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return cartItemList;
     }
 
-    public static boolean updateProductQuantity(String productId, int quantity) {
-        String query = "UPDATE cart_item SET quantity = ? WHERE cart_id = ? AND product_id = ?";
+    public boolean updateCartItem(CartItem cartItem) {
+        String query = "UPDATE cart_item SET quantity = ?, is_selected = ? WHERE product_id = ? AND cart_id = ?";
 
         try (PreparedStatement statement = connect.prepareStatement(query)) {
-            statement.setInt(1, quantity);
-            statement.setInt(2, localCart.cart_id);
-            statement.setString(3, productId);
+            statement.setInt(1, cartItem.getQuantity());
+            statement.setBoolean(2, cartItem.isSelected());
+            statement.setString(3, cartItem.getProductId());
+            statement.setInt(4, localCart.getCartId());
 
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;
@@ -118,12 +179,14 @@ public class Cart {
         }
     }
 
-    public static boolean deleteProductFromCart(String productId) {
+
+
+    public boolean deleteCartItem(CartItem cartItem) {
         String query = "DELETE FROM cart_item WHERE cart_id = ? AND product_id = ?";
 
         try (PreparedStatement statement = connect.prepareStatement(query)) {
-            statement.setInt(1, localCart.cart_id);
-            statement.setString(2, productId);
+            statement.setInt(1, localCart.getCartId());
+            statement.setString(2, cartItem.getProductId());
 
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;
@@ -132,6 +195,30 @@ public class Cart {
             return false;
         }
     }
+
+    public float calculateTotalPrice(int cartId) {
+        String query = """
+            SELECT SUM(p.sell_price * ci.quantity) AS total_price
+            FROM cart_item ci
+            JOIN product p ON ci.product_id = p.product_id
+            WHERE ci.cart_id = ? AND ci.is_selected = true
+    """;
+
+        try (PreparedStatement statement = connect.prepareStatement(query)) {
+            statement.setInt(1, cartId);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getFloat("total_price");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return -1;
+    }
+
 
 
 
