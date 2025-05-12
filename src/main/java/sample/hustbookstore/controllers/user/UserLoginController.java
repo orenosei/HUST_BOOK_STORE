@@ -235,7 +235,7 @@ public class UserLoginController {
         forgotPassQuestionList();
     }
 
-    private Connection connect = database.connectDB();;
+    private Connection connect = database.connectDB();
     public void proceedBtn(){
         if(fp_username.getText().isEmpty()||fp_question.getSelectionModel().getSelectedItem()==null
                 || fp_answer.getText().isEmpty()){

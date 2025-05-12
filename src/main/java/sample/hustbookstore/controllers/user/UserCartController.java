@@ -5,13 +5,21 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import sample.hustbookstore.models.Cart;
 import sample.hustbookstore.models.CartItem;
+import sample.hustbookstore.models.database;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Optional;
 
 import static sample.hustbookstore.LaunchApplication.localCart;
 import static sample.hustbookstore.LaunchApplication.localUser;
@@ -41,8 +49,9 @@ public class UserCartController implements CartUpdateListener{
     @FXML
     private TextField voucherField;
 
+    private Alert alert;
 
-public void display() {
+    public void display() {
     Task<ObservableList<CartItem>> loadItemsTask = new Task<>() {
         @Override
         protected ObservableList<CartItem> call() throws Exception {
@@ -91,4 +100,50 @@ public void display() {
         display();
     }
 
+    private Connection connect = database.connectDB();
+
+    String voucherCode;
+
+    public void pressVoucherBtn(){
+        if(voucherField.getText().isEmpty()){
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter a voucher code!");
+            alert.showAndWait();
+        }else{
+            String selectData = "SELECT code, discount FROM voucher WHERE code = ?";
+            try(PreparedStatement prepare = connect.prepareStatement(selectData)){
+
+                prepare.setString(1, voucherField.getText());
+
+                ResultSet result = prepare.executeQuery();
+                if (result.next()) {
+                    float percent;
+                    alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("CONFIRMATION MESSAGE");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Are you sure you want to apply this voucher?\nPlease note that only one voucher can be applied to an order!");
+
+                    Optional<ButtonType> confirm = alert.showAndWait();
+                    if (confirm.isPresent() && confirm.get() == ButtonType.OK) {
+                        percent = (result.getFloat(2))/100f;
+                        discountValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())*percent));
+                        totalValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())*(1-percent)));
+                        voucherCode = voucherField.getText();
+                        System.out.println(voucherCode);
+                    } else {
+                    }
+                } else {
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("ERROR MESSAGE");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Voucher does not exist!");
+                    alert.showAndWait();
+                }
+            }catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
