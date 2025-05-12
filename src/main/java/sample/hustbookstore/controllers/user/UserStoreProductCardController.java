@@ -1,12 +1,21 @@
 package sample.hustbookstore.controllers.user;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import sample.hustbookstore.models.Book;
+import sample.hustbookstore.models.Product;
 import sample.hustbookstore.models.Stationery;
 import sample.hustbookstore.models.Toy;
 
@@ -34,77 +43,89 @@ public class UserStoreProductCardController implements Initializable {
     @FXML
     private Spinner<Integer> productSpinner;
 
+    @FXML
+    private Label bookAuthor;
 
+    @FXML
+    private TextArea bookDescription;
+
+    @FXML
+    private TextArea bookGenre;
+
+    @FXML
+    private TextArea otherDescription;
+
+    @FXML
+    private Label otherDistributor;
+
+    @FXML
+    private Button bookUp_btn;
+
+    @FXML
+    private Button otherUp_btn;
+
+    @FXML
+    private Button down_btn;
+
+    @FXML
+    private AnchorPane bookInfoPopup;
+
+    @FXML
+    private AnchorPane otherInfoPopup;
 
     private Book bookData;
     private Stationery stationeryData;
     private Toy toyData;
+
     private Image image;
 
     private SpinnerValueFactory<Integer> spin;
 
-    public void setBookData(Book bookData) {
-        this.bookData = bookData;
-        productName.setText(bookData.getName());
-        productSellPrice.setText(String.valueOf(bookData.getSellPrice()));
+    private int currenttype;
 
-        setQuantity(bookData.getStock());
+    public void setProdData(Product prodData) {
+        String imagePath;
+        if (prodData instanceof Book) {
+            Book prod_to_book = (Book) prodData;
+            this.bookData = prod_to_book;
 
-        String imagePath = bookData.getImage();
-        try {
-            if (imagePath != null && !imagePath.isEmpty()) {
-                URL imageUrl = new URL(imagePath);
-                image = new Image(imageUrl.toExternalForm(), 100, 160, true, true);
-            } else {
-                image = new Image(getClass().getResource("/sample/hustbookstore/img/notfound.jpg").toExternalForm(), 100, 160, true, true);
-            }
-        } catch (MalformedURLException e) {
-            URL resourceUrl = getClass().getResource("/" + imagePath);
-            if (resourceUrl != null) {
-                image = new Image(resourceUrl.toExternalForm(), 100, 160, true, true);
-            } else {
-                image = new Image(getClass().getResource("/sample/hustbookstore/img/notfound.jpg").toExternalForm(), 100, 160, true, true);
-            }
+            productName.setText(bookData.getName());
+            bookAuthor.setText(bookData.getAuthor());
+            bookDescription.setText(bookData.getDescription());
+            bookGenre.setText(bookData.getGenre());
+            productSellPrice.setText(String.valueOf(bookData.getSellPrice()));
+
+            setQuantity(bookData.getStock());
+            imagePath = bookData.getImage();
+
+            currenttype = 1;
+        } else if (prodData instanceof Stationery){
+            Stationery prod_to_stationery = (Stationery) prodData;
+            this.stationeryData = prod_to_stationery;
+
+            productName.setText(stationeryData.getName());
+            otherDistributor.setText(stationeryData.getDistributor());
+            otherDescription.setText(stationeryData.getDescription());
+            productSellPrice.setText(String.valueOf(stationeryData.getSellPrice()));
+
+            setQuantity(stationeryData.getStock());
+            imagePath = stationeryData.getImage();
+
+            currenttype = 2;
+        } else {
+            Toy prod_to_toy = (Toy) prodData;
+            this.toyData = prod_to_toy;
+
+            productName.setText(toyData.getName());
+            otherDistributor.setText(toyData.getDistributor());
+            otherDescription.setText(toyData.getDescription());
+            productSellPrice.setText(String.valueOf(toyData.getSellPrice()));
+
+            setQuantity(toyData.getStock());
+            imagePath = toyData.getImage();
+
+            currenttype = 3;
         }
-
-        productImage.setImage(image);
-    }
-
-    public void setStationeryData(Stationery stationeryData) {
-        this.stationeryData = stationeryData;
-        productName.setText(stationeryData.getName());
-        productSellPrice.setText(String.valueOf(stationeryData.getSellPrice()));
-
-        setQuantity(stationeryData.getStock());
-
-        String imagePath = stationeryData.getImage();
-        try {
-            if (imagePath != null && !imagePath.isEmpty()) {
-                URL imageUrl = new URL(imagePath);
-                image = new Image(imageUrl.toExternalForm(), 100, 160, true, true);
-            } else {
-                image = new Image(getClass().getResource("/sample/hustbookstore/img/notfound.jpg").toExternalForm(), 100, 160, true, true);
-            }
-        } catch (MalformedURLException e) {
-            URL resourceUrl = getClass().getResource("/" + imagePath);
-            if (resourceUrl != null) {
-                image = new Image(resourceUrl.toExternalForm(), 100, 160, true, true);
-            } else {
-                image = new Image(getClass().getResource("/sample/hustbookstore/img/notfound.jpg").toExternalForm(), 100, 160, true, true);
-            }
-        }
-
-        productImage.setImage(image);
-    }
-
-    public void setToyData(Toy toyData) {
-        this.toyData = toyData;
-        productName.setText(toyData.getName());
-        productSellPrice.setText(String.valueOf(toyData.getSellPrice()));
-
-        setQuantity(toyData.getStock());
-
-        String imagePath = toyData.getImage();
         try {
             if (imagePath != null && !imagePath.isEmpty()) {
                 URL imageUrl = new URL(imagePath);
@@ -127,6 +148,109 @@ public class UserStoreProductCardController implements Initializable {
     public void setQuantity(int qty) {
         spin = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, qty, 0);
         productSpinner.setValueFactory(spin);
+    }
+
+    protected void showBookInfoAnimation() {
+        Rectangle clip = new Rectangle();
+        clip.setWidth(bookInfoPopup.getPrefWidth());
+        clip.setHeight(0);
+        bookInfoPopup.setClip(clip);
+
+        bookInfoPopup.setVisible(true);
+
+        Timeline timeline = new Timeline();
+        timeline.getKeyFrames().add(new KeyFrame(
+                Duration.seconds(0.5),
+                new KeyValue(clip.heightProperty(), bookInfoPopup.getPrefHeight())
+        ));
+        timeline.play();
+    }
+
+    protected void showOtherInfoAnimation() {
+        Rectangle clip = new Rectangle();
+        clip.setWidth(otherInfoPopup.getPrefWidth());
+        clip.setHeight(0);
+        otherInfoPopup.setClip(clip);
+
+        otherInfoPopup.setVisible(true);
+
+        Timeline timeline = new Timeline();
+        timeline.getKeyFrames().add(new KeyFrame(
+                Duration.seconds(0.5),
+                new KeyValue(clip.heightProperty(), otherInfoPopup.getPrefHeight())
+        ));
+        timeline.play();
+    }
+
+    protected void hideBookInfoAnimation() {
+        Node clip = bookInfoPopup.getClip();
+
+        if (clip == null || !(clip instanceof Rectangle)) {
+            Rectangle newClip = new Rectangle();
+            newClip.setWidth(bookInfoPopup.getPrefWidth());
+            newClip.setHeight(bookInfoPopup.getPrefHeight());
+            bookInfoPopup.setClip(newClip);
+            clip = newClip;
+        }
+
+        Rectangle rectClip = (Rectangle) clip;
+
+        Timeline timeline = new Timeline();
+        timeline.getKeyFrames().add(new KeyFrame(
+                Duration.seconds(0.5),
+                new KeyValue(rectClip.heightProperty(), 0)
+        ));
+
+        timeline.setOnFinished(event -> bookInfoPopup.setVisible(false));
+        timeline.play();
+    }
+
+    protected void hideOtherInfoAnimation() {
+        Node clip = otherInfoPopup.getClip();
+
+        if (clip == null || !(clip instanceof Rectangle)) {
+            Rectangle newClip = new Rectangle();
+            newClip.setWidth(otherInfoPopup.getPrefWidth());
+            newClip.setHeight(otherInfoPopup.getPrefHeight());
+            otherInfoPopup.setClip(newClip);
+            clip = newClip;
+        }
+
+        Rectangle rectClip = (Rectangle) clip;
+
+        Timeline timeline = new Timeline();
+        timeline.getKeyFrames().add(new KeyFrame(
+                Duration.seconds(0.5),
+                new KeyValue(rectClip.heightProperty(), 0)
+        ));
+
+        timeline.setOnFinished(event -> otherInfoPopup.setVisible(false));
+        timeline.play();
+    }
+
+    @FXML
+    private void handleCardButtonAction(ActionEvent event) {
+        if (event.getSource() == down_btn) {
+            if (currenttype == 1) {
+                showBookInfoAnimation();
+            } else {
+                showOtherInfoAnimation();
+            }
+        }
+    }
+
+    @FXML
+    private void handleBookMoreInfoButtonAction(ActionEvent event) {
+        if (event.getSource() == bookUp_btn) {
+            hideBookInfoAnimation();
+        }
+    }
+
+    @FXML
+    private void handleOtherMoreInfoButtonAction(ActionEvent event) {
+        if (event.getSource() == otherUp_btn) {
+            hideOtherInfoAnimation();
+        }
     }
 
     //public void addButton() {
