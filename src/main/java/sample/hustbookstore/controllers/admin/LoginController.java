@@ -127,8 +127,6 @@ public class LoginController {
             showAlert(Alert.AlertType.ERROR, "Please fill all the fields");
         } else if (adminList.isUsernameTaken(su_username.getText())) {
             showAlert(Alert.AlertType.ERROR, su_username.getText() + " is already taken");
-        } else if (su_password.getText().length() < 8) {
-            showAlert(Alert.AlertType.ERROR, "Invalid Password, at least 8 characters are needed");
         } else if (!su_privacycode.getText().equals("abc123")) {
             showAlert(Alert.AlertType.ERROR, "Privacy code is incorrect");
         } else {
@@ -202,7 +200,7 @@ public class LoginController {
     }
 
 
-    private String[] questionList = {"What is your favorite Color?", "What is your favorite food?", "What is your birth date?"};
+    private String[] questionList = {"What is your favorite movie?", "What is your favorite book?", "What is your favorite sport?", "What is your favorite song?", "What is your favorite drink?", "What is your favorite food?", "What is your favorite game?", "What is your favorite animal?", "What is your favorite color?"};
     public void regLquestionList(){
         List<String> listQ = new ArrayList<>();
 
