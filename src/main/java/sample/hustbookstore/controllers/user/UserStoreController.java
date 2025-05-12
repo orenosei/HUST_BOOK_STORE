@@ -137,7 +137,7 @@ public class UserStoreController{
                 load.setLocation(getClass().getResource(getProductCardPath()));
                 AnchorPane pane = load.load();
                 UserStoreProductCardController cardC = load.getController();
-                cardC.setBookData(bookListData.get(q));
+                cardC.setProdData(bookListData.get(q));
 
                 int[] updated = updateRowColumn(column, row);
                 column = updated[0];
@@ -169,7 +169,7 @@ public class UserStoreController{
                 load.setLocation(getClass().getResource(getProductCardPath()));
                 AnchorPane pane = load.load();
                 UserStoreProductCardController cardC = load.getController();
-                cardC.setStationeryData(stationeryListData.get(q));
+                cardC.setProdData(stationeryListData.get(q));
 
                 int[] updated = updateRowColumn(column, row);
                 column = updated[0];
@@ -202,7 +202,7 @@ public class UserStoreController{
                 load.setLocation(getClass().getResource(getProductCardPath()));
                 AnchorPane pane = load.load();
                 UserStoreProductCardController cardC = load.getController();
-                cardC.setToyData(toyListData.get(q));
+                cardC.setProdData(toyListData.get(q));
 
                 int[] updated = updateRowColumn(column, row);
                 column = updated[0];
