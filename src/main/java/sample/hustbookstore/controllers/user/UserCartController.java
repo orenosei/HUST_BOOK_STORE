@@ -50,6 +50,8 @@ public class UserCartController implements CartUpdateListener{
 
     private Alert alert;
 
+    private float percent = 0;
+
     public void display() {
     Task<ObservableList<CartItem>> loadItemsTask = new Task<>() {
         @Override
@@ -92,6 +94,7 @@ public class UserCartController implements CartUpdateListener{
 
     public void showSubTotalValue(){
         subTotalValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())));
+        totalValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())*(1-percent)));
     }
 
     public void initialize(){
@@ -114,7 +117,6 @@ public class UserCartController implements CartUpdateListener{
             voucherCode = voucherField.getText();
 
             if (localVoucher.isVoucherExists(voucherCode)) {
-                float percent;
                 alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("CONFIRMATION MESSAGE");
                 alert.setHeaderText(null);
