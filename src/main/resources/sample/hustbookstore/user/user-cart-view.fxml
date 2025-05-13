@@ -2,11 +2,13 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -41,13 +43,21 @@
                   <Font size="25.0" />
                </font>
             </Text>
-            <TextField layoutX="16.0" layoutY="232.0" prefHeight="25.0" prefWidth="416.0" promptText="Customer Name" />
-            <TextField layoutX="16.0" layoutY="274.0" prefHeight="25.0" prefWidth="417.0" promptText="Phone number" />
-            <TextField layoutX="15.0" layoutY="323.0" prefHeight="25.0" prefWidth="109.0" promptText="Province/City" />
-            <TextField layoutX="143.0" layoutY="322.0" prefHeight="25.0" prefWidth="109.0" promptText="District" />
-            <TextField layoutX="274.0" layoutY="322.0" prefHeight="25.0" prefWidth="109.0" promptText="Ward/Commune" />
-            <TextField layoutX="15.0" layoutY="365.0" prefHeight="25.0" prefWidth="417.0" promptText="Specific Address" />
-            <Button layoutX="356.0" layoutY="488.0" mnemonicParsing="false" text="Place Order" />
+            <VBox layoutX="15.0" layoutY="183.0" prefHeight="281.0" prefWidth="449.0" spacing="25.0" AnchorPane.rightAnchor="10.0">
+               <children>
+                  <TextField fx:id="nameField" prefHeight="25.0" prefWidth="416.0" promptText="Receiver's name" />
+                  <TextField fx:id="phoneNumberField" prefHeight="25.0" prefWidth="417.0" promptText="Receiver's phone number" />
+                  <HBox spacing="10.0">
+                     <children>
+                        <ComboBox fx:id="cboProvince" prefHeight="26.0" prefWidth="416.0" promptText="Province/City" />
+                        <ComboBox fx:id="cboDistrict" prefHeight="26.0" prefWidth="416.0" promptText="District" />
+                        <ComboBox fx:id="cboWard" prefHeight="26.0" prefWidth="416.0" promptText="Ward/Commune" />
+                     </children>
+                  </HBox>
+                  <TextField fx:id="specificAddressField" prefHeight="26.0" prefWidth="408.0" promptText="Specific Address" />
+               </children>
+            </VBox>
+            <Button layoutX="361.0" layoutY="638.0" mnemonicParsing="false" text="Place Order" />
          </children>
       </AnchorPane>
       <TextField fx:id="voucherField" layoutX="162.0" layoutY="512.0" promptText="apply voucher here" />
