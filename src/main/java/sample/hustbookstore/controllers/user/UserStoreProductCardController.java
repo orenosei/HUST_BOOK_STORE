@@ -76,6 +76,9 @@ public class UserStoreProductCardController implements Initializable {
     @FXML
     private AnchorPane otherInfoPopup;
 
+    @FXML
+    private Button askAIButton;
+
     private Book bookData;
     private Stationery stationeryData;
     private Toy toyData;
@@ -87,6 +90,8 @@ public class UserStoreProductCardController implements Initializable {
     private int currenttype;
 
     private Product productAddToCart;
+
+    public String askedItem;
 
     public void setProdData(Product prodData) {
         this.productAddToCart = prodData;
@@ -256,6 +261,15 @@ public class UserStoreProductCardController implements Initializable {
     private void handleOtherMoreInfoButtonAction(ActionEvent event) {
         if (event.getSource() == otherUp_btn) {
             hideOtherInfoAnimation();
+        }
+    }
+
+    @FXML
+    private void handleAskAIButtonAction(ActionEvent event) {
+        if (event.getSource() == otherUp_btn) {
+            askedItem = productAddToCart.getID();
+            // To Do
+            // AryaChat.getPromptText(askedItem) {}
         }
     }
 

@@ -36,7 +36,7 @@
             </TextArea>
             <AnchorPane layoutX="194.0" layoutY="175.0" prefHeight="25.0" prefWidth="95.0">
                <children>
-                  <Button layoutX="2.0" layoutY="3.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="more-info" stylesheets="@../Design/ProductCardDesign.css" text="i" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="askAIButton" layoutX="2.0" layoutY="3.0" mnemonicParsing="false" onAction="#handleAskAIButtonAction" prefHeight="20.0" prefWidth="20.0" styleClass="more-info" stylesheets="@../Design/ProductCardDesign.css" text="i" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
