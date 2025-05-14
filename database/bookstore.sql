@@ -68,6 +68,7 @@ CREATE TABLE `cart_item` (
                              `cart_id` INT NOT NULL,                        -- Tham chiếu đến giỏ hàng
                              `product_id` VARCHAR(255) NOT NULL,            -- Tham chiếu đến sản phẩm
                              `quantity` INT NOT NULL,                       -- Số lượng sản phẩm trong giỏ
+                             `is_selected` BOOLEAN DEFAULT false,
                              FOREIGN KEY (`cart_id`) REFERENCES `cart`(`cart_id`)
                                  ON DELETE CASCADE ON UPDATE CASCADE,
                              FOREIGN KEY (`product_id`) REFERENCES `product`(`product_id`)

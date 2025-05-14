@@ -29,7 +29,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <TextArea fx:id="productName" layoutX="161.0" layoutY="57.0" prefHeight="108.0" prefWidth="146.0" styleClass="prod-title" stylesheets="@../Design/ProductCardDesign.css" text="Làm bạn với cô nàng dễ thương nhì lớp - Tập 2" wrapText="true" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="57.0">
+            <TextArea fx:id="productName" editable="false" layoutX="161.0" layoutY="57.0" prefHeight="108.0" prefWidth="146.0" styleClass="prod-title" stylesheets="@../Design/ProductCardDesign.css" text="Làm bạn với cô nàng dễ thương nhì lớp - Tập 2" wrapText="true" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="57.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -49,7 +49,7 @@
                </children>
             </AnchorPane>
             <Spinner fx:id="productSpinner" layoutX="169.0" layoutY="217.0" prefHeight="26.0" prefWidth="66.0" />
-            <Button fx:id="addToCart_btn" contentDisplay="RIGHT" layoutX="242.0" layoutY="217.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="73.0" text="Add" AnchorPane.rightAnchor="20.0">
+            <Button fx:id="addToCart_btn" contentDisplay="RIGHT" layoutX="242.0" layoutY="217.0" mnemonicParsing="false" onAction="#handleAddToCartButton" prefHeight="26.0" prefWidth="73.0" text="Add" AnchorPane.rightAnchor="20.0">
                <graphic>
                   <FontAwesomeIcon glyphName="CART_PLUS" />
                </graphic>
@@ -69,7 +69,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="productSellPrice" alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="85.0" styleClass="text-area" stylesheets="@../Design/ProductCardDesign.css" text="90 000" GridPane.columnIndex="1" GridPane.valignment="CENTER">
+                  <TextField fx:id="productSellPrice" alignment="CENTER_RIGHT" editable="false" prefHeight="26.0" prefWidth="85.0" styleClass="text-area" stylesheets="@../Design/ProductCardDesign.css" text="90 000" GridPane.columnIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font size="19.0" />
                      </font>
@@ -116,8 +116,8 @@
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin></Label>
-                  <TextArea fx:id="bookGenre" prefHeight="200.0" prefWidth="200.0" styleClass="prod-title" stylesheets="@../Design/ProductCardDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextArea fx:id="bookDescription" prefHeight="200.0" prefWidth="200.0" styleClass="prod-title" stylesheets="@../Design/ProductCardDesign.css" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextArea fx:id="bookGenre" editable="false" prefHeight="200.0" prefWidth="200.0" styleClass="prod-title" stylesheets="@../Design/ProductCardDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextArea fx:id="bookDescription" editable="false" prefHeight="200.0" prefWidth="200.0" styleClass="prod-title" stylesheets="@../Design/ProductCardDesign.css" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
             <Button fx:id="bookUp_btn" layoutX="154.0" layoutY="261.0" mnemonicParsing="false" onAction="#handleBookMoreInfoButtonAction" text="▲" AnchorPane.bottomAnchor="15.0" />
@@ -149,7 +149,7 @@
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin></Label>
-                  <TextArea fx:id="otherDescription" prefHeight="200.0" prefWidth="200.0" styleClass="prod-title" stylesheets="@../Design/ProductCardDesign.css" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextArea fx:id="otherDescription" editable="false" prefHeight="200.0" prefWidth="200.0" styleClass="prod-title" stylesheets="@../Design/ProductCardDesign.css" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <Button fx:id="otherUp_btn" layoutX="154.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleOtherMoreInfoButtonAction" text="▲" AnchorPane.bottomAnchor="15.0" />

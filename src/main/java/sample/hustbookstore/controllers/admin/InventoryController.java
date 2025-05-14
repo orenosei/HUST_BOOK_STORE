@@ -378,6 +378,11 @@ public void setAdd_btn() {
             alert.setHeaderText(null);
             alert.setContentText("Product added successfully.");
             alert.showAndWait();
+
+            if (homeScreenController != null) {
+                homeScreenController.reloadStore();
+            }
+
             showData();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -458,6 +463,10 @@ public void setUpdate_btn() {
         alert.setHeaderText(null);
         alert.setContentText("Product updated successfully.");
         alert.showAndWait();
+
+        if (homeScreenController != null) {
+            homeScreenController.reloadStore();
+        }
         showData();
     } else {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -496,6 +505,10 @@ public void setUpdate_btn() {
                 alert.setContentText("Product deleted successfully.");
                 alert.showAndWait();
                 setClear_btn();
+
+                if (homeScreenController != null) {
+                    homeScreenController.reloadStore();
+                }
                 showData();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -562,7 +575,14 @@ public void setUpdate_btn() {
             inventory_genre.getCheckModel().clearChecks();
         }
     }
-    
+
+    private HomeScreenController homeScreenController;
+
+    public void setHomeScreenController(HomeScreenController homeScreenController) {
+        this.homeScreenController = homeScreenController;
+    }
+
+
     public void initialize() {    // buộc phải có, giải thích trong buổi họp nhóm tiếp theo
         setTypeList();
         setGenreList();

@@ -3,16 +3,18 @@ package sample.hustbookstore;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import sample.hustbookstore.models.*;
 
 import java.io.IOException;
-import java.util.Date;
+
+import java.awt.Taskbar;
+import java.awt.Toolkit;
+import java.awt.Taskbar.Feature;
 
 
 public class LaunchApplication extends Application {
@@ -30,7 +32,7 @@ public class LaunchApplication extends Application {
 
     public static User localUser;
 
-    public static Cart localCart;
+    public static Cart localCart = new Cart();
 
     public static VoucherList localVoucher = new VoucherList();
 
@@ -64,8 +66,6 @@ public class LaunchApplication extends Application {
         }
     }
 
-
-
     @Override
     public void start(Stage stage) throws IOException {
         localAdmin = null;
@@ -79,10 +79,25 @@ public class LaunchApplication extends Application {
 
         FXMLLoader fxmlLoader = new FXMLLoader(LaunchApplication.class.getResource("LaunchApplication.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 640, 720);
-        stage.setTitle("Welcome to HUST Book Store");
+        stage.setTitle("HUST Book Store");
+
+        Image image = new Image(getClass().getResourceAsStream("/sample/hustbookstore/img/logo_meow.png"));
+
+        stage.getIcons().add(image);
+
+        if (Taskbar.isTaskbarSupported()) {
+            var taskbar = Taskbar.getTaskbar();
+
+            if (taskbar.isSupported(Feature.ICON_IMAGE)) {
+                final Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
+                var dockIcon = defaultToolkit.getImage(getClass().getResource("/sample/hustbookstore/img/logo_meow.png"));
+                taskbar.setIconImage(dockIcon);
+            }
+
+        }
+
         stage.setScene(scene);
         stage.show();
-
 
     }
 
