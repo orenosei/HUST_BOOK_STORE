@@ -1,7 +1,7 @@
 package sample.hustbookstore.controllers.admin;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -9,11 +9,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import sample.hustbookstore.models.Book;
 import sample.hustbookstore.models.Stationery;
+import sample.hustbookstore.models.Store;
 import sample.hustbookstore.models.Toy;
 
-import static sample.hustbookstore.LaunchApplication.localStore;
+import java.io.IOException;
 
-public class StoreController {
+public class StoreController{
 
     @FXML
     private Tab tabBook;
@@ -110,116 +111,120 @@ public class StoreController {
         }
     }
 
+    private final Store store = new Store();
 
-    public int[] updateRowColumn(int column, int row) {
-        if (column == 2) {
-            column = 0;
-            row += 1;
-        }
-        return new int[]{column, row};
-    }
-
-    //public ObservableList<Book> bookListData = FXCollections.observableArrayList();
-    public void tabBookDisplayCard() {
-//        bookListData.clear();
-        ObservableList<Book> bookListData = localStore.getBookListData();
-
-        int row = 0;
+    private void tabBookDisplayCard() {
         int column = 0;
-
-        tabBookGrid.getRowConstraints().clear();
-        tabBookGrid.getColumnConstraints().clear();
-
-        for (int q = 0; q < bookListData.size(); q++) {
+        int row = 0;
+        for (Book book : store.getBookListData()) {
             try {
-                FXMLLoader load = new FXMLLoader();
-                load.setLocation(getClass().getResource(getProductCardPath()));
-                AnchorPane pane = load.load();
-                StoreProductCardController cardC = load.getController();
-                cardC.setData(bookListData.get(q));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(getProductCardPath()));
+                AnchorPane pane = loader.load();
+                StoreProductCardController controller = loader.getController();
+                controller.setData(book);
 
-                int[] updated = updateRowColumn(column, row);
-                column = updated[0];
-                row = updated[1];
+                if (column == 2) {
+                    column = 0;
+                    row++;
+                }
 
                 tabBookGrid.add(pane, column++, row);
-
-            } catch (Exception e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    //public ObservableList<Stationery> stationeryListData = FXCollections.observableArrayList();
-    public void tabStationeryDisplayCard() {
-
-        //stationeryListData.clear();
-        ObservableList<Stationery> stationeryListData = localStore.getStationeryListData();
-
-        int row = 0;
+    private void tabStationeryDisplayCard() {
         int column = 0;
-
-        tabStationeryGrid.getRowConstraints().clear();
-        tabStationeryGrid.getColumnConstraints().clear();
-
-        for (int q = 0; q < stationeryListData.size(); q++) {
+        int row = 0;
+        for (Stationery stationery : store.getStationeryListData()) {
             try {
-                FXMLLoader load = new FXMLLoader();
-                load.setLocation(getClass().getResource(getProductCardPath()));
-                AnchorPane pane = load.load();
-                StoreProductCardController cardC = load.getController();
-                cardC.setData(stationeryListData.get(q));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(getProductCardPath()));
+                AnchorPane pane = loader.load();
+                StoreProductCardController controller = loader.getController();
+                controller.setData(stationery);
 
-                int[] updated = updateRowColumn(column, row);
-                column = updated[0];
-                row = updated[1];
+                if (column == 2) {
+                    column = 0;
+                    row++;
+                }
 
                 tabStationeryGrid.add(pane, column++, row);
-
-            } catch (Exception e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    //private ObservableList<Toy> toyListData = FXCollections.observableArrayList();
-
-    public void tabToyDisplayCard() {
-
-        // toyListData.clear();
-        ObservableList<Toy> toyListData = localStore.getToyListData();
-
-        int row = 0;
+    private void tabToyDisplayCard(){
         int column = 0;
-
-        tabToyGrid.getRowConstraints().clear();
-        tabToyGrid.getColumnConstraints().clear();
-
-        for (int q = 0; q < toyListData.size(); q++) {
+        int row = 0;
+        for (Toy toy : store.getToyListData()) {
             try {
-                FXMLLoader load = new FXMLLoader();
-                load.setLocation(getClass().getResource(getProductCardPath()));
-                AnchorPane pane = load.load();
-                StoreProductCardController cardC = load.getController();
-                cardC.setData(toyListData.get(q));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(getProductCardPath()));
+                AnchorPane pane = loader.load();
+                StoreProductCardController controller = loader.getController();
+                controller.setData(toy);
 
-                int[] updated = updateRowColumn(column, row);
-                column = updated[0];
-                row = updated[1];
+                if (column == 2) {
+                    column = 0;
+                    row++;
+                }
 
                 tabToyGrid.add(pane, column++, row);
-
-
-            } catch (Exception e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+
+
+//    @Override
+//    public void onStoreUpdated() {
+//        // Chạy trên luồng nền
+//        Task<Void> refreshTask = new Task<Void>() {
+//            @Override
+//            protected Void call() {
+//                store.refreshData(); // Cập nhật dữ liệu
+//                //loadMainPane();
+//                return null;
+//            }
+//
+//            @Override
+//            protected void succeeded() {
+//                // Cập nhật UI trên luồng chính
+//                //super.succeeded();
+//                Platform.runLater(() -> {
+//                    loadMainPane();
+//                });
+//            }
+//        };
+//        new Thread(refreshTask).start();
+//    }
+
+
+    private void clearGrids() {
+        tabBookGrid.getChildren().clear();
+        tabStationeryGrid.getChildren().clear();
+        tabToyGrid.getChildren().clear();
+    }
+
+
+    public void loadMainPane() {
+        Platform.runLater(() -> {
+            store.refreshData();
+            clearGrids();
+            tabBookDisplayCard();
+            tabStationeryDisplayCard();
+            tabToyDisplayCard();
+        });
     }
 
     public void initialize() {
-        tabBookDisplayCard();
-        tabStationeryDisplayCard();
-        tabToyDisplayCard();
+        store.refreshData();
+        loadMainPane();
         loadRightPane();
     }
 

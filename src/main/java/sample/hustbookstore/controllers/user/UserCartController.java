@@ -26,7 +26,7 @@ import java.io.File;
 
 import java.util.List;
 
-import static sample.hustbookstore.LaunchApplication.localCart;
+import static sample.hustbookstore.LaunchApplication.*;
 
 
 public class UserCartController implements CartUpdateListener{
@@ -54,11 +54,20 @@ public class UserCartController implements CartUpdateListener{
     @FXML
     private TextField voucherField;
 
+
+    @FXML
+    private TextField nameField;
+
+    @FXML
+    private TextField phoneNumberField;
+
+    @FXML
+    private TextField specificAddressField;
+
     @FXML private ComboBox<Province> cboProvince;
     @FXML private ComboBox<District> cboDistrict;
     @FXML private ComboBox<Ward> cboWard;
 
-    private List<Province> provinces;
 
 
     public void display() {
@@ -88,6 +97,8 @@ public class UserCartController implements CartUpdateListener{
                 }
             }
             showSubTotalValue();
+            nameField.setText(localUser.getName());
+            phoneNumberField.setText(localUser.getPhoneNumber());
         });
 
         loadItemsTask.setOnFailed(event -> {
@@ -136,12 +147,12 @@ public class UserCartController implements CartUpdateListener{
                     }
                 });
 
-                cboWard.setOnAction(event -> {
-                    Ward selectedWard = cboWard.getSelectionModel().getSelectedItem();
-                    if(selectedWard != null){
-                        showAddress();
-                    }
-                });
+//                cboWard.setOnAction(event -> {
+//                    Ward selectedWard = cboWard.getSelectionModel().getSelectedItem();
+//                    if(selectedWard != null){
+//                        showAddress();
+//                    }
+//                });
 
             } catch (Exception e) {
                 e.printStackTrace();

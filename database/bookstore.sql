@@ -56,8 +56,6 @@ CREATE TABLE `voucher` (
 CREATE TABLE `cart` (
                         `cart_id` INT AUTO_INCREMENT PRIMARY KEY, -- Khóa chính cho bảng cart
                         `user_id` INT NOT NULL,                   -- Khóa ngoại tham chiếu đến bảng user
-                        `total_cost` FLOAT NOT NULL,              -- Tổng chi phí giỏ hàng
-                        `final_price` FLOAT NOT NULL,             -- Giá cuối cùng sau khi giảm giá
                         FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) -- Khóa ngoại
                             ON DELETE CASCADE                     -- Xóa giỏ hàng khi xóa user
                             ON UPDATE CASCADE                     -- Cập nhật user_id nếu thay đổi
@@ -79,6 +77,7 @@ CREATE TABLE `bill` (
                         `bill_id` INT AUTO_INCREMENT PRIMARY KEY, -- ID duy nhất cho hóa đơn
                         `user_id` INT NOT NULL,                   -- Tham chiếu đến người dùng
                         `total_price` FLOAT NOT NULL,             -- Tổng giá trị hóa đơn
+                        `profit` FLOAT NOT NULL,                    -- tổng doanh thu của bill
                         `purchase_date` DATE NOT NULL,            -- Ngày mua hàng
                         FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
                             ON DELETE CASCADE ON UPDATE CASCADE

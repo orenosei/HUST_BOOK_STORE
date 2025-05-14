@@ -145,16 +145,6 @@ public class HomeScreenController implements Initializable {
         showHeaderAnimation();
     }
 
-//    public void loadInventory() {
-//        try {
-//            AnchorPane root = FXMLLoader.load(getClass().getResource(getInventoryPath()));
-//            inventoryScreen.getChildren().clear();
-//            inventoryScreen.getChildren().add(root);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
     public void loadInventory() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(getInventoryPath()));
@@ -173,7 +163,9 @@ public class HomeScreenController implements Initializable {
 
     public void loadStore() {
         try {
-            AnchorPane root = FXMLLoader.load(getClass().getResource(getStorePath()));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(getStorePath()));
+            AnchorPane root = loader.load();
+
             Platform.runLater(() -> {
                 storeScreen.getChildren().clear();
                 storeScreen.getChildren().add(root);
@@ -182,6 +174,7 @@ public class HomeScreenController implements Initializable {
             e.printStackTrace();
         }
     }
+
 
     public void loadCustomers() {
         try {
@@ -306,51 +299,15 @@ public class HomeScreenController implements Initializable {
     }
 
 
-//    @FXML
-//    private Text waitingText;
-
     @FXML
     private FontAwesomeIcon syncIcon;
+
 
 
     @FXML
     public void handleSyncButtonAction(ActionEvent event) {
         if (event.getSource() == sync_btn) {
-
-            RotateTransition rotateTransition = new RotateTransition(Duration.seconds(1), syncIcon);
-            rotateTransition.setByAngle(360);
-            rotateTransition.setCycleCount(RotateTransition.INDEFINITE);
-            rotateTransition.play();
-
-            // Chạy tác vụ tải trong luồng nền
-            Task<Void> loadTask = new Task<>() {
-                @Override
-                protected Void call() throws Exception {
-                    // Thực hiện công việc nặng
-                    Store.initialize();
-                    loadStore();
-                    return null;
-                }
-
-                @Override
-                protected void succeeded() {
-                    super.succeeded();
-                    Platform.runLater(() -> {
-                        rotateTransition.stop();
-                    });
-                }
-
-                @Override
-                protected void failed() {
-                    super.failed();
-                    Platform.runLater(() -> {
-                        rotateTransition.stop();
-                        System.err.println("Failed to load store: " + getException().getMessage());
-                    });
-                }
-            };
-
-            new Thread(loadTask).start();
+            reloadStore();
         }
     }
 
@@ -363,9 +320,9 @@ public class HomeScreenController implements Initializable {
         // Chạy tác vụ tải trong luồng nền
         Task<Void> loadTask = new Task<>() {
             @Override
-            protected Void call() throws Exception {
+            protected Void call() {
                 // Thực hiện công việc nặng
-                Store.initialize();
+//                Store.initialize();
                 loadStore();
                 return null;
             }
