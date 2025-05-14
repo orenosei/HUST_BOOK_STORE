@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -11,6 +12,9 @@ import sample.hustbookstore.models.Book;
 import sample.hustbookstore.models.Stationery;
 import sample.hustbookstore.models.Store;
 import sample.hustbookstore.models.Toy;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static sample.hustbookstore.LaunchApplication.localStore;
 
@@ -121,6 +125,10 @@ public class StoreController {
 
     private final Store store = new Store();
 
+    private final List<AnchorPane> allBookCards = new ArrayList<>();
+    private final List<AnchorPane> allStationeryCards = new ArrayList<>();
+    private final List<AnchorPane> allToyCards = new ArrayList<>();
+
     private void clearGrids() {
         tabBookGrid.getChildren().clear();
         tabStationeryGrid.getChildren().clear();
@@ -128,6 +136,9 @@ public class StoreController {
     }
 
     private void tabBookDisplayCard() {
+        allBookCards.clear();
+        tabBookGrid.getChildren().clear();
+
         int column = 0;
         int row = 0;
         for (Book book : store.getBookListData()) {
@@ -136,40 +147,23 @@ public class StoreController {
                 AnchorPane pane = loader.load();
                 StoreProductCardController controller = loader.getController();
                 controller.setData(book);
+                pane.setUserData(book);
 
-                if (column == 2) {
-                    column = 0;
-                    row++;
-                }
-
+                allBookCards.add(pane);
                 tabBookGrid.add(pane, column++, row);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    private void tabStationeryDisplayCard() {
-        int column = 0;
-        int row = 0;
-        for (Stationery stationery : store.getStationeryListData()) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(getProductCardPath()));
-                AnchorPane pane = loader.load();
-                StoreProductCardController controller = loader.getController();
-                controller.setData(stationery);
-
                 if (column == 2) {
                     column = 0;
                     row++;
                 }
-
-                tabStationeryGrid.add(pane, column++, row);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
     private void tabToyDisplayCard() {
+        allToyCards.clear();
+        tabToyGrid.getChildren().clear();
+
         int column = 0;
         int row = 0;
         for (Toy toy : store.getToyListData()) {
@@ -178,28 +172,105 @@ public class StoreController {
                 AnchorPane pane = loader.load();
                 StoreProductCardController controller = loader.getController();
                 controller.setData(toy);
+                pane.setUserData(toy);
 
+
+                allToyCards.add(pane);
+                tabToyGrid.add(pane, column++, row);
                 if (column == 2) {
                     column = 0;
                     row++;
                 }
-
-                tabToyGrid.add(pane, column++, row);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
+    private void tabStationeryDisplayCard() {
+        allStationeryCards.clear();
+        tabStationeryGrid.getChildren().clear();
+
+        int column = 0;
+        int row = 0;
+        for (Stationery stationery : store.getStationeryListData()) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(getProductCardPath()));
+                AnchorPane pane = loader.load();
+                StoreProductCardController controller = loader.getController();
+                controller.setData(stationery);
+                pane.setUserData(stationery);
+
+                allStationeryCards.add(pane);
+                tabStationeryGrid.add(pane, column++, row);
+                if (column == 2) {
+                    column = 0;
+                    row++;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void filterProducts(String keyword) {
+        filterGridPane(tabBookGrid, allBookCards, keyword);
+        filterGridPane(tabStationeryGrid, allStationeryCards, keyword);
+        filterGridPane(tabToyGrid, allToyCards, keyword);
+    }
+
+    private void filterGridPane(GridPane gridPane, List<AnchorPane> allCards, String keyword) {
+        gridPane.getChildren().clear();
+
+        int column = 0;
+        int row = 0;
+        for (AnchorPane card : allCards) {
+            Object userData = card.getUserData();
+            String productName = "";
+
+            if (userData instanceof Book) {
+                productName = ((Book) userData).getName().toLowerCase();
+            } else if (userData instanceof Stationery) {
+                productName = ((Stationery) userData).getName().toLowerCase();
+            } else if (userData instanceof Toy) {
+                productName = ((Toy) userData).getName().toLowerCase();
+            }
+
+            if (productName.contains(keyword.toLowerCase())) {
+                gridPane.add(card, column++, row);
+                if (column == 2) {
+                    column = 0;
+                    row++;
+                }
+            }
+        }
+    }
+
+
+    private void resetGridPane(GridPane gridPane, List<AnchorPane> allCards) {
+        gridPane.getChildren().clear();
+        int column = 0;
+        int row = 0;
+        for (AnchorPane card : allCards) {
+            gridPane.add(card, column++, row);
+            if (column == 2) {
+                column = 0;
+                row++;
+            }
+        }
+    }
+
     @FXML
     private void onSearch() {
-        String keyword = searchBar.getText().trim();
+        String keyword = searchBar.getText().trim().toLowerCase();
+
         if (keyword.isEmpty()) {
-            store.refreshData();
+            resetGridPane(tabBookGrid, allBookCards);
+            resetGridPane(tabStationeryGrid, allStationeryCards);
+            resetGridPane(tabToyGrid, allToyCards);
         } else {
-            store.filterProducts(keyword);
+            filterProducts(keyword);
         }
-        loadMainPane();
     }
 
     public void loadMainPane() {
