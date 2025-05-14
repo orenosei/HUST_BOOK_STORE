@@ -327,7 +327,7 @@ public class HomeScreenController implements Initializable {
                 @Override
                 protected Void call() throws Exception {
                     // Thực hiện công việc nặng
-                    Store.initialize();
+                    //Store.initialize();
                     loadStore();
                     return null;
                 }
@@ -365,7 +365,7 @@ public class HomeScreenController implements Initializable {
             @Override
             protected Void call() throws Exception {
                 // Thực hiện công việc nặng
-                Store.initialize();
+                //Store.initialize();
                 loadStore();
                 return null;
             }

@@ -73,7 +73,7 @@ public class LaunchApplication extends Application {
         AdminList.initialize();
         UserList.initialize();
         Inventory.initialize();
-        Store.initialize();
+        //Store.initialize();
         VoucherList.initialize();
         Cart.initialize();
 
