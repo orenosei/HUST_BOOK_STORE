@@ -61,7 +61,7 @@
          </children>
       </AnchorPane>
       <TextField fx:id="voucherField" layoutX="162.0" layoutY="512.0" promptText="apply voucher here" />
-      <Button fx:id="applyVoucherBtn" layoutX="336.0" layoutY="512.0" mnemonicParsing="false" text="Apply" />
+      <Button fx:id="applyVoucherBtn" layoutX="336.0" layoutY="512.0" mnemonicParsing="false" onAction="#pressVoucherBtn" text="Apply" />
       <GridPane layoutX="195.0" layoutY="552.0" prefHeight="34.0" prefWidth="196.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -76,7 +76,7 @@
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Subtotal:" GridPane.halignment="RIGHT" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Discount:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
             <Text fx:id="subTotalValue" strokeType="OUTSIDE" strokeWidth="0.0" text="123.456" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-            <Text fx:id="discountValue" strokeType="OUTSIDE" strokeWidth="0.0" text="23.45" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Text fx:id="discountValue" strokeType="OUTSIDE" strokeWidth="0.0" text="00.00" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="VND" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="VND" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
          </children>
@@ -86,12 +86,12 @@
             <Font size="17.0" />
          </font>
       </Text>
-      <Text fx:id="totalValue" layoutX="205.0" layoutY="653.0" strokeType="OUTSIDE" strokeWidth="0.0" text="123.456">
+      <Text fx:id="totalValue" layoutX="162.0" layoutY="649.0" strokeType="OUTSIDE" strokeWidth="0.0" text="123.456">
          <font>
             <Font size="33.0" />
          </font>
       </Text>
-      <Text layoutX="337.0" layoutY="652.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VND">
+      <Text layoutX="349.0" layoutY="650.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VND">
          <font>
             <Font size="33.0" />
          </font>
