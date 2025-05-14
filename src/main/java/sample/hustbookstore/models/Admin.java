@@ -38,6 +38,10 @@ public class Admin {
         this.answer = answer;
     }
 
+    public Admin() {
+
+    }
+
     public int getAdminId() {
         return adminId;
     }

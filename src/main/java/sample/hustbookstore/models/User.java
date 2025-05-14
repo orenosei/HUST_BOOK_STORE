@@ -20,6 +20,10 @@ public class User extends Admin{
         super(username, password, question, answer);
     }
 
+    public User() {
+
+    }
+
     public String getAddress() {
         return address;
     }

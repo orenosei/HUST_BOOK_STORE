@@ -274,7 +274,7 @@ public class StoreController {
     }
 
     public void loadMainPane() {
-        //store.refreshData();
+
         clearGrids();
         tabBookDisplayCard();
         tabStationeryDisplayCard();
@@ -286,6 +286,9 @@ public class StoreController {
         store.refreshData();
         loadMainPane();
         loadRightPane();
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            onSearch();
+        });
     }
 
 }

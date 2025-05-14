@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import sample.hustbookstore.LaunchApplication;
 import sample.hustbookstore.models.Admin;
 import sample.hustbookstore.models.AdminList;
 import sample.hustbookstore.models.database;
@@ -145,42 +146,84 @@ public class LoginController {
         }
     }
 
+//    private void loadHomeScreen() {
+//        waitingScreen.setVisible(true);
+//
+//        Task<AnchorPane> loadTask = new Task<>() {
+//            @Override
+//            protected AnchorPane call() throws IOException {
+//                return FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/home-view.fxml"));
+//            }
+//        };
+//
+//        loadTask.setOnSucceeded(event -> {
+//            try {
+//                AnchorPane root = loadTask.getValue();
+//                Stage currentStage = (Stage) si_loginBtn.getScene().getWindow();
+//                currentStage.close();
+//
+//                Stage stage = new Stage();
+//                stage.setTitle("HUSTBookStore");
+//                stage.setScene(new Scene(root));
+//                stage.setMinWidth(1280);
+//                stage.setMinHeight(720);
+//                stage.show();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                showAlert(Alert.AlertType.ERROR, "Failed to display main window!");
+//            } finally {
+//                waitingScreen.setVisible(false);
+//            }
+//        });
+//
+//        loadTask.setOnFailed(event -> {
+//            waitingScreen.setVisible(false);
+//            showAlert(Alert.AlertType.ERROR, "Failed to load main window!");
+//        });
+//
+//        new Thread(loadTask).start();
+//    }
+
     private void loadHomeScreen() {
         waitingScreen.setVisible(true);
 
-        Task<AnchorPane> loadTask = new Task<>() {
+        Task<Void> prepareTask = new Task<>() {
             @Override
-            protected AnchorPane call() throws IOException {
-                return FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/home-view.fxml"));
+            protected Void call() {
+
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return null;
             }
         };
 
-        loadTask.setOnSucceeded(event -> {
+        prepareTask.setOnSucceeded(e -> {
             try {
-                AnchorPane root = loadTask.getValue();
+                AnchorPane root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/home-view.fxml"));
+
                 Stage currentStage = (Stage) si_loginBtn.getScene().getWindow();
                 currentStage.close();
 
                 Stage stage = new Stage();
-                stage.setTitle("HUSTBookStore");
                 stage.setScene(new Scene(root));
-                stage.setMinWidth(1280);
-                stage.setMinHeight(720);
                 stage.show();
-            } catch (Exception e) {
-                e.printStackTrace();
-                showAlert(Alert.AlertType.ERROR, "Failed to display main window!");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                showAlert(Alert.AlertType.ERROR, "Failed to load admin window!");
             } finally {
                 waitingScreen.setVisible(false);
             }
         });
 
-        loadTask.setOnFailed(event -> {
+        prepareTask.setOnFailed(e -> {
             waitingScreen.setVisible(false);
-            showAlert(Alert.AlertType.ERROR, "Failed to load main window!");
+            showAlert(Alert.AlertType.ERROR, "An error occurred while loading the admin home screen!");
         });
 
-        new Thread(loadTask).start();
+        new Thread(prepareTask).start();
     }
 
     private void showAlert(Alert.AlertType type, String content) {
