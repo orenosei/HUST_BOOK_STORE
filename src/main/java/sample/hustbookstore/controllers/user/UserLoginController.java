@@ -235,83 +235,49 @@ public class UserLoginController {
         forgotPassQuestionList();
     }
 
-    private Connection connect = database.connectDB();;
-    public void proceedBtn(){
-        if(fp_username.getText().isEmpty()||fp_question.getSelectionModel().getSelectedItem()==null
-                || fp_answer.getText().isEmpty()){
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Please fill all blank fields");
-            alert.showAndWait();
-        }else{
-            String selectData = "SELECT username, question, answer FROM user WHERE username = ? AND question = ? AND answer = ? ";
-            try(PreparedStatement prepare = connect.prepareStatement(selectData)){
-
-                prepare.setString(1, fp_username.getText());
-                prepare.setString(2, (String)fp_question.getSelectionModel().getSelectedItem());
-                prepare.setString(3, fp_answer.getText());
-
-                ResultSet result = prepare.executeQuery();
-                if(result.next()){
-                    np_newPassForm.setVisible(true);
-                    fp_questionForm.setVisible(false);
-
-                }else{
-                    alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Incorrect Information");
-                    alert.showAndWait();
-
-                }
-            }catch(Exception e){e.printStackTrace();}
-
+    public void proceedBtn() {
+        if (fp_username.getText().isEmpty()
+                || fp_question.getSelectionModel().getSelectedItem() == null
+                || fp_answer.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Please fill all blank fields");
+        } else {
+            boolean ok = UserList.verifySecurityInfo(
+                    fp_username.getText(),
+                    (String) fp_question.getSelectionModel().getSelectedItem(),
+                    fp_answer.getText()
+            );
+            if (ok) {
+                np_newPassForm.setVisible(true);
+                fp_questionForm.setVisible(false);
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Incorrect Information");
+            }
         }
-
     }
 
-    public void changePassBtn(){
-        if(np_newPassword.getText().isEmpty()||np_confirmPassword.getText().isEmpty()){
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Please fill all blank fields");
-            alert.showAndWait();
-        }else{
-            if(np_newPassword.getText().equals(np_confirmPassword.getText())) {
-
-                String query = "UPDATE user SET password=? WHERE username=?";
-                try(PreparedStatement prepare = connect.prepareStatement(query)){
-
-                    prepare.setString(1, np_newPassword.getText());
-                    prepare.setString(2, fp_username.getText());
-
-                    prepare.executeUpdate();
-
-                    alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Information Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Your password updated successfully.");
-                    alert.showAndWait();
-
-                    si_loginForm.setVisible(true);
-                    np_newPassForm.setVisible(false);
-
-                    np_confirmPassword.setText("");
-                    np_newPassword.setText("");
-                    fp_question.getSelectionModel().clearSelection();
-                    fp_answer.setText("");
-                    fp_username.setText("");
-                }catch(Exception e){e.printStackTrace();}
-
-
+    public void changePassBtn() {
+        if (np_newPassword.getText().isEmpty()
+                || np_confirmPassword.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Please fill all blank fields");
+        } else if (!np_newPassword.getText().equals(np_confirmPassword.getText())) {
+            showAlert(Alert.AlertType.ERROR, "Passwords do not match");
+        } else {
+            boolean updated = UserList.updatePassword(
+                    fp_username.getText(),
+                    np_newPassword.getText()
+            );
+            if (updated) {
+                showAlert(Alert.AlertType.INFORMATION, "Your password updated successfully.");
+                // reset về form đăng nhập
+                si_loginForm.setVisible(true);
+                np_newPassForm.setVisible(false);
+                fp_username.clear();
+                fp_answer.clear();
+                fp_question.getSelectionModel().clearSelection();
+                np_newPassword.clear();
+                np_confirmPassword.clear();
             } else {
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Not match");
-                alert.showAndWait();
+                showAlert(Alert.AlertType.ERROR, "Failed to update password. Please try again.");
             }
         }
     }

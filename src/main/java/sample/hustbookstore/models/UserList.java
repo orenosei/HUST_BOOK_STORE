@@ -58,7 +58,8 @@ public class UserList {
     }
 
     public static boolean registerUser(User user) {
-        String query = "INSERT INTO user (username, password, question, answer, name, phonenumber, email, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO user (username, password, question, answer, name, phonenumber, email, address) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connect.prepareStatement(query)) {
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getPassword());
@@ -89,6 +90,32 @@ public class UserList {
 
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean verifySecurityInfo(String username, String question, String answer) {
+        String sql = "SELECT 1 FROM user WHERE username = ? AND question = ? AND answer = ?";
+        try (PreparedStatement stmt = connect.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            stmt.setString(2, question);
+            stmt.setString(3, answer);
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean updatePassword(String username, String newPassword) {
+        String sql = "UPDATE user SET password = ? WHERE username = ?";
+        try (PreparedStatement stmt = connect.prepareStatement(sql)) {
+            stmt.setString(1, newPassword);
+            stmt.setString(2, username);
+            return stmt.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
