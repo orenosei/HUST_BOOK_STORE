@@ -8,7 +8,9 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -25,9 +27,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 
 import java.util.List;
+import sample.hustbookstore.models.database;
 
 import static sample.hustbookstore.LaunchApplication.localCart;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Optional;
+
+import static sample.hustbookstore.LaunchApplication.*;
 
 public class UserCartController implements CartUpdateListener{
 
@@ -60,6 +69,9 @@ public class UserCartController implements CartUpdateListener{
 
     private List<Province> provinces;
 
+    private Alert alert;
+
+    private float percent = 0;
 
     public void display() {
         Task<ObservableList<CartItem>> loadItemsTask = new Task<>() {
@@ -103,6 +115,7 @@ public class UserCartController implements CartUpdateListener{
 
     public void showSubTotalValue(){
         subTotalValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())));
+        totalValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())*(1-percent)));
     }
 
     public void selectAddress(){
@@ -157,5 +170,41 @@ public class UserCartController implements CartUpdateListener{
         selectAddress();
         Cart.setCartUpdateListener(this);
         display();
+    }
+
+    private Connection connect = database.connectDB();
+
+    String voucherCode;
+
+    public void pressVoucherBtn(){
+        if(voucherField.getText().isEmpty()){
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter a voucher code!");
+            alert.showAndWait();
+        }else{
+            voucherCode = voucherField.getText();
+
+            if (localVoucher.isVoucherExists(voucherCode)) {
+                alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("CONFIRMATION MESSAGE");
+                alert.setHeaderText(null);
+                alert.setContentText("Are you sure you want to apply this voucher?\nPlease note that only one voucher can be applied to an order!");
+
+                Optional<ButtonType> confirm = alert.showAndWait();
+                if (confirm.isPresent() && confirm.get() == ButtonType.OK) {
+                    percent = (localVoucher.getVoucher(voucherCode).getDiscount())/100f;
+                    discountValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())*percent));
+                    totalValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())*(1-percent)));
+                }
+            } else {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR MESSAGE");
+                alert.setHeaderText(null);
+                alert.setContentText("Voucher does not exist!");
+                alert.showAndWait();
+            }
+        }
     }
 }
