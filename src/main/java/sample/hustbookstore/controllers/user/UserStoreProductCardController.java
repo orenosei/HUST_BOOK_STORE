@@ -93,7 +93,7 @@ public class UserStoreProductCardController implements Initializable {
 
     public String askedItem;
 
-    public void setProdData(Product prodData) {
+    public void setData(Product prodData) {
         this.productAddToCart = prodData;
         String imagePath;
         if (prodData instanceof Book) {

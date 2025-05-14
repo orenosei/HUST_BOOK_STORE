@@ -227,6 +227,7 @@ public class HomeScreenController implements Initializable {
 
     public void displayUsername() {
         String username = localAdmin.getUsername();
+        if(username == null) username = "Admin";
         this.username.setText(username);
         if (username.length() > 10) {
             this.username.setText(username.substring(0, 10) + "...");

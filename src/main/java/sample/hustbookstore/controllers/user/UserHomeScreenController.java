@@ -12,6 +12,9 @@ import sample.hustbookstore.controllers.admin.HomeScreenController;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static sample.hustbookstore.LaunchApplication.localAdmin;
+import static sample.hustbookstore.LaunchApplication.localUser;
+
 public class UserHomeScreenController extends HomeScreenController {
 
     @FXML
@@ -89,6 +92,19 @@ public class UserHomeScreenController extends HomeScreenController {
         }
     }
 
+    @Override
+    public void displayUsername() {
+        String username = localUser.getUsername();
+        if(username == null) username = "User";
+        this.username.setText(username);
+        if (username.length() > 10) {
+            this.username.setText(username.substring(0, 10) + "...");
+        } else if (username.length() == 0) {
+            this.username.setText("Not logged in");
+        } else {
+        }
+    }
+
     @FXML
     private void handleSidebarButtonAction(ActionEvent event) {
         if (event.getSource() == dashboard_btn) {
@@ -96,7 +112,7 @@ public class UserHomeScreenController extends HomeScreenController {
             profileScreen.setVisible(false);
             storeScreen.setVisible(false);
             cartScreen.setVisible(false);
-            sync_btn.setVisible(false);
+            //sync_btn.setVisible(false);
             showHeaderAnimation();
 
 
@@ -106,7 +122,7 @@ public class UserHomeScreenController extends HomeScreenController {
             storeScreen.setVisible(true);
             headerPane.setVisible(false);
             cartScreen.setVisible(false);
-            sync_btn.setVisible(true);
+            //sync_btn.setVisible(true);
 
 
         } else if (event.getSource() == profile_btn) {
@@ -115,7 +131,7 @@ public class UserHomeScreenController extends HomeScreenController {
             storeScreen.setVisible(false);
             headerPane.setVisible(false);
             cartScreen.setVisible(false);
-            sync_btn.setVisible(false);
+            //sync_btn.setVisible(false);
 
         }
         else if (event.getSource() == cart_btn) {
@@ -123,7 +139,7 @@ public class UserHomeScreenController extends HomeScreenController {
             profileScreen.setVisible(false);
             storeScreen.setVisible(false);
             cartScreen.setVisible(true);
-            sync_btn.setVisible(false);
+            //sync_btn.setVisible(false);
             headerPane.setVisible(false);
 
 
@@ -133,13 +149,13 @@ public class UserHomeScreenController extends HomeScreenController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //displayUsername();
+        displayUsername();
         loadDashboard();
         dashboardScreen.setVisible(true);
         profileScreen.setVisible(false);
         storeScreen.setVisible(false);
         cartScreen.setVisible(false);
-//        sync_btn.setVisible(false);
+        sync_btn.setVisible(false);
         //headerPane.setVisible(true);
 
         loadStore();
