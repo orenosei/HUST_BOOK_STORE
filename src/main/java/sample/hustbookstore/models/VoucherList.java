@@ -107,6 +107,25 @@ public class VoucherList {
         }
     }
 
-
+    public Voucher getVoucher(String voucherCode) {
+        String query = "SELECT * FROM voucher WHERE code = ?";
+        try (PreparedStatement prepare = connect.prepareStatement(query)) {
+            prepare.setString(1, voucherCode);
+            ResultSet result = prepare.executeQuery();
+            if (result.next()) {
+                Voucher voucher = new Voucher(
+                        result.getString("code"),
+                        result.getInt("remaining"),
+                        result.getFloat("discount"),
+                        result.getDate("duration").toLocalDate(),
+                        result.getInt("voucher_id")
+                );
+                return voucher;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

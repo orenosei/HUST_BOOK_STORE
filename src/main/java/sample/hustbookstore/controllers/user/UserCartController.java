@@ -21,8 +21,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Optional;
 
-import static sample.hustbookstore.LaunchApplication.localCart;
-import static sample.hustbookstore.LaunchApplication.localUser;
+import static sample.hustbookstore.LaunchApplication.*;
 
 public class UserCartController implements CartUpdateListener{
 
@@ -50,6 +49,8 @@ public class UserCartController implements CartUpdateListener{
     private TextField voucherField;
 
     private Alert alert;
+
+    private float percent = 0;
 
     public void display() {
     Task<ObservableList<CartItem>> loadItemsTask = new Task<>() {
@@ -93,6 +94,7 @@ public class UserCartController implements CartUpdateListener{
 
     public void showSubTotalValue(){
         subTotalValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())));
+        totalValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())*(1-percent)));
     }
 
     public void initialize(){
@@ -112,37 +114,26 @@ public class UserCartController implements CartUpdateListener{
             alert.setContentText("Please enter a voucher code!");
             alert.showAndWait();
         }else{
-            String selectData = "SELECT code, discount FROM voucher WHERE code = ?";
-            try(PreparedStatement prepare = connect.prepareStatement(selectData)){
+            voucherCode = voucherField.getText();
 
-                prepare.setString(1, voucherField.getText());
+            if (localVoucher.isVoucherExists(voucherCode)) {
+                alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("CONFIRMATION MESSAGE");
+                alert.setHeaderText(null);
+                alert.setContentText("Are you sure you want to apply this voucher?\nPlease note that only one voucher can be applied to an order!");
 
-                ResultSet result = prepare.executeQuery();
-                if (result.next()) {
-                    float percent;
-                    alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("CONFIRMATION MESSAGE");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Are you sure you want to apply this voucher?\nPlease note that only one voucher can be applied to an order!");
-
-                    Optional<ButtonType> confirm = alert.showAndWait();
-                    if (confirm.isPresent() && confirm.get() == ButtonType.OK) {
-                        percent = (result.getFloat(2))/100f;
-                        discountValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())*percent));
-                        totalValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())*(1-percent)));
-                        voucherCode = voucherField.getText();
-                        System.out.println(voucherCode);
-                    } else {
-                    }
-                } else {
-                    alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("ERROR MESSAGE");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Voucher does not exist!");
-                    alert.showAndWait();
+                Optional<ButtonType> confirm = alert.showAndWait();
+                if (confirm.isPresent() && confirm.get() == ButtonType.OK) {
+                    percent = (localVoucher.getVoucher(voucherCode).getDiscount())/100f;
+                    discountValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())*percent));
+                    totalValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())*(1-percent)));
                 }
-            }catch(Exception e) {
-                e.printStackTrace();
+            } else {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR MESSAGE");
+                alert.setHeaderText(null);
+                alert.setContentText("Voucher does not exist!");
+                alert.showAndWait();
             }
         }
     }
