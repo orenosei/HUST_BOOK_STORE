@@ -3,16 +3,14 @@ package sample.hustbookstore.controllers.user;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -62,11 +60,58 @@ public class UserCartController implements CartUpdateListener{
     private TextField voucherField;
 
     @FXML
+    private TextField nameField;
+
+    @FXML
+    private TextField phoneNumberField;
+
+    @FXML
+    private TextField specificAddressField;
+
+
+    @FXML
     private Button placeOrderBtn;
 
     @FXML private ComboBox<Province> cboProvince;
     @FXML private ComboBox<District> cboDistrict;
     @FXML private ComboBox<Ward> cboWard;
+
+    @FXML
+    private AnchorPane cartPane;
+
+    @FXML
+    private Button billOkBtn;
+
+    @FXML
+    private AnchorPane billPane;
+
+    @FXML
+    private TextField billReceiverAddress;
+
+    @FXML
+    private TextField billReceiverName;
+
+    @FXML
+    private TextField billReceiverPhoneNumber;
+
+    @FXML
+    private Text discountValueInBill;
+
+    @FXML
+    private TableView<CartItem> orderListTable;
+    @FXML
+    private TableColumn<CartItem, String> prodNameCol;
+    @FXML
+    private TableColumn<CartItem, Number> prodQtyCol;
+    @FXML
+    private TableColumn<CartItem, String> prodPriceCol;
+
+
+    @FXML
+    private Text subTotalValueInBill;
+
+    @FXML
+    private Text totalValueInBill;
 
 
     private Alert alert;
@@ -220,32 +265,141 @@ public class UserCartController implements CartUpdateListener{
         }
 
         // In bill lên màn hình để câu giờ cho các hành động tiếp theo:
+        cartPane.setOpacity(0.2);
+        billPane.setVisible(true);
+        updateBillDetails(selectedItems);
 
-        // BillList add bill mới tham số là List<CartItems> getSelectedCartItems()
-        float usedVoucher = voucherCode == null ? 0 : localVoucher.getVoucher(voucherCode).getDiscount();
+//        // BillList add bill mới tham số là List<CartItems> getSelectedCartItems()
+//        float usedVoucher = voucherCode == null ? 0 : localVoucher.getVoucher(voucherCode).getDiscount();
+//
+//        Bill newBill = billList.prepareBill(localUser.getUserId(), selectedItems, usedVoucher);
+//        billList.addBill(newBill);
+//
+//        // Inventory xử lý chỉnh sửa stock dựa vào các sản phẩm trong List<CartItems> getSelectedCartItems()
+//        localInventory.updateProductStock(selectedItems);
+//
+//        // Voucher trừ remaining nếu có sử dụng
+//        if(voucherCode != null){
+//            localVoucher.updateVoucherRemaining(voucherCode);
+//        }
+//
+//        //load lại cart: dùng lại method handleDelete
+//        for(CartItem item: selectedItems){
+//            localCart.deleteCartItem(item);
+//        }
+//        display();
+//
+//        //load lại store => dùng nút sync
+//        if(userHomeScreenController != null) userHomeScreenController.reloadStore();
 
-        Bill newBill = billList.prepareBill(localUser.getUserId(), selectedItems, usedVoucher);
-        billList.addBill(newBill);
+        // Tạo task xử lý background
+        Task<Void> backgroundTask = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                voucherCode = voucherField.getText();
 
-        // Inventory xử lý chỉnh sửa stock dựa vào các sản phẩm trong List<CartItems> getSelectedCartItems()
-        localInventory.updateProductStock(selectedItems);
+//                float usedVoucher = voucherCode == null ? 0 : localVoucher.getVoucher(voucherCode).getDiscount();
 
-        // Voucher trừ remaining nếu có sử dụng
-        if(voucherCode != null){
-            localVoucher.updateVoucherRemaining(voucherCode);
-        }
+                float usedVoucher = 0;
+                if (voucherCode != null && !voucherCode.isEmpty()) {
+                    Voucher voucher = localVoucher.getVoucher(voucherCode);
+                    if (voucher != null) {
+                        usedVoucher = voucher.getDiscount();
+                    }
+                }
 
-        //load lại cart: dùng lại method handleDelete
-        for(CartItem item: selectedItems){
-            localCart.deleteCartItem(item);
-        }
-        display();
+                Bill newBill = billList.prepareBill(localUser.getUserId(), selectedItems, usedVoucher);
+                billList.addBill(newBill);
 
-        //load lại store => dùng nút sync
-//        if(userHomeScreenController != null) userHomeScreenController.loadStore();
-        if(userHomeScreenController != null) userHomeScreenController.reloadStore();
+                localInventory.updateProductStock(selectedItems);
+
+                if (voucherCode != null) {
+                    localVoucher.updateVoucherRemaining(voucherCode);
+                }
+
+
+                Platform.runLater(() -> {
+                    for (CartItem item : selectedItems) {
+                        localCart.deleteCartItem(item);
+                    }
+                    display();
+                });
+
+                return null;
+            }
+        };
+
+        // Xử lý khi task hoàn thành
+        backgroundTask.setOnSucceeded(e -> {
+            Platform.runLater(() -> {
+//                for (CartItem item : selectedItems) {
+//                    localCart.deleteCartItem(item);
+//                }
+//                display();
+
+                if (userHomeScreenController != null) {
+                    userHomeScreenController.reloadStore();
+                }
+            });
+        });
+
+        // Xử lý lỗi
+        backgroundTask.setOnFailed(e -> {
+            Throwable exception = backgroundTask.getException();
+            Platform.runLater(() -> {
+                showErrorAlert("Error processing order: " + exception.getMessage());
+                exception.printStackTrace();
+            });
+        });
+
+        // Chạy task trong thread riêng
+        new Thread(backgroundTask).start();
 
     }
+
+    private void updateBillDetails(List<CartItem> selectedItems) {
+
+        billReceiverName.setText(nameField.getText());
+        billReceiverPhoneNumber.setText(phoneNumberField.getText());
+
+        String address = String.format("%s, %s, %s, %s",
+                specificAddressField.getText(),
+                cboWard.getSelectionModel().getSelectedItem().getName(),
+                cboDistrict.getSelectionModel().getSelectedItem().getName(),
+                cboProvince.getSelectionModel().getSelectedItem().getName()
+        );
+        billReceiverAddress.setText(address);
+
+
+        discountValueInBill.setText(discountValue.getText());
+        subTotalValueInBill.setText(subTotalValue.getText());
+        totalValueInBill.setText(totalValue.getText());
+
+
+        setupOrderTable(selectedItems);
+    }
+
+    private void setupOrderTable(List<CartItem> selectedItems) {
+        ObservableList<CartItem> items = FXCollections.observableArrayList(selectedItems);
+
+        prodNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProduct().getName()));
+        prodQtyCol.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantity()));
+        prodPriceCol.setCellValueFactory(cellData -> new SimpleStringProperty(
+                String.format("%,.0fđ", cellData.getValue().getProduct().getSellPrice())
+        ));
+
+        orderListTable.setItems(items);
+    }
+
+    @FXML
+    private void handleBillOk() {
+        billPane.setVisible(false);
+        cartPane.setOpacity(1);
+    }
+
+
+
+
     private UserHomeScreenController userHomeScreenController;
 
     public void setHomeScreenController(UserHomeScreenController userHomeScreenController) {
@@ -256,6 +410,11 @@ public class UserCartController implements CartUpdateListener{
     public void initialize(){
         selectAddress();
         Cart.setCartUpdateListener(this);
-        Platform.runLater(this::display);
+        //Platform.runLater(this::display);
+        display();
+
+        billPane.setVisible(false);
+
+        orderListTable.setPlaceholder(new Label("Không có sản phẩm nào"));
     }
 }
