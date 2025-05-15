@@ -146,81 +146,81 @@ public class UserLoginController {
         }
     }
 
-//    private void loadHomeScreen() {
-//        waitingScreen.setVisible(true);
-//
-//        Task<AnchorPane> loadTask = new Task<>() {
-//            @Override
-//            protected AnchorPane call() throws IOException {
-//                return FXMLLoader.load(getClass().getResource("/sample/hustbookstore/user/user-home-view.fxml"));
-//            }
-//        };
-//
-//        loadTask.setOnSucceeded(event -> {
-//            try {
-//                AnchorPane root = loadTask.getValue();
-//                Stage currentStage = (Stage) si_loginBtn.getScene().getWindow();
-//                currentStage.close();
-//
-//                Stage stage = new Stage();
-//                stage.setTitle("HUSTBookStore");
-//                stage.setScene(new Scene(root));
-//                stage.setMinWidth(1280);
-//                stage.setMinHeight(720);
-//                stage.show();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//                showAlert(Alert.AlertType.ERROR, "Failed to display main window!");
-//            } finally {
-//                waitingScreen.setVisible(false);
-//            }
-//        });
-//
-//        loadTask.setOnFailed(event -> {
-//            waitingScreen.setVisible(false);
-//            showAlert(Alert.AlertType.ERROR, "Failed to load main window!");
-//        });
-//
-//        new Thread(loadTask).start();
-//    }
-
     private void loadHomeScreen() {
         waitingScreen.setVisible(true);
 
-        Task<Void> prepareTask = new Task<>() {
+        Task<AnchorPane> loadTask = new Task<>() {
             @Override
-            protected Void call() {
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return null;
+            protected AnchorPane call() throws IOException {
+                return FXMLLoader.load(getClass().getResource("/sample/hustbookstore/user/user-home-view.fxml"));
             }
         };
 
-        prepareTask.setOnSucceeded(e -> {
+        loadTask.setOnSucceeded(event -> {
             try {
-                AnchorPane root = userHomeRoot;
+                AnchorPane root = loadTask.getValue();
                 Stage currentStage = (Stage) si_loginBtn.getScene().getWindow();
                 currentStage.close();
 
                 Stage stage = new Stage();
+                stage.setTitle("HUSTBookStore");
                 stage.setScene(new Scene(root));
+                stage.setMinWidth(1280);
+                stage.setMinHeight(720);
                 stage.show();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                showAlert(Alert.AlertType.ERROR, "Failed to load user window!");
+            } catch (Exception e) {
+                e.printStackTrace();
+                showAlert(Alert.AlertType.ERROR, "Failed to display main window!");
+            } finally {
+                waitingScreen.setVisible(false);
             }
         });
 
-        prepareTask.setOnFailed(e -> {
+        loadTask.setOnFailed(event -> {
             waitingScreen.setVisible(false);
-            showAlert(Alert.AlertType.ERROR, "An error occurred while loading the user home screen!");
+            showAlert(Alert.AlertType.ERROR, "Failed to load main window!");
         });
 
-        new Thread(prepareTask).start();
+        new Thread(loadTask).start();
     }
+
+//    private void loadHomeScreen() {
+//        waitingScreen.setVisible(true);
+//
+//        Task<Void> prepareTask = new Task<>() {
+//            @Override
+//            protected Void call() {
+//                try {
+//                    Thread.sleep(500);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                return null;
+//            }
+//        };
+//
+//        prepareTask.setOnSucceeded(e -> {
+//            try {
+//                AnchorPane root = userHomeRoot;
+//                Stage currentStage = (Stage) si_loginBtn.getScene().getWindow();
+//                currentStage.close();
+//
+//                Stage stage = new Stage();
+//                stage.setScene(new Scene(root));
+//                stage.show();
+//            } catch (Exception ex) {
+//                ex.printStackTrace();
+//                showAlert(Alert.AlertType.ERROR, "Failed to load user window!");
+//            }
+//        });
+//
+//        prepareTask.setOnFailed(e -> {
+//            waitingScreen.setVisible(false);
+//            showAlert(Alert.AlertType.ERROR, "An error occurred while loading the user home screen!");
+//        });
+//
+//        new Thread(prepareTask).start();
+//    }
 
 
     private void showAlert(Alert.AlertType type, String content) {
