@@ -269,30 +269,7 @@ public class UserCartController implements CartUpdateListener{
         billPane.setVisible(true);
         updateBillDetails(selectedItems);
 
-//        // BillList add bill mới tham số là List<CartItems> getSelectedCartItems()
-//        float usedVoucher = voucherCode == null ? 0 : localVoucher.getVoucher(voucherCode).getDiscount();
-//
-//        Bill newBill = billList.prepareBill(localUser.getUserId(), selectedItems, usedVoucher);
-//        billList.addBill(newBill);
-//
-//        // Inventory xử lý chỉnh sửa stock dựa vào các sản phẩm trong List<CartItems> getSelectedCartItems()
-//        localInventory.updateProductStock(selectedItems);
-//
-//        // Voucher trừ remaining nếu có sử dụng
-//        if(voucherCode != null){
-//            localVoucher.updateVoucherRemaining(voucherCode);
-//        }
-//
-//        //load lại cart: dùng lại method handleDelete
-//        for(CartItem item: selectedItems){
-//            localCart.deleteCartItem(item);
-//        }
-//        display();
-//
-//        //load lại store => dùng nút sync
-//        if(userHomeScreenController != null) userHomeScreenController.reloadStore();
 
-        // Tạo task xử lý background
         Task<Void> backgroundTask = new Task<>() {
             @Override
             protected Void call() throws Exception {
@@ -329,21 +306,14 @@ public class UserCartController implements CartUpdateListener{
             }
         };
 
-        // Xử lý khi task hoàn thành
         backgroundTask.setOnSucceeded(e -> {
             Platform.runLater(() -> {
-//                for (CartItem item : selectedItems) {
-//                    localCart.deleteCartItem(item);
-//                }
-//                display();
-
                 if (userHomeScreenController != null) {
                     userHomeScreenController.reloadStore();
                 }
             });
         });
 
-        // Xử lý lỗi
         backgroundTask.setOnFailed(e -> {
             Throwable exception = backgroundTask.getException();
             Platform.runLater(() -> {
@@ -352,7 +322,6 @@ public class UserCartController implements CartUpdateListener{
             });
         });
 
-        // Chạy task trong thread riêng
         new Thread(backgroundTask).start();
 
     }
