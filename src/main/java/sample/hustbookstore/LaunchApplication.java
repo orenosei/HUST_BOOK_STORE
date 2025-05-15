@@ -8,9 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import sample.hustbookstore.controllers.admin.InventoryController;
 import sample.hustbookstore.models.*;
 
 import java.io.IOException;
@@ -42,6 +44,11 @@ public class LaunchApplication extends Application {
     public static Inventory localInventory = new Inventory();
 
     public static Store localStore = new Store();
+
+    public static AnchorPane localInventoryScreen;
+    public static InventoryController localInventoryController;
+    public static AnchorPane localStoreScreen;
+    public static AnchorPane localUserStoreScreen;
 
 
 
@@ -78,6 +85,13 @@ public class LaunchApplication extends Application {
 
         VoucherList.initialize();
         Cart.initialize();
+
+        FXMLLoader inventoryLoader = new FXMLLoader(getClass().getResource("/sample/hustbookstore/admin/inventory-view.fxml"));
+        localInventoryScreen = inventoryLoader.load();
+        localInventoryController = inventoryLoader.getController();
+
+        localStoreScreen = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/store-view.fxml"));
+        localUserStoreScreen = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/user/user-store-view.fxml"));
 
         FXMLLoader fxmlLoader = new FXMLLoader(LaunchApplication.class.getResource("LaunchApplication.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 640, 720);

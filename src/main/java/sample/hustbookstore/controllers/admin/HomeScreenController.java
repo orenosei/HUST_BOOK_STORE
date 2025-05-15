@@ -24,8 +24,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import static sample.hustbookstore.LaunchApplication.localAdmin;
-import static sample.hustbookstore.LaunchApplication.localStore;
+import static sample.hustbookstore.LaunchApplication.*;
 
 public class HomeScreenController implements Initializable {
 
@@ -155,17 +154,33 @@ public class HomeScreenController implements Initializable {
 //            e.printStackTrace();
 //        }
 //    }
+//    public void loadInventory() {
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource(getInventoryPath()));
+//            AnchorPane root = loader.load();
+//
+//            // Lấy controller của inventory và truyền tham chiếu HomeScreenController
+//            InventoryController inventoryController = loader.getController();
+//            inventoryController.setHomeScreenController(this);
+//
+//            inventoryScreen.getChildren().clear();
+//            inventoryScreen.getChildren().add(root);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
     public void loadInventory() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(getInventoryPath()));
-            AnchorPane root = loader.load();
+            if (localInventoryScreen == null) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(getInventoryPath()));
+                localInventoryScreen = loader.load();
+                localInventoryController = loader.getController();
+            }
 
-            // Lấy controller của inventory và truyền tham chiếu HomeScreenController
-            InventoryController inventoryController = loader.getController();
-            inventoryController.setHomeScreenController(this);
+            localInventoryController.setHomeScreenController(this);
 
             inventoryScreen.getChildren().clear();
-            inventoryScreen.getChildren().add(root);
+            inventoryScreen.getChildren().add(localInventoryScreen);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -173,7 +188,8 @@ public class HomeScreenController implements Initializable {
 
     public void loadStore() {
         try {
-            AnchorPane root = FXMLLoader.load(getClass().getResource(getStorePath()));
+//            AnchorPane root = FXMLLoader.load(getClass().getResource(getStorePath()));
+            AnchorPane root = localStoreScreen;
             Platform.runLater(() -> {
                 storeScreen.getChildren().clear();
                 storeScreen.getChildren().add(root);
@@ -307,8 +323,6 @@ public class HomeScreenController implements Initializable {
     }
 
 
-//    @FXML
-//    private Text waitingText;
 
     @FXML
     private FontAwesomeIcon syncIcon;

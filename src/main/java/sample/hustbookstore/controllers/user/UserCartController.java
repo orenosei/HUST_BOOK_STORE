@@ -39,7 +39,7 @@ public class UserCartController implements CartUpdateListener{
 
     @Override
     public void onCartUpdated() {
-        Platform.runLater(this::display); // Cập nhật UI trên luồng JavaFX
+        Platform.runLater(this::display);
     }
 
     @FXML
@@ -69,93 +69,79 @@ public class UserCartController implements CartUpdateListener{
 
     private float percent = 0;
 
-    public void display() {
-        Task<ObservableList<CartItem>> loadItemsTask = new Task<>() {
-            @Override
-            protected ObservableList<CartItem> call() throws Exception {
-                return localCart.getCartItemList(localCart.getCartId());
-            }
-        };
-
-        loadItemsTask.setOnSucceeded(event -> {
-            ObservableList<CartItem> itemList = loadItemsTask.getValue();
-            vboxPane.getChildren().clear();
-
-            for (int i = 0; i < itemList.size(); i++) {
-                try {
-                    FXMLLoader load = new FXMLLoader();
-                    load.setLocation(getClass().getResource("/sample/hustbookstore/user/user-cartItemCard-view.fxml"));
-                    AnchorPane pane = load.load();
-                    UserCartItemController itemC = load.getController();
-
-                    itemC.setUserCartController(this);
-                    itemC.setData(itemList.get(i));
-                    vboxPane.getChildren().add(pane);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            showSubTotalValue();
-        });
-
-        loadItemsTask.setOnFailed(event -> {
-            Throwable error = loadItemsTask.getException();
-            error.printStackTrace();
-        });
-
-        Thread thread = new Thread(loadItemsTask);
-        thread.setDaemon(true);
-        thread.start();
-    }
-
-
     public void showSubTotalValue(){
         subTotalValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())));
         totalValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())*(1-percent)));
     }
 
-    public void selectAddress(){
-        Platform.runLater(() -> {
-            try {
+    public void display() {
+        try {
+            ObservableList<CartItem> itemList = localCart.getCartItemList(localCart.getCartId());
+            vboxPane.getChildren().clear();
+
+            for (CartItem cartItem : itemList) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/hustbookstore/user/user-cartItemCard-view.fxml"));
+                AnchorPane pane = loader.load();
+                UserCartItemController itemController = loader.getController();
+
+                itemController.setUserCartController(this);
+                itemController.setData(cartItem);
+                vboxPane.getChildren().add(pane);
+            }
+
+            showSubTotalValue();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void selectAddress() {
+        Task<Void> addressTask = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
                 ObjectMapper objectMapper = new ObjectMapper();
                 File jsonFile = new File("src/main/resources/sample/hustbookstore/data/dvhcvn.json");
-
                 JsonNode rootNode = objectMapper.readTree(jsonFile);
                 JsonNode dataNode = rootNode.get("data");
 
-                List<Province> provinces = objectMapper.convertValue(dataNode, new TypeReference<List<Province>>() {});
+                List<Province> provinces = objectMapper.convertValue(dataNode, new TypeReference<>() {});
 
-                ObservableList<Province> provinceList = FXCollections.observableArrayList(provinces);
-                cboProvince.setItems(provinceList);
+                Platform.runLater(() -> {
+                    ObservableList<Province> provinceList = FXCollections.observableArrayList(provinces);
+                    cboProvince.setItems(provinceList);
 
-                cboProvince.setOnAction(event -> {
-                    Province selectedProvince = cboProvince.getSelectionModel().getSelectedItem();
-                    if (selectedProvince != null) {
-                        ObservableList<District> districtList = FXCollections.observableArrayList(selectedProvince.getLevel2s());
-                        cboDistrict.setItems(districtList);
-                        cboWard.getItems().clear();
-                    }
+                    cboProvince.setOnAction(event -> handleProvinceSelection());
+                    cboDistrict.setOnAction(event -> handleDistrictSelection());
+                    cboWard.setOnAction(event -> showAddress());
                 });
 
-                cboDistrict.setOnAction(event -> {
-                    District selectedDistrict = cboDistrict.getSelectionModel().getSelectedItem();
-                    if (selectedDistrict != null) {
-                        ObservableList<Ward> wardList = FXCollections.observableArrayList(selectedDistrict.getLevel3s());
-                        cboWard.setItems(wardList);
-                    }
-                });
-
-                cboWard.setOnAction(event -> {
-                    Ward selectedWard = cboWard.getSelectionModel().getSelectedItem();
-                    if(selectedWard != null){
-                        showAddress();
-                    }
-                });
-
-            } catch (Exception e) {
-                e.printStackTrace();
+                return null;
             }
+        };
+
+        addressTask.setOnFailed(event -> {
+            Throwable e = addressTask.getException();
+            e.printStackTrace();
         });
+
+        new Thread(addressTask).start();
+    }
+
+    private void handleProvinceSelection() {
+        Province selectedProvince = cboProvince.getSelectionModel().getSelectedItem();
+        if (selectedProvince != null) {
+            ObservableList<District> districtList = FXCollections.observableArrayList(selectedProvince.getLevel2s());
+            cboDistrict.setItems(districtList);
+            cboWard.getItems().clear();
+        }
+    }
+
+    private void handleDistrictSelection() {
+        District selectedDistrict = cboDistrict.getSelectionModel().getSelectedItem();
+        if (selectedDistrict != null) {
+            ObservableList<Ward> wardList = FXCollections.observableArrayList(selectedDistrict.getLevel3s());
+            cboWard.setItems(wardList);
+        }
     }
 
     public void showAddress(){
@@ -202,6 +188,6 @@ public class UserCartController implements CartUpdateListener{
     public void initialize(){
         selectAddress();
         Cart.setCartUpdateListener(this);
-        display();
+        Platform.runLater(this::display);
     }
 }

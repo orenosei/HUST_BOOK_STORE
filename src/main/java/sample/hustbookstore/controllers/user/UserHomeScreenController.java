@@ -1,6 +1,7 @@
 package sample.hustbookstore.controllers.user;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,8 +13,7 @@ import sample.hustbookstore.controllers.admin.HomeScreenController;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static sample.hustbookstore.LaunchApplication.localAdmin;
-import static sample.hustbookstore.LaunchApplication.localUser;
+import static sample.hustbookstore.LaunchApplication.*;
 
 public class UserHomeScreenController extends HomeScreenController {
 
@@ -71,10 +71,10 @@ public class UserHomeScreenController extends HomeScreenController {
         return "/sample/hustbookstore/user/user-dashboard-view.fxml";
     }
     
-    @Override
-    protected String getStorePath() {
-        return "/sample/hustbookstore/user/user-store-view.fxml";
-    }
+//    @Override
+//    protected String getStorePath() {
+//        return "/sample/hustbookstore/user/user-store-view.fxml";
+//    }
     
     @Override
     protected String getProfilePath() {
@@ -87,6 +87,18 @@ public class UserHomeScreenController extends HomeScreenController {
             AnchorPane root = FXMLLoader.load(getClass().getResource(getCartPath()));
             cartScreen.getChildren().clear();
             cartScreen.getChildren().add(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @Override
+    public void loadStore() {
+        try {
+            AnchorPane root = localUserStoreScreen;
+            Platform.runLater(() -> {
+                storeScreen.getChildren().clear();
+                storeScreen.getChildren().add(root);
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
