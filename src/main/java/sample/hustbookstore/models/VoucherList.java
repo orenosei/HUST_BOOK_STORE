@@ -36,6 +36,18 @@ public class VoucherList {
         }
     }
 
+    public boolean updateVoucherRemaining(String code) {
+        String updateQuery = "UPDATE voucher SET remaining = remaining - 1 WHERE code = ?";
+        try (PreparedStatement prepare = connect.prepareStatement(updateQuery)) {
+            prepare.setString(1, code);
+            int rowsAffected = prepare.executeUpdate();
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
     public ObservableList<Voucher> getAllVouchers() {
         ObservableList<Voucher> voucherList = FXCollections.observableArrayList();

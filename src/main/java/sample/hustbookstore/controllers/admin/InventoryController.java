@@ -149,7 +149,6 @@ public class InventoryController {
 
 
     private Image image;
-    private String currentImagePath;
 
     public void setTypeList(){
         List<String> typeL = new ArrayList<String>();
@@ -312,7 +311,7 @@ public class InventoryController {
             try {
                 currentImageUrl = getImageUrl(file);
 
-                image = new Image(file.toURI().toString(), 1000, 1600, true, true);
+                image = new Image(file.toURI().toString(), 100, 160, true, true);
                 inventory_imageView.setImage(image);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -542,7 +541,7 @@ public void setUpdate_btn() {
             if (prod.getImage() != null && !prod.getImage().isEmpty()) {
                 // Sử dụng URL từ cloudinary
                 String imageUrl = prod.getImage();
-                Image img = new Image(imageUrl, 1000, 1600, true, true);
+                Image img = new Image(imageUrl, 100, 160, true, true);
                 inventory_imageView.setImage(img);
                 currentImageUrl = imageUrl;
             } else {

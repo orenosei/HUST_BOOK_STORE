@@ -16,8 +16,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import sample.hustbookstore.models.Cart;
-import sample.hustbookstore.models.CartItem;
+
+import sample.hustbookstore.models.*;
 import sample.hustbookstore.models.address.District;
 import sample.hustbookstore.models.address.Province;
 import sample.hustbookstore.models.address.Ward;
@@ -26,6 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static sample.hustbookstore.LaunchApplication.localCart;
@@ -60,6 +61,9 @@ public class UserCartController implements CartUpdateListener{
     @FXML
     private TextField voucherField;
 
+    @FXML
+    private Button placeOrderBtn;
+
     @FXML private ComboBox<Province> cboProvince;
     @FXML private ComboBox<District> cboDistrict;
     @FXML private ComboBox<Ward> cboWard;
@@ -68,6 +72,8 @@ public class UserCartController implements CartUpdateListener{
     private Alert alert;
 
     private float percent = 0;
+
+    private BillList billList = new BillList();
 
     public void showSubTotalValue(){
         subTotalValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())));
@@ -152,48 +158,98 @@ public class UserCartController implements CartUpdateListener{
 
     String voucherCode;
 
-    public void pressVoucherBtn(){
-        if(voucherField.getText().isEmpty()){
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Please enter a voucher code!");
-            alert.showAndWait();
-        }else{
-            voucherCode = voucherField.getText();
+    public void pressVoucherBtn() {
+        if (voucherField.getText().isEmpty()) {
+            showErrorAlert("Please enter a voucher code!");
+            return;
+        }
 
-            if (localVoucher.isVoucherExists(voucherCode)) {
-                alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("CONFIRMATION MESSAGE");
-                alert.setHeaderText(null);
-                alert.setContentText("Are you sure you want to apply this voucher?\nPlease note that only one voucher can be applied to an order!");
+        voucherCode = voucherField.getText();
+        if (!localVoucher.isVoucherExists(voucherCode)) {
+            showErrorAlert("Voucher does not exist!");
+            return;
+        }
+        Voucher voucher = localVoucher.getVoucher(voucherCode);
+        if (voucher.getRemaining() <= 0) {
+            showErrorAlert("This voucher has been used up!");
+            return;
+        }
+        if (voucher.getDuration().isBefore(LocalDate.now())) {
+            showErrorAlert("This voucher has expired!");
+            return;
+        }
+        showConfirmationDialog(voucher);
+    }
 
-                Optional<ButtonType> confirm = alert.showAndWait();
-                if (confirm.isPresent() && confirm.get() == ButtonType.OK) {
-                    percent = (localVoucher.getVoucher(voucherCode).getDiscount())/100f;
-                    discountValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())*percent));
-                    totalValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())*(1-percent)));
-                }
-            } else {
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("ERROR MESSAGE");
-                alert.setHeaderText(null);
-                alert.setContentText("Voucher does not exist!");
-                alert.showAndWait();
-            }
+    private void showConfirmationDialog(Voucher voucher) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("CONFIRMATION MESSAGE");
+        alert.setHeaderText(null);
+        alert.setContentText("Apply this voucher? (Only one voucher per order)");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            float total = localCart.calculateTotalPrice(localCart.getCartId());
+            percent = voucher.getDiscount() / 100f;
+
+            discountValue.setText(String.format("%.2f", total * percent));
+            totalValue.setText(String.format("%.2f", total * (1 - percent)));
         }
     }
 
+    private void showErrorAlert(String message) {
+//        new Alert(Alert.AlertType.ERROR, message).showAndWait();
+        alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Something went wrong =((");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    @FXML
     public void handleOrderBtn(){
         // List<CartItems> getSelectedCartItems()
+        List<CartItem> selectedItems = localCart.getSelectedCartItems(localCart.getCartId());
+
+        // check stock = 0 item => user phai bỏ select
+        for(CartItem item: selectedItems){
+            if(item.getProduct().getStock() == 0){
+                showErrorAlert(item.getProduct().getName() + " is out of stock!");
+                return;
+            }
+        }
 
         // In bill lên màn hình để câu giờ cho các hành động tiếp theo:
-        // BillList add bill mới tham số là List<CartItems> getSelectedCartItems()
-        // Inventory xử lý chỉnh sửa stock dựa vào các sản phẩm trong List<CartItems> getSelectedCartItems()
-        // Voucher trừ remaining nếu có sử dụng
-        //load lại cart: dùng lại method handleDelete
-        //load lại store => dùng nút sync
 
+        // BillList add bill mới tham số là List<CartItems> getSelectedCartItems()
+        float usedVoucher = voucherCode == null ? 0 : localVoucher.getVoucher(voucherCode).getDiscount();
+
+        Bill newBill = billList.prepareBill(localUser.getUserId(), selectedItems, usedVoucher);
+        billList.addBill(newBill);
+
+        // Inventory xử lý chỉnh sửa stock dựa vào các sản phẩm trong List<CartItems> getSelectedCartItems()
+        localInventory.updateProductStock(selectedItems);
+
+        // Voucher trừ remaining nếu có sử dụng
+        if(voucherCode != null){
+            localVoucher.updateVoucherRemaining(voucherCode);
+        }
+
+        //load lại cart: dùng lại method handleDelete
+        for(CartItem item: selectedItems){
+            localCart.deleteCartItem(item);
+        }
+        display();
+
+        //load lại store => dùng nút sync
+//        if(userHomeScreenController != null) userHomeScreenController.loadStore();
+        if(userHomeScreenController != null) userHomeScreenController.reloadStore();
+
+    }
+    private UserHomeScreenController userHomeScreenController;
+
+    public void setHomeScreenController(UserHomeScreenController userHomeScreenController) {
+        this.userHomeScreenController = userHomeScreenController;
     }
 
 

@@ -174,6 +174,19 @@ public class HomeScreenController implements Initializable {
         }
     }
 
+    public void loadNewStore() {
+        try {
+
+            AnchorPane root = FXMLLoader.load(getClass().getResource(getStorePath()));
+            Platform.runLater(() -> {
+                storeScreen.getChildren().clear();
+                storeScreen.getChildren().add(root);
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void loadCustomers() {
         try {
             AnchorPane root = FXMLLoader.load(getClass().getResource(getCustomersPath()));
@@ -318,7 +331,7 @@ public class HomeScreenController implements Initializable {
                 protected Void call() throws Exception {
                     // Thực hiện công việc nặng
                     //Store.initialize();
-                    loadStore();
+                    loadNewStore();
                     return null;
                 }
 
@@ -356,7 +369,7 @@ public class HomeScreenController implements Initializable {
             protected Void call() throws Exception {
                 // Thực hiện công việc nặng
                 //Store.initialize();
-                loadStore();
+                loadNewStore();
                 return null;
             }
 
