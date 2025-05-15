@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static sample.hustbookstore.LaunchApplication.localCart;
@@ -211,14 +213,34 @@ public class Cart {
         return -1;
     }
 
-//    public List<CartItem> getSelectedCartItems() {
-//        String query = """
-//            SELECT * FROM cart_item
-//            WHERE cart_id = ? AND is_selected = true
-//        """;
-//
-//    }
+    public List<CartItem> getSelectedCartItems(int cartId) {
+        List<CartItem> selectedItems = new ArrayList<>();
+        String query = """
+        SELECT * FROM cart_item
+        WHERE cart_id = ? AND is_selected = true
+    """;
 
+        try (PreparedStatement statement = connect.prepareStatement(query)) {
+            statement.setInt(1, cartId);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    CartItem item = new CartItem(
+                            resultSet.getString("product_id"),
+                            resultSet.getInt("quantity"),
+                            resultSet.getBoolean("is_selected")
+
+                    );
+                    selectedItems.add(item);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+
+        return selectedItems;
+    }
 
 
     public static void initialize() {

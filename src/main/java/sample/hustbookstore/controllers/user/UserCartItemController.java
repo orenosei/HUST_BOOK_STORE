@@ -43,7 +43,13 @@ public class UserCartItemController {
         itemName.setText(item.getProduct().getName());
         itemPrice.setText(String.valueOf(item.getProduct().getSellPrice()));
         itemCheckBox.setSelected(item.isSelected());
-        itemSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, item.getProduct().getStock(), item.getQuantity()));
+
+
+        itemSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
+                0,
+                item.getProduct().getStock(),
+                Math.min(item.getProduct().getStock(), item.getQuantity())
+        ));
 
         String imagePath = item.getProduct().getImage();
         try {

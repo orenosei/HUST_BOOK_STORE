@@ -85,6 +85,7 @@ public class LaunchApplication extends Application {
 
         VoucherList.initialize();
         Cart.initialize();
+        BillList.initialize();
 
         FXMLLoader inventoryLoader = new FXMLLoader(getClass().getResource("/sample/hustbookstore/admin/inventory-view.fxml"));
         localInventoryScreen = inventoryLoader.load();
