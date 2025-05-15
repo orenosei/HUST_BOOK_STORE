@@ -354,7 +354,7 @@ public class UserCartController implements CartUpdateListener{
         prodNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProduct().getName()));
         prodQtyCol.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantity()));
         prodPriceCol.setCellValueFactory(cellData -> new SimpleStringProperty(
-                String.format("%,.0fđ", cellData.getValue().getProduct().getSellPrice())
+                String.format("%,.0fđ", cellData.getValue().getProduct().getSellPrice() * cellData.getValue().getQuantity())
         ));
 
         orderListTable.setItems(items);
