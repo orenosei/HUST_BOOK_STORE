@@ -24,6 +24,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import static sample.hustbookstore.LaunchApplication.adminHomeRoot;
 import static sample.hustbookstore.LaunchApplication.localAdmin;
 
 public class LoginController {
@@ -202,7 +203,7 @@ public class LoginController {
 
         prepareTask.setOnSucceeded(e -> {
             try {
-                AnchorPane root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/home-view.fxml"));
+                AnchorPane root = adminHomeRoot;
 
                 Stage currentStage = (Stage) si_loginBtn.getScene().getWindow();
                 currentStage.close();
@@ -210,7 +211,7 @@ public class LoginController {
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
                 showAlert(Alert.AlertType.ERROR, "Failed to load admin window!");
             } finally {
