@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import static sample.hustbookstore.LaunchApplication.localCart;
 
@@ -26,13 +27,6 @@ public class Cart {
     public Cart(int cart_id, int user_id) {
         this.cart_id = cart_id;
         this.user_id = user_id;
-    }
-
-    public static void initialize() {
-        connect = database.connectDB();
-        if (connect == null) {
-            throw new IllegalStateException("Unable to connect to the database.");
-        }
     }
 
 
@@ -138,8 +132,6 @@ public class Cart {
         }
     }
 
-
-
     public ObservableList<CartItem> getCartItemList(int cartId) {
         ObservableList<CartItem> cartItemList = FXCollections.observableArrayList();
         String query = "SELECT * FROM cart_item WHERE cart_id = ?";
@@ -219,8 +211,22 @@ public class Cart {
         return -1;
     }
 
+//    public List<CartItem> getSelectedCartItems() {
+//        String query = """
+//            SELECT * FROM cart_item
+//            WHERE cart_id = ? AND is_selected = true
+//        """;
+//
+//    }
 
 
+
+    public static void initialize() {
+        connect = database.connectDB();
+        if (connect == null) {
+            throw new IllegalStateException("Unable to connect to the database.");
+        }
+    }
 
 
 }

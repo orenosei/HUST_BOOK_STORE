@@ -184,6 +184,18 @@ public class UserCartController implements CartUpdateListener{
         }
     }
 
+    public void handleOrderBtn(){
+        // List<CartItems> getSelectedCartItems()
+
+        // In bill lên màn hình để câu giờ cho các hành động tiếp theo:
+        // BillList add bill mới tham số là List<CartItems> getSelectedCartItems()
+        // Inventory xử lý chỉnh sửa stock dựa vào các sản phẩm trong List<CartItems> getSelectedCartItems()
+        // Voucher trừ remaining nếu có sử dụng
+        //load lại cart: dùng lại method handleDelete
+        //load lại store => dùng nút sync
+
+    }
+
 
     public void initialize(){
         selectAddress();

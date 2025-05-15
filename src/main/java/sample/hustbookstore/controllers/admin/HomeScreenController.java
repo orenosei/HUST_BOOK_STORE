@@ -144,31 +144,6 @@ public class HomeScreenController implements Initializable {
         showHeaderAnimation();
     }
 
-//    public void loadInventory() {
-//        try {
-//            AnchorPane root = FXMLLoader.load(getClass().getResource(getInventoryPath()));
-//            inventoryScreen.getChildren().clear();
-//            inventoryScreen.getChildren().add(root);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//    public void loadInventory() {
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource(getInventoryPath()));
-//            AnchorPane root = loader.load();
-//
-//            // Lấy controller của inventory và truyền tham chiếu HomeScreenController
-//            InventoryController inventoryController = loader.getController();
-//            inventoryController.setHomeScreenController(this);
-//
-//            inventoryScreen.getChildren().clear();
-//            inventoryScreen.getChildren().add(root);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
     public void loadInventory() {
         try {
             if (localInventoryScreen == null) {
@@ -188,7 +163,7 @@ public class HomeScreenController implements Initializable {
 
     public void loadStore() {
         try {
-//            AnchorPane root = FXMLLoader.load(getClass().getResource(getStorePath()));
+
             AnchorPane root = localStoreScreen;
             Platform.runLater(() -> {
                 storeScreen.getChildren().clear();
