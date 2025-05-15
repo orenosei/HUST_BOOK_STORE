@@ -289,42 +289,6 @@ public class UserStoreProductCardController implements Initializable {
 //            alert.showAndWait();
 //        }
 //    }
-//    @FXML
-//    public void handleAddToCartButton(ActionEvent event) {
-//
-//        if (event.getSource() == addToCart_btn) {
-//            Task<Boolean> addProductTask = new Task<>() {
-//                @Override
-//                protected Boolean call() {
-//                    return localCart.addProductToCart(productAddToCart.getID(), productSpinner.getValue());
-//                }
-//            };
-//            addProductTask.setOnSucceeded(workerStateEvent -> {
-//                boolean success = addProductTask.getValue();
-//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//                if (success) {
-//
-//                    alert.setHeaderText(null);
-//                    alert.setContentText("Add product to Cart successfully!");
-//                } else {
-//                    alert.setAlertType(Alert.AlertType.ERROR);
-//                    alert.setContentText("Failed to add the product to the cart. The requested quantity might exceed the stock.");
-//                }
-//                alert.showAndWait();
-//            });
-//
-//            addProductTask.setOnFailed(workerStateEvent -> {
-//                Alert alert = new Alert(Alert.AlertType.ERROR);
-//                alert.setHeaderText(null);
-//                alert.setContentText("An unexpected error occurred while adding the product to the cart.");
-//                alert.showAndWait();
-//            });
-//
-//            Thread thread = new Thread(addProductTask);
-//            thread.setDaemon(true);
-//            thread.start();
-//        }
-//    }
 
     @FXML
     public void handleAddToCartButton(ActionEvent event) {
@@ -335,16 +299,13 @@ public class UserStoreProductCardController implements Initializable {
             alert.setContentText("Processing...");
             alert.show();
 
-            // Tạo một task để xử lý thao tác thêm sản phẩm vào giỏ
             Task<Boolean> task = new Task<>() {
                 @Override
                 protected Boolean call() {
-                    // Thực hiện tác vụ nặng ở đây
                     return localCart.addProductToCart(productAddToCart.getID(), productSpinner.getValue());
                 }
             };
 
-            // Xử lý khi tác vụ hoàn tất
             task.setOnSucceeded(e -> {
                 boolean success = task.getValue();
 
@@ -362,7 +323,6 @@ public class UserStoreProductCardController implements Initializable {
                 });
             });
 
-            // Xử lý khi tác vụ thất bại
             task.setOnFailed(e -> {
                 Platform.runLater(() -> {
                     alert.close();
@@ -372,9 +332,8 @@ public class UserStoreProductCardController implements Initializable {
                 });
             });
 
-            // Khởi chạy task trên một thread mới
             Thread thread = new Thread(task);
-            thread.setDaemon(true); // Đảm bảo thread tự động dừng khi ứng dụng đóng
+            thread.setDaemon(true);
             thread.start();
         }
     }
