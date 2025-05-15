@@ -17,7 +17,6 @@ module sample.hustbookstore {
     requires fontawesomefx;
     requires java.net.http;
     requires java.desktop;
-    requires com.google.gson;
     requires com.fasterxml.jackson.databind;
 
     opens sample.hustbookstore to javafx.fxml;
@@ -30,7 +29,6 @@ module sample.hustbookstore {
     opens sample.hustbookstore.controllers.admin to javafx.fxml;
     exports sample.hustbookstore.controllers.user;
     opens sample.hustbookstore.controllers.user to javafx.fxml;
-    opens sample.hustbookstore.models.address to com.google.gson;
     exports sample.hustbookstore.models.address;
 
 }

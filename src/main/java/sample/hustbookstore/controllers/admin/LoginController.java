@@ -12,20 +12,17 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import sample.hustbookstore.LaunchApplication;
+
 import sample.hustbookstore.models.Admin;
 import sample.hustbookstore.models.AdminList;
-import sample.hustbookstore.models.database;
+
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-import static sample.hustbookstore.LaunchApplication.localAdmin;
 
 public class LoginController {
     @FXML
@@ -185,47 +182,6 @@ public class LoginController {
         new Thread(loadTask).start();
     }
 
-//    private void loadHomeScreen() {
-//        waitingScreen.setVisible(true);
-//
-//        Task<Void> prepareTask = new Task<>() {
-//            @Override
-//            protected Void call() {
-//
-//                try {
-//                    Thread.sleep(500);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                return null;
-//            }
-//        };
-//
-//        prepareTask.setOnSucceeded(e -> {
-//            try {
-//                AnchorPane root = adminHomeRoot;
-//
-//                Stage currentStage = (Stage) si_loginBtn.getScene().getWindow();
-//                currentStage.close();
-//
-//                Stage stage = new Stage();
-//                stage.setScene(new Scene(root));
-//                stage.show();
-//            } catch (Exception ex) {
-//                ex.printStackTrace();
-//                showAlert(Alert.AlertType.ERROR, "Failed to load admin window!");
-//            } finally {
-//                waitingScreen.setVisible(false);
-//            }
-//        });
-//
-//        prepareTask.setOnFailed(e -> {
-//            waitingScreen.setVisible(false);
-//            showAlert(Alert.AlertType.ERROR, "An error occurred while loading the admin home screen!");
-//        });
-//
-//        new Thread(prepareTask).start();
-//    }
 
     private void showAlert(Alert.AlertType type, String content) {
         alert = new Alert(type);

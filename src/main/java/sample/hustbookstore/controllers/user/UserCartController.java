@@ -27,13 +27,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 
 import java.util.List;
-import sample.hustbookstore.models.database;
 
 import static sample.hustbookstore.LaunchApplication.localCart;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import java.util.Optional;
 
 import static sample.hustbookstore.LaunchApplication.*;
@@ -67,7 +64,6 @@ public class UserCartController implements CartUpdateListener{
     @FXML private ComboBox<District> cboDistrict;
     @FXML private ComboBox<Ward> cboWard;
 
-    private List<Province> provinces;
 
     private Alert alert;
 
@@ -166,13 +162,7 @@ public class UserCartController implements CartUpdateListener{
 
     }
 
-    public void initialize(){
-        selectAddress();
-        Cart.setCartUpdateListener(this);
-        display();
-    }
 
-    private Connection connect = database.connectDB();
 
     String voucherCode;
 
@@ -206,5 +196,12 @@ public class UserCartController implements CartUpdateListener{
                 alert.showAndWait();
             }
         }
+    }
+
+
+    public void initialize(){
+        selectAddress();
+        Cart.setCartUpdateListener(this);
+        display();
     }
 }

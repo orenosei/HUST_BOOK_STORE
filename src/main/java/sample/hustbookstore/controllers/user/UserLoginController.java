@@ -12,16 +12,13 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import sample.hustbookstore.LaunchApplication;
-import sample.hustbookstore.models.Cart;
+
 import sample.hustbookstore.models.User;
 import sample.hustbookstore.models.UserList;
-import sample.hustbookstore.models.database;
+
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -183,45 +180,6 @@ public class UserLoginController {
 
         new Thread(loadTask).start();
     }
-
-//    private void loadHomeScreen() {
-//        waitingScreen.setVisible(true);
-//
-//        Task<Void> prepareTask = new Task<>() {
-//            @Override
-//            protected Void call() {
-//                try {
-//                    Thread.sleep(500);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                return null;
-//            }
-//        };
-//
-//        prepareTask.setOnSucceeded(e -> {
-//            try {
-//                AnchorPane root = userHomeRoot;
-//                Stage currentStage = (Stage) si_loginBtn.getScene().getWindow();
-//                currentStage.close();
-//
-//                Stage stage = new Stage();
-//                stage.setScene(new Scene(root));
-//                stage.show();
-//            } catch (Exception ex) {
-//                ex.printStackTrace();
-//                showAlert(Alert.AlertType.ERROR, "Failed to load user window!");
-//            }
-//        });
-//
-//        prepareTask.setOnFailed(e -> {
-//            waitingScreen.setVisible(false);
-//            showAlert(Alert.AlertType.ERROR, "An error occurred while loading the user home screen!");
-//        });
-//
-//        new Thread(prepareTask).start();
-//    }
-
 
     private void showAlert(Alert.AlertType type, String content) {
         alert = new Alert(type);
