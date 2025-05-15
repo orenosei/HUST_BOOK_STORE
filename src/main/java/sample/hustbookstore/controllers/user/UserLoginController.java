@@ -25,8 +25,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import static sample.hustbookstore.LaunchApplication.localCart;
-import static sample.hustbookstore.LaunchApplication.localUser;
+import static sample.hustbookstore.LaunchApplication.*;
 
 public class UserLoginController {
     @FXML
@@ -202,14 +201,14 @@ public class UserLoginController {
 
         prepareTask.setOnSucceeded(e -> {
             try {
-                AnchorPane root = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/user/user-home-view.fxml"));
+                AnchorPane root = userHomeRoot;
                 Stage currentStage = (Stage) si_loginBtn.getScene().getWindow();
                 currentStage.close();
 
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
                 showAlert(Alert.AlertType.ERROR, "Failed to load user window!");
             }
