@@ -5,7 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.text.Text;
 import sample.hustbookstore.models.BillList;
 import sample.hustbookstore.models.UserList;
@@ -43,6 +45,15 @@ public class DashboardController {
 
     @FXML
     private Button rightOrderButton;
+
+    @FXML
+    private DatePicker datePickerFrom;
+
+    @FXML
+    private DatePicker datePickerTo;
+
+    @FXML
+    private Button confirmButton;
 
     private LocalDate todayLocalDate = LocalDate.now();
     private Date tabIncomeLeft;
@@ -121,7 +132,32 @@ public class DashboardController {
         }
     }
 
+    @FXML
+    private void handleConfirmButton(ActionEvent event) {
+        if (event.getSource() == confirmButton) {
+            if (datePickerFrom.getValue() == null || datePickerTo.getValue() == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Please fill all the fields.");
+                alert.showAndWait();
+            } else if (datePickerFrom.getValue().isAfter(datePickerTo.getValue())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Please choose the date order correctly.");
+                alert.showAndWait();
+            } else {
+                Date dayFrom = Date.valueOf(datePickerFrom.getValue());
+                Date dayTo = Date.valueOf(datePickerTo.getValue());
+                incomeCount.setText(String.format("%.2f",BillList.calculateIncome(dayFrom,dayTo)));
+            }
+        }
+    }
+
     public void initialize(){
+        datePickerFrom.setValue(todayLocalDate.minusWeeks(1));
+        datePickerTo.setValue(todayLocalDate);
         loadCount();
         calculateTabIncome();
         loadIncomeChart(BillList.getIncomeDataByDate(tabIncomeLeft,tabIncomeRight));
