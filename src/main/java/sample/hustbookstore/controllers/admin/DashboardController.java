@@ -16,7 +16,7 @@ import static sample.hustbookstore.LaunchApplication.localCart;
 
 public class DashboardController {
     @FXML
-    private BarChart<?, ?> customerChart;
+    private BarChart<String, Integer> orderChart;
 
     @FXML
     private Text customerCount;
@@ -45,9 +45,16 @@ public class DashboardController {
         incomeChart.getData().add(series);
     }
 
+    public void loadOrderChart(List<XYChart.Data<String, Integer>> dataList) {
+        orderChart.getData().clear();
+        XYChart.Series<String, Integer> series = new XYChart.Series();
+        series.getData().addAll(dataList);
+        orderChart.getData().add(series);
+    }
 
     public void initialize(){
         loadCount();
         loadIncomeChart(BillList.getIncomeDataByDate());
+        loadOrderChart(BillList.getOrderDataByDate());
     }
 }

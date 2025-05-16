@@ -79,7 +79,7 @@
                   <NumberAxis side="LEFT" />
                </yAxis>
             </LineChart>
-            <Text fill="#92c2da" layoutX="114.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Income's Chart" textAlignment="JUSTIFY">
+            <Text fill="#92c2da" layoutX="129.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Income Chart" textAlignment="JUSTIFY">
                <font>
                   <Font name="Chalkboard SE Regular" size="35.0" />
                </font>
@@ -88,7 +88,7 @@
       </AnchorPane>
       <AnchorPane layoutX="538.0" layoutY="260.0" prefHeight="370.0" prefWidth="465.0" styleClass="chart-panel" stylesheets="@../Design/homeDesign.css" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="30.0">
          <children>
-            <BarChart fx:id="customerChart" layoutX="20.0" layoutY="72.0" prefHeight="298.0" prefWidth="445.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="62.0">
+            <BarChart fx:id="orderChart" layoutX="20.0" layoutY="72.0" legendVisible="false" prefHeight="298.0" prefWidth="445.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="62.0">
                <xAxis>
                   <CategoryAxis side="BOTTOM" />
                </xAxis>
@@ -96,7 +96,7 @@
                   <NumberAxis side="LEFT" />
                </yAxis>
             </BarChart>
-            <Text fill="#92c2da" layoutX="89.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customers's Chart" textAlignment="JUSTIFY">
+            <Text fill="#92c2da" layoutX="134.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orders Chart" textAlignment="JUSTIFY">
                <font>
                   <Font name="Chalkboard SE Regular" size="35.0" />
                </font>
