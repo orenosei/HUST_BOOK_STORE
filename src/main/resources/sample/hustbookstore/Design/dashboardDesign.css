@@ -1,0 +1,67 @@
+
+.tab-header-area {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 50;
+    -fx-border-color: transparent;
+    -fx-border-radius: 0;
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+}
+
+
+.tab-header-background {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.tab {
+    -fx-border-width: 0;
+    -fx-background-insets: 0 1 0 1;
+}
+
+
+.tab:selected:top {
+    -fx-border-color: transparent;
+    -fx-border-radius: 0;
+    -fx-border-width: 0;
+    -fx-pref-height: 50px;
+}
+
+.tab-container .focus-indicator{
+    -fx-border-color: transparent;
+    -fx-border-radius: 0;
+    -fx-border-width: 0;
+
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+}
+
+.tab-label {
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffffff;
+}
+
+
+
+#tab-trending{
+    -fx-background-color: #7E60C6;
+    -fx-background-radius: 10 10 0 0;
+    -fx-padding: 5 50 5 50;
+}
+
+#tab-recommendation{
+    -fx-background-color: #5B6AE4;
+    -fx-background-radius: 10 10 0 0;
+    -fx-padding: 5 50 5 50;
+}
+
+.trending-bg{
+    -fx-background-color: linear-gradient(to bottom,#7E60C6, #796ea1);
+    -fx-background-radius: 30 30 30 30;
+}
+
+.recommendation-bg{
+    -fx-background-color: linear-gradient(to bottom,#5B6AE4, #757dbc);
+    -fx-background-radius: 30 30 30 30;
+}

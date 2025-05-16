@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="550.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.user.UserTrendingCardController">
+   <children>
+      <ImageView fx:id="imageField" fitHeight="530.0" fitWidth="366.0" layoutX="39.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <image>
+            <Image url="@../img/notfound.jpg" />
+         </image>
+      </ImageView>
+      <TextArea fx:id="nameField" layoutX="448.0" layoutY="53.0" prefHeight="207.0" prefWidth="370.0" text="Arya bàn bên thỉnh thoảng lại trêu ghẹo tôi bằng tiếng Nga" wrapText="true" AnchorPane.bottomAnchor="333.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </TextArea>
+      <GridPane hgap="30.0" layoutX="411.0" layoutY="245.0" vgap="10.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="ISBN:" />
+            <Label text="Author:" GridPane.rowIndex="1" />
+            <Label text="Genre:" GridPane.rowIndex="2" />
+            <Label text="Description:" GridPane.rowIndex="3" />
+            <TextField fx:id="isbnField" text="978-604-2-37405-7" GridPane.columnIndex="1" />
+            <TextField fx:id="authorField" text="Momoco" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="genreField" text="Romcom" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextArea fx:id="descriptionField" prefHeight="117.0" prefWidth="249.0" text="Arya bàn bên thỉnh thoảng lại trêu gheo tôi bằng tiếng nga" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="407.0" layoutY="492.0" text="Price:">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <Label layoutX="678.0" layoutY="499.0" text="VND">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Text fx:id="priceField" layoutX="499.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="90000" textAlignment="RIGHT" wrappingWidth="171.58984375">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
