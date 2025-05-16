@@ -48,7 +48,7 @@ public class Cart {
     }
 
 
-    public Cart getCartFromDatabase(int user_id) {
+    public static Cart getCartFromDatabase(int user_id) {
         Cart cart;
 
         String query = "SELECT * FROM cart WHERE user_id = ?";

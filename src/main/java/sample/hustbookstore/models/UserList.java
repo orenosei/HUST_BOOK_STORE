@@ -58,8 +58,8 @@ public class UserList {
     }
 
     public static boolean registerUser(User user) {
-        String query = "INSERT INTO user (username, password, question, answer, name, phonenumber, email, address) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO user (username, password, question, answer, name, phonenumber, email, address) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connect.prepareStatement(query)) {
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getPassword());
