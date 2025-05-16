@@ -1,9 +1,11 @@
 package sample.hustbookstore.controllers.admin;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import sample.hustbookstore.models.BillList;
 import sample.hustbookstore.models.UserList;
@@ -30,11 +32,42 @@ public class DashboardController {
     @FXML
     private Text orderCount;
 
+    @FXML
+    private Button leftIncomeButton;
+
+    @FXML
+    private Button rightIncomeButton;
+
+    @FXML
+    private Button leftOrderButton;
+
+    @FXML
+    private Button rightOrderButton;
+
+    private LocalDate todayLocalDate = LocalDate.now();
+    private Date tabIncomeLeft;
+    private Date tabIncomeRight;
+    private Date tabOrderLeft;
+    private Date tabOrderRight;
+
+    private int tabIncomeId = 0;
+    private int tabOrderId = 0;
+
+    public void calculateTabIncome() {
+        tabIncomeLeft = Date.valueOf(todayLocalDate.minusWeeks(tabIncomeId + 1));
+        tabIncomeRight = Date.valueOf(todayLocalDate.minusWeeks(tabIncomeId));
+    }
+
+    public void calculateTabOrder() {
+        tabOrderLeft = Date.valueOf(todayLocalDate.minusWeeks(tabOrderId + 1));
+        tabOrderRight = Date.valueOf(todayLocalDate.minusWeeks(tabOrderId));
+    }
+
     public void loadCount() {
         customerCount.setText(Integer.toString(UserList.countUser()));
         orderCount.setText(Integer.toString(BillList.countBill()));
-        Date today = Date.valueOf(LocalDate.now());
-        Date weekLater = Date.valueOf(LocalDate.now().minusWeeks(1));
+        Date today = Date.valueOf(todayLocalDate);
+        Date weekLater = Date.valueOf(todayLocalDate.minusWeeks(1));
         incomeCount.setText(String.format("%.2f",BillList.calculateIncome(weekLater,today)));
     }
 
@@ -52,9 +85,47 @@ public class DashboardController {
         orderChart.getData().add(series);
     }
 
+    @FXML
+    private void handleLeftIncomeButton(ActionEvent event) {
+        if (event.getSource() == leftIncomeButton) {
+            tabIncomeId++;
+            calculateTabIncome();
+            loadIncomeChart(BillList.getIncomeDataByDate(tabIncomeLeft,tabIncomeRight));
+        }
+    }
+
+    @FXML
+    private void handleRightIncomeButton(ActionEvent event) {
+        if (event.getSource() == rightIncomeButton && tabIncomeId > 0) {
+            tabIncomeId--;
+            calculateTabIncome();
+            loadIncomeChart(BillList.getIncomeDataByDate(tabIncomeLeft,tabIncomeRight));
+        }
+    }
+
+    @FXML
+    private void handleLeftOrderButton(ActionEvent event) {
+        if (event.getSource() == leftOrderButton) {
+            tabOrderId++;
+            calculateTabOrder();
+            loadOrderChart(BillList.getOrderDataByDate(tabOrderLeft,tabOrderRight));
+        }
+    }
+
+    @FXML
+    private void handleRightOrderButton(ActionEvent event) {
+        if (event.getSource() == rightOrderButton && tabOrderId > 0) {
+            tabOrderId--;
+            calculateTabOrder();
+            loadOrderChart(BillList.getOrderDataByDate(tabOrderLeft,tabOrderRight));
+        }
+    }
+
     public void initialize(){
         loadCount();
-        loadIncomeChart(BillList.getIncomeDataByDate());
-        loadOrderChart(BillList.getOrderDataByDate());
+        calculateTabIncome();
+        loadIncomeChart(BillList.getIncomeDataByDate(tabIncomeLeft,tabIncomeRight));
+        calculateTabOrder();
+        loadOrderChart(BillList.getOrderDataByDate(tabOrderLeft,tabOrderRight));
     }
 }
