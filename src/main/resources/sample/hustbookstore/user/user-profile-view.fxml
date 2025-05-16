@@ -112,7 +112,7 @@
                         </Label>
                      </children>
                   </GridPane>
-                  <Button fx:id="profile_changePasswordBtn" layoutX="436.0" layoutY="173.0" mnemonicParsing="false" onAction="#profileChangePasswordBtn" prefHeight="25.0" prefWidth="125.0" text="Change" />
+                  <Button fx:id="profile_changePasswordBtn" layoutX="447.0" layoutY="185.0" mnemonicParsing="false" onAction="#profileChangePasswordBtn" prefHeight="25.0" prefWidth="125.0" text="Change" />
                   <HBox layoutY="-1.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
                      <children>
                         <FontAwesomeIcon glyphName="EDIT" selectionEnd="0" selectionStart="0" size="24" />

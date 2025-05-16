@@ -6,7 +6,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 
-public class CustomersController {
+public class UserManagementController {
 
     @FXML
     private TableColumn<?, ?> addressColumn;

@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Inventory {
     private static Connection connect;
@@ -285,7 +286,22 @@ public class Inventory {
         }
     }
 
+    public boolean updateProductStock(List<CartItem> itemList) {
+        for(CartItem item : itemList) {
+            String sql = "UPDATE product SET " + " stock = stock - ? WHERE product_id = ?";
+            try(PreparedStatement statement = connect.prepareStatement(sql)) {
+                statement.setInt(1,item.getQuantity());
+                statement.setString(2,item.getProduct().getID());
 
+                statement.executeUpdate();
+
+            }catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+                }
+        }
+        return true;
+    }
 
 }
 

@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -288,40 +289,57 @@ public class UserStoreProductCardController implements Initializable {
 //            alert.showAndWait();
 //        }
 //    }
+
     @FXML
     public void handleAddToCartButton(ActionEvent event) {
         if (event.getSource() == addToCart_btn) {
-            Task<Boolean> addProductTask = new Task<>() {
+            // Hiển thị thông báo chờ
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("Processing...");
+            alert.show();
+
+            Task<Boolean> task = new Task<>() {
                 @Override
                 protected Boolean call() {
                     return localCart.addProductToCart(productAddToCart.getID(), productSpinner.getValue());
                 }
             };
-            addProductTask.setOnSucceeded(workerStateEvent -> {
-                boolean success = addProductTask.getValue();
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText(null);
-                if (success) {
-                    alert.setContentText("Add product to Cart successfully!");
-                } else {
+
+            task.setOnSucceeded(e -> {
+                boolean success = task.getValue();
+
+                Platform.runLater(() -> {
+                    if (success) {
+                        alert.close();
+                        alert.setAlertType(Alert.AlertType.INFORMATION);
+                        alert.setContentText("Add product to Cart successfully!");
+                    } else {
+                        alert.close();
+                        alert.setAlertType(Alert.AlertType.ERROR);
+                        alert.setContentText("Failed to add the product to the cart. The requested quantity might exceed the stock.");
+                    }
+                    alert.showAndWait();
+                });
+            });
+
+            task.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    alert.close();
                     alert.setAlertType(Alert.AlertType.ERROR);
-                    alert.setContentText("Failed to add the product to the cart. The requested quantity might exceed the stock.");
-                }
-                alert.showAndWait();
+                    alert.setContentText("An error occurred while processing. Please try again later.");
+                    alert.showAndWait();
+                });
             });
 
-            addProductTask.setOnFailed(workerStateEvent -> {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText("An unexpected error occurred while adding the product to the cart.");
-                alert.showAndWait();
-            });
-
-            Thread thread = new Thread(addProductTask);
+            Thread thread = new Thread(task);
             thread.setDaemon(true);
             thread.start();
         }
     }
+
+
+
 
 
 

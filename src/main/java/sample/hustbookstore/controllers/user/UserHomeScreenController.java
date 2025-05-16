@@ -71,10 +71,10 @@ public class UserHomeScreenController extends HomeScreenController {
         return "/sample/hustbookstore/user/user-dashboard-view.fxml";
     }
     
-//    @Override
-//    protected String getStorePath() {
-//        return "/sample/hustbookstore/user/user-store-view.fxml";
-//    }
+    @Override
+    protected String getStorePath() {
+        return "/sample/hustbookstore/user/user-store-view.fxml";
+    }
     
     @Override
     protected String getProfilePath() {
@@ -82,15 +82,29 @@ public class UserHomeScreenController extends HomeScreenController {
     }
 
 
-    public void loadCart() {
+//    public void loadCart() {
+//        try {
+//            AnchorPane root = FXMLLoader.load(getClass().getResource(getCartPath()));
+//            cartScreen.getChildren().clear();
+//            cartScreen.getChildren().add(root);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    public void loadCart(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(getCartPath()));
         try {
-            AnchorPane root = FXMLLoader.load(getClass().getResource(getCartPath()));
+            AnchorPane root = loader.load();
             cartScreen.getChildren().clear();
             cartScreen.getChildren().add(root);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        UserCartController controller = loader.getController();
+        controller.setHomeScreenController(this);
     }
+
     @Override
     public void loadStore() {
         try {
@@ -98,6 +112,7 @@ public class UserHomeScreenController extends HomeScreenController {
             Platform.runLater(() -> {
                 storeScreen.getChildren().clear();
                 storeScreen.getChildren().add(root);
+                System.out.println("Heloooo");
             });
         } catch (Exception e) {
             e.printStackTrace();
@@ -124,7 +139,7 @@ public class UserHomeScreenController extends HomeScreenController {
             profileScreen.setVisible(false);
             storeScreen.setVisible(false);
             cartScreen.setVisible(false);
-            //sync_btn.setVisible(false);
+            sync_btn.setVisible(false);
             showHeaderAnimation();
 
 
@@ -134,7 +149,7 @@ public class UserHomeScreenController extends HomeScreenController {
             storeScreen.setVisible(true);
             headerPane.setVisible(false);
             cartScreen.setVisible(false);
-            //sync_btn.setVisible(true);
+            sync_btn.setVisible(true);
 
 
         } else if (event.getSource() == profile_btn) {
@@ -143,7 +158,7 @@ public class UserHomeScreenController extends HomeScreenController {
             storeScreen.setVisible(false);
             headerPane.setVisible(false);
             cartScreen.setVisible(false);
-            //sync_btn.setVisible(false);
+            sync_btn.setVisible(false);
 
         }
         else if (event.getSource() == cart_btn) {
@@ -151,7 +166,7 @@ public class UserHomeScreenController extends HomeScreenController {
             profileScreen.setVisible(false);
             storeScreen.setVisible(false);
             cartScreen.setVisible(true);
-            //sync_btn.setVisible(false);
+            sync_btn.setVisible(false);
             headerPane.setVisible(false);
 
 
