@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -537,23 +538,7 @@ public void setUpdate_btn() {
         inventory_type.getSelectionModel().select(prod.getType());
         inventory_description.setText(prod.getDescription());
 
-        try {
-            if (prod.getImage() != null && !prod.getImage().isEmpty()) {
-                // Sử dụng URL từ cloudinary
-                String imageUrl = prod.getImage();
-                Image img = new Image(imageUrl, 100, 160, true, true);
-                inventory_imageView.setImage(img);
-                currentImageUrl = imageUrl;
-            } else {
-                inventory_imageView.setImage(null);
-                currentImageUrl = null;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            inventory_imageView.setImage(null);
-            currentImageUrl = null;
-        }
-
+        loadImageAsync(prod.getImage());
 
         if ("Book".equals(prod.getType())) {
             inventory_author.setText(prod.getAuthor() != null ? prod.getAuthor() : "");
@@ -567,13 +552,46 @@ public void setUpdate_btn() {
                 }
             }
         } else {
-            // Xóa dữ liệu liên quan đến sách nếu không phải loại sách
             inventory_author.clear();
             inventory_publishedDate.setValue(null);
             inventory_ISBN.clear();
             inventory_genre.getCheckModel().clearChecks();
         }
     }
+
+    private Task<Image> imageLoadingTask;
+    private void loadImageAsync(String imageUrl) {
+        if (imageLoadingTask != null && imageLoadingTask.isRunning()) {
+            imageLoadingTask.cancel();
+        }
+
+        inventory_imageView.setImage(null);
+        currentImageUrl = null;
+
+        if (imageUrl == null || imageUrl.isEmpty()) return;
+
+        imageLoadingTask = new Task<>() {
+            @Override
+            protected Image call() throws Exception {
+                return new Image(imageUrl, 100, 160, true, true);
+            }
+        };
+        imageLoadingTask.setOnSucceeded(e -> {
+            if (!imageLoadingTask.isCancelled()) {
+                Image img = imageLoadingTask.getValue();
+                inventory_imageView.setImage(img);
+                currentImageUrl = imageUrl;
+            }
+        });
+        imageLoadingTask.setOnFailed(e -> {
+            inventory_imageView.setImage(null);
+            currentImageUrl = null;
+        });
+        Thread thread = new Thread(imageLoadingTask);
+        thread.setDaemon(true);
+        thread.start();
+    }
+
 
     private HomeScreenController homeScreenController;
 
