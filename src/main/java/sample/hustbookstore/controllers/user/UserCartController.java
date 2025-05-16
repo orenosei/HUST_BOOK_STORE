@@ -2,6 +2,9 @@ package sample.hustbookstore.controllers.user;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -13,8 +16,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+import javafx.util.Duration;
 import sample.hustbookstore.models.*;
 import sample.hustbookstore.models.address.District;
 import sample.hustbookstore.models.address.Province;
@@ -121,8 +126,8 @@ public class UserCartController implements CartUpdateListener{
     private BillList billList = new BillList();
 
     public void showSubTotalValue(){
-        subTotalValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())));
-        totalValue.setText(Float.toString(localCart.calculateTotalPrice(localCart.getCartId())*(1-percent)));
+        subTotalValue.setText(String.format("%.2f",localCart.calculateTotalPrice(localCart.getCartId())));
+        totalValue.setText(String.format("%.2f",localCart.calculateTotalPrice(localCart.getCartId())*(1-percent)));
     }
 
     public void display() {
@@ -266,9 +271,22 @@ public class UserCartController implements CartUpdateListener{
 
         // In bill lên màn hình để câu giờ cho các hành động tiếp theo:
         cartPane.setOpacity(0.2);
-        billPane.setVisible(true);
+//        billPane.setVisible(true);
         updateBillDetails(selectedItems);
 
+        Rectangle clip = new Rectangle();
+        clip.setWidth(billPane.getWidth());
+        clip.setHeight(0);
+        billPane.setClip(clip);
+
+        billPane.setVisible(true);
+
+        Timeline timeline = new Timeline();
+        timeline.getKeyFrames().add(new KeyFrame(
+                Duration.seconds(1),
+                new KeyValue(clip.heightProperty(), billPane.getHeight())
+        ));
+        timeline.play();
 
         Task<Void> backgroundTask = new Task<>() {
             @Override
@@ -292,6 +310,7 @@ public class UserCartController implements CartUpdateListener{
 
                 if (voucherCode != null) {
                     localVoucher.updateVoucherRemaining(voucherCode);
+                    discountValue.setText("00.00");
                 }
 
 
