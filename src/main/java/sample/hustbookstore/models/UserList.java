@@ -122,6 +122,19 @@ public class UserList {
         }
     }
 
+    public static int countUser() {
+        String sql = "SELECT COUNT(user_id) FROM user";
+        try (PreparedStatement stmt = connect.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     public static void closeConnection() {
         if (connect != null) {
             try {
