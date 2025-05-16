@@ -8,15 +8,21 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import sample.hustbookstore.models.BillList;
+import sample.hustbookstore.models.Book;
+import sample.hustbookstore.models.Cart;
 import sample.hustbookstore.models.UserList;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
-import static sample.hustbookstore.LaunchApplication.localCart;
+//import static sample.hustbookstore.LaunchApplication.localCart;
 
 public class DashboardController {
     @FXML
@@ -55,6 +61,24 @@ public class DashboardController {
     @FXML
     private Button confirmButton;
 
+    @FXML
+    private Text trendingId;
+
+    @FXML
+    private ImageView trendingImage;
+
+    @FXML
+    private Text trendingStock;
+
+    @FXML
+    private Text trendingPrice;
+
+    @FXML
+    private Button leftTrendingButton;
+
+    @FXML
+    private Button rightTrendingButton;
+
     private LocalDate todayLocalDate = LocalDate.now();
     private Date tabIncomeLeft;
     private Date tabIncomeRight;
@@ -63,6 +87,12 @@ public class DashboardController {
 
     private int tabIncomeId = 0;
     private int tabOrderId = 0;
+
+    private List<Book> trendingBooks;
+    private Book trendingBook;
+    private Image image;
+
+    private int tabTrendingId = 0;
 
     public void calculateTabIncome() {
         tabIncomeLeft = Date.valueOf(todayLocalDate.minusWeeks(tabIncomeId + 1));
@@ -94,6 +124,39 @@ public class DashboardController {
         XYChart.Series<String, Integer> series = new XYChart.Series();
         series.getData().addAll(dataList);
         orderChart.getData().add(series);
+    }
+
+    public void loadTrendingBooks() {
+        Cart cart = new Cart();
+        trendingBooks = cart.getTrendingBooks();
+    }
+
+    public void displayTrendingBooks() {
+        if (trendingBooks.size() > 0) {
+            trendingBook = trendingBooks.get(tabTrendingId);
+            trendingId.setText(trendingBook.getID());
+            trendingStock.setText(Integer.toString(trendingBook.getStock()));
+            trendingPrice.setText(Double.toString(trendingBook.getSellPrice()));
+
+            String imagePath = trendingBook.getImage();
+            try {
+                if (imagePath != null && !imagePath.isEmpty()) {
+                    URL imageUrl = new URL(imagePath);
+                    image = new Image(imageUrl.toExternalForm(), 80, 128, true, true);
+                } else {
+                    image = new Image(getClass().getResource("/sample/hustbookstore/img/notfound.jpg").toExternalForm(), 80, 128, true, true);
+                }
+            } catch (MalformedURLException e) {
+                URL resourceUrl = getClass().getResource("/" + imagePath);
+                if (resourceUrl != null) {
+                    image = new Image(resourceUrl.toExternalForm(), 80, 128, true, true);
+                } else {
+                    image = new Image(getClass().getResource("/sample/hustbookstore/img/notfound.jpg").toExternalForm(), 80, 128, true, true);
+                }
+            }
+
+            trendingImage.setImage(image);
+        }
     }
 
     @FXML
@@ -133,6 +196,30 @@ public class DashboardController {
     }
 
     @FXML
+    private void handleLeftTrendingButton(ActionEvent event) {
+        if (event.getSource() == leftTrendingButton) {
+            if (tabTrendingId < (trendingBooks.size() - 1)) {
+                tabTrendingId++;
+            } else {
+                tabTrendingId = 0;
+            }
+            displayTrendingBooks();
+        }
+    }
+
+    @FXML
+    private void handleRightTrendingButton(ActionEvent event) {
+        if (event.getSource() == rightTrendingButton) {
+            if (tabTrendingId > 0) {
+                tabTrendingId--;
+            } else {
+                tabTrendingId = (trendingBooks.size() - 1);
+            }
+            displayTrendingBooks();
+        }
+    }
+
+    @FXML
     private void handleConfirmButton(ActionEvent event) {
         if (event.getSource() == confirmButton) {
             if (datePickerFrom.getValue() == null || datePickerTo.getValue() == null) {
@@ -163,5 +250,7 @@ public class DashboardController {
         loadIncomeChart(BillList.getIncomeDataByDate(tabIncomeLeft,tabIncomeRight));
         calculateTabOrder();
         loadOrderChart(BillList.getOrderDataByDate(tabOrderLeft,tabOrderRight));
+        loadTrendingBooks();
+        displayTrendingBooks();
     }
 }
