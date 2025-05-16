@@ -71,10 +71,10 @@ public class UserHomeScreenController extends HomeScreenController {
         return "/sample/hustbookstore/user/user-dashboard-view.fxml";
     }
     
-//    @Override
-//    protected String getStorePath() {
-//        return "/sample/hustbookstore/user/user-store-view.fxml";
-//    }
+    @Override
+    protected String getStorePath() {
+        return "/sample/hustbookstore/user/user-store-view.fxml";
+    }
     
     @Override
     protected String getProfilePath() {

@@ -90,7 +90,7 @@ public class HomeScreenController implements Initializable {
     }
 
     protected String getStorePath() {
-        return "/sample/hustbookstore/user/user-store-view.fxml";
+        return "/sample/hustbookstore/admin/store-view.fxml";
     }
 
     protected String getCustomersPath() {
