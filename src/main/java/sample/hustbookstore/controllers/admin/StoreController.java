@@ -100,9 +100,6 @@ public class StoreController {
     @FXML
     private Button searchBtn;
 
-
-
-
     protected String getRightPanelPath() {
         return "/sample/hustbookstore/admin/voucher-view.fxml";
     }
@@ -110,7 +107,6 @@ public class StoreController {
     protected String getProductCardPath() {
         return "/sample/hustbookstore/admin/productCard-view.fxml";
     }
-    
 
     public void loadRightPane() {
         try {

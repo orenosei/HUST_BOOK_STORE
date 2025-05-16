@@ -1,6 +1,8 @@
 
 package sample.hustbookstore.models;
 
+import javafx.scene.chart.XYChart;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -50,6 +52,51 @@ public class BillList {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public static int countBill() {
+        String sql = "SELECT COUNT(bill_id) FROM bill";
+        try (PreparedStatement stmt = connect.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public static float calculateIncome(Date date1, Date date2) {
+        String sql = "SELECT SUM(profit) FROM bill WHERE purchase_date BETWEEN ? AND ?";
+        try (PreparedStatement stmt = connect.prepareStatement(sql)) {
+            stmt.setDate(1, date1);
+            stmt.setDate(2, date2);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public static List<XYChart.Data<String, Float>> getIncomeDataByDate() {
+        List<XYChart.Data<String, Float>> dataList = new ArrayList<>();
+        String sql = "SELECT purchase_date, SUM(profit) FROM bill GROUP BY purchase_date ORDER BY TIMESTAMP(purchase_date)";
+        try (Connection conn = database.connectDB();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                dataList.add(new XYChart.Data<>(rs.getString(1), rs.getFloat(2)));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dataList;
     }
 
 
