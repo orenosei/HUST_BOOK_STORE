@@ -82,16 +82,6 @@ public class UserHomeScreenController extends HomeScreenController {
     }
 
 
-//    public void loadCart() {
-//        try {
-//            AnchorPane root = FXMLLoader.load(getClass().getResource(getCartPath()));
-//            cartScreen.getChildren().clear();
-//            cartScreen.getChildren().add(root);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     public void loadCart(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource(getCartPath()));
         try {

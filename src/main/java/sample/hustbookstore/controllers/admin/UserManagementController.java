@@ -1,37 +1,89 @@
 package sample.hustbookstore.controllers.admin;
 
+import javafx.animation.PauseTransition;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Duration;
+import sample.hustbookstore.models.User;
+import sample.hustbookstore.models.UserList;
+
+import java.util.Optional;
 
 
 public class UserManagementController {
 
     @FXML
-    private TableColumn<?, ?> addressColumn;
+    private TableColumn<User, String> addressColumn;
 
     @FXML
-    private TableView<?> customerTable;
+    private TableView<User> customerTable;
 
     @FXML
-    private TableColumn<?, ?> idColumn;
+    private TableColumn<User, String> nameColumn;
 
     @FXML
-    private TableColumn<?, ?> nameColumn;
+    private TableColumn<User, String> phoneColumn;
 
     @FXML
-    private TableColumn<?, ?> phoneColumn;
+    private TextField searchField;
 
     @FXML
-    private TableColumn<?, ?> totalColumn;
+    private TableColumn<User, Double> totalColumn;
+
+    @FXML
+    private TableColumn<User, String> usernameColumn;
+
+    private final FilteredList<User> filteredUsers = new FilteredList<>(UserList.getAllUsers());
+
 
     public void initialize() {
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
-        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
-        totalColumn.setCellValueFactory(new PropertyValueFactory<>("total"));
+        //UserList.initialize();
 
+        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+
+        totalColumn.setCellValueFactory(cellData -> {
+            int userId = cellData.getValue().getUserId();
+            double total = UserList.getTotalSpentByUserId(userId);
+            return new ReadOnlyObjectWrapper<>(total);
+        });
+
+        totalColumn.setCellFactory(tc -> new TableCell<>() {
+            @Override
+            protected void updateItem(Double total, boolean empty) {
+                super.updateItem(total, empty);
+                if (empty || total == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("%,.2f", total));
+                }
+            }
+        });
+
+        customerTable.setItems(filteredUsers);
+
+        searchField.textProperty().addListener((obs, oldVal, newVal) -> {
+            String keyword = newVal.toLowerCase();
+            filteredUsers.setPredicate(user -> {
+                if (keyword.isEmpty()) return true;
+
+                String username = user.getUsername() != null ? user.getUsername().toLowerCase() : "";
+                String name = user.getName() != null ? user.getName().toLowerCase() : "";
+                String phone = user.getPhoneNumber() != null ? user.getPhoneNumber() : "";
+
+                return username.contains(keyword)
+                        || name.contains(keyword)
+                        || phone.contains(keyword);
+            });
+        });
     }
 }

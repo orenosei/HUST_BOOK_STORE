@@ -1,5 +1,8 @@
 package sample.hustbookstore.models;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +18,46 @@ public class UserList {
         if (connect == null) {
             throw new IllegalStateException("Unable to connect to the database.");
         }
+    }
+
+    public static ObservableList<User> getAllUsers() {
+        ObservableList<User> users = FXCollections.observableArrayList();
+        String query = "SELECT * FROM user";
+        try (PreparedStatement stmt = connect.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                User user = new User(
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("question"),
+                        rs.getString("answer"),
+                        rs.getString("name"),
+                        rs.getString("phonenumber"),
+                        rs.getString("email"),
+                        rs.getString("address"),
+                        rs.getInt("user_id")
+                );
+                users.add(user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    public static double getTotalSpentByUserId(int userId) {
+        String query = "SELECT SUM(total_price) FROM bill WHERE user_id = ?";
+        try (PreparedStatement stmt = connect.prepareStatement(query)) {
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                // Trả về 0.0 nếu không có bill nào
+                return rs.getDouble(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0.0;
     }
 
     public static boolean login(String username, String password) {
