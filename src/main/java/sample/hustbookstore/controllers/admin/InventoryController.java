@@ -321,78 +321,78 @@ public class InventoryController {
         }
     }
 
-public void setAdd_btn() {
-    if (
-            inventory_productID.getText().isEmpty()
-                    || inventory_productName.getText().isEmpty()
-                    || inventory_importPrice.getText().isEmpty()
-                    || inventory_sellingPrice.getText().isEmpty()
-                    || inventory_distributor.getText().isEmpty()
-                    || inventory_type.getSelectionModel().getSelectedItem() == null
-                    || inventory_restrictedAge.getText().isEmpty()
-                    || inventory_stocks.getText().isEmpty()
-                    || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_description.getText().isEmpty())
-                    || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_ISBN.getText().isEmpty())
-                    || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_author.getText().isEmpty())
-                    || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_genre.getCheckModel().getCheckedItems().isEmpty())
-                    || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_publishedDate.getValue() == null)
-    ) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error Message");
-        alert.setHeaderText(null);
-        alert.setContentText("Please enter all the fields correctly.");
-        alert.showAndWait();
-        return;
-    }
-
-    if (localInventory.isProductExists(inventory_productID.getText())) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error Message");
-        alert.setHeaderText(null);
-        alert.setContentText(inventory_productID.getText() + " already exists.");
-        alert.showAndWait();
-    } else {
-        String type = inventory_type.getSelectionModel().getSelectedItem();
-
-        boolean success = localInventory.addProduct(
-                inventory_productID.getText(),
-                inventory_productName.getText(),
-                inventory_distributor.getText(),
-                Double.parseDouble(inventory_sellingPrice.getText()),
-                Double.parseDouble(inventory_importPrice.getText()),
-                Integer.parseInt(inventory_stocks.getText()),
-                type,
-                currentImageUrl,
-                inventory_description.getText(),
-                LocalDate.now(),
-                Integer.parseInt(inventory_restrictedAge.getText()),
-                "Book".equals(type) ? inventory_ISBN.getText() : null,
-                "Book".equals(type) ? String.join(", ", inventory_genre.getCheckModel().getCheckedItems()) : null,
-                "Book".equals(type) ? inventory_publishedDate.getValue() : null,
-                "Book".equals(type) ? inventory_author.getText() : null
-        );
-
-        if (success) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Product added successfully.");
-            alert.showAndWait();
-
-            if (homeScreenController != null) {
-                homeScreenController.reloadStore();
-            }
-
-            showData();
-        } else {
+    public void setAdd_btn() {
+        if (
+                inventory_productID.getText().isEmpty()
+                        || inventory_productName.getText().isEmpty()
+                        || inventory_importPrice.getText().isEmpty()
+                        || inventory_sellingPrice.getText().isEmpty()
+                        || inventory_distributor.getText().isEmpty()
+                        || inventory_type.getSelectionModel().getSelectedItem() == null
+                        || inventory_restrictedAge.getText().isEmpty()
+                        || inventory_stocks.getText().isEmpty()
+                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_description.getText().isEmpty())
+                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_ISBN.getText().isEmpty())
+                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_author.getText().isEmpty())
+                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_genre.getCheckModel().getCheckedItems().isEmpty())
+                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && inventory_publishedDate.getValue() == null)
+        ) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);
-            alert.setContentText("Failed to add product.");
+            alert.setContentText("Please enter all the fields correctly.");
             alert.showAndWait();
+            return;
+        }
+
+        if (localInventory.isProductExists(inventory_productID.getText())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText(inventory_productID.getText() + " already exists.");
+            alert.showAndWait();
+        } else {
+            String type = inventory_type.getSelectionModel().getSelectedItem();
+
+            boolean success = localInventory.addProduct(
+                    inventory_productID.getText(),
+                    inventory_productName.getText(),
+                    inventory_distributor.getText(),
+                    Double.parseDouble(inventory_sellingPrice.getText()),
+                    Double.parseDouble(inventory_importPrice.getText()),
+                    Integer.parseInt(inventory_stocks.getText()),
+                    type,
+                    currentImageUrl,
+                    inventory_description.getText(),
+                    LocalDate.now(),
+                    Integer.parseInt(inventory_restrictedAge.getText()),
+                    "Book".equals(type) ? inventory_ISBN.getText() : null,
+                    "Book".equals(type) ? String.join(", ", inventory_genre.getCheckModel().getCheckedItems()) : null,
+                    "Book".equals(type) ? inventory_publishedDate.getValue() : null,
+                    "Book".equals(type) ? inventory_author.getText() : null
+            );
+
+            if (success) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Product added successfully.");
+                alert.showAndWait();
+
+                if (homeScreenController != null) {
+                    homeScreenController.reloadStore();
+                }
+
+                showData();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Failed to add product.");
+                alert.showAndWait();
+            }
         }
     }
-}
 
 
     public void setClear_btn() {
@@ -412,71 +412,70 @@ public void setAdd_btn() {
         inventory_imageView.setImage(null);
     }
 
-public void setUpdate_btn() {
-    if (
-            inventory_productID.getText().isEmpty()
-                    || inventory_productName.getText().isEmpty()
-                    || inventory_importPrice.getText().isEmpty()
-                    || inventory_sellingPrice.getText().isEmpty()
-                    || inventory_distributor.getText().isEmpty()
-                    || inventory_type.getSelectionModel().getSelectedItem() == null
-                    || inventory_restrictedAge.getText().isEmpty()
-                    || inventory_stocks.getText().isEmpty()
-                    || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && (
-                    inventory_description.getText().isEmpty()
-                            || inventory_ISBN.getText().isEmpty()
-                            || inventory_author.getText().isEmpty()
-                            || inventory_genre.getCheckModel().getCheckedItems().isEmpty()
-                            || inventory_publishedDate.getValue() == null
-            ))
-    ) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error Message");
-        alert.setHeaderText(null);
-        alert.setContentText("Please enter all the fields correctly.");
-        alert.showAndWait();
-        return;
-    }
-
-    String type = inventory_type.getSelectionModel().getSelectedItem();
-    boolean isUpdated = localInventory.updateProduct(
-            inventory_productID.getText(),
-            type,
-            inventory_productName.getText(),
-            currentImageUrl,
-            inventory_distributor.getText(),
-            inventory_description.getText(),
-            LocalDate.now(),
-            Integer.parseInt(inventory_stocks.getText()),
-            Float.parseFloat(inventory_importPrice.getText()),
-            Float.parseFloat(inventory_sellingPrice.getText()),
-            Integer.parseInt(inventory_restrictedAge.getText()),
-            "Book".equals(type) ? inventory_ISBN.getText() : null,
-            "Book".equals(type) ? inventory_author.getText() : null,
-            "Book".equals(type) ? String.join(", ", inventory_genre.getCheckModel().getCheckedItems()) : null,
-            "Book".equals(type) ? inventory_publishedDate.getValue() : null
-    );
-
-    if (isUpdated) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information Message");
-        alert.setHeaderText(null);
-        alert.setContentText("Product updated successfully.");
-        alert.showAndWait();
-
-        if (homeScreenController != null) {
-            homeScreenController.reloadStore();
+    public void setUpdate_btn() {
+        if (
+                inventory_productID.getText().isEmpty()
+                        || inventory_productName.getText().isEmpty()
+                        || inventory_importPrice.getText().isEmpty()
+                        || inventory_sellingPrice.getText().isEmpty()
+                        || inventory_distributor.getText().isEmpty()
+                        || inventory_type.getSelectionModel().getSelectedItem() == null
+                        || inventory_restrictedAge.getText().isEmpty()
+                        || inventory_stocks.getText().isEmpty()
+                        || ("Book".equals(inventory_type.getSelectionModel().getSelectedItem()) && (
+                        inventory_description.getText().isEmpty()
+                                || inventory_ISBN.getText().isEmpty()
+                                || inventory_author.getText().isEmpty()
+                                || inventory_genre.getCheckModel().getCheckedItems().isEmpty()
+                                || inventory_publishedDate.getValue() == null
+                ))
+        ) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter all the fields correctly.");
+            alert.showAndWait();
+            return;
         }
-        showData();
-    } else {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error Message");
-        alert.setHeaderText(null);
-        alert.setContentText("Product update failed. Please try again.");
-        alert.showAndWait();
-    }
-}
 
+        String type = inventory_type.getSelectionModel().getSelectedItem();
+        boolean isUpdated = localInventory.updateProduct(
+                inventory_productID.getText(),
+                type,
+                inventory_productName.getText(),
+                currentImageUrl,
+                inventory_distributor.getText(),
+                inventory_description.getText(),
+                LocalDate.now(),
+                Integer.parseInt(inventory_stocks.getText()),
+                Float.parseFloat(inventory_importPrice.getText()),
+                Float.parseFloat(inventory_sellingPrice.getText()),
+                Integer.parseInt(inventory_restrictedAge.getText()),
+                "Book".equals(type) ? inventory_ISBN.getText() : null,
+                "Book".equals(type) ? inventory_author.getText() : null,
+                "Book".equals(type) ? String.join(", ", inventory_genre.getCheckModel().getCheckedItems()) : null,
+                "Book".equals(type) ? inventory_publishedDate.getValue() : null
+        );
+
+        if (isUpdated) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Product updated successfully.");
+            alert.showAndWait();
+
+            if (homeScreenController != null) {
+                homeScreenController.reloadStore();
+            }
+            showData();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Product update failed. Please try again.");
+            alert.showAndWait();
+        }
+    }
 
     public void setDelete_btn() {
         if (inventory_productID.getText().isEmpty()) {
@@ -519,8 +518,6 @@ public void setUpdate_btn() {
             }
         }
     }
-
-
 
     public void inventorySelectData() {
         Book prod = inventory_tableView.getSelectionModel().getSelectedItem();
@@ -591,7 +588,6 @@ public void setUpdate_btn() {
         thread.setDaemon(true);
         thread.start();
     }
-
 
     private HomeScreenController homeScreenController;
 
