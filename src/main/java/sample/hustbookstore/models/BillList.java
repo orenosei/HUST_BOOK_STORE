@@ -82,23 +82,6 @@ public class BillList {
         return 0;
     }
 
-//    public static List<XYChart.Data<String, Float>> getIncomeDataByDate() {
-//        List<XYChart.Data<String, Float>> dataList = new ArrayList<>();
-//        String sql = "SELECT purchase_date, SUM(profit) FROM bill GROUP BY purchase_date ORDER BY TIMESTAMP(purchase_date)";
-//        try (Connection conn = database.connectDB();
-//             PreparedStatement stmt = conn.prepareStatement(sql);
-//             ResultSet rs = stmt.executeQuery()) {
-//
-//            while (rs.next()) {
-//                dataList.add(new XYChart.Data<>(rs.getString(1), rs.getFloat(2)));
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return dataList;
-//    }
-
     public static List<XYChart.Data<String, Float>> getIncomeDataByDate(Date day1, Date day2) {
         List<XYChart.Data<String, Float>> dataList = new ArrayList<>();
         String sql = "SELECT purchase_date, SUM(profit) FROM bill WHERE purchase_date BETWEEN ? AND ? GROUP BY purchase_date ORDER BY TIMESTAMP(purchase_date)";
@@ -117,23 +100,6 @@ public class BillList {
         return dataList;
     }
 
-//    public static List<XYChart.Data<String, Integer>> getOrderDataByDate() {
-//        List<XYChart.Data<String, Integer>> dataList = new ArrayList<>();
-//        String sql = "SELECT purchase_date, COUNT(bill_id) FROM bill GROUP BY purchase_date ORDER BY TIMESTAMP(purchase_date)";
-//        try (Connection conn = database.connectDB();
-//             PreparedStatement stmt = conn.prepareStatement(sql);
-//             ResultSet rs = stmt.executeQuery()) {
-//
-//            while (rs.next()) {
-//                dataList.add(new XYChart.Data<>(rs.getString(1), rs.getInt(2)));
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return dataList;
-//    }
-
     public static List<XYChart.Data<String, Integer>> getOrderDataByDate(Date day1, Date day2) {
         List<XYChart.Data<String, Integer>> dataList = new ArrayList<>();
         String sql = "SELECT purchase_date, COUNT(bill_id) FROM bill WHERE purchase_date BETWEEN ? AND ? GROUP BY purchase_date ORDER BY TIMESTAMP(purchase_date)";
@@ -151,7 +117,6 @@ public class BillList {
         }
         return dataList;
     }
-
 
     public static void initialize() {
         connect = database.connectDB();
