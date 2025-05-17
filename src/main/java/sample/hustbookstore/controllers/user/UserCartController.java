@@ -168,7 +168,6 @@ public class UserCartController implements CartUpdateListener{
 
                     cboProvince.setOnAction(event -> handleProvinceSelection());
                     cboDistrict.setOnAction(event -> handleDistrictSelection());
-                    cboWard.setOnAction(event -> showAddress());
                 });
 
                 return null;
@@ -199,11 +198,6 @@ public class UserCartController implements CartUpdateListener{
             cboWard.setItems(wardList);
         }
     }
-
-    public void showAddress(){
-
-    }
-
 
 
     String voucherCode;
@@ -248,7 +242,6 @@ public class UserCartController implements CartUpdateListener{
     }
 
     private void showErrorAlert(String message) {
-//        new Alert(Alert.AlertType.ERROR, message).showAndWait();
         alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Something went wrong =((");
         alert.setHeaderText(null);
@@ -258,9 +251,7 @@ public class UserCartController implements CartUpdateListener{
 
     @FXML
     public void handleOrderBtn(){
-        // List<CartItems> getSelectedCartItems()
         List<CartItem> selectedItems = localCart.getSelectedCartItems(localCart.getCartId());
-
         // check stock = 0 item => user phai bỏ select
         for(CartItem item: selectedItems){
             if(item.getProduct().getStock() == 0){
@@ -268,32 +259,48 @@ public class UserCartController implements CartUpdateListener{
                 return;
             }
         }
+        if (nameField.getText().isEmpty() ||
+                phoneNumberField.getText().isEmpty() ||
+                specificAddressField.getText().isEmpty() ||
+                cboWard.getSelectionModel().isEmpty() ||
+                cboDistrict.getSelectionModel().isEmpty() ||
+                cboProvince.getSelectionModel().isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Missing Information");
+            alert.setHeaderText("Please complete all required fields!");
+            alert.setContentText("Ensure all fields are filled: Name, Phone Number and Address");
+            alert.showAndWait();
+            return;
+        }
 
         // In bill lên màn hình để câu giờ cho các hành động tiếp theo:
         cartPane.setOpacity(0.2);
-//        billPane.setVisible(true);
         updateBillDetails(selectedItems);
 
         Rectangle clip = new Rectangle();
         clip.setWidth(billPane.getWidth());
         clip.setHeight(0);
         billPane.setClip(clip);
-
         billPane.setVisible(true);
 
         Timeline timeline = new Timeline();
         timeline.getKeyFrames().add(new KeyFrame(
-                Duration.seconds(1),
+                Duration.seconds(0.5),
                 new KeyValue(clip.heightProperty(), billPane.getHeight())
         ));
-        timeline.play();
 
+        Task<Void> backgroundTask = reloadTask(selectedItems);
+        new Thread(backgroundTask).start();
+
+        timeline.play();
+    }
+
+    private Task<Void> reloadTask(List<CartItem> selectedItems) {
         Task<Void> backgroundTask = new Task<>() {
             @Override
             protected Void call() throws Exception {
                 voucherCode = voucherField.getText();
-
-//                float usedVoucher = voucherCode == null ? 0 : localVoucher.getVoucher(voucherCode).getDiscount();
 
                 float usedVoucher = 0;
                 if (voucherCode != null && !voucherCode.isEmpty()) {
@@ -312,7 +319,6 @@ public class UserCartController implements CartUpdateListener{
                     localVoucher.updateVoucherRemaining(voucherCode);
                     discountValue.setText("00.00");
                 }
-
 
                 Platform.runLater(() -> {
                     for (CartItem item : selectedItems) {
@@ -340,13 +346,10 @@ public class UserCartController implements CartUpdateListener{
                 exception.printStackTrace();
             });
         });
-
-        new Thread(backgroundTask).start();
-
+        return backgroundTask;
     }
 
     private void updateBillDetails(List<CartItem> selectedItems) {
-
         billReceiverName.setText(nameField.getText());
         billReceiverPhoneNumber.setText(phoneNumberField.getText());
 
@@ -358,11 +361,9 @@ public class UserCartController implements CartUpdateListener{
         );
         billReceiverAddress.setText(address);
 
-
         discountValueInBill.setText(discountValue.getText());
         subTotalValueInBill.setText(subTotalValue.getText());
         totalValueInBill.setText(totalValue.getText());
-
 
         setupOrderTable(selectedItems);
     }
@@ -398,11 +399,10 @@ public class UserCartController implements CartUpdateListener{
     public void initialize(){
         selectAddress();
         Cart.setCartUpdateListener(this);
-        //Platform.runLater(this::display);
         display();
 
         billPane.setVisible(false);
 
-        orderListTable.setPlaceholder(new Label("Không có sản phẩm nào"));
+        orderListTable.setPlaceholder(new Label("Not found"));
     }
 }

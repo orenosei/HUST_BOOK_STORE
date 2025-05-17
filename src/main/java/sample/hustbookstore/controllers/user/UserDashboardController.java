@@ -15,6 +15,7 @@ import javafx.scene.layout.StackPane;
 
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import sample.hustbookstore.models.BillList;
 import sample.hustbookstore.models.Book;
 import sample.hustbookstore.models.Cart;
 
@@ -54,9 +55,8 @@ public class UserDashboardController {
     }
 
     private void loadTrendingBooks() {
-        Cart cart = new Cart();
-        trendingBooks = cart.getTrendingBooks();
-        if (trendingBooks.size() < 5) {}
+        BillList billList = new BillList();
+        trendingBooks =  billList.getTrendingBooks();
     }
 
     private void initializeCards() {
