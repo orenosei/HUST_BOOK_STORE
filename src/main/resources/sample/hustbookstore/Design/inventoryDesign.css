@@ -100,7 +100,7 @@
 }
 
 .payment-bar{
-    -fx-background-color: linear-gradient(to bottom, #9cd3ff, #ba9dff);
+    -fx-background-color: linear-gradient(to bottom, #b6dcff, #9178d1);
 }
 
 .payment-panel{
@@ -185,16 +185,17 @@
 .inventory-table{
     -fx-background-color: white;
     -fx-border-width: 5px;
-    -fx-border-color: linear-gradient(to top, #9cd3ff, #ba9dff);
+    -fx-border-color: #b6dcff;
     -fx-border-radius: 5px;
 }
+
 
 .column-header-background .table-column {
     /*-fx-padding: 10px 0 10px 0; !* Thay đổi khoảng cách trên và dưới *!*/
     -fx-font-size: 16px;    /* Tăng kích thước font để làm header cao hơn */
     -fx-alignment: CENTER;  /* Căn giữa nội dung */
     -fx-pref-height: 50px;
-    -fx-background-color: #ba9dff ;
+    -fx-background-color: #9178d1 ;
 }
 
 .column-header-background .table-column .text{
@@ -211,7 +212,7 @@
 }
 
 .inventory-table-border{
-    -fx-border-color: linear-gradient(to top, #9cd3ff, #ba9dff);
+    -fx-border-color: linear-gradient(to top, #b6dcff, #9178d1);
     -fx-border-width: 9px;
     -fx-border-radius: 7px;
 }
@@ -240,24 +241,24 @@
 .text-box{
     -fx-border-radius: 2px;
     -fx-border-width: 2px;
-    -fx-border-color: #ba9dff;
+    -fx-border-color: #b6dcff;
 }
 
 .type-selection-box {
-    -fx-background-color: #ba9dff;
+    -fx-background-color: #b6dcff;
     -fx-border-radius: 2px;
     -fx-border-width: 2px;
-    -fx-border-color: #ba9dff;
+    -fx-border-color: #b6dcff;
 }
 .type-selection-box .arrow-button{
     -fx-background-color: transparent;
 }
 
 .combo-box {
-    -fx-background-color: #ba9dff;
+    -fx-background-color: #b6dcff;
     -fx-border-radius: 2px;
     -fx-border-width: 2px;
-    -fx-border-color: #ba9dff;
+    -fx-border-color: #b6dcff;
 }
 .combo-box .arrow-button{
     -fx-background-color: transparent;
@@ -265,7 +266,7 @@
 .combo-box .list-cell{
     -fx-background-color: white;
     -fx-border-width: 1px;
-    -fx-border-color: #ba9dff;
+    -fx-border-color: #b6dcff;
     /*-fx-pref-height: 50%;*/
     /*-fx-pref-width: 50%;*/
     -fx-cell-size: 18px;
@@ -277,9 +278,24 @@
 }
 
 .inventory-button{
-    -fx-background-color: linear-gradient(to left, #9cd3ff, #ba9dff);
+    -fx-background-color: #b6dcff;
     -fx-border-radius: 2px;
     -fx-border-width: 2px;
+}
+
+.inventory-button:hover{
+    -fx-background-color: #5faeef;
+    -fx-border-radius: 2px;
+    -fx-border-width: 2px;
+}
+
+
+.type-selection-box .arrow-button .arrow{
+    -fx-background-color: white;
+}
+
+.combo-box .arrow-button .arrow{
+    -fx-background-color: white;
 }
 
 .voucher-button{
@@ -299,6 +315,10 @@
 .inventory-search-bar{
     -fx-background-color: white;
     -fx-border-width: 5px;
-    -fx-border-color: linear-gradient(to left, #9cd3ff, #ba9dff);
+    -fx-border-color: #9178d1;
     -fx-border-radius: 10px;
+}
+
+.list-cell .text{
+    -fx-background-color: #bdbdbd;
 }
