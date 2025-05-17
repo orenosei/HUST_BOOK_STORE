@@ -7,6 +7,8 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -74,8 +76,14 @@
                   </Text>
                </children>
             </GridPane>
-            <Button fx:id="leftTrendingButton" layoutX="3.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleLeftTrendingButton" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="◀" textFill="WHITE" AnchorPane.leftAnchor="5.0" />
-            <Button fx:id="rightTrendingButton" layoutX="274.0" layoutY="98.0" mnemonicParsing="false" onAction="#handleRightTrendingButton" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="▶" textFill="WHITE" AnchorPane.rightAnchor="5.0" />
+            <Button fx:id="leftTrendingButton" layoutX="-9.0" layoutY="85.0" mnemonicParsing="false" onAction="#handleLeftTrendingButton" styleClass="arrow-button" stylesheets="@../Design/dashboardDesign.css" text="◀" textFill="WHITE" AnchorPane.leftAnchor="-9.0">
+               <font>
+                  <Font size="26.0" />
+               </font></Button>
+            <Button fx:id="rightTrendingButton" layoutX="258.0" layoutY="85.0" mnemonicParsing="false" onAction="#handleRightTrendingButton" styleClass="arrow-button" stylesheets="@../Design/dashboardDesign.css" text="▶" textFill="WHITE" AnchorPane.rightAnchor="-6.800000000000011">
+               <font>
+                  <Font size="26.0" />
+               </font></Button>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="360.0" layoutY="20.0" prefHeight="200.0" prefWidth="300.0" styleClass="info-panel" stylesheets="@../Design/homeDesign.css">
@@ -114,11 +122,18 @@
                      <font>
                         <Font size="13.0" />
                      </font></Text>
-                  <DatePicker fx:id="datePickerFrom" GridPane.columnIndex="1" />
-                  <DatePicker fx:id="datePickerTo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <DatePicker fx:id="datePickerFrom" styleClass="type-selection-box" stylesheets="@../Design/dashboardDesign.css" GridPane.columnIndex="1" />
+                  <DatePicker fx:id="datePickerTo" styleClass="type-selection-box" stylesheets="@../Design/dashboardDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <Button fx:id="confirmButton" layoutX="162.0" layoutY="115.0" mnemonicParsing="false" onAction="#handleConfirmButton" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="Confirm" textFill="WHITE" />
+            <Button fx:id="confirmButton" layoutX="162.0" layoutY="115.0" mnemonicParsing="false" onAction="#handleConfirmButton" styleClass="confirm-button" stylesheets="@../Design/dashboardDesign.css" text="Confirm" textFill="WHITE">
+               <effect>
+                  <Lighting bumpInput="$null" diffuseConstant="2.0" specularConstant="0.0" specularExponent="10.1" surfaceScale="10.0">
+                     <light>
+                        <Light.Distant azimuth="0.0" elevation="68.12" />
+                     </light>
+                  </Lighting>
+               </effect></Button>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="650.0" layoutY="20.0" prefHeight="90.0" prefWidth="300.0" styleClass="info-panel" stylesheets="@../Design/homeDesign.css" AnchorPane.rightAnchor="30.0">
@@ -146,18 +161,18 @@
                   <NumberAxis side="LEFT" />
                </yAxis>
             </LineChart>
-            <Text fill="#92c2da" layoutX="129.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Income Chart" textAlignment="JUSTIFY">
+            <Text fill="#b5e4fa" layoutX="129.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Income Chart" textAlignment="JUSTIFY">
                <font>
                   <Font name="Chalkboard SE Regular" size="35.0" />
                </font>
             </Text>
-            <Button fx:id="leftIncomeButton" layoutX="84.0" layoutY="32.0" mnemonicParsing="false" onAction="#handleLeftIncomeButton" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="◀" textFill="WHITE" AnchorPane.leftAnchor="80.0">
+            <Button fx:id="leftIncomeButton" layoutX="62.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleLeftIncomeButton" styleClass="arrow-button-2" stylesheets="@../Design/dashboardDesign.css" text="◀" textFill="#b5e4fa" AnchorPane.leftAnchor="62.0">
                <font>
-                  <Font size="15.0" />
+                  <Font size="32.0" />
                </font></Button>
-            <Button fx:id="rightIncomeButton" layoutX="349.0" layoutY="32.0" mnemonicParsing="false" onAction="#handleRightIncomeButton" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="▶" textFill="WHITE" AnchorPane.rightAnchor="80.0">
+            <Button fx:id="rightIncomeButton" layoutX="342.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleRightIncomeButton" styleClass="arrow-button-2" stylesheets="@../Design/dashboardDesign.css" text="▶" textFill="#b5e4fa" AnchorPane.rightAnchor="64.40000000000003">
                <font>
-                  <Font size="15.0" />
+                  <Font size="32.0" />
                </font></Button>
          </children>
       </AnchorPane>
@@ -176,14 +191,14 @@
                   <Font name="Chalkboard SE Regular" size="35.0" />
                </font>
             </Text>
-            <Button fx:id="leftOrderButton" layoutX="64.0" layoutY="32.0" mnemonicParsing="false" onAction="#handleLeftOrderButton" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="◀" textFill="WHITE" AnchorPane.leftAnchor="80.0">
+            <Button fx:id="leftOrderButton" layoutX="69.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleLeftOrderButton" styleClass="arrow-button-2" stylesheets="@../Design/dashboardDesign.css" text="◀" textFill="#b5e4fa" AnchorPane.leftAnchor="69.0">
                <font>
-                  <Font size="15.0" />
+                  <Font size="32.0" />
                </font>
             </Button>
-            <Button fx:id="rightOrderButton" layoutX="364.0" layoutY="32.0" mnemonicParsing="false" onAction="#handleRightOrderButton" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="▶" textFill="WHITE" AnchorPane.rightAnchor="80.0">
+            <Button fx:id="rightOrderButton" layoutX="334.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleRightOrderButton" styleClass="arrow-button-2" stylesheets="@../Design/dashboardDesign.css" text="▶" textFill="#b5e4fa" AnchorPane.rightAnchor="72.40000000000003">
                <font>
-                  <Font size="15.0" />
+                  <Font size="32.0" />
                </font>
             </Button>
          </children>

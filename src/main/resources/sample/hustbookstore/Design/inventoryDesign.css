@@ -189,6 +189,9 @@
     -fx-border-radius: 5px;
 }
 
+.root{
+    -fx-background-color: transparent;
+}
 
 .column-header-background .table-column {
     /*-fx-padding: 10px 0 10px 0; !* Thay đổi khoảng cách trên và dưới *!*/

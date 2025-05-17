@@ -1,3 +1,7 @@
+.root{
+    -fx-background-color: white;
+}
+
 .side-bar{
     -fx-background-color: linear-gradient(to bottom, #b6dcff, #9178d1);
     -fx-background-radius: 0 50px 50px 0;
@@ -14,7 +18,7 @@
 }
 
 .white-bg{
-    -fx-background-color: white;
+    -fx-background-color: transparent;
 }
 
 .header{
