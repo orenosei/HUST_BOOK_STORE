@@ -84,3 +84,15 @@ CREATE TABLE `bill` (
                         FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
                             ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+CREATE TABLE `bill_item` (
+                             `bill_item_id` INT AUTO_INCREMENT PRIMARY KEY, -- ID duy nhất cho từng mục hóa đơn
+                             `bill_id` INT NOT NULL,                        -- Tham chiếu đến hóa đơn
+                             `product_id` VARCHAR(255) NOT NULL,            -- Tham chiếu đến sản phẩm
+                             `quantity` INT NOT NULL,                       -- Số lượng sản phẩm đã mua
+                             `price_at_purchase` FLOAT NOT NULL,            -- Giá sản phẩm tại thời điểm mua
+                             FOREIGN KEY (`bill_id`) REFERENCES `bill`(`bill_id`)
+                                 ON DELETE CASCADE ON UPDATE CASCADE,
+                             FOREIGN KEY (`product_id`) REFERENCES `product`(`product_id`)
+                                 ON DELETE CASCADE ON UPDATE CASCADE
+);

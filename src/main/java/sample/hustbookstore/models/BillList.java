@@ -36,22 +36,91 @@ public class BillList {
         );
     }
 
-    public boolean addBill(Bill bill) {
-        String sql = "INSERT INTO bill (user_id, total_price, profit, purchase_date) VALUES (?, ?, ?, ?)";
+//    public boolean addBill(Bill bill) {
+//        String sql = "INSERT INTO bill (user_id, total_price, profit, purchase_date) VALUES (?, ?, ?, ?)";
+//
+//        try (PreparedStatement statement = connect.prepareStatement(sql)) {
+//            statement.setInt(1, bill.getUserID());
+//            statement.setDouble(2, bill.getTotalPrice());
+//            statement.setDouble(3, bill.getProfit());
+//            statement.setDate(4, Date.valueOf(bill.getPurchasedDate()));
+//
+//            int affectedRows = statement.executeUpdate();
+//            return affectedRows > 0;
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+//    }
+    public boolean addBill(Bill bill, List<CartItem> selectedItems) {
+        String sqlBill = "INSERT INTO bill (user_id, total_price, profit, purchase_date) VALUES (?, ?, ?, ?)";
 
-        try (PreparedStatement statement = connect.prepareStatement(sql)) {
-            statement.setInt(1, bill.getUserID());
-            statement.setDouble(2, bill.getTotalPrice());
-            statement.setDouble(3, bill.getProfit());
-            statement.setDate(4, Date.valueOf(bill.getPurchasedDate()));
+        boolean isSuccess = false;
 
-            int affectedRows = statement.executeUpdate();
-            return affectedRows > 0;
+        try {
+            connect.setAutoCommit(false);
 
+            try (PreparedStatement billStatement = connect.prepareStatement(sqlBill, PreparedStatement.RETURN_GENERATED_KEYS)) {
+                billStatement.setInt(1, bill.getUserID());
+                billStatement.setDouble(2, bill.getTotalPrice());
+                billStatement.setDouble(3, bill.getProfit());
+                billStatement.setDate(4, Date.valueOf(bill.getPurchasedDate()));
+
+                int affectedRows = billStatement.executeUpdate();
+                if (affectedRows == 0) {
+                    connect.rollback();
+                    return false;
+                }
+
+                try (ResultSet generatedKeys = billStatement.getGeneratedKeys()) {
+                    if (!generatedKeys.next()) {
+                        connect.rollback();
+                        return false;
+                    }
+                    int billId = generatedKeys.getInt(1);
+
+                    String sqlItem = "INSERT INTO bill_item (bill_id, product_id, quantity, price_at_purchase) VALUES (?, ?, ?, ?)";
+                    for (CartItem item : selectedItems) {
+                        try (PreparedStatement itemStatement = connect.prepareStatement(sqlItem)) {
+                            itemStatement.setInt(1, billId);
+                            itemStatement.setString(2, item.getProductId());
+                            itemStatement.setInt(3, item.getQuantity());
+
+                            Product product = item.getProduct();
+                            if (product == null) {
+                                connect.rollback();
+                                return false;
+                            }
+                            itemStatement.setDouble(4, product.getSellPrice());
+
+                            itemStatement.executeUpdate();
+                        }
+                    }
+                }
+                connect.commit();
+                isSuccess = true;
+            }
         } catch (SQLException e) {
+            try {
+                if (connect != null) {
+                    connect.rollback();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
             e.printStackTrace();
-            return false;
+        } finally {
+            try {
+                if (connect != null) {
+                    connect.setAutoCommit(true);
+                    connect.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+        return isSuccess;
     }
 
     public static int countBill() {
