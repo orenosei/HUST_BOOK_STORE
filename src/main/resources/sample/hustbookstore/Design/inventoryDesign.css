@@ -194,7 +194,7 @@
     -fx-font-size: 16px;    /* Tăng kích thước font để làm header cao hơn */
     -fx-alignment: CENTER;  /* Căn giữa nội dung */
     -fx-pref-height: 50px;
-    -fx-background-color: #9178d1 ;
+    -fx-background-color: #ba9dff ;
 }
 
 .column-header-background .table-column .text{
@@ -240,24 +240,24 @@
 .text-box{
     -fx-border-radius: 2px;
     -fx-border-width: 2px;
-    -fx-border-color: #9178d1;
+    -fx-border-color: #ba9dff;
 }
 
 .type-selection-box {
-    -fx-background-color: #9178d1;
+    -fx-background-color: #ba9dff;
     -fx-border-radius: 2px;
     -fx-border-width: 2px;
-    -fx-border-color: #9178d1;
+    -fx-border-color: #ba9dff;
 }
 .type-selection-box .arrow-button{
     -fx-background-color: transparent;
 }
 
 .combo-box {
-    -fx-background-color: #9178d1;
+    -fx-background-color: #ba9dff;
     -fx-border-radius: 2px;
     -fx-border-width: 2px;
-    -fx-border-color: #9178d1;
+    -fx-border-color: #ba9dff;
 }
 .combo-box .arrow-button{
     -fx-background-color: transparent;
@@ -265,7 +265,7 @@
 .combo-box .list-cell{
     -fx-background-color: white;
     -fx-border-width: 1px;
-    -fx-border-color: #9178d1;
+    -fx-border-color: #ba9dff;
     /*-fx-pref-height: 50%;*/
     /*-fx-pref-width: 50%;*/
     -fx-cell-size: 18px;
