@@ -18,7 +18,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import sample.hustbookstore.models.Store;
 
 import java.net.URL;
 import java.util.Optional;
@@ -98,7 +97,7 @@ public class HomeScreenController implements Initializable {
     }
 
     protected String getOthersPath() {
-        return "/sample/hustbookstore/admin/others-view.fxml";
+        return "/sample/hustbookstore/admin/orderHistory-view.fxml";
     }
 
     protected String getProfilePath() {
