@@ -25,6 +25,6 @@
       <CheckBox fx:id="itemCheckBox" layoutX="25.0" layoutY="67.0" mnemonicParsing="false" onAction="#handleSelectItem" prefWidth="18.0" AnchorPane.leftAnchor="10.0" />
       <TextField fx:id="itemPrice" editable="false" layoutX="203.0" layoutY="93.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
       <Button fx:id="itemDelete" layoutX="413.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleDeleteButton" text="X" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Spinner fx:id="itemSpinner" layoutX="165.0" layoutY="97.0" prefHeight="38.0" prefWidth="99.0" />
+      <Spinner fx:id="itemSpinner" editable="true" layoutX="165.0" layoutY="97.0" prefHeight="38.0" prefWidth="99.0" />
    </children>
 </AnchorPane>

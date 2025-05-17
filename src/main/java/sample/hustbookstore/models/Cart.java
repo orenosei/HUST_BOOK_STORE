@@ -318,6 +318,10 @@ public class Cart {
     }
 
 
+    public static void closeConnection() throws SQLException {
+        connect.close();
+    }
+
     public static void initialize() {
         connect = database.connectDB();
         if (connect == null) {

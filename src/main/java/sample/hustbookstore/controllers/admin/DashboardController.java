@@ -127,8 +127,8 @@ public class DashboardController {
     }
 
     public void loadTrendingBooks() {
-        Cart cart = new Cart();
-        trendingBooks = cart.getTrendingBooks();
+        BillList billList = new BillList();
+        trendingBooks =  billList.getTrendingBooks();
     }
 
     public void displayTrendingBooks() {

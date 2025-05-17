@@ -13,6 +13,10 @@ import java.util.List;
 public class Inventory {
     private static Connection connect;
 
+    public static void closeConnection() throws SQLException {
+        connect.close();
+    }
+
     public static void initialize() {
         connect = database.connectDB();
         if (connect == null) {
