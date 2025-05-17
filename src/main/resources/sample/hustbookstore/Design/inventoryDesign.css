@@ -170,8 +170,12 @@
 }
 
 
-.inventory-table .placeholder{
+.placeholder{
     -fx-background-color: transparent;
+}
+
+.virtual-flow{
+    -fx-background-color: red;
 }
 
 .scroll-pane{
@@ -185,18 +189,48 @@
     -fx-border-radius: 5px;
 }
 
-.table-view .column-header-background {
+.column-header-background .table-column {
     /*-fx-padding: 10px 0 10px 0; !* Thay đổi khoảng cách trên và dưới *!*/
     -fx-font-size: 16px;    /* Tăng kích thước font để làm header cao hơn */
     -fx-alignment: CENTER;  /* Căn giữa nội dung */
     -fx-pref-height: 50px;
+    -fx-background-color: #ba9dff ;
 }
-.table-column {
-    -fx-background-color: #9178d1;
+
+.column-header-background .table-column .text{
+    -fx-fill: white;
 }
-.table-column .label .text{
-    -fx-fill: White;
+
+.table-view .table-cell{
+    -fx-text-fill: black;
+    -fx-background-color: transparent;
 }
+
+.table-view .table-row-cell:hover{
+    -fx-background-color: #d6c5ff;
+}
+
+.inventory-table-border{
+    -fx-border-color: linear-gradient(to top, #9cd3ff, #ba9dff);
+    -fx-border-width: 9px;
+    -fx-border-radius: 7px;
+}
+
+.table-view .table-row-cell:selected{
+    -fx-background-color: #8056ed;
+}
+
+.table-view .table-row-cell:selected .text {   /* mọi nút Text trong hàng */
+    -fx-fill: white;                 /* chữ trắng */
+}
+
+
+/*.table-column {*/
+/*    -fx-background-color: #9178d1;*/
+/*}*/
+/*.table-column .label .text{*/
+/*    -fx-fill: White;*/
+/*}*/
 /*.table-view .column-resize-line {*/
 /*    -fx-background: -fx-accent;*/
 /*    -fx-background-color: -fx-background;*/
@@ -206,24 +240,24 @@
 .text-box{
     -fx-border-radius: 2px;
     -fx-border-width: 2px;
-    -fx-border-color: #9178d1;
+    -fx-border-color: #ba9dff;
 }
 
 .type-selection-box {
-    -fx-background-color: #9178d1;
+    -fx-background-color: #ba9dff;
     -fx-border-radius: 2px;
     -fx-border-width: 2px;
-    -fx-border-color: #9178d1;
+    -fx-border-color: #ba9dff;
 }
 .type-selection-box .arrow-button{
     -fx-background-color: transparent;
 }
 
 .combo-box {
-    -fx-background-color: #9178d1;
+    -fx-background-color: #ba9dff;
     -fx-border-radius: 2px;
     -fx-border-width: 2px;
-    -fx-border-color: #9178d1;
+    -fx-border-color: #ba9dff;
 }
 .combo-box .arrow-button{
     -fx-background-color: transparent;
@@ -231,13 +265,16 @@
 .combo-box .list-cell{
     -fx-background-color: white;
     -fx-border-width: 1px;
-    -fx-border-color: #9178d1;
+    -fx-border-color: #ba9dff;
     /*-fx-pref-height: 50%;*/
     /*-fx-pref-width: 50%;*/
     -fx-cell-size: 18px;
 
 }
 
+.column-overlay{
+    -fx-background-color: white;
+}
 
 .inventory-button{
     -fx-background-color: linear-gradient(to left, #9cd3ff, #ba9dff);
