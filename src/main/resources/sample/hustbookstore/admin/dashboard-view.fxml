@@ -20,24 +20,24 @@
    <children>
       <AnchorPane layoutX="30.0" layoutY="20.0" prefHeight="200.0" prefWidth="300.0" styleClass="info-panel" stylesheets="@../Design/homeDesign.css" AnchorPane.leftAnchor="30.0">
          <children>
-            <Text fill="WHITE" layoutX="107.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trending">
+            <Text fill="WHITE" layoutX="79.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trending Book">
                <font>
                   <Font name="Chalkboard SE Regular" size="22.0" />
                </font>
             </Text>
-            <AnchorPane layoutX="32.0" layoutY="37.0" prefHeight="150.0" prefWidth="100.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="30.0">
+            <AnchorPane layoutX="39.0" layoutY="51.0" prefHeight="128.0" prefWidth="80.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="35.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true">
+                  <ImageView fx:id="trendingImage" fitHeight="128.0" fitWidth="80.0" pickOnBounds="true">
                      <image>
                         <Image url="@../img/notfound.jpg" />
                      </image>
                   </ImageView>
                </children>
             </AnchorPane>
-            <GridPane layoutX="143.0" layoutY="67.0" prefHeight="90.0" prefWidth="123.0" AnchorPane.rightAnchor="30.0">
+            <GridPane layoutX="143.0" layoutY="67.0" prefHeight="90.0" prefWidth="140.0" AnchorPane.rightAnchor="35.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="56.0" minWidth="10.0" prefWidth="50.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="88.0" minWidth="10.0" prefWidth="88.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -45,11 +45,37 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="?" GridPane.rowIndex="1" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="?" GridPane.rowIndex="2" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Text>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="STOCK" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Text>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="PRICE" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Text>
+                  <Text fx:id="trendingId" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="trendingStock" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="trendingPrice" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
                </children>
             </GridPane>
+            <Button fx:id="leftTrendingButton" layoutX="3.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleLeftTrendingButton" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="◀" textFill="WHITE" AnchorPane.leftAnchor="5.0" />
+            <Button fx:id="rightTrendingButton" layoutX="274.0" layoutY="98.0" mnemonicParsing="false" onAction="#handleRightTrendingButton" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="▶" textFill="WHITE" AnchorPane.rightAnchor="5.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="360.0" layoutY="20.0" prefHeight="200.0" prefWidth="300.0" styleClass="info-panel" stylesheets="@../Design/homeDesign.css">
