@@ -299,11 +299,19 @@
 
 .arrow-button{
     -fx-background-color: transparent;
-
+    -fx-text-fill: #ffffff;
+}
+.arrow-button .text:hover{
+    -fx-fill: #46c0ff;
 }
 
 .arrow-button-2{
     -fx-background-color: transparent;
+    -fx-text-fill: #b5e4fa;
+}
+
+.arrow-button-2 .text:hover{
+    -fx-fill: #44d1ff;
 }
 
 .confirm-button{
