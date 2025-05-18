@@ -40,8 +40,8 @@ public class UserDashboardController {
 
     @FXML
     public void initialize() {
-        loadTrendingBooks();
-        initializeCards();
+        //loadTrendingBooks();
+        //initializeCards();
     }
 
     private void loadTrendingBooks() {

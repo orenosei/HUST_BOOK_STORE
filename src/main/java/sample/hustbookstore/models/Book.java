@@ -20,6 +20,8 @@ public class Book extends Product
         this.author = author;
     }
 
+    public String combinedText = name + " " + author + " " + genre + " " + description;
+
 //    public Book(String name, String distributor, Double sellPrice,String type, String image, String description) {
 //        super(name, distributor, sellPrice, type, image, description);
 //    }
