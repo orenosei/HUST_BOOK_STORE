@@ -17,6 +17,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import sample.hustbookstore.models.BillList;
 import sample.hustbookstore.models.Book;
+import sample.hustbookstore.models.BookIndexer;
 import sample.hustbookstore.models.Cart;
 
 import java.io.IOException;
@@ -27,8 +28,6 @@ import java.util.List;
 public class UserDashboardController {
 
     @FXML
-    private AnchorPane recommendationPane;
-    @FXML
     private Button trendingLeftBtn;
     @FXML
     private AnchorPane trendingPane;
@@ -37,8 +36,20 @@ public class UserDashboardController {
     @FXML
     private StackPane trendingStackPane;
 
+    @FXML
+    private AnchorPane recommendationPane;
+
+    @FXML
+    private Button recommendationLeftBtn;
+
+    @FXML
+    private Button recommendationRightBtn;
+
+    @FXML
+    private StackPane recommendationStackPane;
 
     private List<Book> trendingBooks;
+    private List<Book> recommendationBooks;
 
     private List<Node> cardNodes = new ArrayList<>();
     private int currentIndex = 0;
@@ -89,7 +100,6 @@ public class UserDashboardController {
 
         trendingStackPane.setClip(clip);
     }
-
 
     private void slideCards(double distance) {
         autoSlideTimeline.pause();
@@ -155,5 +165,11 @@ public class UserDashboardController {
     }
 
     // // todo: Recommendation
+    // Cho recommend
+    //WIP
+//    private void loadRecommendationBooks() {
+//        BillList billList = new BillList();
+//        recommendationBooks =  billList.getRecommendationBooks();
+//    }
 
 }

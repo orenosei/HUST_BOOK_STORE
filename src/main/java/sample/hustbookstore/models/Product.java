@@ -38,6 +38,13 @@ public class Product {
         this.description = description;
     }
 
+    //Cho recommend
+    public Product(String ID, String name, String description) {
+        this.ID = ID;
+        this.name = name;
+        this.description = description;
+    }
+
     public String getID() {
         return ID;
     }

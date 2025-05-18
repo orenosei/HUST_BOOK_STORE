@@ -20,11 +20,15 @@ public class Book extends Product
         this.author = author;
     }
 
+    //Cho recommend
     public String combinedText = name + " " + author + " " + genre + " " + description;
 
-//    public Book(String name, String distributor, Double sellPrice,String type, String image, String description) {
-//        super(name, distributor, sellPrice, type, image, description);
-//    }
+    //Cho recommend
+    public Book(String ID, String name, String description, String genre, String author) {
+        super(ID, name, description);
+        this.author = author;
+        this.genre = genre;
+    }
 
     public String getIsbn() {
         return isbn;

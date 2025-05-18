@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static sample.hustbookstore.LaunchApplication.localUser;
+
 public class BillList {
     private static Connection connect;
 
@@ -223,6 +225,76 @@ public class BillList {
         return bills;
     }
 
+    //Cho recommend
+    public ObservableList<Book> getRecommendationBooks() {
+        ObservableList<Book> sampleBooks = FXCollections.observableArrayList();
+        ObservableList<Book> compareBooks = FXCollections.observableArrayList();
+        ObservableList<Book> recommendationBooks = FXCollections.observableArrayList();
+
+        //Cho recommend
+        int localID = localUser.getUserId();
+
+        // Viết lại sql
+        String query = """
+        SELECT DISTINCT
+            p.product_id,
+            p.name,
+            p.description,
+            p.genre,
+            p.author,
+            b.user_id
+        FROM product p
+        LEFT JOIN bill_item bi ON p.product_id = bi.product_id
+        LEFT JOIN bill b ON bi.bill_id = b.bill_id
+        WHERE p.type = 'Book';
+    """;
+
+        try (PreparedStatement statement = connect.prepareStatement(query)) {
+            statement.setInt(1, localUser.getUserId());
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Book book = new Book(
+                        resultSet.getString("product_id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("description"),
+                        resultSet.getString("genre"),
+                        resultSet.getString("author")
+                    );
+
+                    if (resultSet.getInt("user_id") == localID) {
+                        sampleBooks.add(book);
+                    } else {
+                        compareBooks.add(book);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error loading recommendation books: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        StringBuilder rawData = new StringBuilder();
+
+        for (Book book : sampleBooks) {
+            rawData.append(book.combinedText).append(" ");
+        }
+
+        // WIP
+//        // Static method, trong homescreen gọi trong initialize
+//        BookIndexer indexer = new BookIndexer();
+//        indexer.indexBooks(bookList); // Chạy một lần để tạo chỉ mục,
+//
+//// Gợi ý sách dựa trên một sách cụ thể
+//        BookRecommender recommender = new BookRecommender();
+//        String processedQuery = VietnameseTextProcessor.tokenize("Dế Mèn phiêu lưu ký Tô Hoài Thiếu nhi ..."); // đã tách từ
+//        recommender.searchSimilarBooks(processedQuery, 5);
+
+
+        return recommendationBooks;
+    }
+
+
     public ObservableList<Book> getTrendingBooks() {
         ObservableList<Book> trendingBooks = FXCollections.observableArrayList();
         String query = """
@@ -248,22 +320,7 @@ public class BillList {
         JOIN product p ON bi.product_id = p.product_id
         WHERE p.type = 'Book'
             AND b.purchase_date >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
-        GROUP BY 
-            p.product_id,
-            p.name,
-            p.distributor,
-            p.sell_price,
-            p.import_price,
-            p.stock,
-            p.type,
-            p.image,
-            p.description,
-            p.added_date,
-            p.age_restrict,
-            p.isbn,
-            p.genre,
-            p.author,
-            p.pub_date
+        GROUP BY p.product_id
         ORDER BY total_sold DESC
         LIMIT 5
     """;
