@@ -301,7 +301,7 @@
     -fx-background-color: transparent;
     -fx-text-fill: #ffffff;
 }
-.arrow-button .text:hover{
+.arrow-button .text:pressed{
     -fx-fill: #46c0ff;
 }
 
@@ -310,7 +310,7 @@
     -fx-text-fill: #b5e4fa;
 }
 
-.arrow-button-2 .text:hover{
+.arrow-button-2 .text:pressed{
     -fx-fill: #44d1ff;
 }
 

@@ -172,7 +172,7 @@ public class DashboardController {
     private void handleRightIncomeButton(ActionEvent event) {
         if (event.getSource() == rightIncomeButton && tabIncomeId > 0) {
             tabIncomeId--;
-            calculateTabIncome();
+            calculateTabIncome()   ;
             loadIncomeChart(BillList.getIncomeDataByDate(tabIncomeLeft,tabIncomeRight));
         }
     }
