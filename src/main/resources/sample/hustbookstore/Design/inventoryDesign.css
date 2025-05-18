@@ -284,6 +284,7 @@
     -fx-background-color: #b6dcff;
     -fx-border-radius: 2px;
     -fx-border-width: 2px;
+    -fx-border-color: #b6dcff;
 }
 
 .inventory-button:hover{
@@ -291,7 +292,6 @@
     -fx-border-radius: 2px;
     -fx-border-width: 2px;
 }
-
 
 .type-selection-box .arrow-button .arrow{
     -fx-background-color: white;

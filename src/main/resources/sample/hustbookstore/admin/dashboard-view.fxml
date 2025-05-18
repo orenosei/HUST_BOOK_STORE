@@ -36,6 +36,10 @@
                   </ImageView>
                </children>
             </AnchorPane>
+            <Button fx:id="leftTrendingButton" layoutX="-9.0" layoutY="85.0" mnemonicParsing="false" onAction="#handleLeftTrendingButton" styleClass="arrow-button" stylesheets="@../Design/dashboardDesign.css" text="◀" textFill="WHITE" AnchorPane.leftAnchor="-9.0">
+               <font>
+                  <Font size="26.0" />
+               </font></Button>
             <GridPane layoutX="143.0" layoutY="67.0" prefHeight="90.0" prefWidth="140.0" AnchorPane.rightAnchor="35.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="56.0" minWidth="10.0" prefWidth="50.0" />
@@ -76,10 +80,6 @@
                   </Text>
                </children>
             </GridPane>
-            <Button fx:id="leftTrendingButton" layoutX="-9.0" layoutY="85.0" mnemonicParsing="false" onAction="#handleLeftTrendingButton" styleClass="arrow-button" stylesheets="@../Design/dashboardDesign.css" text="◀" textFill="WHITE" AnchorPane.leftAnchor="-9.0">
-               <font>
-                  <Font size="26.0" />
-               </font></Button>
             <Button fx:id="rightTrendingButton" layoutX="258.0" layoutY="85.0" mnemonicParsing="false" onAction="#handleRightTrendingButton" styleClass="arrow-button" stylesheets="@../Design/dashboardDesign.css" text="▶" textFill="WHITE" AnchorPane.rightAnchor="-6.800000000000011">
                <font>
                   <Font size="26.0" />
