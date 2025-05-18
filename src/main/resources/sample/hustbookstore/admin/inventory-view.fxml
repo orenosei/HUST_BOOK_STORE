@@ -15,25 +15,44 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.CheckComboBox?>
 
-<AnchorPane fx:id="inventory_screen" prefHeight="720.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.InventoryController">
+<AnchorPane fx:id="inventory_screen" prefHeight="720.0" prefWidth="1020.0" stylesheets="@../Design/inventoryDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.InventoryController">
    <children>
-      <AnchorPane layoutX="611.0" layoutY="16.0" prefHeight="44.0" prefWidth="396.0" styleClass="search-bar" stylesheets="@../Design/homeDesign.css" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="10.0">
+      <AnchorPane layoutX="611.0" layoutY="16.0" prefHeight="44.0" prefWidth="396.0" style="-fx-background-radius: 20;" styleClass="inventory-search-bar" stylesheets="@../Design/inventoryDesign.css" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="10.0">
          <children>
-            <TextField fx:id="search_bar" layoutX="165.0" layoutY="10.0" prefHeight="55.0" prefWidth="396.0" promptText="Search" styleClass="trans-bg" stylesheets="@../Design/homeDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TextField fx:id="search_bar" layoutX="165.0" layoutY="10.0" prefHeight="55.0" prefWidth="396.0" promptText="Search" styleClass="trans-bg" stylesheets="@../Design/inventoryDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <FontAwesomeIcon fill="#7e60c6" glyphName="SEARCH" layoutX="357.0" layoutY="35.0" size="2em" />
+            <FontAwesomeIcon glyphName="SEARCH" layoutX="359.0" layoutY="33.0" size="2em">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.729411780834198" green="0.615686297416687" blue="1.0" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.6117647290229797" green="0.8274509906768799" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill></FontAwesomeIcon>
          </children>
       </AnchorPane>
-      <ScrollPane layoutX="10.0" layoutY="80.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="320.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="70.0">
+      <ScrollPane hbarPolicy="NEVER" layoutX="11.2" layoutY="80.0" prefHeight="315.0" prefWidth="999.0" stylesheets="@../Design/inventoryDesign.css" vbarPolicy="NEVER" AnchorPane.bottomAnchor="335.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="70.0">
          <content>
-            <TableView fx:id="inventory_tableView" onMouseClicked="#inventorySelectData" prefHeight="310.0" prefWidth="997.0" styleClass="inventory-table" stylesheets="@../Design/homeDesign.css" tableMenuButtonVisible="true">
+            <TableView fx:id="inventory_tableView" onMouseClicked="#inventorySelectData" prefHeight="310.0" prefWidth="997.0" style="-fx-background-radius: 20;" styleClass="inventory-table-border" stylesheets="@../Design/inventoryDesign.css" tableMenuButtonVisible="true">
                <columns>
                   <TableColumn fx:id="col_productID" prefWidth="150.0" resizable="false" text="Product ID" />
                   <TableColumn fx:id="col_productName" prefWidth="300.0" resizable="false" text="Product Name" />
@@ -57,9 +76,9 @@
             </TableView>
          </content>
       </ScrollPane>
-      <AnchorPane layoutX="8.0" layoutY="516.0" prefHeight="315.0" prefWidth="1000.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+      <AnchorPane layoutX="8.0" layoutY="516.0" prefHeight="315.0" prefWidth="1000.0" stylesheets="@../Design/inventoryDesign.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <children>
-            <GridPane layoutX="131.0" layoutY="15.0" vgap="5.0">
+            <GridPane layoutX="131.0" layoutY="15.0" stylesheets="@../Design/inventoryDesign.css" vgap="5.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="89.18696594238281" minWidth="10.0" prefWidth="89.18696594238281" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.13912963867188" minWidth="10.0" prefWidth="156.3130340576172" />
@@ -75,25 +94,25 @@
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <TextField fx:id="inventory_productID" styleClass="text-box" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" />
+                  <TextField fx:id="inventory_productID" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" GridPane.columnIndex="1" />
                   <Label text="Product ID" textFill="#947bd0" />
-                  <TextField fx:id="inventory_productName" styleClass="text-box" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="inventory_productName" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label text="Product Name" textFill="#947bd0" GridPane.rowIndex="2" />
                   <Label text="Type" textFill="#947bd0" GridPane.rowIndex="1" />
-                  <TextField fx:id="inventory_stocks" styleClass="text-box" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <TextField fx:id="inventory_stocks" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                   <Label text="Stocks" textFill="#947bd0" GridPane.rowIndex="7" />
-                  <TextField fx:id="inventory_importPrice" styleClass="text-box" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="inventory_importPrice" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <Label text="Import price" textFill="#947bd0" GridPane.rowIndex="5" />
-                  <TextField fx:id="inventory_sellingPrice" styleClass="text-box" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="inventory_sellingPrice" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <Label text="Selling price" textFill="#947bd0" GridPane.rowIndex="6" />
-                  <TextField fx:id="inventory_distributor" styleClass="text-box" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="inventory_distributor" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Distributor" textFill="#947bd0" GridPane.rowIndex="3" />
-                  <ComboBox fx:id="inventory_type" editable="true" onAction="#handleProductTypeChange" prefHeight="29.0" prefWidth="165.0" promptText="Select type" styleClass="type-selection-box" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="inventory_restrictedAge" styleClass="text-box" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <ComboBox fx:id="inventory_type" editable="true" onAction="#handleProductTypeChange" prefHeight="29.0" prefWidth="165.0" styleClass="type-selection-box" stylesheets="@../Design/inventoryDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="inventory_restrictedAge" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label text="Restricted Age" textFill="#947bd0" GridPane.rowIndex="4" />
                </children>
             </GridPane>
-            <GridPane layoutX="10.0" layoutY="51.0" vgap="10.0">
+            <GridPane layoutX="10.0" layoutY="51.0" stylesheets="@../Design/inventoryDesign.css" vgap="10.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                </columnConstraints>
@@ -104,32 +123,32 @@
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="add_btn" mnemonicParsing="false" onAction="#setAdd_btn" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@../Design/homeDesign.css" text="Add" textFill="WHITE">
+                  <Button fx:id="add_btn" mnemonicParsing="false" onAction="#setAdd_btn" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Add" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="update_btn" mnemonicParsing="false" onAction="#setUpdate_btn" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@../Design/homeDesign.css" text="Update" textFill="WHITE" GridPane.rowIndex="1">
+                  <Button fx:id="update_btn" mnemonicParsing="false" onAction="#setUpdate_btn" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Update" textFill="WHITE" GridPane.rowIndex="1">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="clear_btn" mnemonicParsing="false" onAction="#setClear_btn" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@../Design/homeDesign.css" text="Clear" textFill="WHITE" GridPane.rowIndex="2">
+                  <Button fx:id="clear_btn" mnemonicParsing="false" onAction="#setClear_btn" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Clear" textFill="WHITE" GridPane.rowIndex="2">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="delete_btn" mnemonicParsing="false" onAction="#setDelete_btn" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@../Design/homeDesign.css" text="Delete" textFill="WHITE" GridPane.rowIndex="3">
+                  <Button fx:id="delete_btn" mnemonicParsing="false" onAction="#setDelete_btn" prefHeight="36.0" prefWidth="95.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Delete" textFill="WHITE" GridPane.rowIndex="3">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
                </children>
             </GridPane>
-            <AnchorPane layoutX="841.0" layoutY="41.0" prefHeight="214.0" prefWidth="100.0" styleClass="inventory-table" stylesheets="@../Design/homeDesign.css">
+            <AnchorPane layoutX="841.0" layoutY="41.0" prefHeight="214.0" prefWidth="100.0" styleClass="inventory-table" stylesheets="@../Design/inventoryDesign.css">
                <children>
                   <ImageView fx:id="inventory_imageView" fitHeight="160.0" fitWidth="100.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button fx:id="import_btn" layoutX="15.0" layoutY="132.0" mnemonicParsing="false" onAction="#setImport_btn" prefHeight="35.0" prefWidth="98.0" styleClass="inventory-button" stylesheets="@../Design/homeDesign.css" text="Import" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                  <Button fx:id="import_btn" layoutX="15.0" layoutY="132.0" mnemonicParsing="false" onAction="#setImport_btn" prefHeight="35.0" prefWidth="98.0" styleClass="inventory-button" text="Import" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -154,16 +173,16 @@
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <TextField fx:id="inventory_ISBN" prefWidth="148.0" styleClass="text-box" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="inventory_ISBN" prefWidth="148.0" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label fx:id="inventory_isbn_label" text="ISBN" textFill="#947bd0" GridPane.rowIndex="1" />
-                  <TextField fx:id="inventory_author" styleClass="text-box" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="inventory_author" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label fx:id="inventory_author_label" text="Author" textFill="#947bd0" GridPane.rowIndex="2" />
                   <Label fx:id="inventory_genre_label" text="Genre" textFill="#947bd0" GridPane.rowIndex="3" />
                   <Label fx:id="inventory_pubDate_label" text="Published date" textFill="#947bd0" GridPane.rowIndex="4" />
-                  <DatePicker fx:id="inventory_publishedDate" prefHeight="30.0" prefWidth="209.0" styleClass="type-selection-box" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextArea fx:id="inventory_description" prefHeight="112.0" prefWidth="214.0" styleClass="text-box" stylesheets="@../Design/homeDesign.css" wrapText="true" GridPane.columnIndex="1" />
+                  <DatePicker fx:id="inventory_publishedDate" prefHeight="30.0" prefWidth="209.0" styleClass="type-selection-box" stylesheets="@../Design/inventoryDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextArea fx:id="inventory_description" prefHeight="112.0" prefWidth="214.0" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" wrapText="true" GridPane.columnIndex="1" />
                   <Label fx:id="inventory_description_label" text="Description" textFill="#947bd0" />
-                  <CheckComboBox fx:id="inventory_genre" prefHeight="26.0" prefWidth="212.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <CheckComboBox fx:id="inventory_genre" prefHeight="26.0" prefWidth="212.0" styleClass="type-selection-box" stylesheets="@../Design/inventoryDesign.css" title="" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
          </children>

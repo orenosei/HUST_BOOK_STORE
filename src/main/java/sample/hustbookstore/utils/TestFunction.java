@@ -15,7 +15,7 @@ public class TestFunction extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(LaunchApplication.class.getResource("arya-chat.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
-        stage.setTitle("TEST THÔI UwU");
+        stage.setTitle("TEST ");
         stage.setScene(scene);
         stage.show();
     }

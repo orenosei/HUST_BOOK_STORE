@@ -16,6 +16,9 @@ public class VoucherList {
             throw new IllegalStateException("Unable to connect to the database.");
         }
     }
+    public static void closeConnection() throws SQLException {
+        connect.close();
+    }
 
     public static boolean updateVoucher(String code, int remaining, float discount, LocalDate duration, int voucher_id) {
         String updateQuery = "UPDATE voucher "

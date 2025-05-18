@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 
 <AnchorPane prefHeight="630.0" prefWidth="1020.0" stylesheets="@../Design/dashboardDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.user.UserDashboardController">
    <children>
@@ -18,18 +18,17 @@
                      <children>
                         <AnchorPane fx:id="trendingPane" prefHeight="575.0" prefWidth="1020.0" styleClass="trending-bg" stylesheets="@../Design/dashboardDesign.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Button fx:id="trendingLeftBtn" layoutX="14.0" layoutY="244.0" mnemonicParsing="false" onAction="#handleTrendingLeftBtn" style="-fx-background-color: tranparent;" AnchorPane.leftAnchor="20.0">
+                              <Button fx:id="trendingLeftBtn" layoutX="14.0" layoutY="244.0" mnemonicParsing="false" onAction="#handleTrendingLeftBtn" styleClass="trans-bg" stylesheets="@../Design/dashboardDesign.css" AnchorPane.leftAnchor="20.0">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="ANGLE_LEFT" size="5em" />
                                  </graphic>
                               </Button>
-                              <Button fx:id="trendingRightBtn" layoutX="933.0" layoutY="244.0" mnemonicParsing="false" onAction="#handleTrendingRightBtn" style="-fx-background-color: tranparent;" AnchorPane.rightAnchor="20.0">
+                              <Button fx:id="trendingRightBtn" layoutX="933.0" layoutY="244.0" mnemonicParsing="false" onAction="#handleTrendingRightBtn" styleClass="trans-bg" stylesheets="@../Design/dashboardDesign.css" AnchorPane.rightAnchor="20.0">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="ANGLE_RIGHT" size="5em" />
                                  </graphic>
                               </Button>
-                              <HBox fx:id="contentBox" layoutX="316.0" layoutY="164.0" prefHeight="570.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0" />
-                              <Button fx:id="stopBtn" layoutX="922.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleStopBtn" text="Stop" />
+                              <StackPane fx:id="trendingStackPane" layoutX="110.0" layoutY="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0" />
                            </children>
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -45,12 +44,12 @@
                      <children>
                         <AnchorPane fx:id="recommendationPane" prefHeight="575.0" prefWidth="1020.0" styleClass="recommendation-bg" stylesheets="@../Design/dashboardDesign.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Button layoutX="38.0" layoutY="244.0" mnemonicParsing="false" style="-fx-background-color: tranparent;" AnchorPane.leftAnchor="20.0">
+                              <Button layoutX="38.0" layoutY="244.0" mnemonicParsing="false" styleClass="trans-bg" stylesheets="@../Design/dashboardDesign.css" AnchorPane.leftAnchor="20.0">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="ANGLE_LEFT" size="5em" />
                                  </graphic>
                               </Button>
-                              <Button layoutX="923.0" layoutY="244.0" mnemonicParsing="false" style="-fx-background-color: tranparent;" AnchorPane.rightAnchor="20.0">
+                              <Button layoutX="923.0" layoutY="244.0" mnemonicParsing="false" styleClass="trans-bg" stylesheets="@../Design/dashboardDesign.css" AnchorPane.rightAnchor="20.0">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="ANGLE_RIGHT" size="5em" />
                                  </graphic>

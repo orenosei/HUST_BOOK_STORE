@@ -279,7 +279,6 @@ public class UserStoreProductCardController implements Initializable {
     @FXML
     public void handleAddToCartButton(ActionEvent event) {
         if (event.getSource() == addToCart_btn) {
-            // Hiển thị thông báo chờ
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText(null);
             alert.setContentText("Processing...");

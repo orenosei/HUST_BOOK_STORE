@@ -1,15 +1,22 @@
-
 package sample.hustbookstore.models;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BillList {
     private static Connection connect;
+
+    public static void closeConnection() throws SQLException {
+        connect.close();
+    }
 
     public Bill prepareBill(int userId, List<CartItem> cartItems, float discount) {
 
@@ -36,18 +43,44 @@ public class BillList {
         );
     }
 
-    public boolean addBill(Bill bill) {
-        String sql = "INSERT INTO bill (user_id, total_price, profit, purchase_date) VALUES (?, ?, ?, ?)";
+    public boolean addBill(Bill bill, List<CartItem> selectedItems) {
+        String sqlBill = "INSERT INTO bill (user_id, total_price, profit, purchase_date) VALUES (?, ?, ?, ?)";
 
-        try (PreparedStatement statement = connect.prepareStatement(sql)) {
-            statement.setInt(1, bill.getUserID());
-            statement.setDouble(2, bill.getTotalPrice());
-            statement.setDouble(3, bill.getProfit());
-            statement.setDate(4, Date.valueOf(bill.getPurchasedDate()));
+        try (PreparedStatement billStatement = connect.prepareStatement(sqlBill, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
-            int affectedRows = statement.executeUpdate();
-            return affectedRows > 0;
+            billStatement.setInt(1, bill.getUserID());
+            billStatement.setDouble(2, bill.getTotalPrice());
+            billStatement.setDouble(3, bill.getProfit());
+            billStatement.setDate(4, Date.valueOf(bill.getPurchasedDate()));
 
+            int affectedRows = billStatement.executeUpdate();
+            if (affectedRows == 0) {
+                return false;
+            }
+            try (ResultSet generatedKeys = billStatement.getGeneratedKeys()) {
+                if (!generatedKeys.next()) {
+                    return false;
+                }
+                int billId = generatedKeys.getInt(1);
+
+                String sqlItem = "INSERT INTO bill_item (bill_id, product_id, quantity, price_at_purchase) VALUES (?, ?, ?, ?)";
+                for (CartItem item : selectedItems) {
+                    try (PreparedStatement itemStatement = connect.prepareStatement(sqlItem)) {
+                        itemStatement.setInt(1, billId);
+                        itemStatement.setString(2, item.getProductId());
+                        itemStatement.setInt(3, item.getQuantity());
+
+                        Product product = item.getProduct();
+                        if (product == null) {
+                            return false;
+                        }
+                        itemStatement.setDouble(4, product.getSellPrice());
+
+                        itemStatement.executeUpdate();
+                    }
+                }
+            }
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -85,8 +118,7 @@ public class BillList {
     public static List<XYChart.Data<String, Float>> getIncomeDataByDate(Date day1, Date day2) {
         List<XYChart.Data<String, Float>> dataList = new ArrayList<>();
         String sql = "SELECT purchase_date, SUM(profit) FROM bill WHERE purchase_date BETWEEN ? AND ? GROUP BY purchase_date ORDER BY TIMESTAMP(purchase_date)";
-        try (Connection conn = database.connectDB();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connect.prepareStatement(sql)) {
             stmt.setDate(1, day1);
             stmt.setDate(2, day2);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -103,8 +135,7 @@ public class BillList {
     public static List<XYChart.Data<String, Integer>> getOrderDataByDate(Date day1, Date day2) {
         List<XYChart.Data<String, Integer>> dataList = new ArrayList<>();
         String sql = "SELECT purchase_date, COUNT(bill_id) FROM bill WHERE purchase_date BETWEEN ? AND ? GROUP BY purchase_date ORDER BY TIMESTAMP(purchase_date)";
-        try (Connection conn = database.connectDB();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connect.prepareStatement(sql)) {
             stmt.setDate(1, day1);
             stmt.setDate(2, day2);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -116,6 +147,157 @@ public class BillList {
             e.printStackTrace();
         }
         return dataList;
+    }
+
+    public static List<Map<String, Object>> getBillsWithUserName(LocalDate fromDate, LocalDate toDate) {
+        List<Map<String, Object>> bills = new ArrayList<>();
+        String sql = "SELECT b.bill_id, u.name, b.total_price, b.profit, b.purchase_date " +
+                "FROM bill b JOIN user u ON b.user_id = u.user_id " +
+                "WHERE b.purchase_date BETWEEN ? AND ?";
+        try (Connection conn = database.connectDB();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setDate(1, Date.valueOf(fromDate));
+            stmt.setDate(2, Date.valueOf(toDate));
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Map<String, Object> bill = new HashMap<>();
+                    bill.put("bill_id", rs.getInt("bill_id"));
+                    bill.put("name", rs.getString("name"));
+                    bill.put("total_price", rs.getDouble("total_price"));
+                    bill.put("profit", rs.getDouble("profit"));
+                    bill.put("purchase_date", rs.getDate("purchase_date").toLocalDate());
+                    bills.add(bill);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bills;
+    }
+
+    public static List<Map<String, Object>> getBillItemsWithProductName(int billId) {
+        List<Map<String, Object>> items = new ArrayList<>();
+        String sql = "SELECT p.name, bi.quantity, bi.price_at_purchase "
+                + "FROM bill_item bi "
+                + "JOIN product p ON bi.product_id = p.product_id "
+                + "WHERE bi.bill_id = ?";
+
+        try (PreparedStatement stmt = connect.prepareStatement(sql)) {
+            stmt.setInt(1, billId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Map<String, Object> item = new HashMap<>();
+                    item.put("product_name", rs.getString("name"));
+                    item.put("quantity", rs.getInt("quantity"));
+                    item.put("price", rs.getDouble("price_at_purchase"));
+                    items.add(item);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return items;
+    }
+
+    public static List<Map<String, Object>> getAllBillsWithUserName() {
+        List<Map<String, Object>> bills = new ArrayList<>();
+        String sql = "SELECT b.bill_id, u.name, b.total_price, b.profit, b.purchase_date "
+                + "FROM bill b JOIN user u ON b.user_id = u.user_id";
+
+        try (PreparedStatement stmt = connect.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Map<String, Object> bill = new HashMap<>();
+                bill.put("bill_id", rs.getInt("bill_id"));
+                bill.put("name", rs.getString("name"));
+                bill.put("total_price", rs.getDouble("total_price"));
+                bill.put("profit", rs.getDouble("profit"));
+                bill.put("purchase_date", rs.getDate("purchase_date").toLocalDate());
+                bills.add(bill);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bills;
+    }
+
+    public ObservableList<Book> getTrendingBooks() {
+        ObservableList<Book> trendingBooks = FXCollections.observableArrayList();
+        String query = """
+        SELECT 
+            p.product_id,
+            p.name,
+            p.distributor,
+            p.sell_price,
+            p.import_price,
+            p.stock,
+            p.type,
+            p.image,
+            p.description,
+            p.added_date,
+            p.age_restrict,
+            p.isbn,
+            p.genre,
+            p.author,
+            p.pub_date,
+            SUM(bi.quantity) AS total_sold
+        FROM bill_item bi
+        JOIN bill b ON bi.bill_id = b.bill_id
+        JOIN product p ON bi.product_id = p.product_id
+        WHERE p.type = 'Book'
+            AND b.purchase_date >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+        GROUP BY 
+            p.product_id,
+            p.name,
+            p.distributor,
+            p.sell_price,
+            p.import_price,
+            p.stock,
+            p.type,
+            p.image,
+            p.description,
+            p.added_date,
+            p.age_restrict,
+            p.isbn,
+            p.genre,
+            p.author,
+            p.pub_date
+        ORDER BY total_sold DESC
+        LIMIT 5
+    """;
+
+        try (PreparedStatement statement = connect.prepareStatement(query)) {
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Book book = new Book(
+                        resultSet.getString("product_id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("distributor"),
+                        resultSet.getDouble("sell_price"),
+                        resultSet.getDouble("import_price"),
+                        resultSet.getInt("stock"),
+                        resultSet.getString("type"),
+                        resultSet.getString("image"),
+                        resultSet.getString("description"),
+                        resultSet.getDate("added_date").toLocalDate(),
+                        resultSet.getInt("age_restrict"),
+                        resultSet.getString("isbn"),
+                        resultSet.getString("genre"),
+                        resultSet.getDate("pub_date").toLocalDate(),
+                        resultSet.getString("author")
+                );
+
+                trendingBooks.add(book);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error loading trending books: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return trendingBooks;
     }
 
     public static void initialize() {

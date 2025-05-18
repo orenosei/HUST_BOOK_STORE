@@ -44,7 +44,7 @@ public class Cart {
     }
 
 
-    public Cart getCartFromDatabase(int user_id) {
+    public static Cart getCartFromDatabase(int user_id) {
         Cart cart;
 
         String query = "SELECT * FROM cart WHERE user_id = ?";
@@ -317,6 +317,10 @@ public class Cart {
         return trendingBooks;
     }
 
+
+    public static void closeConnection() throws SQLException {
+        connect.close();
+    }
 
     public static void initialize() {
         connect = database.connectDB();

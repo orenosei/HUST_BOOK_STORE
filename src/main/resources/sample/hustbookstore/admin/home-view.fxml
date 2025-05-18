@@ -3,13 +3,14 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="home_screen" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.HomeScreenController">
+<AnchorPane fx:id="home_screen" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../Design/homeDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.HomeScreenController">
    <children>
       <AnchorPane fx:id="headerPane" layoutX="10.0" layoutY="10.0" prefHeight="90.0" prefWidth="1280.0" styleClass="header" stylesheets="@../Design/homeDesign.css">
          <children>
@@ -27,7 +28,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="260.0" styleClass="side-bar" stylesheets="@../Design/homeDesign.css">
+      <AnchorPane layoutX="-3.0" prefHeight="730.0" prefWidth="275.0" styleClass="side-bar" stylesheets="@../Design/homeDesign.css">
          <children>
             <Text fill="WHITE" layoutX="10.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HUST">
                <font>
@@ -88,8 +89,8 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@../Design/homeDesign.css">
                      <children>
-                        <FontAwesomeIcon fill="WHITE" glyphName="EMPIRE" layoutX="14.0" layoutY="60.0" size="4em" />
-                        <Button fx:id="others_btn" alignment="BASELINE_CENTER" layoutX="77.0" mnemonicParsing="false" onAction="#handleSidebarButtonAction" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@../Design/homeDesign.css" text="OTHERS" textFill="WHITE">
+                        <FontAwesomeIcon fill="WHITE" glyphName="HISTORY" layoutX="14.0" layoutY="60.0" size="4em" />
+                        <Button fx:id="others_btn" alignment="BASELINE_CENTER" layoutX="77.0" mnemonicParsing="false" onAction="#handleSidebarButtonAction" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@../Design/homeDesign.css" text="ORDERS" textFill="WHITE">
                            <font>
                               <Font name="Chalkboard Bold" size="23.0" />
                            </font>
@@ -124,6 +125,9 @@
                </styleClass>
             </AnchorPane>
          </children>
+         <effect>
+            <DropShadow />
+         </effect>
       </AnchorPane>
       <StackPane layoutX="270.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
