@@ -42,7 +42,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="profile_label_phoneNum" layoutX="124.0" layoutY="439.0" text="profile_phoneNum">
+            <Label fx:id="profile_label_phoneNum" layoutX="124.0" layoutY="439.0" text="profile_phoneNum" textFill="#b6dcff">
                <font>
                   <Font size="20.0" />
                </font>
@@ -57,7 +57,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="profile_label_email" layoutX="124.0" layoutY="469.0" text="profile_email">
+            <Label fx:id="profile_label_email" layoutX="124.0" layoutY="469.0" text="profile_email" textFill="#b6dcff">
                <font>
                   <Font size="20.0" />
                </font>
@@ -84,7 +84,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="profile_label_adminID" text="profile_adminID" GridPane.columnIndex="1">
+                        <Label fx:id="profile_label_adminID" text="profile_adminID" textFill="#b6dcff" GridPane.columnIndex="1">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -100,7 +100,7 @@
                            </font>
                         </Label>
                         <TextField fx:id="profile_adminPassword" prefWidth="200.0" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="profile_label_adminUser" prefHeight="30.0" prefWidth="225.0" text="profile_adminUsername" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label fx:id="profile_label_adminUser" prefHeight="30.0" prefWidth="225.0" text="profile_adminUsername" textFill="#b6dcff" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font size="20.0" />
                            </font>
