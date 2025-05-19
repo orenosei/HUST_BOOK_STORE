@@ -19,7 +19,7 @@
    <children>
       <VBox prefHeight="700.0" prefWidth="290.0" style="-fx-border-color: #4C64EF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView fx:id="voucher_tableView" onMouseClicked="#voucherSelectedData" prefHeight="499.0" prefWidth="288.0">
+            <TableView fx:id="voucher_tableView" onMouseClicked="#voucherSelectedData" prefHeight="499.0" prefWidth="288.0" styleClass="inventory-table-border" stylesheets="@../Design/inventoryDesign.css">
                <columns>
                   <TableColumn fx:id="codeIDCol" prefWidth="75.0" text="ID" visible="false" />
                   <TableColumn fx:id="codeAvailablecodeCol" prefWidth="81.59997564554214" text="Code" />
@@ -34,7 +34,7 @@
             <AnchorPane prefHeight="200.0" prefWidth="288.0">
                <children>
                   <Label fx:id="voucher_label_ID" text="Hiden ID" visible="false" />
-                  <GridPane hgap="10.0" layoutX="13.0" layoutY="20.0" vgap="8.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                  <GridPane hgap="10.0" layoutX="13.0" layoutY="20.0" stylesheets="@../Design/inventoryDesign.css" vgap="8.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <columnConstraints>
                         <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -46,9 +46,9 @@
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <TextField fx:id="voucherDiscount" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <DatePicker fx:id="voucherDuaration" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="voucherRemain" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="voucherDiscount" prefHeight="25.0" prefWidth="180.0" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <DatePicker fx:id="voucherDuaration" styleClass="type-selection-box" stylesheets="@../Design/inventoryDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="voucherRemain" prefHeight="25.0" prefWidth="180.0" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Text fill="#8f9de6" strokeType="OUTSIDE" strokeWidth="0.0" text="DISCOUNT" GridPane.rowIndex="1">
                            <font>
                               <Font size="15.0" />
@@ -64,7 +64,7 @@
                               <Font size="15.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="voucherCode" prefHeight="25.0" prefWidth="180.0" styleClass="vouher-bar" stylesheets="@../Design/homeDesign.css" GridPane.columnIndex="1" />
+                        <TextField fx:id="voucherCode" prefHeight="25.0" prefWidth="180.0" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" GridPane.columnIndex="1" />
                         <Text fill="#8f9de6" strokeType="OUTSIDE" strokeWidth="0.0" text="CODE" textAlignment="RIGHT">
                            <font>
                               <Font size="15.0" />
@@ -74,10 +74,10 @@
                   </GridPane>
                   <HBox prefHeight="29.0" prefWidth="288.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
                      <children>
-                        <Button fx:id="voucherAddBtn" mnemonicParsing="false" onAction="#VoucherAddBtn" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="Add" textFill="WHITE" />
-                        <Button fx:id="voucherUpdateBtn" mnemonicParsing="false" onAction="#voucherUpdateBtn" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="Update" textFill="WHITE" />
-                        <Button fx:id="voucherClearBtn" mnemonicParsing="false" onAction="#voucherClearBtn" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="Clear" textFill="WHITE" />
-                        <Button fx:id="voucherDeleteBtn" mnemonicParsing="false" onAction="#voucherDeleteBtn" prefHeight="32.0" prefWidth="79.0" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" text="Delete" textFill="WHITE" />
+                        <Button fx:id="voucherAddBtn" mnemonicParsing="false" onAction="#VoucherAddBtn" prefHeight="32.0" prefWidth="79.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Add" textFill="WHITE" />
+                        <Button fx:id="voucherUpdateBtn" mnemonicParsing="false" onAction="#voucherUpdateBtn" prefHeight="32.0" prefWidth="79.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Update" textFill="WHITE" />
+                        <Button fx:id="voucherClearBtn" mnemonicParsing="false" onAction="#voucherClearBtn" prefHeight="32.0" prefWidth="79.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Clear" textFill="WHITE" />
+                        <Button fx:id="voucherDeleteBtn" mnemonicParsing="false" onAction="#voucherDeleteBtn" prefHeight="32.0" prefWidth="79.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Delete" textFill="WHITE" />
                      </children>
                   </HBox>
                </children>

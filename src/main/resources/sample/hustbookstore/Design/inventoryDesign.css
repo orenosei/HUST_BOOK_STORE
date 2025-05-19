@@ -253,6 +253,21 @@
     -fx-border-width: 2px;
     -fx-border-color: #b6dcff;
 }
+
+
+.type-selection-box .list-view .cell .text {
+    -fx-fill: black;
+}
+
+.type-selection-box .list-view .cell:hover .text {
+    -fx-fill: black;
+}
+
+/* Giữ text đen khi ô được chọn và hover */
+.type-selection-box .list-view .cell:filled:selected:hover .text {
+    -fx-fill: black;
+}
+
 .type-selection-box .arrow-button{
     -fx-background-color: transparent;
 }
@@ -293,8 +308,12 @@
     -fx-border-width: 2px;
 }
 
-.type-selection-box .arrow-button .arrow{
-    -fx-background-color: white;
+.inventory-button:pressed{
+    -fx-background-color: #5099f1;
+}
+
+.type-selection-box .arrow-button .arrow {
+    -fx-fill: white;
 }
 
 .combo-box .arrow-button .arrow{
@@ -319,7 +338,7 @@
     -fx-background-color: white;
     -fx-border-width: 5px;
     -fx-border-color: #9178d1;
-    -fx-border-radius: 10px;
+    -fx-border-radius: 20px;
 }
 
 .list-cell .text{
