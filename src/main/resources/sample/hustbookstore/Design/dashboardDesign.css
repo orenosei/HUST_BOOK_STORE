@@ -299,19 +299,31 @@
 
 .arrow-button{
     -fx-background-color: transparent;
-    -fx-text-fill: #ffffff;
 }
-.arrow-button .text:pressed{
-    -fx-fill: #46c0ff;
+
+.arrow-button .text{
+    -fx-fill: White;
+}
+.arrow-button:hover .text{
+    -fx-fill: #59c4ff;
+}
+.arrow-button:pressed .text{
+    -fx-fill: #17baff;
 }
 
 .arrow-button-2{
     -fx-background-color: transparent;
-    -fx-text-fill: #b5e4fa;
 }
 
-.arrow-button-2 .text:pressed{
+.arrow-button-2 .text{
+    -fx-fill: #b5e4fa;
+}
+
+.arrow-button-2:hover .text{
     -fx-fill: #44d1ff;
+}
+.arrow-button-2:pressed .text{
+    -fx-fill: #12a4ff;
 }
 
 .confirm-button{
