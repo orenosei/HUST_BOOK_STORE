@@ -84,7 +84,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="profile_label_adminID" text="profile_adminID" textFill="#b6dcff" GridPane.columnIndex="1">
+                        <Label fx:id="profile_label_adminID" text="profile_adminID" GridPane.columnIndex="1">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -100,7 +100,7 @@
                            </font>
                         </Label>
                         <TextField fx:id="profile_adminPassword" prefWidth="200.0" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="profile_label_adminUser" prefHeight="30.0" prefWidth="225.0" text="profile_adminUsername" textFill="#b6dcff" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label fx:id="profile_label_adminUser" prefHeight="30.0" prefWidth="225.0" text="profile_adminUsername" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -109,7 +109,10 @@
                   </GridPane>
                   <Button fx:id="profile_changePasswordBtn" layoutX="269.0" layoutY="226.0" mnemonicParsing="false" onAction="#profileChangePasswordBtn" prefHeight="46.0" prefWidth="119.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Change password" textFill="WHITE" AnchorPane.bottomAnchor="27.600000000000023" AnchorPane.rightAnchor="32.60000000000008">
                      <effect>
-                        <DropShadow blurType="TWO_PASS_BOX" height="15.0" radius="7.0" width="15.0" />
+                        <DropShadow blurType="TWO_PASS_BOX" height="15.0" radius="7.0" spread="0.7" width="15.0">
+                           <color>
+                              <Color red="0.3176470696926117" green="0.6117647290229797" blue="0.8509804010391235" />
+                           </color></DropShadow>
                      </effect></Button>
                   <Label layoutX="35.0" layoutY="-1.0" text="ACCOUNT INFORMATION" textFill="#9178d1" AnchorPane.topAnchor="-1.0">
                      <font>
@@ -152,11 +155,11 @@
                         </Label>
                      </children>
                   </GridPane>
-                  <Button fx:id="profile_update_btn" layoutX="267.0" layoutY="237.0" mnemonicParsing="false" onAction="#profileUpdateBtn" prefHeight="46.0" prefWidth="126.0" styleClass="inventory-button" text="Update" textFill="WHITE" AnchorPane.bottomAnchor="0.6000000000000227">
+                  <Button fx:id="profile_update_btn" layoutX="274.0" layoutY="237.0" mnemonicParsing="false" onAction="#profileUpdateBtn" prefHeight="46.0" prefWidth="119.0" styleClass="inventory-button" text="Update" textFill="WHITE" AnchorPane.bottomAnchor="9.0">
                      <effect>
                         <DropShadow blurType="TWO_PASS_BOX" height="15.0" radius="7.0" spread="0.7" width="15.0">
                            <color>
-                              <Color red="0.31894737482070923" green="0.6124736666679382" blue="0.8526315689086914" />
+                              <Color red="0.3176470696926117" green="0.6117647290229797" blue="0.8509804010391235" />
                            </color>
                         </DropShadow>
                      </effect>
