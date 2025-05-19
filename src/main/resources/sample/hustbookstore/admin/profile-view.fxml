@@ -64,9 +64,9 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="806.0" layoutY="226.0" prefHeight="720.0" prefWidth="659.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="369.0" layoutY="12.0" prefHeight="694.0" prefWidth="611.0" styleClass="inventory-table-border" stylesheets="@../Design/inventoryDesign.css" AnchorPane.rightAnchor="14.200000000000045" AnchorPane.topAnchor="12.0">
          <children>
-            <AnchorPane layoutX="100.0" layoutY="51.0" prefHeight="300.0" prefWidth="520.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="50.0">
+            <AnchorPane layoutX="100.0" layoutY="51.0" prefHeight="300.0" prefWidth="520.0" stylesheets="@../Design/inventoryDesign.css" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="50.0">
                <children>
                   <GridPane layoutX="14.0" layoutY="50.0" prefHeight="162.0" prefWidth="375.0">
                     <columnConstraints>
@@ -107,7 +107,7 @@
                         </Label>
                      </children>
                   </GridPane>
-                  <Button fx:id="profile_changePasswordBtn" layoutX="275.0" layoutY="226.0" mnemonicParsing="false" onAction="#profileChangePasswordBtn" prefHeight="46.0" prefWidth="119.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Change password" textFill="WHITE" AnchorPane.bottomAnchor="28.0" AnchorPane.rightAnchor="71.0">
+                  <Button fx:id="profile_changePasswordBtn" layoutX="269.0" layoutY="226.0" mnemonicParsing="false" onAction="#profileChangePasswordBtn" prefHeight="46.0" prefWidth="119.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Change password" textFill="WHITE" AnchorPane.bottomAnchor="27.600000000000023" AnchorPane.rightAnchor="32.60000000000008">
                      <effect>
                         <DropShadow blurType="TWO_PASS_BOX" height="15.0" radius="7.0" width="15.0" />
                      </effect></Button>
