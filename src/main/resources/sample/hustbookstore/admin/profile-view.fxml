@@ -2,124 +2,171 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="profile_form" prefHeight="720.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.ProfileController">
+<AnchorPane fx:id="profile_form" prefHeight="720.0" prefWidth="1020.0" stylesheets="@../Design/inventoryDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.ProfileController">
    <children>
-      <AnchorPane layoutX="50.0" layoutY="54.0" prefHeight="630.0" prefWidth="300.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="50.0" layoutY="54.0" prefHeight="720.0" prefWidth="340.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane stylesheets="@../Design/profileDesign.css" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="125.0">
-               <children>
-                  <ImageView fx:id="profile_circleimage" fitHeight="200.0" fitWidth="200.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="-14.0" />
-               </children>
+            <AnchorPane layoutX="60.0" layoutY="142.4" prefHeight="217.0" prefWidth="219.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="142.0">
                <styleClass>
                   <String fx:value="bg-radious" />
-                  <String fx:value="icon-bg" />
+                  <String fx:value="inventory-table-border" />
                </styleClass>
+               <children>
+                  <ImageView fx:id="profile_circleimage" fitHeight="94.0" fitWidth="126.0" layoutX="83.2" layoutY="116.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="83.0" AnchorPane.topAnchor="116.0" />
+               </children>
+               <stylesheets>
+                  <URL value="@../Design/profileDesign.css" />
+                  <URL value="@../Design/inventoryDesign.css" />
+               </stylesheets>
             </AnchorPane>
-            <Button fx:id="profile_importBtn" layoutX="87.0" layoutY="336.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="125.0" text="Update avatar" AnchorPane.topAnchor="336.0">
+            <Button fx:id="profile_importBtn" layoutX="87.0" layoutY="336.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="125.0" text="Update avatar" visible="false" AnchorPane.topAnchor="336.0">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Label layoutX="42.0" layoutY="402.0" text="Phone:">
+            <Label layoutX="51.0" layoutY="439.0" text="Phone:" textFill="#9178d1">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="profile_label_phoneNum" layoutX="115.0" layoutY="402.0" text="profile_phoneNum">
+            <Label fx:id="profile_label_phoneNum" layoutX="124.0" layoutY="439.0" text="profile_phoneNum">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="profile_label_adminName" layoutX="32.0" layoutY="44.0" text="Trinh Minh Thanh">
+            <Label fx:id="profile_label_adminName" layoutX="53.0" layoutY="44.0" text="Trinh Minh Thanh" textFill="#9178d1">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <Label layoutX="50.0" layoutY="432.0" text="Email:">
+            <Label layoutX="59.0" layoutY="469.0" text="Email:" textFill="#9178d1">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="profile_label_email" layoutX="115.0" layoutY="432.0" text="profile_email">
+            <Label fx:id="profile_label_email" layoutX="124.0" layoutY="469.0" text="profile_email">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="806.0" layoutY="226.0" prefHeight="630.0" prefWidth="720.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="806.0" layoutY="226.0" prefHeight="720.0" prefWidth="659.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane layoutX="100.0" layoutY="51.0" prefHeight="300.0" prefWidth="520.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="50.0">
                <children>
-                  <Label text="ID:" AnchorPane.bottomAnchor="220.0">
+                  <GridPane layoutX="14.0" layoutY="50.0" prefHeight="162.0" prefWidth="375.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.79998779296875" minWidth="10.0" prefWidth="163.9999755859375" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="249.19998779296876" minWidth="10.0" prefWidth="210.8000244140625" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="ID:" textFill="#9178d1">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="profile_label_adminID" text="profile_adminID" GridPane.columnIndex="1">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label text="Username:" textFill="#9178d1" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label text="Password:" textFill="#9178d1" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="profile_adminPassword" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="profile_label_adminUser" prefHeight="30.0" prefWidth="225.0" text="profile_adminUsername" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
+                  <Button fx:id="profile_changePasswordBtn" layoutX="275.0" layoutY="226.0" mnemonicParsing="false" onAction="#profileChangePasswordBtn" prefHeight="46.0" prefWidth="119.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Change password" textFill="WHITE" AnchorPane.bottomAnchor="28.0" AnchorPane.rightAnchor="71.0">
+                     <effect>
+                        <DropShadow blurType="TWO_PASS_BOX" height="15.0" radius="7.0" width="15.0" />
+                     </effect></Button>
+                  <Label layoutX="35.0" layoutY="-1.0" text="ACCOUNT INFORMATION" textFill="#9178d1" AnchorPane.topAnchor="-1.0">
                      <font>
-                        <Font size="20.0" />
+                        <Font name="System Bold Italic" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="profile_label_adminID" layoutX="162.0" layoutY="52.0" text="profile_adminID">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label layoutY="42.0" text="Username:" AnchorPane.bottomAnchor="170.0" AnchorPane.leftAnchor="0.0">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label layoutY="87.0" text="Password:" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="0.0">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="profile_adminPassword" layoutX="162.0" layoutY="90.0" prefWidth="200.0" AnchorPane.bottomAnchor="120.0" />
-                  <Button fx:id="profile_changePasswordBtn" layoutX="388.0" layoutY="90.0" mnemonicParsing="false" onAction="#profileChangePasswordBtn" prefHeight="25.0" prefWidth="125.0" text="Change" AnchorPane.bottomAnchor="120.0" AnchorPane.rightAnchor="0.0" />
-                  <Label layoutX="35.0" layoutY="-1.0" text="ACCOUNT INFORMATION" AnchorPane.topAnchor="-1.0">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="profile_label_adminUser" layoutX="162.0" layoutY="99.0" text="profile_adminUsername">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <FontAwesomeIcon glyphName="EDIT" layoutY="22.0" selectionEnd="0" selectionStart="0" size="24" />
+                  <FontAwesomeIcon fill="#9178d1" glyphName="EDIT" layoutY="22.0" selectionEnd="0" selectionStart="0" size="24" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="97.0" layoutY="386.0" prefHeight="200.0" prefWidth="520.0">
+            <AnchorPane layoutX="97.0" layoutY="386.0" prefHeight="284.0" prefWidth="521.0">
                <children>
-                  <Label text="Name:" AnchorPane.bottomAnchor="120.0">
+                  <GridPane layoutX="19.0" layoutY="53.0" prefHeight="162.0" prefWidth="375.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.8" minWidth="10.0" prefWidth="167.19998779296876" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="212.80000000000004" minWidth="10.0" prefWidth="208.0000122070313" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="60.8" minHeight="10.0" prefHeight="32.79996337890625" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="48.00003662109375" minHeight="0.0" prefHeight="28.00003662109375" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TextField fx:id="profile_adminEmail" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Name:" textFill="#9178d1">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="profile_adminName" prefHeight="26.0" prefWidth="194.0" GridPane.columnIndex="1" />
+                        <Label text="Phone number:" textFill="#9178d1" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="profile_adminPhone" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Email:" textFill="#9178d1" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
+                  <Button fx:id="profile_update_btn" layoutX="267.0" layoutY="237.0" mnemonicParsing="false" onAction="#profileUpdateBtn" prefHeight="46.0" prefWidth="126.0" styleClass="inventory-button" text="Update" textFill="WHITE" AnchorPane.bottomAnchor="0.6000000000000227">
+                     <effect>
+                        <DropShadow blurType="TWO_PASS_BOX" height="15.0" radius="7.0" spread="0.7" width="15.0">
+                           <color>
+                              <Color red="0.31894737482070923" green="0.6124736666679382" blue="0.8526315689086914" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Button>
+                  <Label layoutX="36.0" layoutY="-2.0" text="RECEIVER INFORMATION" textFill="#9178d1" AnchorPane.topAnchor="-2.0">
                      <font>
-                        <Font size="20.0" />
+                        <Font name="System Bold Italic" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="profile_adminName" layoutX="162.0" layoutY="3.0" prefWidth="200.0" AnchorPane.bottomAnchor="120.0" />
-                  <Label layoutY="85.0" text="Phone number:" AnchorPane.bottomAnchor="70.0">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="profile_adminPhone" layoutX="162.0" layoutY="88.0" prefWidth="200.0" AnchorPane.bottomAnchor="70.0" />
-                  <Label layoutY="136.0" text="Email:" AnchorPane.bottomAnchor="20.0">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="profile_adminEmail" layoutX="164.0" layoutY="139.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" />
-                  <Button fx:id="profile_update_btn" layoutX="402.0" layoutY="91.0" mnemonicParsing="false" onAction="#profileUpdateBtn" prefHeight="46.0" prefWidth="126.0" text="Update" AnchorPane.bottomAnchor="62.599999999999994" />
-                  <Label layoutX="36.0" layoutY="-2.0" text="RECEIVER INFORMATION" AnchorPane.topAnchor="-2.0">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <FontAwesomeIcon glyphName="EDIT" layoutX="4.0" layoutY="22.0" selectionEnd="0" selectionStart="0" size="24" />
+                  <FontAwesomeIcon fill="#9178d1" glyphName="EDIT" layoutX="4.0" layoutY="22.0" selectionEnd="0" selectionStart="0" size="24" />
                </children>
             </AnchorPane>
          </children>

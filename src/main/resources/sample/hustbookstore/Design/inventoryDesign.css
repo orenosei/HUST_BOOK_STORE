@@ -268,6 +268,38 @@
     -fx-fill: black;
 }
 
+/* 1. Giữ text đen dù cell có state gì */
+.type-selection-box .list-view .list-cell .text {
+    -fx-fill: black;
+}
+
+/* 2. Khi cell được hover */
+.type-selection-box .list-view .list-cell:hover {
+    /* nếu bạn muốn giữ nền sáng hoặc cho nó tối nhẹ để thấy hover */
+    -fx-background-color: derive(#b6dcff, 20%);  /* ví dụ nhạt màu hơn nền chính */
+}
+
+/* 3. Khi cell hover thì text vẫn đen */
+.type-selection-box .list-view .list-cell:hover .text {
+    -fx-fill: black;
+}
+
+/* 4. Khi cell được chọn (selection) */
+.type-selection-box .list-view .list-cell:selected {
+    /* giữ selection bar color nếu cần */
+    -fx-background-color: derive(#b6dcff, 10%);
+}
+
+/* 5. Giữ text đen trong selection */
+.type-selection-box .list-view .list-cell:selected .text {
+    -fx-fill: black;
+}
+
+/* 6. (Tùy chọn) Override selection-bar-text */
+.type-selection-box .list-view {
+    -fx-selection-bar-text: black;
+}
+
 .type-selection-box .arrow-button{
     -fx-background-color: transparent;
 }
@@ -288,7 +320,6 @@
     /*-fx-pref-height: 50%;*/
     /*-fx-pref-width: 50%;*/
     -fx-cell-size: 18px;
-
 }
 
 .column-overlay{
@@ -320,6 +351,28 @@
     -fx-background-color: white;
 }
 
+.combo-box .list-cell:selected .text {
+    -fx-fill: black;
+}
+
+/* 1. Mặc định text trong combo-box phải đen */
+.combo-box .list-cell .text {
+    -fx-fill: black;
+}
+
+/* 2. Khi hover vào item */
+.combo-box .list-cell:hover {
+    -fx-background-color: derive(#b6dcff, 20%);
+}
+.combo-box .list-cell:hover .text {
+    -fx-fill: black;
+}
+
+/* 4. Đảm bảo selection-bar-text nếu dùng popup ListView nội bộ */
+.combo-box-popup .list-view {
+    -fx-selection-bar-text: black;
+}
+
 .voucher-button{
     -fx-background-color: #8f9de6;
     -fx-border-radius: 2px;
@@ -341,6 +394,6 @@
     -fx-border-radius: 20px;
 }
 
-.list-cell .text{
-    -fx-background-color: #bdbdbd;
+.invisible-bg{
+    -fx-background-color: transparent;
 }

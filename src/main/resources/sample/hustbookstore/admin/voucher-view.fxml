@@ -15,9 +15,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="700.0" maxWidth="290.0" prefHeight="700.0" prefWidth="290.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.VoucherController">
+<AnchorPane maxHeight="700.0" maxWidth="290.0" prefHeight="700.0" prefWidth="290.0" styleClass="invisible-bg" stylesheets="@../Design/inventoryDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.VoucherController">
    <children>
-      <VBox prefHeight="700.0" prefWidth="290.0" style="-fx-border-color: #4C64EF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="700.0" prefWidth="264.0" style="-fx-border-color: #4C64EF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <TableView fx:id="voucher_tableView" onMouseClicked="#voucherSelectedData" prefHeight="499.0" prefWidth="288.0" styleClass="inventory-table-border" stylesheets="@../Design/inventoryDesign.css">
                <columns>
@@ -34,7 +34,7 @@
             <AnchorPane prefHeight="200.0" prefWidth="288.0">
                <children>
                   <Label fx:id="voucher_label_ID" text="Hiden ID" visible="false" />
-                  <GridPane hgap="10.0" layoutX="13.0" layoutY="20.0" stylesheets="@../Design/inventoryDesign.css" vgap="8.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                  <GridPane hgap="10.0" layoutX="13.0" layoutY="20.0" styleClass="invisible-bg" stylesheets="@../Design/inventoryDesign.css" vgap="8.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <columnConstraints>
                         <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
