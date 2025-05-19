@@ -334,6 +334,10 @@
     -fx-background-color: #bcd6ff;
 }
 
+.confirm-button:pressed {
+    -fx-background-color: #6aabff;
+}
+
 .type-selection-box .arrow-button .arrow{
     -fx-background-color: white;
 }
