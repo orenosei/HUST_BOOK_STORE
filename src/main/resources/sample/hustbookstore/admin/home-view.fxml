@@ -139,7 +139,7 @@
             <AnchorPane fx:id="profileScreen" layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="1020.0" />
          </children>
       </StackPane>
-      <Button fx:id="sync_btn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="280.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleSyncButtonAction" prefHeight="38.0" prefWidth="16.0" styleClass="voucher-button" stylesheets="@../Design/homeDesign.css" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="342.0" AnchorPane.topAnchor="10.0">
+      <Button fx:id="sync_btn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="280.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleSyncButtonAction" prefHeight="38.0" prefWidth="16.0" styleClass="invisible-bg" stylesheets="@../Design/inventoryDesign.css" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="342.0" AnchorPane.topAnchor="10.0">
          <graphic>
             <FontAwesomeIcon fx:id="syncIcon" fill="WHITE" glyphName="REFRESH" size="1.5em" textAlignment="CENTER" />
          </graphic>
