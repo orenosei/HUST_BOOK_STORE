@@ -13,9 +13,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -26,35 +23,14 @@
             <AnchorPane layoutX="11.0" layoutY="2.0" prefHeight="64.0" prefWidth="159.0">
                <children>
                   <FontAwesomeIcon fill="#9178d1" glyphName="SHOPPING_CART" layoutX="4.0" layoutY="50.0" size="4em" wrappingWidth="59.744943618774414" />
-                  <Text layoutX="71.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CART">
+                  <Text fill="#9178d1" layoutX="71.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CART">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
-                     <fill>
-                        <LinearGradient endX="1.0" endY="1.0">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.5407407283782959" green="0.6555555462837219" blue="1.0" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="0.006729475100942127">
-                                 <color>
-                                    <Color red="0.5407407283782959" green="0.6555555462837219" blue="1.0" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.6348147988319397" green="0.24444444477558136" blue="1.0" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </fill>
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="520.0" prefHeight="700.0" prefWidth="470.0" styleClass="inventory-table-border" stylesheets="@../Design/inventoryDesign.css">
+            <AnchorPane layoutX="520.0" prefHeight="700.0" prefWidth="470.0" styleClass="inventory-table-border-right" stylesheets="@../Design/inventoryDesign.css">
                <children>
                   <Text fill="#9178d1" layoutX="19.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PAYMENT INFORMATION">
                      <font>
@@ -94,7 +70,7 @@
                </children>
             </AnchorPane>
             <TextField fx:id="voucherField" layoutX="238.0" layoutY="485.0" promptText="apply voucher here" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" />
-            <Button fx:id="applyVoucherBtn" layoutX="412.0" layoutY="485.0" mnemonicParsing="false" onAction="#pressVoucherBtn" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Apply" textFill="#52aeff" />
+            <Button fx:id="applyVoucherBtn" layoutX="412.0" layoutY="485.0" mnemonicParsing="false" onAction="#pressVoucherBtn" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Apply" textFill="WHITE" />
             <GridPane layoutX="252.0" layoutY="539.0" prefHeight="34.0" prefWidth="196.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -129,9 +105,9 @@
                   <Font name="System Bold" size="33.0" />
                </font>
             </Text>
-            <ScrollPane hbarPolicy="NEVER" layoutY="70.0" prefHeight="393.0" prefWidth="505.0" styleClass="inventory-table-border" stylesheets="@../Design/inventoryDesign.css" vbarPolicy="NEVER">
+            <ScrollPane hbarPolicy="NEVER" layoutY="70.0" prefHeight="393.0" prefWidth="505.0" styleClass="inventory-table-border-left" stylesheets="@../Design/inventoryDesign.css" vbarPolicy="NEVER">
                <content>
-                  <VBox fx:id="vboxPane" prefHeight="150.0" prefWidth="503.0" spacing="20.0" stylesheets="@../Design/inventoryDesign.css" />
+                  <VBox fx:id="vboxPane" prefHeight="150.0" prefWidth="483.0" spacing="20.0" stylesheets="@../Design/inventoryDesign.css" />
                </content>
             </ScrollPane>
          </children>
@@ -203,11 +179,11 @@
                </children>
             </GridPane>
             <TableView fx:id="orderListTable" layoutX="56.0" layoutY="244.0" prefHeight="262.0" prefWidth="420.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
-              <columns>
-                <TableColumn fx:id="prodNameCol" prefWidth="305.0" text="Name" />
-                <TableColumn fx:id="prodQtyCol" prefWidth="61.0" text="Quantity" />
+               <columns>
+                  <TableColumn fx:id="prodNameCol" prefWidth="305.0" text="Name" />
+                  <TableColumn fx:id="prodQtyCol" prefWidth="61.0" text="Quantity" />
                   <TableColumn fx:id="prodPriceCol" prefWidth="103.0" text="Price" />
-              </columns>
+               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
