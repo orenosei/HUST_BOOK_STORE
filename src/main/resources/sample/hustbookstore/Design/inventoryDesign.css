@@ -376,6 +376,7 @@
     -fx-border-radius: 2px;
     -fx-border-width: 2px;
     -fx-border-color: #b6dcff;
+    -fx-effect: dropshadow(gaussian, #5a9cd6, 10, 0.3, 2, 2);
 }
 
 .inventory-button:hover{
@@ -393,6 +394,7 @@
     -fx-border-radius: 3px;
     -fx-border-width: 3px;
     -fx-border-color:  #9178d1;
+    -fx-effect: dropshadow(gaussian, #5c45a3, 10, 0.3, 2, 2);
 }
 
 .inventory-place-order .text{
@@ -400,7 +402,7 @@
 }
 
 .inventory-place-order:hover{
-    -fx-background-color: #947fd8;
+    -fx-background-color: #bb95ff;
     -fx-border-radius: 2px;
     -fx-border-width: 2px;
 }
@@ -524,4 +526,10 @@
 
 .usui-bg{
     -fx-background-color: linear-gradient(to left, #f2fbff, #ededff);
+}
+
+.gradient-bg{
+    -fx-background-color: linear-gradient(to left, #b6dcff, #9178d1);
+    -fx-background-radius: 30px;
+    -fx-effect: dropshadow(gaussian, #5c45a3, 10, 0.3, 2, 2);
 }

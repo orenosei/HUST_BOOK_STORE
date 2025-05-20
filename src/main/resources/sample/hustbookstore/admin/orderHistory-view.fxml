@@ -19,7 +19,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.OrderHistoryController">
    <children>
-      <AnchorPane fx:id="billPane" prefHeight="720.0" prefWidth="1020.0" styleClass="usui-bg" stylesheets="@../Design/inventoryDesign.css">
+      <AnchorPane fx:id="billPane" prefHeight="720.0" prefWidth="1020.0" styleClass="invisible-bg" stylesheets="@../Design/inventoryDesign.css">
          <children>
             <Label layoutX="59.0" layoutY="28.0" text="Order History" textFill="#9178d1">
                <font>
