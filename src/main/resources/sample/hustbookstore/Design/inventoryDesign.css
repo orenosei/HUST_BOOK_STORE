@@ -268,6 +268,13 @@
     -fx-border-color: #b6dcff;
 }
 
+.type-selection-box-2 {
+    -fx-background-color: #aa92ec;
+    -fx-border-radius: 6px;
+    -fx-border-width: 2px;
+    -fx-border-color: #9178d1;
+    -fx-effect: dropshadow(gaussian, #5c45a3, 10, 0.3, 2, 2);
+}
 
 .type-selection-box .list-view .cell .text {
     -fx-fill: black;
@@ -415,6 +422,38 @@
     -fx-fill: white;
 }
 
+.type-selection-box-2 .increment-arrow-button {
+    -fx-background-color: transparent;
+}
+
+.type-selection-box-2 .increment-arrow-button .increment-arrow {
+    -fx-background-color: white;
+}
+
+.type-selection-box-2 .increment-arrow-button:hover .increment-arrow {
+    -fx-background-color: #d3b2ff; /* tím nhạt */
+}
+
+.type-selection-box-2 .increment-arrow-button:pressed .increment-arrow {
+    -fx-background-color: #8459ff; /* tím đậm */
+}
+
+.type-selection-box-2 .decrement-arrow-button {
+    -fx-background-color: transparent;
+}
+
+.type-selection-box-2 .decrement-arrow-button .decrement-arrow {
+    -fx-background-color: white;
+}
+
+.type-selection-box-2 .decrement-arrow-button:hover .decrement-arrow {
+    -fx-background-color: #d3b2ff;
+}
+
+.type-selection-box-2 .decrement-arrow-button:pressed .decrement-arrow {
+    -fx-background-color: #8459ff;
+}
+
 .combo-box .arrow-button .arrow{
     -fx-background-color: white;
 }
@@ -522,10 +561,11 @@
 .cart-item{
     -fx-background-color: linear-gradient(to left, #ecf8ff, #f2efff);
     -fx-background-radius: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 20, 0.4, 0, 8);
 }
 
 .usui-bg{
-    -fx-background-color: linear-gradient(to left, #f2fbff, #ededff);
+    -fx-background-color: linear-gradient(to right, #f2fbff, #ededff);
 }
 
 .gradient-bg{

@@ -7,19 +7,19 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="290.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.user.AryaChatController">
+<AnchorPane prefHeight="700.0" prefWidth="290.0" styleClass="inventory-table-border" stylesheets="@../Design/inventoryDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.user.AryaChatController">
    <children>
-      <Text layoutX="22.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="giữ nguyên kích thước AnchorPane gốc 700x290 nhé">
+      <Text layoutX="22.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="giữ nguyên kích thước AnchorPane gốc 700x290 nhé" visible="false">
          <font>
             <Font size="11.0" />
          </font>
       </Text>
       <AnchorPane layoutY="629.0" prefHeight="70.0" prefWidth="290.0">
          <children>
-            <TextField fx:id="inputField" layoutX="14.0" layoutY="12.0" prefHeight="46.0" prefWidth="213.0" promptText="Send your message here..." />
-            <Button fx:id="sendButton" layoutX="234.0" layoutY="12.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="46.0" text="Send" />
+            <TextField fx:id="inputField" layoutX="14.0" layoutY="12.0" prefHeight="54.0" prefWidth="214.0" promptText="Send your message here..." styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" />
+            <Button fx:id="sendButton" layoutX="236.0" layoutY="16.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="47.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="🐧" />
          </children>
       </AnchorPane>
-      <TextArea fx:id="chatArea" layoutY="63.0" prefHeight="559.0" prefWidth="290.0" promptText="Chat with Arya here" />
+      <TextArea fx:id="chatArea" layoutX="14.0" layoutY="63.0" prefHeight="559.0" prefWidth="276.0" promptText="Chat with Arya here" />
    </children>
 </AnchorPane>
