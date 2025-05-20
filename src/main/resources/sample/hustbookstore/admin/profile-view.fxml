@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="profile_form" prefHeight="720.0" prefWidth="1020.0" styleClass="usui-bg" stylesheets="@../Design/inventoryDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.ProfileController">
+<AnchorPane fx:id="profile_form" prefHeight="720.0" prefWidth="1020.0" styleClass="invisible-bg" stylesheets="@../Design/inventoryDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.ProfileController">
    <children>
       <AnchorPane layoutX="50.0" layoutY="54.0" prefHeight="720.0" prefWidth="340.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
