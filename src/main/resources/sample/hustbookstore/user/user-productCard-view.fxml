@@ -48,10 +48,10 @@
                   </Text>
                </children>
             </AnchorPane>
-            <Spinner fx:id="productSpinner" layoutX="169.0" layoutY="217.0" prefHeight="26.0" prefWidth="66.0" />
-            <Button fx:id="addToCart_btn" contentDisplay="RIGHT" layoutX="242.0" layoutY="217.0" mnemonicParsing="false" onAction="#handleAddToCartButton" prefHeight="26.0" prefWidth="73.0" text="Add" AnchorPane.rightAnchor="20.0">
+            <Spinner fx:id="productSpinner" layoutX="169.0" layoutY="217.0" prefHeight="26.0" prefWidth="66.0" styleClass="type-selection-box-2" stylesheets="@../Design/inventoryDesign.css" />
+            <Button fx:id="addToCart_btn" contentDisplay="RIGHT" layoutX="242.0" layoutY="217.0" mnemonicParsing="false" onAction="#handleAddToCartButton" prefHeight="26.0" prefWidth="73.0" styleClass="inventory-place-order" stylesheets="@../Design/inventoryDesign.css" text="Add" AnchorPane.rightAnchor="20.0">
                <graphic>
-                  <FontAwesomeIcon glyphName="CART_PLUS" />
+                  <FontAwesomeIcon fill="WHITE" glyphName="CART_PLUS" />
                </graphic>
             </Button>
             <GridPane layoutX="75.0" layoutY="255.0">
@@ -81,7 +81,10 @@
                   </TextField>
                </children>
             </GridPane>
-            <Button fx:id="down_btn" layoutX="154.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleCardButtonAction" text="▼" AnchorPane.topAnchor="15.0" />
+            <Button fx:id="down_btn" layoutX="146.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleCardButtonAction" styleClass="arrow-button-3" stylesheets="@../Design/dashboardDesign.css" text="▼" AnchorPane.topAnchor="7.0">
+               <font>
+                  <Font size="19.0" />
+               </font></Button>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="bookInfoPopup" layoutX="10.0" layoutY="10.0" prefHeight="300.0" prefWidth="335.0" styleClass="front-bg-no-shadow" stylesheets="@../Design/ProductCardDesign.css" visible="false" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
