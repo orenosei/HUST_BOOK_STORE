@@ -162,7 +162,7 @@
                   <NumberAxis side="LEFT" />
                </yAxis>
             </LineChart>
-            <Text fill="#b5e4fa" layoutX="129.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Income Chart" textAlignment="JUSTIFY">
+            <Text fill="#92c2da" layoutX="129.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Income Chart" textAlignment="JUSTIFY">
                <font>
                   <Font name="Chalkboard SE Regular" size="35.0" />
                </font>
