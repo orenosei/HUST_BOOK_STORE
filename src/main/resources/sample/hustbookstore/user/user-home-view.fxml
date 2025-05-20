@@ -28,7 +28,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="-3.0" prefHeight="732.0" prefWidth="275.0" styleClass="side-bar" stylesheets="@../Design/homeDesign.css">
+      <AnchorPane layoutX="-3.0" prefHeight="735.0" prefWidth="275.0" styleClass="side-bar" stylesheets="@../Design/homeDesign.css">
          <children>
             <Text fill="WHITE" layoutX="10.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HUST">
                <font>
