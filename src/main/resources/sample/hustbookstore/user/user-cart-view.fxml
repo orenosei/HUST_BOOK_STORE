@@ -13,44 +13,63 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.user.UserCartController">
+<AnchorPane prefHeight="720.0" prefWidth="1020.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.user.UserCartController">
    <children>
       <AnchorPane fx:id="cartPane" layoutX="20.0" layoutY="10.0">
          <children>
             <AnchorPane layoutX="11.0" layoutY="2.0" prefHeight="64.0" prefWidth="159.0">
                <children>
-                  <FontAwesomeIcon glyphName="SHOPPING_CART" layoutX="4.0" layoutY="50.0" size="4em" wrappingWidth="59.744943618774414" />
+                  <FontAwesomeIcon fill="#9178d1" glyphName="SHOPPING_CART" layoutX="4.0" layoutY="50.0" size="4em" wrappingWidth="59.744943618774414" />
                   <Text layoutX="71.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CART">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
+                     <fill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.5407407283782959" green="0.6555555462837219" blue="1.0" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.006729475100942127">
+                                 <color>
+                                    <Color red="0.5407407283782959" green="0.6555555462837219" blue="1.0" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.6348147988319397" green="0.24444444477558136" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="520.0" prefHeight="700.0" prefWidth="470.0">
+            <AnchorPane layoutX="520.0" prefHeight="700.0" prefWidth="470.0" styleClass="inventory-table-border" stylesheets="@../Design/inventoryDesign.css">
                <children>
-                  <Text layoutX="19.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PAYMENT INFORMATION">
+                  <Text fill="#9178d1" layoutX="19.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PAYMENT INFORMATION">
                      <font>
-                        <Font size="33.0" />
+                        <Font name="System Bold Italic" size="33.0" />
                      </font>
                   </Text>
-                  <Text layoutX="26.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer:">
+                  <Text fill="#52aeff" layoutX="26.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer:">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Text>
-                  <Text layoutX="25.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trinh Minh Thanh">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Text>
-                  <VBox layoutX="15.0" layoutY="183.0" prefHeight="281.0" prefWidth="449.0" spacing="25.0" AnchorPane.rightAnchor="10.0">
+                  <VBox layoutX="33.0" layoutY="224.0" prefHeight="351.0" prefWidth="422.0" spacing="25.0" AnchorPane.rightAnchor="15.0">
                      <children>
-                        <TextField fx:id="nameField" prefHeight="25.0" prefWidth="416.0" promptText="Receiver's name" />
-                        <TextField fx:id="phoneNumberField" prefHeight="25.0" prefWidth="417.0" promptText="Receiver's phone number" />
+                        <TextField fx:id="nameField" prefHeight="26.0" prefWidth="422.0" promptText="Receiver's name" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" />
+                        <TextField fx:id="phoneNumberField" prefHeight="25.0" prefWidth="417.0" promptText="Receiver's phone number" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" />
                         <HBox spacing="10.0">
                            <children>
                               <ComboBox fx:id="cboProvince" prefHeight="26.0" prefWidth="416.0" promptText="Province/City" />
@@ -58,14 +77,24 @@
                               <ComboBox fx:id="cboWard" prefHeight="26.0" prefWidth="416.0" promptText="Ward/Commune" />
                            </children>
                         </HBox>
-                        <TextField fx:id="specificAddressField" prefHeight="26.0" prefWidth="408.0" promptText="Specific Address" />
+                        <TextField fx:id="specificAddressField" prefHeight="26.0" prefWidth="408.0" promptText="Specific Address" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" />
+                        <Text fill="#9178d1" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter all required information" visible="false" wrappingWidth="200.638671875">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font>
+                        </Text>
                      </children>
                   </VBox>
-                  <Button fx:id="placeOrderBtn" layoutX="361.0" layoutY="638.0" mnemonicParsing="false" onAction="#handleOrderBtn" text="Place Order" />
+                  <Text fill="#52aeff" layoutX="25.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trinh Minh Thanh">
+                     <font>
+                        <Font name="System Italic" size="25.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="placeOrderBtn" layoutX="321.0" layoutY="611.0" mnemonicParsing="false" onAction="#handleOrderBtn" prefHeight="48.0" prefWidth="123.0" styleClass="inventory-place-order" stylesheets="@../Design/inventoryDesign.css" text="Place Order" textFill="#aa92ec" />
                </children>
             </AnchorPane>
-            <TextField fx:id="voucherField" layoutX="238.0" layoutY="485.0" promptText="apply voucher here" />
-            <Button fx:id="applyVoucherBtn" layoutX="412.0" layoutY="485.0" mnemonicParsing="false" onAction="#pressVoucherBtn" text="Apply" />
+            <TextField fx:id="voucherField" layoutX="238.0" layoutY="485.0" promptText="apply voucher here" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" />
+            <Button fx:id="applyVoucherBtn" layoutX="412.0" layoutY="485.0" mnemonicParsing="false" onAction="#pressVoucherBtn" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Apply" textFill="#52aeff" />
             <GridPane layoutX="252.0" layoutY="539.0" prefHeight="34.0" prefWidth="196.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -77,32 +106,32 @@
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Subtotal:" GridPane.halignment="RIGHT" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Discount:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                  <Text fx:id="subTotalValue" strokeType="OUTSIDE" strokeWidth="0.0" text="123.456" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                  <Text fx:id="discountValue" strokeType="OUTSIDE" strokeWidth="0.0" text="00.00" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="VND" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="VND" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                  <Text fill="#c1c1c1" strokeType="OUTSIDE" strokeWidth="0.0" text="Subtotal:" GridPane.halignment="RIGHT" />
+                  <Text fill="#c1c1c1" strokeType="OUTSIDE" strokeWidth="0.0" text="Discount:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                  <Text fx:id="subTotalValue" fill="#c1c1c1" strokeType="OUTSIDE" strokeWidth="0.0" text="123.456" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                  <Text fx:id="discountValue" fill="#c1c1c1" strokeType="OUTSIDE" strokeWidth="0.0" text="00.00" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                  <Text fill="#c1c1c1" strokeType="OUTSIDE" strokeWidth="0.0" text="VND" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
+                  <Text fill="#c1c1c1" strokeType="OUTSIDE" strokeWidth="0.0" text="VND" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <Text layoutX="341.0" layoutY="602.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Amount:">
+            <Text fill="#90cbff" layoutX="341.0" layoutY="602.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Amount:">
                <font>
-                  <Font size="17.0" />
+                  <Font name="System Bold Italic" size="18.0" />
                </font>
             </Text>
-            <Text fx:id="totalValue" layoutX="192.0" layoutY="646.0" strokeType="OUTSIDE" strokeWidth="0.0" text="123.456">
+            <Text fx:id="totalValue" fill="#9178d1" layoutX="196.0" layoutY="644.0" strokeType="OUTSIDE" strokeWidth="0.0" text="123.456">
                <font>
-                  <Font size="33.0" />
+                  <Font name="System Bold" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="379.0" layoutY="646.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VND">
+            <Text fill="#9178d1" layoutX="391.0" layoutY="645.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VND">
                <font>
-                  <Font size="33.0" />
+                  <Font name="System Bold" size="33.0" />
                </font>
             </Text>
-            <ScrollPane hbarPolicy="NEVER" layoutY="70.0" prefHeight="393.0" prefWidth="505.0" vbarPolicy="NEVER">
+            <ScrollPane hbarPolicy="NEVER" layoutY="70.0" prefHeight="393.0" prefWidth="505.0" styleClass="inventory-table-border" stylesheets="@../Design/inventoryDesign.css" vbarPolicy="NEVER">
                <content>
-                  <VBox fx:id="vboxPane" prefHeight="150.0" prefWidth="503.0" spacing="20.0" />
+                  <VBox fx:id="vboxPane" prefHeight="150.0" prefWidth="503.0" spacing="20.0" stylesheets="@../Design/inventoryDesign.css" />
                </content>
             </ScrollPane>
          </children>
