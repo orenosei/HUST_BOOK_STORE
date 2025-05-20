@@ -343,6 +343,27 @@
     -fx-background-color: #5099f1;
 }
 
+.inventory-place-order{
+    -fx-background-color:  #aa92ec;
+    -fx-border-radius: 3px;
+    -fx-border-width: 3px;
+    -fx-border-color:  #9178d1;
+}
+
+.inventory-place-order .text{
+    -fx-fill: white;
+}
+
+.inventory-place-order:hover{
+    -fx-background-color: #947fd8;
+    -fx-border-radius: 2px;
+    -fx-border-width: 2px;
+}
+
+.inventory-place-order:pressed{
+    -fx-background-color: #9479dc;
+}
+
 .type-selection-box .arrow-button .arrow {
     -fx-fill: white;
 }
