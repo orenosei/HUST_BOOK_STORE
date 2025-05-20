@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane fx:id="storeForm" prefHeight="720.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.StoreController">
+<AnchorPane fx:id="storeForm" prefHeight="720.0" prefWidth="1020.0" styleClass="usui-bg" stylesheets="@../Design/inventoryDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.StoreController">
    <children>
       <AnchorPane fx:id="rightPane" layoutX="720.0" layoutY="10.0" prefWidth="290.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
       <TabPane fx:id="tabStore" prefHeight="650.0" prefWidth="700.0" stylesheets="@../Design/homeDesign.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
@@ -71,10 +71,10 @@
       </TabPane>
       <HBox layoutX="57.0" layoutY="20.0">
          <children>
-            <TextField fx:id="searchBar" prefHeight="25.0" prefWidth="272.0" promptText="Search " />
-            <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#onSearch">
+            <TextField fx:id="searchBar" prefHeight="25.0" prefWidth="272.0" promptText="Search " styleClass="inventory-search-bar" stylesheets="@../Design/inventoryDesign.css" />
+            <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#onSearch" prefHeight="37.0" prefWidth="38.0" styleClass="inventory-place-order" stylesheets="@../Design/inventoryDesign.css">
                <graphic>
-                  <FontAwesomeIcon glyphName="SEARCH" />
+                  <FontAwesomeIcon fill="WHITE" glyphName="SEARCH" />
                </graphic>
             </Button>
          </children>

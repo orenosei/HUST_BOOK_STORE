@@ -516,3 +516,12 @@
 .scroll-pane .viewport {
     -fx-background-color: transparent;
 }
+
+.cart-item{
+    -fx-background-color: linear-gradient(to left, #ecf8ff, #f2efff);
+    -fx-background-radius: 20px;
+}
+
+.usui-bg{
+    -fx-background-color: linear-gradient(to left, #f2fbff, #ededff);
+}
