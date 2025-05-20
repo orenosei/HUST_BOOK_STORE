@@ -42,7 +42,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="profile_label_phoneNum" layoutX="124.0" layoutY="439.0" text="profile_phoneNum" textFill="#b6dcff">
+            <Label fx:id="profile_label_phoneNum" layoutX="124.0" layoutY="439.0" text="profile_phoneNum" textFill="#52aeff">
                <font>
                   <Font size="20.0" />
                </font>
@@ -57,7 +57,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="profile_label_email" layoutX="124.0" layoutY="469.0" text="profile_email" textFill="#b6dcff">
+            <Label fx:id="profile_label_email" layoutX="124.0" layoutY="469.0" text="profile_email" textFill="#52aeff">
                <font>
                   <Font size="20.0" />
                </font>
@@ -107,7 +107,7 @@
                         </Label>
                      </children>
                   </GridPane>
-                  <Button fx:id="profile_changePasswordBtn" layoutX="269.0" layoutY="226.0" mnemonicParsing="false" onAction="#profileChangePasswordBtn" prefHeight="46.0" prefWidth="119.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Change password" textFill="WHITE" AnchorPane.bottomAnchor="27.600000000000023" AnchorPane.rightAnchor="32.60000000000008">
+                  <Button fx:id="profile_changePasswordBtn" layoutX="269.0" layoutY="226.0" mnemonicParsing="false" onAction="#profileChangePasswordBtn" prefHeight="46.0" prefWidth="119.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Change password" textFill="#1491ff" AnchorPane.bottomAnchor="27.600000000000023" AnchorPane.rightAnchor="32.60000000000008">
                      <effect>
                         <DropShadow blurType="TWO_PASS_BOX" height="15.0" radius="7.0" spread="0.7" width="15.0">
                            <color>
@@ -155,7 +155,7 @@
                         </Label>
                      </children>
                   </GridPane>
-                  <Button fx:id="profile_update_btn" layoutX="274.0" layoutY="237.0" mnemonicParsing="false" onAction="#profileUpdateBtn" prefHeight="46.0" prefWidth="119.0" styleClass="inventory-button" text="Update" textFill="WHITE" AnchorPane.bottomAnchor="9.0">
+                  <Button fx:id="profile_update_btn" layoutX="274.0" layoutY="237.0" mnemonicParsing="false" onAction="#profileUpdateBtn" prefHeight="46.0" prefWidth="119.0" styleClass="inventory-button" text="Update" textFill="#1491ff" AnchorPane.bottomAnchor="9.0">
                      <effect>
                         <DropShadow blurType="TWO_PASS_BOX" height="15.0" radius="7.0" spread="0.7" width="15.0">
                            <color>
