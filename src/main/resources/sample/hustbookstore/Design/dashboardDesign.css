@@ -328,6 +328,7 @@
 
 .confirm-button{
     -fx-background-color: #91B5FC;
+    -fx-effect: dropshadow(gaussian, #4472cf, 10, 0.3, 2, 2);
 }
 
 .confirm-button:hover{
