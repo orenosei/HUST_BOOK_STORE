@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="home_screen" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../Design/homeDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.HomeScreenController">
+<AnchorPane fx:id="home_screen" prefHeight="720.0" prefWidth="1280.0" styleClass="usui-bg" stylesheets="@../Design/inventoryDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.HomeScreenController">
    <children>
       <AnchorPane fx:id="headerPane" layoutX="10.0" layoutY="10.0" prefHeight="90.0" prefWidth="1280.0" styleClass="header" stylesheets="@../Design/homeDesign.css">
          <children>

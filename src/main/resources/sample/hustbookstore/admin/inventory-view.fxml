@@ -22,7 +22,7 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.CheckComboBox?>
 
-<AnchorPane fx:id="inventory_screen" prefHeight="720.0" prefWidth="1020.0" stylesheets="@../Design/inventoryDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.InventoryController">
+<AnchorPane fx:id="inventory_screen" prefHeight="720.0" prefWidth="1020.0" styleClass="usui-bg" stylesheets="@../Design/inventoryDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.InventoryController">
    <children>
       <AnchorPane layoutX="611.0" layoutY="16.0" prefHeight="44.0" prefWidth="396.0" style="-fx-background-radius: 20;" styleClass="inventory-search-bar" stylesheets="@../Design/inventoryDesign.css" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="10.0">
          <children>
@@ -180,7 +180,7 @@
                   <Label fx:id="inventory_genre_label" text="Genre" textFill="#947bd0" GridPane.rowIndex="3" />
                   <Label fx:id="inventory_pubDate_label" text="Published date" textFill="#947bd0" GridPane.rowIndex="4" />
                   <DatePicker fx:id="inventory_publishedDate" prefHeight="30.0" prefWidth="209.0" styleClass="type-selection-box" stylesheets="@../Design/inventoryDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextArea fx:id="inventory_description" prefHeight="112.0" prefWidth="214.0" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" wrapText="true" GridPane.columnIndex="1" />
+                  <TextArea fx:id="inventory_description" prefHeight="112.0" prefWidth="175.0" style="-fx-background-color: white; -fx-border-radius: 2; -fx-border-width: 2; -fx-border-color: #b6dcff;" stylesheets="@../Design/inventoryDesign.css" wrapText="true" GridPane.columnIndex="1" />
                   <Label fx:id="inventory_description_label" text="Description" textFill="#947bd0" />
                   <CheckComboBox fx:id="inventory_genre" prefHeight="26.0" prefWidth="212.0" styleClass="type-selection-box" stylesheets="@../Design/inventoryDesign.css" title="" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>

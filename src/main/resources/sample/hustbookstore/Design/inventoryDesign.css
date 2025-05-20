@@ -220,6 +220,20 @@
     -fx-border-radius: 7px;
 }
 
+.inventory-table-border-left{
+    -fx-border-color: linear-gradient(to left, #b6dcff, #9178d1);
+    -fx-border-width: 9px;
+    -fx-border-radius: 7px;
+}
+
+.inventory-table-border-right{
+    -fx-border-color: linear-gradient(to right, #b6dcff, #9178d1);
+    -fx-border-width: 9px;
+    -fx-border-radius: 7px;
+}
+
+
+
 .table-view .table-row-cell:selected{
     -fx-background-color: #8056ed;
 }
@@ -304,6 +318,37 @@
     -fx-background-color: transparent;
 }
 
+.type-selection-box .increment-arrow-button{
+    -fx-background-color: transparent;
+}
+
+.type-selection-box .increment-arrow-button .increment-arrow {
+    -fx-background-color: white;
+}
+
+.type-selection-box .increment-arrow-button:hover .increment-arrow {
+    -fx-background-color: #44b0ff;
+}
+.type-selection-box .increment-arrow-button:pressed .increment-arrow {
+    -fx-background-color: #009cff;
+}
+
+.type-selection-box .decrement-arrow-button{
+    -fx-background-color: transparent;
+}
+
+.type-selection-box .decrement-arrow-button .decrement-arrow {
+    -fx-background-color: white;
+}
+
+.type-selection-box .decrement-arrow-button:hover .decrement-arrow {
+    -fx-background-color: #5dbdfb;
+}
+
+.type-selection-box .decrement-arrow-button:pressed .decrement-arrow {
+    -fx-background-color: #009cff;
+}
+
 .combo-box {
     -fx-background-color: #b6dcff;
     -fx-border-radius: 2px;
@@ -361,7 +406,7 @@
 }
 
 .inventory-place-order:pressed{
-    -fx-background-color: #9479dc;
+    -fx-background-color: #8459ff;
 }
 
 .type-selection-box .arrow-button .arrow {
@@ -417,4 +462,66 @@
 
 .invisible-bg{
     -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane {
+    /* Không bao giờ hiển thị scrollbar */
+    -fx-hbar-policy: never;
+    -fx-vbar-policy: never;
+}
+
+/* Đè thẳng lên track và thumb của scrollbar (nếu có residual) */
+.text-area .scroll-pane .scroll-bar {
+    -fx-opacity: 0;       /* trong suốt */
+    -fx-max-width: 0;     /* không chiếm không gian */
+    -fx-max-height: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+    -fx-min-width: 0;
+    -fx-min-height: 0;
+}
+
+/* Đảm bảo viewport lấp đầy */
+.text-area .scroll-pane .viewport {
+    -fx-padding: 0;       /* bỏ padding nếu có */
+}
+
+.text-area {
+    -fx-background-color: transparent;     /* nền chính trong suốt */
+    -fx-background-insets: 0;              /* bỏ mọi inset */
+    -fx-background-radius: 0;              /* không bo góc */
+    -fx-border-color: transparent;         /* bỏ khung viền */
+    -fx-padding: 0;                        /* bỏ padding */
+    -fx-focus-color: transparent;          /* remove focus ring */
+    -fx-faint-focus-color: transparent;    /* remove faint focus */
+}
+
+/* 2) Khu vực chứa text */
+.text-area .content {
+    -fx-background-color: transparent;     /* nền của content pane */
+}
+
+/* 3) Viewport của ScrollPane (nếu còn) */
+.text-area .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+/* 4) ScrollBars cũng ẩn luôn, đề phòng còn đọng lại */
+.text-area .scroll-pane .scroll-bar {
+    -fx-opacity: 0;
+    -fx-max-width: 0;
+    -fx-max-height: 0;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.cart-item{
+    -fx-background-color: linear-gradient(to left, #ecf8ff, #f2efff);
+    -fx-background-radius: 20px;
+}
+
+.usui-bg{
+    -fx-background-color: linear-gradient(to left, #f2fbff, #ededff);
 }
