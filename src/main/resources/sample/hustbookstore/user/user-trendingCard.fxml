@@ -74,20 +74,30 @@
             <TextArea fx:id="descriptionField" prefHeight="117.0" prefWidth="249.0" styleClass="text-box-2" stylesheets="@../Design/inventoryDesign.css" text="Arya bàn bên thỉnh thoảng lại trêu gheo tôi bằng tiếng nga" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="407.0" layoutY="492.0" text="Price:" textFill="#530891">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="411.0" layoutY="477.0" prefHeight="50.0" prefWidth="102.0" text="Price:" textFill="#530891">
          <font>
-            <Font name="System Bold Italic" size="27.0" />
+            <Font name="System Bold Italic" size="34.0" />
          </font>
       </Label>
-      <Label layoutX="678.0" layoutY="499.0" text="VND" textFill="#2fff9e">
+      <Label layoutX="678.0" layoutY="499.0" text="VND" textFill="#4dacff">
          <font>
             <Font name="System Italic" size="19.0" />
          </font>
       </Label>
-      <Text fx:id="priceField" fill="#2fff9e" layoutX="499.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="90000" textAlignment="RIGHT" wrappingWidth="171.58984375">
+      <Text fx:id="priceField" fill="WHITE" layoutX="499.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="90000" textAlignment="RIGHT" wrappingWidth="171.58984375">
          <font>
             <Font name="System Bold Italic" size="37.0" />
          </font>
+         <effect>
+            <DropShadow spread="0.68">
+               <input>
+                  <DropShadow />
+               </input>
+               <color>
+                  <Color red="0.3019607961177826" green="0.6745098233222961" blue="1.0" />
+               </color>
+            </DropShadow>
+         </effect>
       </Text>
    </children>
    <stylesheets>
