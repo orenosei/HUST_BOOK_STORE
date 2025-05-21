@@ -27,7 +27,7 @@
             <Font name="System Bold Italic" size="36.0" />
          </font>
          <effect>
-            <DropShadow height="15.0" radius="7.0" spread="0.3" width="15.0">
+            <DropShadow blurType="TWO_PASS_BOX" height="15.0" radius="7.0" spread="0.68" width="15.0">
                <input>
                   <DropShadow>
                      <color>
@@ -35,7 +35,7 @@
                      </color></DropShadow>
                </input>
                <color>
-                  <Color red="0.48235294222831726" green="0.20000000298023224" blue="0.7019608020782471" />
+                  <Color red="0.550000011920929" blue="1.0" />
                </color>
             </DropShadow>
          </effect>
@@ -79,29 +79,15 @@
             <Font name="System Bold Italic" size="27.0" />
          </font>
       </Label>
-      <Label layoutX="678.0" layoutY="499.0" text="VND" textFill="#530891">
+      <Label layoutX="678.0" layoutY="499.0" text="VND" textFill="#2fff9e">
          <font>
             <Font name="System Italic" size="19.0" />
          </font>
       </Label>
-      <Text fx:id="priceField" fill="WHITE" layoutX="499.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="90000" textAlignment="RIGHT" wrappingWidth="171.58984375">
+      <Text fx:id="priceField" fill="#2fff9e" layoutX="499.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="90000" textAlignment="RIGHT" wrappingWidth="171.58984375">
          <font>
             <Font name="System Bold Italic" size="37.0" />
          </font>
-         <effect>
-            <DropShadow blurType="TWO_PASS_BOX" height="16.5" radius="7.375" spread="0.68" width="15.0">
-               <input>
-                  <DropShadow blurType="TWO_PASS_BOX">
-                     <color>
-                        <Color red="0.27368420362472534" green="0.27368420362472534" blue="0.27368420362472534" />
-                     </color>
-                  </DropShadow>
-               </input>
-               <color>
-                  <Color red="1.0" />
-               </color>
-            </DropShadow>
-         </effect>
       </Text>
    </children>
    <stylesheets>

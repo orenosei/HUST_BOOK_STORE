@@ -48,34 +48,59 @@
 }
 
 #tab-trending{
-    -fx-background-color:  linear-gradient(to left, #956dff, #d0c0fd);
+    -fx-background-color: #9178d1;
     -fx-background-radius: 10 10 0 0;
     -fx-padding: 7 170 7 170;
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(145, 106, 255, 0.5),  /* tím nhạt từ #9178d1, 30% opacity */
+            20,                        /* radius */
+            0.3,                       /* spread */
+            0,                         /* offset-x */
+            5                          /* offset-y */
+    );
 }
 
 
 #tab-recommendation{
-    -fx-background-color: linear-gradient(to left, #b6dcff, #71bbff);
+    -fx-background-color: #b6dcff;
     -fx-background-radius: 10 10 0 0;
     -fx-padding: 7 170 7 170;
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(54, 161, 255, 0.5),  /* xanh nhạt, 30% opacity */
+            20, 0.3, 0, 5
+    );
 }
 
 .recommendation-bg {
-    -fx-background-color: linear-gradient(to left, #b6dcff, #71bbff);
+    -fx-background-color: linear-gradient(to bottom, #b6dcff, #9178d1);
     -fx-background-size: cover;
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
     -fx-background-radius: 20;
-    -fx-effect: dropshadow(gaussian, #5a9cd6, 10, 0.3, 2, 2);
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(145, 106, 255, 0.5),  /* tím nhạt từ #9178d1, 30% opacity */
+            20,                        /* radius */
+            0.3,                       /* spread */
+            0,                         /* offset-x */
+            5                          /* offset-y */
+    );
+
 }
 
 .trend-bg{
-    -fx-background-color:  linear-gradient(to left, #956dff, #d0c0fd);
+    -fx-background-color: linear-gradient(to top, #b6dcff, #9178d1);
     -fx-background-size: cover;
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
     -fx-background-radius: 20;
-    -fx-effect: dropshadow(gaussian, #5c45a3, 10, 0.3, 2, 2);
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(19, 98, 165, 0.5),  /* xanh nhạt, 30% opacity */
+            20, 0.3, 0, 5
+    );
 }
 
 .tab-pane .tab-header-area .headers-region .tab:top{
