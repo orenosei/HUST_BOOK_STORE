@@ -44,30 +44,26 @@
 
 .set_glx_bg{
     -fx-background-image:
-            url("../img/bg_trending/4864721.jpg");
+            url("../img/bg_trending/8777583.jpg");
 }
 
 #tab-trending{
-    -fx-background-color: linear-gradient(to right, #faacac, #fed2c5 );
+    -fx-background-color: linear-gradient(to left, #d991ff, #eec7fe );
     -fx-background-radius: 10 10 0 0;
-    -fx-padding: 5 150 5 150;
+    -fx-padding: 7 170 7 170;
 }
 
-.tab-pane .tab-header-area .headers-region .tab:top{
-    -fx-background-color: transparent;
-    -fx-background-radius: 20 20 0 0;
-}
 
 #tab-recommendation{
     -fx-background-color: linear-gradient(to left, #2eaef7, #aae0fc );
     -fx-background-radius: 10 10 0 0;
-    -fx-padding: 5 150 5 150;
+    -fx-padding: 7 170 7 170;
 }
 
 .trending-bg {
     /* background-image theo đường dẫn relative từ file CSS */
     -fx-background-image:
-            url("../img/bg_trending/8777583.jpg");
+            url("../img/bg_trending/purple.jpg");
     -fx-background-size: cover;
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
@@ -81,6 +77,19 @@
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
     -fx-background-radius: 100;
+}
+
+.tab-pane .tab-header-area .headers-region .tab:top{
+    -fx-background-color: transparent;
+    -fx-background-radius: 20 20 0 0;
+}
+
+.tab-pane .tab-header-area .control-buttons-tab .container .tab-down-button {
+    -fx-background-color: transparent;
+}
+
+.tab-pane .tab-header-area .control-buttons-tab .container .tab-down-button .arrow{
+    -fx-background-color: transparent;
 }
 
 .trans-bg{

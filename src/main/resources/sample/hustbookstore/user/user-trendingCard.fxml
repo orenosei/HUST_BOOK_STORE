@@ -4,13 +4,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -21,10 +22,23 @@
             <Image url="@../img/notfound.jpg" />
          </image>
       </ImageView>
-      <TextArea fx:id="nameField" layoutX="448.0" layoutY="53.0" prefHeight="224.0" prefWidth="370.0" styleClass="text-box-2" stylesheets="@../Design/inventoryDesign.css" text="Arya bàn bên thỉnh thoảng lại trêu ghẹo tôi bằng tiếng Nga" wrapText="true" AnchorPane.bottomAnchor="316.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="10.0">
+      <TextArea fx:id="nameField" layoutX="448.0" layoutY="53.0" prefHeight="224.0" prefWidth="370.0" styleClass="text-box-3" stylesheets="@../Design/inventoryDesign.css" text="Arya bàn bên thỉnh thoảng lại trêu ghẹo tôi bằng tiếng Nga" wrapText="true" AnchorPane.bottomAnchor="316.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font name="System Bold Italic" size="36.0" />
          </font>
+         <effect>
+            <DropShadow height="15.0" radius="7.0" spread="0.3" width="15.0">
+               <input>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.2631579041481018" green="0.2631579041481018" blue="0.2631579041481018" />
+                     </color></DropShadow>
+               </input>
+               <color>
+                  <Color red="0.48235294222831726" green="0.20000000298023224" blue="0.7019608020782471" />
+               </color>
+            </DropShadow>
+         </effect>
       </TextArea>
       <GridPane hgap="30.0" layoutX="411.0" layoutY="264.0" prefHeight="187.0" prefWidth="343.0" vgap="10.0">
          <columnConstraints>
@@ -38,32 +52,39 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label text="ISBN:" textFill="WHITE" />
-            <Label text="Author:" textFill="WHITE" GridPane.rowIndex="1" />
-            <Label text="Genre:" textFill="WHITE" GridPane.rowIndex="2" />
-            <Label text="Description:" textFill="WHITE" GridPane.rowIndex="3" />
+            <Label text="ISBN:" textFill="#530891" />
+            <Label text="Author:" textFill="#530891" GridPane.rowIndex="1" />
+            <Label text="Genre:" textFill="#680cb0" GridPane.rowIndex="2" />
+            <Label text="Description:" textFill="#530891" GridPane.rowIndex="3" />
             <TextField fx:id="isbnField" styleClass="text-box-2" stylesheets="@../Design/inventoryDesign.css" text="978-604-2-37405-7" GridPane.columnIndex="1" />
             <TextField fx:id="authorField" styleClass="text-box-2" stylesheets="@../Design/inventoryDesign.css" text="Momoco" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="genreField" styleClass="text-box-2" stylesheets="@../Design/inventoryDesign.css" text="Romcom" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextArea fx:id="descriptionField" prefHeight="117.0" prefWidth="249.0" styleClass="text-box-2" stylesheets="@../Design/inventoryDesign.css" text="Arya bàn bên thỉnh thoảng lại trêu gheo tôi bằng tiếng nga" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="407.0" layoutY="492.0" text="Price:" textFill="WHITE">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="407.0" layoutY="492.0" text="Price:" textFill="#530891">
          <font>
             <Font size="27.0" />
          </font>
       </Label>
-      <Label layoutX="678.0" layoutY="499.0" text="VND" textFill="WHITE">
+      <Label layoutX="678.0" layoutY="499.0" text="VND" textFill="#00ccff">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Text fx:id="priceField" fill="#00efff" layoutX="499.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="90000" textAlignment="RIGHT" wrappingWidth="171.58984375">
+      <Text fx:id="priceField" fill="#00fff4" layoutX="499.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="90000" textAlignment="RIGHT" wrappingWidth="171.58984375">
          <font>
-            <Font size="37.0" />
+            <Font name="System Bold Italic" size="37.0" />
          </font>
          <effect>
-            <Bloom threshold="0.54" />
+            <DropShadow height="15.0" radius="7.0" spread="0.7" width="15.0">
+               <input>
+                  <DropShadow />
+               </input>
+               <color>
+                  <Color red="0.054814815521240234" green="0.6461897492408752" blue="0.7789473533630371" />
+               </color>
+            </DropShadow>
          </effect>
       </Text>
    </children>
