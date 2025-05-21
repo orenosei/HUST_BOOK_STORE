@@ -4,6 +4,7 @@ package sample.hustbookstore.controllers.user;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -162,6 +163,13 @@ public class UserDashboardController {
         if (cardNodes.isEmpty() || trendingRightBtn.isDisabled()) return;
         currentIndex = (currentIndex + 1) % cardNodes.size();
         slideCards(1100);
+    }
+
+    public void handleRecommendationLeftBtn() {
+    }
+
+    public void handleRecommendationRightBtn() {
+
     }
 
     // // todo: Recommendation

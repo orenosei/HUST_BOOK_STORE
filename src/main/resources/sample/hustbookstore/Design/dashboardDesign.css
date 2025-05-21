@@ -48,35 +48,59 @@
 }
 
 #tab-trending{
-    -fx-background-color: linear-gradient(to left, #d991ff, #eec7fe );
+    -fx-background-color: #9178d1;
     -fx-background-radius: 10 10 0 0;
     -fx-padding: 7 170 7 170;
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(145, 106, 255, 0.5),  /* tím nhạt từ #9178d1, 30% opacity */
+            20,                        /* radius */
+            0.3,                       /* spread */
+            0,                         /* offset-x */
+            5                          /* offset-y */
+    );
 }
 
 
 #tab-recommendation{
-    -fx-background-color: linear-gradient(to left, #2eaef7, #aae0fc );
+    -fx-background-color: #b6dcff;
     -fx-background-radius: 10 10 0 0;
     -fx-padding: 7 170 7 170;
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(54, 161, 255, 0.5),  /* xanh nhạt, 30% opacity */
+            20, 0.3, 0, 5
+    );
 }
 
-.trending-bg {
-    /* background-image theo đường dẫn relative từ file CSS */
-    -fx-background-image:
-            url("../img/bg_trending/purple.jpg");
+.recommendation-bg {
+    -fx-background-color: linear-gradient(to bottom, #b6dcff, #9178d1);
     -fx-background-size: cover;
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
-    -fx-background-radius: 100;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(145, 106, 255, 0.5),  /* tím nhạt từ #9178d1, 30% opacity */
+            20,                        /* radius */
+            0.3,                       /* spread */
+            0,                         /* offset-x */
+            5                          /* offset-y */
+    );
+
 }
 
-.recommendation-bg{
-    -fx-background-image:
-            url("../img/bg_rcm/1562.jpg");
+.trend-bg{
+    -fx-background-color: linear-gradient(to top, #b6dcff, #9178d1);
     -fx-background-size: cover;
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
-    -fx-background-radius: 100;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(19, 98, 165, 0.5),  /* xanh nhạt, 30% opacity */
+            20, 0.3, 0, 5
+    );
 }
 
 .tab-pane .tab-header-area .headers-region .tab:top{
@@ -153,13 +177,6 @@
     -fx-background-color: linear-gradient(to bottom, #341c63, #9178d1);
 }
 
-#trending-bg{
-    -fx-background-color: #5c0090;
-    -fx-background-radius: 20px 20px 0 0;
-    -fx-pref-height: 40px;
-    -fx-pref-width: 160px;
-}
-
 #book-bg{
     -fx-background-color: #9178d1;
     -fx-background-radius: 20px 20px 0 0;
@@ -181,10 +198,6 @@
     -fx-pref-width: 160px;
 }
 
-.trending-bg{
-    -fx-background-color: #5c0090;
-    -fx-background-radius: 20px 20px 0 0;
-}
 
 .book-bg{
     -fx-background-color: #9178d1;
