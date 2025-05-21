@@ -13,14 +13,14 @@
 
 <AnchorPane fx:id="storeForm" prefHeight="720.0" prefWidth="1020.0" styleClass="invisible-bg" stylesheets="@../Design/inventoryDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.user.UserStoreController">
    <children>
-      <AnchorPane fx:id="rightPane" layoutX="720.0" layoutY="10.0" prefWidth="290.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-      <TabPane fx:id="tabStore" prefHeight="650.0" prefWidth="700.0" stylesheets="@../Design/homeDesign.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+      <AnchorPane fx:id="rightPane" layoutX="720.0" layoutY="11.2" prefHeight="699.0" prefWidth="296.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="11.0" />
+      <TabPane fx:id="tabStore" prefHeight="650.0" prefWidth="688.0" stylesheets="@../Design/homeDesign.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0">
          <tabs>
             <Tab id="book-bg" fx:id="tabBook" text="        BOOK">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="700.0">
                      <children>
-                        <ScrollPane fx:id="tabBookScroll" fitToWidth="true" hbarPolicy="NEVER" prefHeight="610.0" prefWidth="1020.0" styleClass="invisible-bg" stylesheets="@../Design/inventoryDesign.css" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <ScrollPane fx:id="tabBookScroll" fitToWidth="true" hbarPolicy="NEVER" prefHeight="606.0" prefWidth="691.0" styleClass="invisible-bg" stylesheets="@../Design/inventoryDesign.css" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <content>
                               <GridPane fx:id="tabBookGrid">
                                 <columnConstraints>

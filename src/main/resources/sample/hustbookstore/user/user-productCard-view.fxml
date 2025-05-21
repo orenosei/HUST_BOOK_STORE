@@ -123,7 +123,7 @@
                   <TextArea fx:id="bookDescription" editable="false" prefHeight="200.0" prefWidth="200.0" styleClass="prod-title" stylesheets="@../Design/ProductCardDesign.css" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
-            <Button fx:id="bookUp_btn" layoutX="154.0" layoutY="261.0" mnemonicParsing="false" onAction="#handleBookMoreInfoButtonAction" text="▲" AnchorPane.bottomAnchor="15.0" />
+            <Button fx:id="bookUp_btn" layoutX="154.0" layoutY="261.0" mnemonicParsing="false" onAction="#handleBookMoreInfoButtonAction" styleClass="arrow-button-3" stylesheets="@../Design/dashboardDesign.css" text="▲" AnchorPane.bottomAnchor="15.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="otherInfoPopup" layoutX="20.0" layoutY="20.0" prefHeight="300.0" prefWidth="335.0" styleClass="front-bg-no-shadow" stylesheets="@../Design/ProductCardDesign.css" visible="false" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -155,7 +155,7 @@
                   <TextArea fx:id="otherDescription" editable="false" prefHeight="200.0" prefWidth="200.0" styleClass="prod-title" stylesheets="@../Design/ProductCardDesign.css" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <Button fx:id="otherUp_btn" layoutX="154.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleOtherMoreInfoButtonAction" text="▲" AnchorPane.bottomAnchor="15.0" />
+            <Button fx:id="otherUp_btn" layoutX="154.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleOtherMoreInfoButtonAction" styleClass="arrow-button-3" stylesheets="@../Design/dashboardDesign.css" text="▲" visible="false" AnchorPane.bottomAnchor="15.0" />
          </children>
       </AnchorPane>
    </children>

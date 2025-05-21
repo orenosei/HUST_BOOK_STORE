@@ -42,8 +42,8 @@
       </TextArea>
       <GridPane hgap="30.0" layoutX="411.0" layoutY="264.0" prefHeight="187.0" prefWidth="343.0" vgap="10.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.20001220703125" minWidth="10.0" prefWidth="76.4000244140625" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.799951171875" minWidth="10.0" prefWidth="237.1999755859375" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
@@ -52,10 +52,22 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label text="ISBN:" textFill="#530891" />
-            <Label text="Author:" textFill="#530891" GridPane.rowIndex="1" />
-            <Label text="Genre:" textFill="#680cb0" GridPane.rowIndex="2" />
-            <Label text="Description:" textFill="#530891" GridPane.rowIndex="3" />
+            <Label text="ISBN:" textFill="#530891">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label text="Author:" textFill="#530891" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label text="Genre:" textFill="#680cb0" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label text="Description:" textFill="#530891" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <TextField fx:id="isbnField" styleClass="text-box-2" stylesheets="@../Design/inventoryDesign.css" text="978-604-2-37405-7" GridPane.columnIndex="1" />
             <TextField fx:id="authorField" styleClass="text-box-2" stylesheets="@../Design/inventoryDesign.css" text="Momoco" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="genreField" styleClass="text-box-2" stylesheets="@../Design/inventoryDesign.css" text="Romcom" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -64,25 +76,29 @@
       </GridPane>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="407.0" layoutY="492.0" text="Price:" textFill="#530891">
          <font>
-            <Font size="27.0" />
+            <Font name="System Bold Italic" size="27.0" />
          </font>
       </Label>
-      <Label layoutX="678.0" layoutY="499.0" text="VND" textFill="#00ccff">
+      <Label layoutX="678.0" layoutY="499.0" text="VND" textFill="#530891">
          <font>
-            <Font size="19.0" />
+            <Font name="System Italic" size="19.0" />
          </font>
       </Label>
-      <Text fx:id="priceField" fill="#00fff4" layoutX="499.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="90000" textAlignment="RIGHT" wrappingWidth="171.58984375">
+      <Text fx:id="priceField" fill="WHITE" layoutX="499.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="90000" textAlignment="RIGHT" wrappingWidth="171.58984375">
          <font>
             <Font name="System Bold Italic" size="37.0" />
          </font>
          <effect>
-            <DropShadow height="15.0" radius="7.0" spread="0.7" width="15.0">
+            <DropShadow blurType="TWO_PASS_BOX" height="16.5" radius="7.375" spread="0.68" width="15.0">
                <input>
-                  <DropShadow />
+                  <DropShadow blurType="TWO_PASS_BOX">
+                     <color>
+                        <Color red="0.27368420362472534" green="0.27368420362472534" blue="0.27368420362472534" />
+                     </color>
+                  </DropShadow>
                </input>
                <color>
-                  <Color red="0.054814815521240234" green="0.6461897492408752" blue="0.7789473533630371" />
+                  <Color red="1.0" />
                </color>
             </DropShadow>
          </effect>
