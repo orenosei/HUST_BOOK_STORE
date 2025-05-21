@@ -537,6 +537,19 @@
     -fx-faint-focus-color: transparent;    /* remove faint focus */
 }
 
+.text-box-2 {
+    -fx-background-color: transparent;     /* nền chính trong suốt */
+    -fx-background-insets: 0;              /* bỏ mọi inset */
+    -fx-background-radius: 0;              /* không bo góc */
+    -fx-border-color: transparent;         /* bỏ khung viền */
+    -fx-padding: 0;                        /* bỏ padding */
+    -fx-focus-color: transparent;          /* remove focus ring */
+    -fx-faint-focus-color: transparent;    /* remove faint focus */
+    -fx-text-fill: white;
+}
+
+
+
 /* 2) Khu vực chứa text */
 .text-area .content {
     -fx-background-color: transparent;     /* nền của content pane */
