@@ -218,18 +218,21 @@
     -fx-border-color: linear-gradient(to top, #b6dcff, #9178d1);
     -fx-border-width: 9px;
     -fx-border-radius: 7px;
+    -fx-background-insets: 0;
 }
 
 .inventory-table-border-left{
     -fx-border-color: linear-gradient(to left, #b6dcff, #9178d1);
     -fx-border-width: 9px;
     -fx-border-radius: 7px;
+    -fx-background-insets: 0;
 }
 
 .inventory-table-border-right{
     -fx-border-color: linear-gradient(to right, #b6dcff, #9178d1);
     -fx-border-width: 9px;
     -fx-border-radius: 7px;
+    -fx-background-insets: 0;
 }
 
 

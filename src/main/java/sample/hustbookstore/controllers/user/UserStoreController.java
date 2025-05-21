@@ -97,9 +97,6 @@ public class UserStoreController{
     @FXML
     private TextField searchBar;
 
-    @FXML
-    private Button searchBtn;
-
 
     protected String getRightPanelPath(){
         return "/sample/hustbookstore/user/arya-chat.fxml";
