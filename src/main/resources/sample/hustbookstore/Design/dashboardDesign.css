@@ -48,35 +48,34 @@
 }
 
 #tab-trending{
-    -fx-background-color: linear-gradient(to left, #d991ff, #eec7fe );
+    -fx-background-color:  linear-gradient(to left, #956dff, #d0c0fd);
     -fx-background-radius: 10 10 0 0;
     -fx-padding: 7 170 7 170;
 }
 
 
 #tab-recommendation{
-    -fx-background-color: linear-gradient(to left, #2eaef7, #aae0fc );
+    -fx-background-color: linear-gradient(to left, #b6dcff, #71bbff);
     -fx-background-radius: 10 10 0 0;
     -fx-padding: 7 170 7 170;
 }
 
-.trending-bg {
-    /* background-image theo đường dẫn relative từ file CSS */
-    -fx-background-image:
-            url("../img/bg_trending/purple.jpg");
+.recommendation-bg {
+    -fx-background-color: linear-gradient(to left, #b6dcff, #71bbff);
     -fx-background-size: cover;
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
-    -fx-background-radius: 100;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, #5a9cd6, 10, 0.3, 2, 2);
 }
 
-.recommendation-bg{
-    -fx-background-image:
-            url("../img/bg_rcm/1562.jpg");
+.trend-bg{
+    -fx-background-color:  linear-gradient(to left, #956dff, #d0c0fd);
     -fx-background-size: cover;
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
-    -fx-background-radius: 100;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, #5c45a3, 10, 0.3, 2, 2);
 }
 
 .tab-pane .tab-header-area .headers-region .tab:top{
@@ -153,13 +152,6 @@
     -fx-background-color: linear-gradient(to bottom, #341c63, #9178d1);
 }
 
-#trending-bg{
-    -fx-background-color: #5c0090;
-    -fx-background-radius: 20px 20px 0 0;
-    -fx-pref-height: 40px;
-    -fx-pref-width: 160px;
-}
-
 #book-bg{
     -fx-background-color: #9178d1;
     -fx-background-radius: 20px 20px 0 0;
@@ -181,10 +173,6 @@
     -fx-pref-width: 160px;
 }
 
-.trending-bg{
-    -fx-background-color: #5c0090;
-    -fx-background-radius: 20px 20px 0 0;
-}
 
 .book-bg{
     -fx-background-color: #9178d1;

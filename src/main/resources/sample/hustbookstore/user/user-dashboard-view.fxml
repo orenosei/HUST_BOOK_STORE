@@ -17,7 +17,7 @@
                <content>
                   <AnchorPane>
                      <children>
-                        <AnchorPane fx:id="trendingPane" layoutX="11.2" layoutY="-4.0" prefHeight="574.0" prefWidth="998.0" styleClass="trending-bg" stylesheets="@../Design/dashboardDesign.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="-4.0">
+                        <AnchorPane fx:id="trendingPane" layoutX="11.2" layoutY="-4.0" prefHeight="574.0" prefWidth="998.0" styleClass="trend-bg" stylesheets="@../Design/dashboardDesign.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="-4.0">
                            <children>
                               <Button fx:id="trendingLeftBtn" layoutX="14.0" layoutY="244.0" mnemonicParsing="false" onAction="#handleTrendingLeftBtn" styleClass="trans-bg" stylesheets="@../Design/dashboardDesign.css" AnchorPane.leftAnchor="20.0">
                                  <graphic>
