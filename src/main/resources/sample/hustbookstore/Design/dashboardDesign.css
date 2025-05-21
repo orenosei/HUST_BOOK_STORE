@@ -42,24 +42,33 @@
     -fx-text-fill: #ffffff;
 }
 
-
+.set_glx_bg{
+    -fx-background-image:
+            url("../img/bg_trending/4864721.jpg");
+}
 
 #tab-trending{
-    -fx-background-color: #7E60C6;
+    -fx-background-image:
+            url("../img/bg_trending/Trend_bg_2.png");
     -fx-background-radius: 10 10 0 0;
-    -fx-padding: 5 50 5 50;
+    -fx-padding: 5 150 5 150;
+}
+
+.tab-pane .tab-header-area .headers-region .tab:top{
+    -fx-background-color: transparent;
 }
 
 #tab-recommendation{
-    -fx-background-color: #5B6AE4;
+    -fx-background-image:
+            url("../img/bg_rcm/Rcm_bg.png");
     -fx-background-radius: 10 10 0 0;
-    -fx-padding: 5 50 5 50;
+    -fx-padding: 5 150 5 150;
 }
 
 .trending-bg {
     /* background-image theo đường dẫn relative từ file CSS */
     -fx-background-image:
-            url("../img/bg_trending/Trend_bg_2.jpg");
+            url("../img/bg_trending/Trend_bg_2.png");
     -fx-background-size: cover;
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
@@ -68,7 +77,7 @@
 
 .recommendation-bg{
     -fx-background-image:
-            url("../img/bg_rcm/Rcm_bg.jpg");
+            url("../img/bg_rcm/Rcm_bg.png");
     -fx-background-size: cover;
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
