@@ -155,6 +155,19 @@ public class UserDashboardController {
         slideCards(1100);
     }
 
+    public void handleRecommendationLeftBtn() {
+    }
 
+    public void handleRecommendationRightBtn() {
+
+    }
+
+// // todo: Recommendation
+    // Cho recommend
+    //WIP
+//    private void loadRecommendationBooks() {
+//        BillList billList = new BillList();
+//        recommendationBooks =  billList.getRecommendationBooks();
+//    }
 
 }

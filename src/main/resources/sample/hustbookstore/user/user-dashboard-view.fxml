@@ -45,12 +45,12 @@
                      <children>
                         <AnchorPane fx:id="recommendationPane" prefHeight="575.0" prefWidth="1020.0" styleClass="recommendation-bg" stylesheets="@../Design/dashboardDesign.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Button fx:id="recommendationLeftBtn" layoutX="38.0" layoutY="244.0" mnemonicParsing="false"  styleClass="trans-bg" stylesheets="@../Design/dashboardDesign.css" AnchorPane.leftAnchor="20.0">
+                              <Button fx:id="recommendationLeftBtn" layoutX="38.0" layoutY="244.0" mnemonicParsing="false" onAction="#handleRecommendationLeftBtn" styleClass="trans-bg" stylesheets="@../Design/dashboardDesign.css" AnchorPane.leftAnchor="20.0">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="ANGLE_LEFT" size="5em" />
                                  </graphic>
                               </Button>
-                              <Button fx:id="recommendationRightBtn" layoutX="923.0" layoutY="244.0" mnemonicParsing="false" styleClass="trans-bg" stylesheets="@../Design/dashboardDesign.css" AnchorPane.rightAnchor="20.0">
+                              <Button fx:id="recommendationRightBtn" layoutX="923.0" layoutY="244.0" mnemonicParsing="false" onAction="#handleRecommendationRightBtn" styleClass="trans-bg" stylesheets="@../Design/dashboardDesign.css" AnchorPane.rightAnchor="20.0">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="ANGLE_RIGHT" size="5em" />
                                  </graphic>
