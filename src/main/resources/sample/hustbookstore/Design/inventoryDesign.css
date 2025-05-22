@@ -46,6 +46,9 @@
 .bg-radious{
     -fx-background-radius: 15px;
 }
+.avatar{
+    -fx-background-image: url("../img/bg_trending/15626.png");
+}
 
 .purple-bg{
     -fx-background-color: linear-gradient(to bottom, #341c63, #9178d1);
@@ -548,7 +551,7 @@
     -fx-padding: 0;                        /* bỏ padding */
     -fx-focus-color: transparent;          /* remove focus ring */
     -fx-faint-focus-color: transparent;    /* remove faint focus */
-    -fx-text-fill: white;
+    -fx-text-fill: #1373a5;
 }
 
 .text-box-3 {
@@ -600,4 +603,12 @@
     -fx-background-color: linear-gradient(to left, #b6dcff, #9178d1);
     -fx-background-radius: 30px;
     -fx-effect: dropshadow(gaussian, #5c45a3, 10, 0.3, 2, 2);
+}
+
+.trendbgtest{
+    -fx-background-image: url("../img/bg_trending/15623.png");
+}
+
+#profile-userAva{
+    -fx-background-image: url("../img/bg_trending/15623.png");
 }

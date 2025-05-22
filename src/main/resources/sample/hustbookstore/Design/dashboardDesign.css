@@ -48,9 +48,9 @@
 
 
 #tab-recommendation{
-    -fx-background-color: #9178d1;
+    -fx-background-color: linear-gradient(to left, #ae8fff, #9065ff);
     -fx-background-radius: 10 10 0 0;
-    -fx-padding: 7 172 7 172;
+    -fx-padding: 7 168 7 168;
     -fx-effect: dropshadow(
             gaussian,
             rgba(145, 106, 255, 0.5),  /* tím nhạt từ #9178d1, 30% opacity */
@@ -65,7 +65,7 @@
 #tab-trending{
     -fx-background-color: linear-gradient(to left, #83cff9, #32b0f7);
     -fx-background-radius: 10 10 0 0;
-    -fx-padding: 7 172 7 172;
+    -fx-padding: 7 168 7 168;
     -fx-effect: dropshadow(
             gaussian,
             rgba(54, 161, 255, 0.5),  /* xanh nhạt, 30% opacity */
@@ -92,7 +92,7 @@
 
 /*.trend-bg{*/
 .recommendation-bg {
-    -fx-background-color: linear-gradient(to top, #c6b6ff, #9178d1);
+    -fx-background-image: url("../img/bg_trending/15624.png");
     -fx-background-size: cover;
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
@@ -412,4 +412,16 @@
 
 .date-picker-display-node .text{
     -fx-fill: #b6dcff;
+}
+
+
+.image-view{
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(9, 103, 174, 0.5),  /* tím nhạt từ #9178d1, 30% opacity */
+            20,                        /* radius */
+            0.5,                       /* spread */
+            0,                         /* offset-x */
+            5                          /* offset-y */
+    );
 }
