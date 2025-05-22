@@ -18,6 +18,9 @@ module sample.hustbookstore {
     requires java.net.http;
     requires java.desktop;
     requires com.fasterxml.jackson.databind;
+    requires VnCoreNLP;
+    requires org.apache.lucene.queryparser;
+    requires org.apache.lucene.core;
 
     opens sample.hustbookstore to javafx.fxml;
     exports sample.hustbookstore;

@@ -3,17 +3,17 @@ package sample.hustbookstore.models;
 import java.time.LocalDate;
 
 public class Product {
-    private String ID;
-    private String name;
-    private String distributor;
-    private Double sellPrice;
-    private Double importPrice;
-    private int stock;
-    private String type;
-    private String image;
-    private String description;
-    private LocalDate addedDate;
-    private int restrictedAge;
+    protected String ID;
+    protected String name;
+    protected String distributor;
+    protected Double sellPrice;
+    protected Double importPrice;
+    protected int stock;
+    protected String type;
+    protected String image;
+    protected String description;
+    protected LocalDate addedDate;
+    protected int restrictedAge;
 
     public Product(String ID, String name, String distributor, Double sellPrice, Double importPrice, int stock, String type, String image, String description, LocalDate addedDate, int restrictedAge) {
         this.ID = ID;
@@ -35,6 +35,13 @@ public class Product {
         this.sellPrice = sellPrice;
         this.type = type;
         this.image = image;
+        this.description = description;
+    }
+
+    //Cho recommend
+    public Product(String ID, String name, String description) {
+        this.ID = ID;
+        this.name = name;
         this.description = description;
     }
 
