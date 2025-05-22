@@ -14,7 +14,7 @@
     -fx-background-radius: 15px;
 }
 .function:hover{
-    -fx-background-color: #a1c7d1;
+    -fx-background-color: #8b6ff3;
 }
 
 .white-bg{
@@ -29,6 +29,14 @@
 .info-panel{
     -fx-background-color: linear-gradient(to bottom, #B7E4FA, #91B5FC);
     -fx-background-radius: 20px;
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(9, 103, 174, 0.5),  /* tím nhạt từ #9178d1, 30% opacity */
+            20,                        /* radius */
+            0.5,                       /* spread */
+            0,                         /* offset-x */
+            5                          /* offset-y */
+    );
 }
 
 .chart-panel{

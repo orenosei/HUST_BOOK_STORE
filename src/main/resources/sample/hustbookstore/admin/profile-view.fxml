@@ -17,11 +17,7 @@
    <children>
       <AnchorPane layoutX="50.0" layoutY="54.0" prefHeight="720.0" prefWidth="340.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane layoutX="60.0" layoutY="142.4" prefHeight="217.0" prefWidth="219.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="142.0">
-               <styleClass>
-                  <String fx:value="bg-radious" />
-                  <String fx:value="inventory-table-border" />
-               </styleClass>
+            <AnchorPane layoutX="60.0" layoutY="142.4" prefHeight="219.0" prefWidth="219.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="142.0">
                <children>
                   <ImageView fx:id="profile_circleimage" fitHeight="94.0" fitWidth="126.0" layoutX="83.2" layoutY="116.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="83.0" AnchorPane.topAnchor="116.0" />
                </children>
@@ -29,6 +25,10 @@
                   <URL value="@../Design/profileDesign.css" />
                   <URL value="@../Design/inventoryDesign.css" />
                </stylesheets>
+               <styleClass>
+                  <String fx:value="inventory-table-border" />
+                  <String fx:value="avatar" />
+               </styleClass>
             </AnchorPane>
             <Button fx:id="profile_importBtn" layoutX="87.0" layoutY="336.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="125.0" text="Update avatar" visible="false" AnchorPane.topAnchor="336.0">
                <font>

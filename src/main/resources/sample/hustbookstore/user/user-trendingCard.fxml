@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="550.0" prefWidth="780.0" stylesheets="@../Design/dashboardDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.user.UserTrendingCardController">
+<AnchorPane prefHeight="550.0" prefWidth="780.0" styleClass="trans-bg" stylesheets="@../Design/dashboardDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.user.UserTrendingCardController">
    <children>
       <ImageView fx:id="imageField" fitHeight="530.0" fitWidth="366.0" layoutX="39.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <image>
@@ -51,19 +51,19 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label text="ISBN:" textFill="WHITE">
+            <Label text="ISBN:" textFill="#1aa7f6">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Label>
-            <Label text="Author:" textFill="WHITE" GridPane.rowIndex="1">
+            <Label text="Author:" textFill="#1aa7f6" GridPane.rowIndex="1">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Label>
-            <Label text="Genre:" textFill="WHITE" GridPane.rowIndex="2">
+            <Label text="Genre:" textFill="#1aa7f6" GridPane.rowIndex="2">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Label>
-            <Label text="Description:" textFill="WHITE" GridPane.rowIndex="3">
+            <Label text="Description:" textFill="#1aa7f6" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Label>
@@ -85,7 +85,7 @@
                </font></TextArea>
          </children>
       </GridPane>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="411.0" layoutY="472.0" prefHeight="67.0" prefWidth="110.0" text="Price:" textFill="WHITE">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="411.0" layoutY="472.0" prefHeight="67.0" prefWidth="110.0" text="Price:" textFill="#1aa7f6">
          <font>
             <Font name="System Bold Italic" size="34.0" />
          </font>
