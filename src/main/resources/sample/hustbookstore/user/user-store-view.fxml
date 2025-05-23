@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -7,7 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 
 <AnchorPane fx:id="storeForm" prefHeight="720.0" prefWidth="1020.0" styleClass="invisible-bg" stylesheets="@../Design/inventoryDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.user.UserStoreController">
    <children>
@@ -18,7 +19,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="700.0">
                      <children>
-                        <ScrollPane fx:id="tabBookScroll" fitToWidth="true" hbarPolicy="NEVER" prefHeight="606.0" prefWidth="691.0" styleClass="invisible-bg" stylesheets="@../Design/inventoryDesign.css" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <ScrollPane fx:id="tabBookScroll" fitToWidth="true" hbarPolicy="NEVER" prefHeight="606.0" prefWidth="691.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <content>
                               <GridPane fx:id="tabBookGrid">
                                 <columnConstraints>
@@ -26,6 +27,10 @@
                                 </columnConstraints>
                               </GridPane>
                            </content>
+                           <stylesheets>
+                              <URL value="@../Design/inventoryDesign.css" />
+                              <URL value="@../Design/dashboardDesign.css" />
+                           </stylesheets>
                         </ScrollPane>
                      </children>
                   </AnchorPane>
@@ -67,10 +72,11 @@
             </Tab>
          </tabs>
       </TabPane>
-      <HBox layoutX="51.0" layoutY="18.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="66.0">
-         <children>
-            <TextField fx:id="searchBar" prefHeight="35.0" prefWidth="199.0" promptText="Search " styleClass="inventory-search-bar" />
-         </children>
-      </HBox>
+      <TextField fx:id="searchBar" layoutX="500.0" layoutY="80.8" prefHeight="42.0" prefWidth="199.0" promptText="Search " stylesheets="@../Design/inventoryDesign.css" AnchorPane.topAnchor="81.0">
+         <styleClass>
+            <String fx:value="inventory-search-bar" />
+            <String fx:value="invisible-bg" />
+         </styleClass>
+      </TextField>
    </children>
 </AnchorPane>
