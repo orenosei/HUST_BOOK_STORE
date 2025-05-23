@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import sample.hustbookstore.models.Inventory;
 
 import java.net.URL;
 import java.util.Optional;
@@ -113,6 +114,7 @@ public class HomeScreenController implements Initializable {
             Optional<ButtonType> option = alert.showAndWait();
 
             if (option.get().equals(ButtonType.OK)) {
+                localInventoryController.showData();
                 Stage currentStage = (Stage) logout_btn.getScene().getWindow();
                 currentStage.close();
 
@@ -123,6 +125,7 @@ public class HomeScreenController implements Initializable {
                 stage.setTitle("HUST Book Store");
                 stage.setScene(scene);
                 stage.show();
+
             }
 
         } catch (Exception e) {
