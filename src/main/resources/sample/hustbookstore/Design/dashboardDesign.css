@@ -1,7 +1,7 @@
 
 .tab-header-area {
     -fx-background-color: transparent;
-    -fx-padding: 0 0 0 33;
+    -fx-padding: 0 0 0 45;
     -fx-border-color: transparent;
     -fx-border-radius: 0;
     -fx-border-width: 0;
@@ -50,7 +50,7 @@
 #tab-recommendation{
     -fx-background-color: linear-gradient(to left, #ae8fff, #9065ff);
     -fx-background-radius: 10 10 0 0;
-    -fx-padding: 7 168 7 168;
+    -fx-padding: 7 164 7 164;
     -fx-effect: dropshadow(
             gaussian,
             rgba(145, 106, 255, 0.5),  /* tím nhạt từ #9178d1, 30% opacity */
@@ -65,7 +65,7 @@
 #tab-trending{
     -fx-background-color: linear-gradient(to left, #83cff9, #32b0f7);
     -fx-background-radius: 10 10 0 0;
-    -fx-padding: 7 168 7 168;
+    -fx-padding: 7 164 7 164;
     -fx-effect: dropshadow(
             gaussian,
             rgba(54, 161, 255, 0.5),  /* xanh nhạt, 30% opacity */
