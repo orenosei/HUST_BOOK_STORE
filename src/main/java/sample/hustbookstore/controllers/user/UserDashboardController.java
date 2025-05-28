@@ -4,6 +4,7 @@ package sample.hustbookstore.controllers.user;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,14 +17,13 @@ import javafx.scene.layout.StackPane;
 
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import sample.hustbookstore.models.BillList;
-import sample.hustbookstore.models.Book;
-import sample.hustbookstore.models.BookIndexer;
-import sample.hustbookstore.models.Cart;
+import sample.hustbookstore.models.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static sample.hustbookstore.LaunchApplication.localInventory;
 
 
 public class UserDashboardController {
@@ -59,11 +59,16 @@ public class UserDashboardController {
     private final long SLIDE_INTERVAL = 4000;
 
     @FXML
-    public void initialize() {
+    public void initialize() throws Exception {
         setupStackPaneClip();
         loadTrendingBooks();
         initializeCards();
         setupAutoSlide();
+        ObservableList<Book> AllBook = localInventory.getAllBooks();
+        BookIndexer indexer = new BookIndexer();
+        indexer.indexBooks(AllBook);
+        BookRecommender recommender = new BookRecommender();
+        recommender.searchSimilarBooks("Tếng Nga",3);
     }
 
     private void loadTrendingBooks() {

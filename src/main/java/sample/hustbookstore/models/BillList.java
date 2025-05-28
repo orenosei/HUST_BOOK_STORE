@@ -277,7 +277,7 @@ public class BillList {
         StringBuilder rawData = new StringBuilder();
 
         for (Book book : sampleBooks) {
-            rawData.append(book.combinedText).append(" ");
+            rawData.append(book.getcombinedText()).append(" ");
         }
 
         // WIP

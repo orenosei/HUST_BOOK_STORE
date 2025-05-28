@@ -21,7 +21,9 @@ public class Book extends Product
     }
 
     //Cho recommend
-    public String combinedText = name + " " + author + " " + genre + " " + description;
+    public String getcombinedText() {
+        return name + " " + author + " " + genre + " " + description;
+    }
 
     //Cho recommend
     public Book(String ID, String name, String description, String genre, String author) {
