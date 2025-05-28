@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import org.controlsfx.control.CheckComboBox?>
 
 <AnchorPane fx:id="storeForm" prefHeight="720.0" prefWidth="1020.0" styleClass="invisible-bg" stylesheets="@../Design/inventoryDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.StoreController">
    <children>
@@ -23,9 +22,9 @@
                         <ScrollPane fx:id="tabBookScroll" fitToWidth="true" hbarPolicy="NEVER" layoutX="4.8" prefHeight="606.0" prefWidth="695.0" style="-fx-background-color: white;" stylesheets="@../Design/storeDesign.css" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <content>
                               <GridPane fx:id="tabBookGrid">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                 </rowConstraints>
                               </GridPane>
                            </content>
                         </ScrollPane>
@@ -40,9 +39,9 @@
                         <ScrollPane fx:id="tabStationeryScroll" fitToWidth="true" hbarPolicy="NEVER" prefHeight="610.0" prefWidth="700.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <content>
                               <GridPane fx:id="tabStationeryGrid">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                 </rowConstraints>
                               </GridPane>
                            </content>
                         </ScrollPane>
@@ -57,9 +56,9 @@
                         <ScrollPane fx:id="tabToyScroll" fitToWidth="true" hbarPolicy="NEVER" prefHeight="610.0" prefWidth="700.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <content>
                               <GridPane fx:id="tabToyGrid">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                 </rowConstraints>
                               </GridPane>
                            </content>
                         </ScrollPane>
@@ -69,15 +68,17 @@
             </Tab>
          </tabs>
       </TabPane>
-      <HBox layoutX="57.0" layoutY="20.0">
+      <TextField fx:id="searchBar" layoutX="57.0" layoutY="20.0" prefHeight="40.0" prefWidth="200.0" promptText="Search " styleClass="inventory-search-bar" stylesheets="@../Design/inventoryDesign.css" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="81.0" />
+      <AnchorPane layoutX="28.0" layoutY="11.0" prefHeight="58.0" prefWidth="588.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TextField fx:id="searchBar" prefHeight="25.0" prefWidth="272.0" promptText="Search " styleClass="inventory-search-bar" stylesheets="@../Design/inventoryDesign.css" />
-            <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#onSearch" prefHeight="37.0" prefWidth="38.0" styleClass="inventory-place-order" stylesheets="@../Design/inventoryDesign.css">
-               <graphic>
-                  <FontAwesomeIcon fill="WHITE" glyphName="SEARCH" />
-               </graphic>
-            </Button>
+            <CheckComboBox fx:id="genreCheckComboBox" layoutX="3.0" layoutY="14.0" prefHeight="32.0" prefWidth="178.0" AnchorPane.bottomAnchor="0.0" />
+            <TextField fx:id="restrictAgeField" layoutX="203.0" layoutY="35.0" promptText="Restricted Age" AnchorPane.bottomAnchor="-2.0" />
+            <TextField fx:id="priceFromField" layoutX="390.0" layoutY="34.0" prefHeight="26.0" prefWidth="88.0" promptText="From" AnchorPane.bottomAnchor="-2.0" />
+            <TextField fx:id="priceToField" layoutX="493.0" layoutY="33.0" prefHeight="26.0" prefWidth="94.0" promptText="To" AnchorPane.bottomAnchor="-1.0" />
+            <Label layoutX="17.0" layoutY="4.0" text="Book's Genre" />
+            <Label layoutX="206.0" layoutY="7.0" text="Restricted Age" />
+            <Label layoutX="390.0" layoutY="6.0" text="Price" />
          </children>
-      </HBox>
+      </AnchorPane>
    </children>
 </AnchorPane>
