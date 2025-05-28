@@ -1,0 +1,49 @@
+.text-box {
+    -fx-background-color: white;
+    -fx-control-inner-background: white;
+    -fx-border-color: #0078d7;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-text-fill: black;
+    -fx-prompt-text-fill: #999999;
+}
+
+.text-box .content {
+    -fx-background-color: white;
+}
+
+.button{
+    -fx-background-color: #b6dcff;
+    -fx-border-radius: 2px;
+    -fx-border-width: 2px;
+    -fx-border-color: #b6dcff;
+    -fx-effect: dropshadow(gaussian, #5a9cd6, 10, 0.3, 2, 2);
+}
+
+.button:hover{
+    -fx-background-color: #5faeef;
+    -fx-border-radius: 2px;
+    -fx-border-width: 2px;
+}
+
+.button:pressed{
+    -fx-background-color: #5099f1;
+}
+
+.table-border{
+    -fx-border-color: linear-gradient(to top, #b6dcff, #9178d1);
+    -fx-border-width: 9px;
+    -fx-border-radius: 7px;
+}
+
+.table-border-left{
+    -fx-border-color: linear-gradient(to left, #b6dcff, #9178d1);
+    -fx-border-width: 9px;
+    -fx-border-radius: 7px;
+}
+
+.table-border-right{
+    -fx-border-color: linear-gradient(to right, #b6dcff, #9178d1);
+    -fx-border-width: 9px;
+    -fx-border-radius: 7px;
+}
