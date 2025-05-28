@@ -68,7 +68,8 @@ public class UserDashboardController {
         BookIndexer indexer = new BookIndexer();
         indexer.indexBooks(AllBook);
         BookRecommender recommender = new BookRecommender();
-        recommender.searchSimilarBooks("Tếng Nga",3);
+        Book book = new Book("bruh76", "Re: Zero - Bắt Đầu Lại Ở Thế Giới Khác - 2", "Re Zero tập 2", "Adventure, Dark Fantasy, Drama, Light Novel, Psychological, Romance", "Tappei Nagatsuki");
+        recommender.searchSimilarBooks(book.getcombinedText(),3);
     }
 
     private void loadTrendingBooks() {

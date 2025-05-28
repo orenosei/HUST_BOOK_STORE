@@ -29,7 +29,7 @@ public class BookRecommender {
         TopDocs results = searcher.search(query, topN);
         for (ScoreDoc scoreDoc : results.scoreDocs) {
             Document doc = searcher.doc(scoreDoc.doc);
-            String title = doc.get("title");
+            String title = doc.get("name");
             String author = doc.get("author");
             float score = scoreDoc.score;
 
