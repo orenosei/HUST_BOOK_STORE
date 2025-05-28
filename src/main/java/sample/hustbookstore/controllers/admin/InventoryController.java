@@ -228,7 +228,6 @@ public class InventoryController {
 
         FilteredList<Book> filteredData = new FilteredList<>(list, b -> true);
 
-        // Lắng nghe sự thay đổi trong thanh tìm kiếm
         search_bar.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(book -> {
                 // Nếu thanh tìm kiếm trống, hiển thị tất cả
@@ -237,7 +236,6 @@ public class InventoryController {
                 }
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                // Kiểm tra các thuộc tính: name, distributor, author, genre, description
                 return (book.getName() != null && book.getName().toLowerCase().contains(lowerCaseFilter))
                         || (book.getDistributor() != null && book.getDistributor().toLowerCase().contains(lowerCaseFilter))
                         || (book.getAuthor() != null && book.getAuthor().toLowerCase().contains(lowerCaseFilter))

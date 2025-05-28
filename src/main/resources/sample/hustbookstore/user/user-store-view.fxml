@@ -2,6 +2,7 @@
 
 <?import java.lang.String?>
 <?import java.net.URL?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -9,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import org.controlsfx.control.CheckComboBox?>
 
 <AnchorPane fx:id="storeForm" prefHeight="720.0" prefWidth="1020.0" styleClass="invisible-bg" stylesheets="@../Design/inventoryDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.user.UserStoreController">
    <children>
@@ -78,5 +80,16 @@
             <String fx:value="invisible-bg" />
          </styleClass>
       </TextField>
+      <AnchorPane layoutX="18.0" layoutY="1.0" prefHeight="58.0" prefWidth="588.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="1.0">
+         <children>
+            <CheckComboBox fx:id="genreCheckComboBox" layoutX="3.0" layoutY="14.0" prefHeight="32.0" prefWidth="178.0" AnchorPane.bottomAnchor="0.0" />
+            <TextField fx:id="restrictAgeField" layoutX="203.0" layoutY="35.0" promptText="Restricted Age" AnchorPane.bottomAnchor="-2.0" />
+            <TextField fx:id="priceFromField" layoutX="390.0" layoutY="34.0" prefHeight="26.0" prefWidth="88.0" promptText="From" AnchorPane.bottomAnchor="-2.0" />
+            <TextField fx:id="priceToField" layoutX="493.0" layoutY="33.0" prefHeight="26.0" prefWidth="94.0" promptText="To" AnchorPane.bottomAnchor="-1.0" />
+            <Label layoutX="17.0" layoutY="4.0" text="Book's Genre" />
+            <Label layoutX="206.0" layoutY="7.0" text="Restricted Age" />
+            <Label layoutX="390.0" layoutY="6.0" text="Price" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
