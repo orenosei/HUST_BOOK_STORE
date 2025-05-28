@@ -1,12 +1,19 @@
 package sample.hustbookstore.controllers.user;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import org.cloudinary.json.JSONObject;
+import sample.hustbookstore.models.Book;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -17,9 +24,9 @@ public class AryaChatController {
     private final String API_KEY = "AIzaSyAv-OyfoHUo9Vh2xifmvbzXNdiM195ai9c";
     private final String API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
-    @FXML private TextArea chatArea;
-    @FXML private TextField inputField;
+    @FXML private TextArea inputField;
     @FXML private Button sendButton;
+    @FXML private VBox chatArea2;
 
     @FXML
     private void handleEnterKey(KeyEvent event) {
@@ -32,13 +39,16 @@ public class AryaChatController {
     private void handleSendMessage() {
         String userMessage = inputField.getText().trim();
         if (userMessage.isEmpty()) return;
-        appendMessage("You: " + userMessage);
+        appendMessage(userMessage, true);
         inputField.clear();
+        sendAndReceiveMessage(userMessage);
+    }
+    private void sendAndReceiveMessage(String message) {
         String requestBody = new JSONObject()
                 .put("contents", new JSONObject[]{
                         new JSONObject()
                                 .put("parts", new JSONObject[]{
-                                new JSONObject().put("text", userMessage)
+                                new JSONObject().put("text", message)
                         })
                 })
                 .toString();
@@ -51,10 +61,14 @@ public class AryaChatController {
                 .sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenAccept(response -> {
                     String aiResponse = parseResponse(response.body());
-                    appendMessage("Bot: " + aiResponse);
+                    Platform.runLater(() -> {
+                        appendMessage(aiResponse, false);
+                    });
                 })
                 .exceptionally(e -> {
-                    appendMessage("Error: Failed to get response");
+                    Platform.runLater(() -> {
+                        appendMessage("Error: Failed to get response", false);
+                    });
                     e.printStackTrace();
                     return null;
                 });
@@ -74,14 +88,34 @@ public class AryaChatController {
         }
     }
 
-    private void appendMessage(String message) {
-        chatArea.appendText(message + "\n\n");
-        chatArea.setScrollTop(Double.MAX_VALUE);
+    private void appendMessage(String message, boolean isUser) {
+        Label label = new Label(message);
+        label.setWrapText(true);
+        label.maxWidthProperty().bind(chatArea2.widthProperty().subtract(30));
+        label.setStyle("-fx-background-color: " + (isUser ? "#cce5ff" : "#f1f0f0") +
+                "; -fx-padding: 8 12; -fx-background-radius: 10;");
+        HBox wrapper = new HBox(label);
+        wrapper.setAlignment(isUser ? Pos.CENTER_RIGHT : Pos.CENTER_LEFT);
+        wrapper.setPadding(new Insets(2, 10, 2, 10));
+        chatArea2.getChildren().add(wrapper);
     }
+
+    private void askAi(Book book) {
+        String author = book.getAuthor();
+        String name = book.getName();
+        StringBuilder builder = new StringBuilder();
+        builder.append("Given the book ");
+        builder.append(name);
+        builder.append(" wrote by ");
+        builder.append(author);
+        builder.append(", give me a short overview about the book.");
+        String message = builder.toString();
+        sendAndReceiveMessage(message);
+
+    }
+
     @FXML
     public void initialize() {
-        chatArea.setEditable(false);
-        chatArea.setWrapText(true);
         inputField.setOnKeyPressed(this::handleEnterKey);
         sendButton.setOnAction(event -> handleSendMessage());
     }
