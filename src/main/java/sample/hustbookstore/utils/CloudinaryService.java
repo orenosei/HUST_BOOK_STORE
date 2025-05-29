@@ -23,13 +23,10 @@ public class CloudinaryService {
     private static final String NOT_FOUND_IMAGE_PATH = "/sample/hustbookstore/img/notfound.jpg";
     private static final Map<String, Image> memoryCache = new HashMap<>();
 
-    // Khởi tạo static block cho cấu hình chung
     static {
         try {
-            // Tạo thư mục cache
             Files.createDirectories(Paths.get(CACHE_DIR));
 
-            // Load cấu hình Cloudinary
             Dotenv dotenv = Dotenv.load();
             String cloudName = dotenv.get("CLOUDINARY_CLOUD_NAME");
             String apiKey = dotenv.get("CLOUDINARY_API_KEY");
@@ -47,18 +44,16 @@ public class CloudinaryService {
         }
     }
 
-    // Phương thức upload không static
     public String uploadImage(File file) throws Exception {
-        if (cloudinary == null) throw new IllegalStateException("Cloudinary chưa được cấu hình");
+        if (cloudinary == null) throw new IllegalStateException("Cloudinary not initialized");
         if (file == null || !file.exists()) {
-            throw new IllegalArgumentException("File không tồn tại");
+            throw new IllegalArgumentException("File not found");
         }
 
         Map<String, Object> uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
         return uploadResult.get("secure_url").toString();
     }
 
-    // Phương thức static để load ảnh - dùng chung toàn ứng dụng
     public static Image loadImage(String imagePath) {
         return loadImage(imagePath, 100, 160);
     }
@@ -68,14 +63,12 @@ public class CloudinaryService {
             return getNotFoundImage(width, height);
         }
 
-        // Tạo key cache duy nhất cho URL + kích thước
         String cacheKey = imagePath + "|" + width + "|" + height;
         if (memoryCache.containsKey(cacheKey)) {
             return memoryCache.get(cacheKey);
         }
 
         try {
-            // Xử lý đường dẫn local
             if (!imagePath.startsWith("http")) {
                 URL resourceUrl = CloudinaryService.class.getResource(imagePath);
                 if (resourceUrl == null && !imagePath.startsWith("/")) {
@@ -90,7 +83,6 @@ public class CloudinaryService {
                 return getNotFoundImage(width, height);
             }
 
-            // Kiểm tra cache đĩa
             Path cachedPath = getCachedImagePath(imagePath);
             if (Files.exists(cachedPath)) {
                 Image image = new Image(cachedPath.toUri().toString(), width, height, true, true);
@@ -98,7 +90,6 @@ public class CloudinaryService {
                 return image;
             }
 
-            // Tải ảnh từ internet
             URL url = new URL(imagePath);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
@@ -108,16 +99,14 @@ public class CloudinaryService {
             try (InputStream in = connection.getInputStream()) {
                 byte[] imageData = in.readAllBytes();
 
-                // Lưu vào cache đĩa
                 Files.write(cachedPath, imageData);
 
-                // Tạo ảnh và lưu cache bộ nhớ
                 Image image = new Image(new ByteArrayInputStream(imageData), width, height, true, true);
                 memoryCache.put(cacheKey, image);
                 return image;
             }
         } catch (Exception e) {
-            System.err.println("Lỗi tải ảnh: " + e.getMessage());
+            System.err.println("Image download error: " + e.getMessage());
             return getNotFoundImage(width, height);
         }
     }
@@ -141,9 +130,7 @@ public class CloudinaryService {
             if (dotIndex > 0) {
                 return path.substring(dotIndex + 1);
             }
-        } catch (Exception e) {
-            // Xử lý lỗi âm thầm
-        }
-        return "jpg"; // Mặc định
+        } catch (Exception e) {}
+        return "jpg";
     }
 }
