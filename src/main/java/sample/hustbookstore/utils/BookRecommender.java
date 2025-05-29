@@ -1,4 +1,4 @@
-package sample.hustbookstore.models;
+package sample.hustbookstore.utils;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,6 +10,7 @@ import org.apache.lucene.search.*;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import sample.hustbookstore.models.Book;
 
 import java.io.IOException;
 import java.nio.file.Paths;

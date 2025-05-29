@@ -61,7 +61,7 @@
                         </Text>
                      </children>
                   </VBox>
-                  <Text fill="#52aeff" layoutX="25.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trinh Minh Thanh">
+                  <Text fx:id="customerNameField" fill="#52aeff" layoutX="25.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trinh Minh Thanh">
                      <font>
                         <Font name="System Italic" size="25.0" />
                      </font>

@@ -118,6 +118,9 @@ public class UserCartController implements CartUpdateListener{
     @FXML
     private Text totalValueInBill;
 
+    @FXML
+    private Text customerNameField;
+
 
     private Alert alert;
 
@@ -411,6 +414,7 @@ public class UserCartController implements CartUpdateListener{
         selectAddress();
         Cart.setCartUpdateListener(this);
         display();
+        customerNameField.setText(localUser.getName() == null ? "Trinh Minh Thanh" : localUser.getName() );
 
         billPane.setVisible(false);
 

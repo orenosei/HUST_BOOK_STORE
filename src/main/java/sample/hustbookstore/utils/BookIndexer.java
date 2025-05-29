@@ -1,16 +1,14 @@
-package sample.hustbookstore.models;
+package sample.hustbookstore.utils;
 
 import javafx.collections.ObservableList;
-import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.*;
 import org.apache.lucene.index.*;
 import org.apache.lucene.store.*;
-import org.apache.lucene.util.Version;
+import sample.hustbookstore.models.Book;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.List;
 
 public class BookIndexer {
     private final IndexWriter writer;

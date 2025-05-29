@@ -1,4 +1,4 @@
-package sample.hustbookstore.models;
+package sample.hustbookstore.utils;
 
 import vn.pipeline.*;
 

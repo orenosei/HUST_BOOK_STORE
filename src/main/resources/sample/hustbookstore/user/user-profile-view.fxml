@@ -113,7 +113,7 @@
                         </Label>
                      </children>
                   </GridPane>
-                  <Button fx:id="profile_changePasswordBtn" layoutX="443.0" layoutY="189.0" mnemonicParsing="false" onAction="#profileChangePasswordBtn" prefHeight="31.0" prefWidth="126.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Change" textFill="WHITE" />
+                  <Button fx:id="profile_changePasswordBtn" layoutX="443.0" layoutY="189.0" mnemonicParsing="false" onAction="#handleChangePasswordBtn" prefHeight="31.0" prefWidth="126.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Change" textFill="WHITE" />
                   <HBox layoutY="-1.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
                      <children>
                         <FontAwesomeIcon glyphName="EDIT" selectionEnd="0" selectionStart="0" size="24" />
@@ -167,7 +167,7 @@
                         <TextField fx:id="profile_adminAddress" alignment="TOP_LEFT" prefHeight="26.0" prefWidth="200.0" styleClass="text-box" stylesheets="@../Design/inventoryDesign.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
-                  <Button fx:id="profile_update_btn" layoutX="447.0" layoutY="177.0" mnemonicParsing="false" onAction="#profileUpdateBtn" prefHeight="46.0" prefWidth="126.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Update" textFill="WHITE" AnchorPane.bottomAnchor="118.99999999999997" />
+                  <Button fx:id="profile_update_btn" layoutX="447.0" layoutY="177.0" mnemonicParsing="false" onAction="#handleUpdateBtn" prefHeight="46.0" prefWidth="126.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Update" textFill="WHITE" AnchorPane.bottomAnchor="118.99999999999997" />
                   <VBox layoutX="401.0" layoutY="50.0" prefHeight="78.0" prefWidth="219.0" spacing="20.0" />
                   <Label layoutX="70.0" layoutY="41.0" text="PERSONAL INFORMATION" textFill="#9178d1">
                      <font>
