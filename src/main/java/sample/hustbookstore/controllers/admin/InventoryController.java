@@ -141,6 +141,11 @@ public class InventoryController {
 
     private Image image;
 
+    private static StoreUpdateListener listener;
+    public static void setStoreUpdateListener(StoreUpdateListener listener) {
+        InventoryController.listener = listener;
+    }
+
     public void setTypeList(){
         List<String> typeL = new ArrayList<String>();
         typeL.add("Book");
@@ -367,9 +372,10 @@ public class InventoryController {
                 alert.setContentText("Product added successfully.");
                 alert.showAndWait();
 
-                if (homeScreenController != null) {
-                    homeScreenController.reloadStore();
-                }
+//                if (homeScreenController != null) {
+//                    homeScreenController.reloadStore();
+//                }
+                if(listener != null) listener.onStoreUpdated();
 
                 showData();
             } else {
@@ -452,9 +458,10 @@ public class InventoryController {
             alert.setContentText("Product updated successfully.");
             alert.showAndWait();
 
-            if (homeScreenController != null) {
-                homeScreenController.reloadStore();
-            }
+//            if (homeScreenController != null) {
+//                homeScreenController.reloadStore();
+//            }
+            if(listener != null) listener.onStoreUpdated();
             showData();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -493,9 +500,10 @@ public class InventoryController {
                 alert.showAndWait();
                 setClear_btn();
 
-                if (homeScreenController != null) {
-                    homeScreenController.reloadStore();
-                }
+//                if (homeScreenController != null) {
+//                    homeScreenController.reloadStore();
+//                }
+                if(listener != null) listener.onStoreUpdated();
                 showData();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

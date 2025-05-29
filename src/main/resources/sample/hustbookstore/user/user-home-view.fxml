@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
-<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -12,7 +12,7 @@
 
 <AnchorPane fx:id="home_screen" prefHeight="720.0" prefWidth="1280.0" styleClass="usui-bg" stylesheets="@../Design/inventoryDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.user.UserHomeScreenController">
    <children>
-      <AnchorPane fx:id="headerPane" layoutX="10.0" layoutY="10.0" prefHeight="90.0" prefWidth="1280.0" styleClass="header" stylesheets="@../Design/homeDesign.css">
+      <AnchorPane fx:id="headerPane" layoutX="10.0" layoutY="10.0" prefHeight="90.0" prefWidth="1280.0" styleClass="header" stylesheets="@../Design/homeDesign.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="296.0" layoutY="73.0" size="6em" />
             <Text fill="WHITE" layoutX="381.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome,">
@@ -27,7 +27,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="-3.0" prefHeight="735.0" prefWidth="275.0" styleClass="side-bar" stylesheets="@../Design/homeDesign.css">
+      <AnchorPane prefHeight="720.0" prefWidth="260.0" styleClass="side-bar" stylesheets="@../Design/homeDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Text fill="WHITE" layoutX="10.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HUST">
                <font>
@@ -44,7 +44,7 @@
                   <Font name="Martian Mono ExtraBold" size="22.0" />
                </font>
             </Text>
-            <VBox layoutY="134.0" prefHeight="456.0" prefWidth="250.0">
+            <VBox layoutY="134.0" prefHeight="456.0" prefWidth="250.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
                   <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@../Design/homeDesign.css">
                      <children>
@@ -88,21 +88,26 @@
                   </AnchorPane>
                </children>
             </VBox>
-            <AnchorPane layoutX="12.0" layoutY="646.0" prefHeight="50.0" prefWidth="128.0" stylesheets="@../Design/homeDesign.css">
+            <HBox prefHeight="49.0" prefWidth="237.0" spacing="40.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                <children>
-                  <Button fx:id="logout_btn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#logout" prefHeight="67.0" prefWidth="203.0" styleClass="trans-bg" stylesheets="@../Design/homeDesign.css" text="SIGN OUT" textFill="WHITE" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Button fx:id="logout_btn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#logout" prefHeight="49.0" prefWidth="138.0" styleClass="trans-bg" stylesheets="@../Design/homeDesign.css" text="SIGN OUT" textFill="WHITE">
                      <font>
                         <Font name="Chalkboard Bold" size="16.0" />
                      </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="SIGN_OUT" size="2em" text="" wrappingWidth="33.21428680419922" />
+                     </graphic>
                   </Button>
-                  <FontAwesomeIcon fill="WHITE" glyphName="SIGN_OUT" layoutX="8.0" layoutY="33.0" size="2em" text="" wrappingWidth="33.21428680419922" />
+                  <Button fx:id="sync_btn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleSyncButtonAction" prefHeight="50.0" prefWidth="51.0" styleClass="invisible-bg" stylesheets="@../Design/inventoryDesign.css" textAlignment="CENTER" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIcon fx:id="syncIcon" fill="WHITE" glyphName="REFRESH" size="1.5em" textAlignment="CENTER" />
+                     </graphic>
+                     <font>
+                        <Font name="Chalkboard Bold" size="19.0" />
+                     </font>
+                  </Button>
                </children>
-               <styleClass>
-                  <String fx:value="trans-bg" />
-                  <String fx:value="function" />
-                  <String fx:value="signout-panel" />
-               </styleClass>
-            </AnchorPane>
+            </HBox>
          </children>
          <effect>
             <DropShadow />
@@ -116,13 +121,5 @@
             <AnchorPane fx:id="profileScreen" layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="1020.0" />
          </children>
       </StackPane>
-      <Button fx:id="sync_btn" alignment="CENTER" graphicTextGap="15.0" layoutX="280.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleSyncButtonAction" prefHeight="54.0" prefWidth="33.0" styleClass="gradient-bg" stylesheets="@../Design/inventoryDesign.css" textAlignment="RIGHT" textFill="WHITE" AnchorPane.rightAnchor="320.0" AnchorPane.topAnchor="10.0">
-         <font>
-            <Font name="Chalkboard Bold" size="19.0" />
-         </font>
-         <graphic>
-            <FontAwesomeIcon fx:id="syncIcon" fill="WHITE" glyphName="REFRESH" size="2em" textAlignment="CENTER" />
-         </graphic>
-      </Button>
    </children>
 </AnchorPane>

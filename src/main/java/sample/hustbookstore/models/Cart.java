@@ -37,13 +37,6 @@ public class Cart {
         listener = cartListener;
     }
 
-    private static void notifyCartUpdated() {
-        if (listener != null) {
-            Platform.runLater(listener::onCartUpdated);
-        }
-    }
-
-
     public static Cart getCartFromDatabase(int user_id) {
         Cart cart;
 
@@ -122,7 +115,6 @@ public class Cart {
 
             // GỌI LISTENER SAU KHI THÀNH CÔNG
             if (success && listener != null) {
-//                listener.onCartUpdated();
                 Platform.runLater(listener::onCartUpdated);
             }
 
