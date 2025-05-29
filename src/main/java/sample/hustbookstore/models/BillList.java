@@ -226,76 +226,6 @@ public class BillList {
         return bills;
     }
 
-    //Cho recommend
-//    public ObservableList<Book> getRecommendationBooks() {
-//        ObservableList<Book> sampleBooks = FXCollections.observableArrayList();
-//        ObservableList<Book> compareBooks = FXCollections.observableArrayList();
-//        ObservableList<Book> recommendationBooks = FXCollections.observableArrayList();
-//
-//        //Cho recommend
-//        int localID = localUser.getUserId();
-//
-//        // Viết lại sql
-//        String query = """
-//        SELECT DISTINCT
-//            p.product_id,
-//            p.name,
-//            p.description,
-//            p.genre,
-//            p.author,
-//            b.user_id
-//        FROM product p
-//        LEFT JOIN bill_item bi ON p.product_id = bi.product_id
-//        LEFT JOIN bill b ON bi.bill_id = b.bill_id
-//        WHERE p.type = 'Book';
-//    """;
-//
-//        try (PreparedStatement statement = connect.prepareStatement(query)) {
-//            statement.setInt(1, localUser.getUserId());
-//
-//            try (ResultSet resultSet = statement.executeQuery()) {
-//                while (resultSet.next()) {
-//                    Book book = new Book(
-//                        resultSet.getString("product_id"),
-//                        resultSet.getString("name"),
-//                        resultSet.getString("description"),
-//                        resultSet.getString("genre"),
-//                        resultSet.getString("author")
-//                    );
-//
-//                    if (resultSet.getInt("user_id") == localID) {
-//                        sampleBooks.add(book);
-//                    } else {
-//                        compareBooks.add(book);
-//                    }
-//                }
-//            }
-//        } catch (Exception e) {
-//            System.err.println("Error loading recommendation books: " + e.getMessage());
-//            e.printStackTrace();
-//        }
-//
-//        StringBuilder rawData = new StringBuilder();
-//
-//        for (Book book : sampleBooks) {
-//            rawData.append(book.getcombinedText()).append(" ");
-//        }
-
-        // WIP
-//        // Static method, trong homescreen gọi trong initialize
-//        BookIndexer indexer = new BookIndexer();
-//        indexer.indexBooks(bookList); // Chạy một lần để tạo chỉ mục,
-//
-//// Gợi ý sách dựa trên một sách cụ thể
-//        BookRecommender recommender = new BookRecommender();
-//        String processedQuery = VietnameseTextProcessor.tokenize("Dế Mèn phiêu lưu ký Tô Hoài Thiếu nhi ..."); // đã tách từ
-//        recommender.searchSimilarBooks(processedQuery, 5);
-
-
-//        return recommendationBooks;
-//    }
-
-
     public ObservableList<Book> getTrendingBooks() {
         ObservableList<Book> trendingBooks = FXCollections.observableArrayList();
         String query = """
@@ -367,7 +297,7 @@ public class BillList {
 
         String sql = "SELECT p.product_id, p.isbn, p.image, p.name, p.author, p.genre, p.description, p.sell_price "
                 + "FROM bill_item bi JOIN bill b ON bi.bill_id = b.bill_id JOIN product p ON bi.product_id = p.product_id "
-                + "WHERE b.user_id = ?";
+                + "WHERE p.type = 'Book' AND b.user_id = ? ORDER BY b.purchase_date DESC LIMIT 5";
 
         try (PreparedStatement stmt = connect.prepareStatement(sql)) {
             stmt.setInt(1, localUser.getUserId());
@@ -393,8 +323,6 @@ public class BillList {
 
         BookRecommender recommender = new BookRecommender();
         ObservableList<Book> recommendbooks = recommender.searchSimilarBooks(sb.toString(),5);
-        //Book book = new Book("bruh76", "Re: Zero - Bắt Đầu Lại Ở Thế Giới Khác - 2", "Re Zero tập 2", "Adventure, Dark Fantasy, Drama, Light Novel, Psychological, Romance", "Tappei Nagatsuki");
-        //recommender.searchSimilarBooks(book.getcombinedText(),3);
 
         return recommendbooks;
     }
