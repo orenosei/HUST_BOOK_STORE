@@ -21,7 +21,7 @@
             <Button fx:id="sendButton" layoutX="236.0" layoutY="16.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="47.0" styleClass="button" stylesheets="@../Design/aryaDesign.css" text="🐧" />
          </children>
       </AnchorPane>
-      <ScrollPane fitToWidth="true" layoutX="16.0" layoutY="70.0" prefHeight="559.0" prefWidth="276.0">
+      <ScrollPane fx:id="scrollPane" fitToWidth="true" layoutX="16.0" layoutY="70.0" prefHeight="559.0" prefWidth="276.0">
          <content>
             <VBox fx:id="chatArea2" prefWidth="258.0" spacing="8.0" />
          </content>

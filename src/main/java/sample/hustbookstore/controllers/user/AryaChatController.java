@@ -1,17 +1,16 @@
 package sample.hustbookstore.controllers.user;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.util.Duration;
 import org.cloudinary.json.JSONObject;
 import sample.hustbookstore.models.Book;
 
@@ -27,6 +26,7 @@ public class AryaChatController {
     @FXML private TextArea inputField;
     @FXML private Button sendButton;
     @FXML private VBox chatArea2;
+    @FXML private ScrollPane scrollPane;
 
     @FXML
     private void handleEnterKey(KeyEvent event) {
@@ -44,6 +44,10 @@ public class AryaChatController {
         sendAndReceiveMessage(userMessage);
     }
     private void sendAndReceiveMessage(String message) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Only answer the below question in plain text.\n");
+        builder.append(message);
+        message = builder.toString();
         String requestBody = new JSONObject()
                 .put("contents", new JSONObject[]{
                         new JSONObject()
@@ -98,6 +102,10 @@ public class AryaChatController {
         wrapper.setAlignment(isUser ? Pos.CENTER_RIGHT : Pos.CENTER_LEFT);
         wrapper.setPadding(new Insets(2, 10, 2, 10));
         chatArea2.getChildren().add(wrapper);
+
+        PauseTransition delay = new PauseTransition(Duration.millis(50));
+        delay.setOnFinished(event -> scrollPane.setVvalue(scrollPane.getVmax()));
+        delay.play();
     }
 
     private void askAi(Book book) {
