@@ -20,6 +20,7 @@ import sample.hustbookstore.models.Book;
 import sample.hustbookstore.models.Product;
 import sample.hustbookstore.models.Stationery;
 import sample.hustbookstore.models.Toy;
+import sample.hustbookstore.utils.CloudinaryService;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -138,21 +139,22 @@ public class UserStoreProductCardController implements Initializable {
 
             currenttype = 3;
         }
-        try {
-            if (imagePath != null && !imagePath.isEmpty()) {
-                URL imageUrl = new URL(imagePath);
-                image = new Image(imageUrl.toExternalForm(), 100, 160, true, true);
-            } else {
-                image = new Image(getClass().getResource("/sample/hustbookstore/img/notfound.jpg").toExternalForm(), 100, 160, true, true);
-            }
-        } catch (MalformedURLException e) {
-            URL resourceUrl = getClass().getResource("/" + imagePath);
-            if (resourceUrl != null) {
-                image = new Image(resourceUrl.toExternalForm(), 100, 160, true, true);
-            } else {
-                image = new Image(getClass().getResource("/sample/hustbookstore/img/notfound.jpg").toExternalForm(), 100, 160, true, true);
-            }
-        }
+//        try {
+//            if (imagePath != null && !imagePath.isEmpty()) {
+//                URL imageUrl = new URL(imagePath);
+//                image = new Image(imageUrl.toExternalForm(), 100, 160, true, true);
+//            } else {
+//                image = new Image(getClass().getResource("/sample/hustbookstore/img/notfound.jpg").toExternalForm(), 100, 160, true, true);
+//            }
+//        } catch (MalformedURLException e) {
+//            URL resourceUrl = getClass().getResource("/" + imagePath);
+//            if (resourceUrl != null) {
+//                image = new Image(resourceUrl.toExternalForm(), 100, 160, true, true);
+//            } else {
+//                image = new Image(getClass().getResource("/sample/hustbookstore/img/notfound.jpg").toExternalForm(), 100, 160, true, true);
+//            }
+//        }
+        Image image = CloudinaryService.loadImage(imagePath);
 
         productImage.setImage(image);
     }
