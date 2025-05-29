@@ -114,6 +114,7 @@ public class UserStoreController{
         return "/sample/hustbookstore/user/arya-chat.fxml";
     }
 
+    public static AryaChatController arya;
 
     protected String getProductCardPath() {
         return "/sample/hustbookstore/user/user-productCard-view.fxml";
