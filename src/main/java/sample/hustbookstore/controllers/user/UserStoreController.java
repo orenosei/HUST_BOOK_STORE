@@ -114,7 +114,7 @@ public class UserStoreController{
         return "/sample/hustbookstore/user/arya-chat.fxml";
     }
 
-    public static AryaChatController arya;
+    public static AryaChatController arya = new AryaChatController();
 
     protected String getProductCardPath() {
         return "/sample/hustbookstore/user/user-productCard-view.fxml";
@@ -126,6 +126,7 @@ public class UserStoreController{
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource(getRightPanelPath()));
             AnchorPane pane = loader.load();
+            arya = loader.getController();
             rightPane.getChildren().setAll(pane);
         } catch (Exception e) {
             e.printStackTrace();
