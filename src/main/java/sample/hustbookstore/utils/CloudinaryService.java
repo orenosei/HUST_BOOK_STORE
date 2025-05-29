@@ -40,7 +40,7 @@ public class CloudinaryService {
                 ));
             }
         } catch (Exception e) {
-            System.err.println("Lỗi khởi tạo CloudinaryService: " + e.getMessage());
+            System.err.println("CloudinaryService not initialized: " + e.getMessage());
         }
     }
 
