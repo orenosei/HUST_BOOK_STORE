@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="550.0" prefWidth="780.0" styleClass="trans-bg" stylesheets="@../Design/dashboardDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.user.UserRecommendCardController">
+    <children>
+        <ImageView fx:id="imageField" fitHeight="530.0" fitWidth="366.0" layoutX="39.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <image>
+                <Image url="@../img/notfound.jpg" />
+            </image>
+        </ImageView>
+        <TextArea fx:id="nameField" layoutX="448.0" layoutY="53.0" prefHeight="224.0" prefWidth="370.0" styleClass="text-box-3" stylesheets="@../Design/inventoryDesign.css" text="Arya bàn bên thỉnh thoảng lại trêu ghẹo tôi bằng tiếng Nga" wrapText="true" AnchorPane.bottomAnchor="316.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="10.0">
+            <font>
+                <Font name="System Bold Italic" size="36.0" />
+            </font>
+            <effect>
+                <DropShadow blurType="TWO_PASS_BOX" height="15.0" radius="7.0" spread="0.68" width="15.0">
+                    <input>
+                        <DropShadow>
+                            <color>
+                                <Color red="0.2631579041481018" green="0.2631579041481018" blue="0.2631579041481018" />
+                            </color></DropShadow>
+                    </input>
+                    <color>
+                        <Color green="0.6225889325141907" blue="1.0" />
+                    </color>
+                </DropShadow>
+            </effect>
+        </TextArea>
+        <GridPane hgap="30.0" layoutX="411.0" layoutY="264.0" prefHeight="187.0" prefWidth="343.0" vgap="10.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.19996337890625" minWidth="10.0" prefWidth="107.8" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.799951171875" minWidth="10.0" prefWidth="204.59999999999997" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label text="ISBN:" textFill="#1aa7f6">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font></Label>
+                <Label text="Author:" textFill="#1aa7f6" GridPane.rowIndex="1">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font></Label>
+                <Label text="Genre:" textFill="#1aa7f6" GridPane.rowIndex="2">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font></Label>
+                <Label text="Description:" textFill="#1aa7f6" GridPane.rowIndex="3">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font></Label>
+                <TextField fx:id="isbnField" styleClass="text-box-2" stylesheets="@../Design/inventoryDesign.css" text="978-604-2-37405-7" GridPane.columnIndex="1">
+                    <font>
+                        <Font size="18.0" />
+                    </font></TextField>
+                <TextField fx:id="authorField" styleClass="text-box-2" stylesheets="@../Design/inventoryDesign.css" text="Momoco" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="18.0" />
+                    </font></TextField>
+                <TextField fx:id="genreField" styleClass="text-box-2" stylesheets="@../Design/inventoryDesign.css" text="Romcom" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="18.0" />
+                    </font></TextField>
+                <TextArea fx:id="descriptionField" prefHeight="117.0" prefWidth="249.0" styleClass="text-box-2" stylesheets="@../Design/inventoryDesign.css" text="Arya bàn bên thỉnh thoảng lại trêu gheo tôi bằng tiếng nga" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <font>
+                        <Font size="18.0" />
+                    </font></TextArea>
+            </children>
+        </GridPane>
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="411.0" layoutY="472.0" prefHeight="67.0" prefWidth="110.0" text="Price:" textFill="#1aa7f6">
+            <font>
+                <Font name="System Bold Italic" size="34.0" />
+            </font>
+        </Label>
+        <Label layoutX="678.0" layoutY="499.0" text="VND" textFill="#4dacff">
+            <font>
+                <Font name="System Italic" size="19.0" />
+            </font>
+        </Label>
+        <Text fx:id="priceField" fill="WHITE" layoutX="499.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="90000" textAlignment="RIGHT" wrappingWidth="171.58984375">
+            <font>
+                <Font name="System Bold Italic" size="37.0" />
+            </font>
+            <effect>
+                <DropShadow spread="0.68">
+                    <input>
+                        <DropShadow />
+                    </input>
+                    <color>
+                        <Color red="0.3019607961177826" green="0.6745098233222961" blue="1.0" />
+                    </color>
+                </DropShadow>
+            </effect>
+        </Text>
+    </children>
+</AnchorPane>

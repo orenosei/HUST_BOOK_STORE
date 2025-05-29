@@ -32,6 +32,16 @@ public class Book extends Product
         this.genre = genre;
     }
 
+    //Cho recommend
+    public Book(String ID, String isbn, String image, String name, String author, String genre, String description, Double price) {
+        super(ID, name, description);
+        this.isbn = isbn;
+        this.genre = genre;
+        this.author = author;
+        this.sellPrice = price;
+        this.image = image;
+    }
+
     public String getIsbn() {
         return isbn;
     }

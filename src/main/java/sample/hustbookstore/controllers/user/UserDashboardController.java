@@ -41,44 +41,59 @@ public class UserDashboardController {
     private AnchorPane recommendationPane;
 
     @FXML
-    private Button recommendationLeftBtn;
+    private Button recommendLeftBtn;
 
     @FXML
-    private Button recommendationRightBtn;
+    private Button recommendRightBtn;
 
     @FXML
-    private StackPane recommendationStackPane;
+    private StackPane recommendStackPane;
 
     private List<Book> trendingBooks;
-    private List<Book> recommendationBooks;
+    private List<Book> recommendBooks;
 
-    private List<Node> cardNodes = new ArrayList<>();
-    private int currentIndex = 0;
+    private List<Node> cardNodesTrending = new ArrayList<>();
+    private List<Node> cardNodesRecommend = new ArrayList<>();
+    private int currentIndexTrending = 0;
+    private int currentIndexRecommend = 0;
 
-    private Timeline autoSlideTimeline;
-    private final long SLIDE_INTERVAL = 4000;
+    private Timeline autoSlideTimelineTrending;
+    private Timeline autoSlideTimelineRecommend;
+    private final long SLIDE_INTERVAL_TRENDING = 4000;
+    private final long SLIDE_INTERVAL_RECOMMEND = 4000;
 
     @FXML
     public void initialize() throws Exception {
         setupStackPaneClip();
         loadTrendingBooks();
-        initializeCards();
-        setupAutoSlide();
-        ObservableList<Book> AllBook = localInventory.getAllBooks();
-        BookIndexer indexer = new BookIndexer();
-        indexer.indexBooks(AllBook);
-        BookRecommender recommender = new BookRecommender();
-        Book book = new Book("bruh76", "Re: Zero - Bắt Đầu Lại Ở Thế Giới Khác - 2", "Re Zero tập 2", "Adventure, Dark Fantasy, Drama, Light Novel, Psychological, Romance", "Tappei Nagatsuki");
-        recommender.searchSimilarBooks(book.getcombinedText(),3);
+        loadRecommendBooks();
+        initializeTrendingCards();
+        initializeRecommendCards();
+        setupAutoSlideTrending();
+        setupAutoSlideRecommend();
     }
+
+//    private void loadRecommendBooks() throws Exception {
+//        ObservableList<Book> AllBook = localInventory.getAllBooks();
+//        BookIndexer indexer = new BookIndexer();
+//        indexer.indexBooks(AllBook);
+//        BookRecommender recommender = new BookRecommender();
+//        Book book = new Book("bruh76", "Re: Zero - Bắt Đầu Lại Ở Thế Giới Khác - 2", "Re Zero tập 2", "Adventure, Dark Fantasy, Drama, Light Novel, Psychological, Romance", "Tappei Nagatsuki");
+//        recommender.searchSimilarBooks(book.getcombinedText(),3);
+//    }
 
     private void loadTrendingBooks() {
         BillList billList = new BillList();
         trendingBooks =  billList.getTrendingBooks();
     }
 
-    private void initializeCards() {
-        cardNodes.clear();
+    private void loadRecommendBooks() throws Exception {
+        BillList billList = new BillList();
+        recommendBooks = billList.getRecommendBooks();
+    }
+
+    private void initializeTrendingCards() {
+        cardNodesTrending.clear();
         trendingStackPane.getChildren().clear();
 
         try {
@@ -87,11 +102,32 @@ public class UserDashboardController {
                 Node card = loader.load();
                 UserTrendingCardController controller = loader.getController();
                 controller.setData(book);
-                cardNodes.add(card);
+                cardNodesTrending.add(card);
             }
 
-            if (!cardNodes.isEmpty()) {
-                trendingStackPane.getChildren().add(cardNodes.get(currentIndex));
+            if (!cardNodesTrending.isEmpty()) {
+                trendingStackPane.getChildren().add(cardNodesTrending.get(currentIndexTrending));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initializeRecommendCards() {
+        cardNodesRecommend.clear();
+        recommendStackPane.getChildren().clear();
+
+        try {
+            for (Book book : recommendBooks) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/hustbookstore/user/user-recommendCard.fxml"));
+                Node card = loader.load();
+                UserRecommendCardController controller = loader.getController();
+                controller.setData(book);
+                cardNodesRecommend.add(card);
+            }
+
+            if (!cardNodesRecommend.isEmpty()) {
+                recommendStackPane.getChildren().add(cardNodesRecommend.get(currentIndexRecommend));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -108,11 +144,11 @@ public class UserDashboardController {
         trendingStackPane.setClip(clip);
     }
 
-    private void slideCards(double distance) {
-        autoSlideTimeline.pause();
+    private void slideCardsTrending(double distance) {
+        autoSlideTimelineTrending.pause();
 
         Node currentCard = trendingStackPane.getChildren().get(0);
-        Node newCard = cardNodes.get(currentIndex);
+        Node newCard = cardNodesTrending.get(currentIndexTrending);
         MotionBlur blur = new MotionBlur();
         blur.setRadius(15);
 
@@ -138,45 +174,102 @@ public class UserDashboardController {
             trendingRightBtn.setDisable(false);
             newCard.setEffect(null);
 
-            autoSlideTimeline.playFromStart();
+            autoSlideTimelineTrending.playFromStart();
         });
 
         currentTransition.play();
         newTransition.play();
     }
 
-    private void setupAutoSlide() {
-        autoSlideTimeline = new Timeline(
-                new KeyFrame(Duration.millis(SLIDE_INTERVAL), e -> {
-                    if (!cardNodes.isEmpty()) {
-                        currentIndex = (currentIndex + 1) % cardNodes.size();
-                        slideCards(1100);
+    private void slideCardsRecommend(double distance) {
+        autoSlideTimelineRecommend.pause();
+
+        Node currentCard = recommendStackPane.getChildren().get(0);
+        Node newCard = cardNodesRecommend.get(currentIndexRecommend);
+        MotionBlur blur = new MotionBlur();
+        blur.setRadius(15);
+
+        currentCard.setEffect(blur);
+        newCard.setEffect(blur);
+
+        newCard.setTranslateX(distance);
+        recommendStackPane.getChildren().add(newCard);
+
+        TranslateTransition currentTransition = new TranslateTransition(Duration.millis(700), currentCard);
+        currentTransition.setByX(-distance);
+
+        TranslateTransition newTransition = new TranslateTransition(Duration.millis(700), newCard);
+        newTransition.setFromX(distance);
+        newTransition.setToX(0);
+
+        recommendLeftBtn.setDisable(true);
+        recommendRightBtn.setDisable(true);
+
+        newTransition.setOnFinished(e -> {
+            recommendStackPane.getChildren().remove(currentCard);
+            recommendLeftBtn.setDisable(false);
+            recommendRightBtn.setDisable(false);
+            newCard.setEffect(null);
+
+            autoSlideTimelineRecommend.playFromStart();
+        });
+
+        currentTransition.play();
+        newTransition.play();
+    }
+
+    private void setupAutoSlideTrending() {
+        autoSlideTimelineTrending = new Timeline(
+                new KeyFrame(Duration.millis(SLIDE_INTERVAL_TRENDING), e -> {
+                    if (!cardNodesTrending.isEmpty()) {
+                        currentIndexTrending = (currentIndexTrending + 1) % cardNodesTrending.size();
+                        slideCardsTrending(1100);
                     }
                 }));
-        autoSlideTimeline.setCycleCount(Timeline.INDEFINITE);
-        autoSlideTimeline.play();
+        autoSlideTimelineTrending.setCycleCount(Timeline.INDEFINITE);
+        autoSlideTimelineTrending.play();
+    }
+
+    private void setupAutoSlideRecommend() {
+        autoSlideTimelineRecommend = new Timeline(
+                new KeyFrame(Duration.millis(SLIDE_INTERVAL_RECOMMEND), e -> {
+                    if (!cardNodesRecommend.isEmpty()) {
+                        currentIndexRecommend = (currentIndexRecommend + 1) % cardNodesRecommend.size();
+                        slideCardsRecommend(1100);
+                    }
+                }));
+        autoSlideTimelineRecommend.setCycleCount(Timeline.INDEFINITE);
+        autoSlideTimelineRecommend.play();
     }
 
     @FXML
     private void handleTrendingLeftBtn() {
-        if (cardNodes.isEmpty() || trendingLeftBtn.isDisabled()) return;
-        currentIndex = (currentIndex - 1 + cardNodes.size()) % cardNodes.size();
-        slideCards(-1100);
+        if (cardNodesTrending.isEmpty() || trendingLeftBtn.isDisabled()) return;
+        currentIndexTrending = (currentIndexTrending - 1 + cardNodesTrending.size()) % cardNodesTrending.size();
+        slideCardsTrending(-1100);
     }
 
     @FXML
     private void handleTrendingRightBtn() {
-        if (cardNodes.isEmpty() || trendingRightBtn.isDisabled()) return;
-        currentIndex = (currentIndex + 1) % cardNodes.size();
-        slideCards(1100);
+        if (cardNodesTrending.isEmpty() || trendingRightBtn.isDisabled()) return;
+        currentIndexTrending = (currentIndexTrending + 1) % cardNodesTrending.size();
+        slideCardsTrending(1100);
     }
 
-    public void handleRecommendationLeftBtn() {
+    @FXML
+    private void handleRecommendLeftBtn() {
+        if (cardNodesRecommend.isEmpty() || recommendLeftBtn.isDisabled()) return;
+        currentIndexRecommend = (currentIndexRecommend - 1 + cardNodesRecommend.size()) % cardNodesRecommend.size();
+        slideCardsRecommend(-1100);
     }
 
-    public void handleRecommendationRightBtn() {
-
+    @FXML
+    private void handleRecommendRightBtn() {
+        if (cardNodesRecommend.isEmpty() || recommendRightBtn.isDisabled()) return;
+        currentIndexRecommend = (currentIndexRecommend + 1) % cardNodesRecommend.size();
+        slideCardsRecommend(1100);
     }
+
 
     // // todo: Recommendation
     // Cho recommend
