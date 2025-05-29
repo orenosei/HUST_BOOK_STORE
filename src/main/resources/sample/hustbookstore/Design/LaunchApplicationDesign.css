@@ -46,9 +46,9 @@
 }
 
 .returnbtn{
-    -fx-background-color: #c7abdf;
+    -fx-background-color: #c4b1db;
 }
 
 .returnbtn:hover{
-    -fx-background-color: #b699d1;
+    -fx-background-color: #bda2d4;
 }

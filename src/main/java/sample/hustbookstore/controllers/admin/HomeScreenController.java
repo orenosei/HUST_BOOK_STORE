@@ -69,7 +69,7 @@ public class HomeScreenController extends BaseHomeScreenController implements In
                 localInventoryController = loader.getController();
             }
 
-            localInventoryController.setHomeScreenController(this);
+           // localInventoryController.setHomeScreenController(this);
             InventoryController.setStoreUpdateListener(this);
 
             inventoryScreen.getChildren().clear();
@@ -189,7 +189,7 @@ public class HomeScreenController extends BaseHomeScreenController implements In
         }
     }
 
-    @FXML
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
         InventoryController.setStoreUpdateListener(this);
         displayUsername();

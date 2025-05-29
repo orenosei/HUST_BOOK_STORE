@@ -18,9 +18,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import sample.hustbookstore.controllers.admin.InventoryController;
-import sample.hustbookstore.controllers.admin.StoreUpdateListener;
-
 import java.util.Optional;
 import static sample.hustbookstore.LaunchApplication.localInventoryController;
 
@@ -165,11 +162,6 @@ public abstract class BaseHomeScreenController implements Initializable{
         TranslateTransition tt = new TranslateTransition(Duration.seconds(0.5), headerPane);
         tt.setToY(-10);
         tt.play();
-    }
-
-    @FXML
-    public void initialize() {
-
     }
 
 }
