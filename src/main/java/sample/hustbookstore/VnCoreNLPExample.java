@@ -2,8 +2,10 @@ package sample.hustbookstore;
 
 import javafx.collections.ObservableList;
 import sample.hustbookstore.models.*;
-import vn.pipeline.*;
-import java.io.*;
+import sample.hustbookstore.utils.BookIndexer;
+import sample.hustbookstore.utils.BookProcessor;
+import sample.hustbookstore.utils.BookRecommender;
+
 import java.sql.Connection;
 
 import static sample.hustbookstore.LaunchApplication.localInventory;

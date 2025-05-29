@@ -32,6 +32,8 @@ module sample.hustbookstore {
     opens sample.hustbookstore.controllers.admin to javafx.fxml;
     exports sample.hustbookstore.controllers.user;
     opens sample.hustbookstore.controllers.user to javafx.fxml;
+    exports sample.hustbookstore.controllers.base;
+    opens sample.hustbookstore.controllers.base to javafx.fxml;
     exports sample.hustbookstore.models.address;
 
 }

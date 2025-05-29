@@ -3,6 +3,8 @@ package sample.hustbookstore.models;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
+import sample.hustbookstore.utils.BookIndexer;
+import sample.hustbookstore.utils.BookRecommender;
 
 import java.sql.*;
 import java.time.LocalDate;
