@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
@@ -20,7 +21,7 @@
     <children>
         <AnchorPane prefHeight="720.0" prefWidth="1280.0" styleClass="white-form" stylesheets="@../Design/LaunchApplicationDesign.css">
             <children>
-                <AnchorPane fx:id="si_loginForm" layoutX="640.0" prefHeight="720.0" prefWidth="640.0">
+                <AnchorPane fx:id="si_loginForm" layoutX="640.0" prefHeight="720.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <FontAwesomeIcon glyphName="USER" layoutX="272.0" layoutY="220.0" size="10em" styleClass="gradient">
                             <fill>
@@ -40,7 +41,7 @@
                                 </LinearGradient>
                             </fill>
                         </FontAwesomeIcon>
-                        <Label layoutX="261.0" layoutY="252.0" text="LOGIN" textFill="#9178d1">
+                        <Label layoutX="197.0" layoutY="253.0" text="ADMIN LOGIN" textFill="#9178d1">
                             <font>
                                 <Font size="40.0" />
                             </font>
@@ -61,7 +62,7 @@
                         </Hyperlink>
                     </children>
                 </AnchorPane>
-                <AnchorPane fx:id="su_signupForm" prefHeight="720.0" prefWidth="640.0">
+                <AnchorPane fx:id="su_signupForm" prefHeight="720.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <FontAwesomeIcon glyphName="USER" layoutX="274.0" layoutY="112.0" size="10em" styleClass="gradient">
                             <fill>
@@ -110,7 +111,7 @@
                         </PasswordField>
                     </children>
                 </AnchorPane>
-            <AnchorPane fx:id="fp_questionForm" layoutX="639.0" layoutY="9.0" prefHeight="720.0" prefWidth="640.0" visible="false">
+            <AnchorPane fx:id="fp_questionForm" layoutX="639.0" layoutY="9.0" prefHeight="720.0" prefWidth="640.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <FontAwesomeIcon glyphName="USER" layoutX="272.0" layoutY="220.0" size="10em" styleClass="gradient">
                      <fill>
@@ -157,7 +158,7 @@
                   </TextField>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="np_newPassForm" layoutX="635.0" layoutY="9.0" prefHeight="720.0" prefWidth="640.0" visible="false">
+            <AnchorPane fx:id="np_newPassForm" layoutX="635.0" layoutY="9.0" prefHeight="720.0" prefWidth="640.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <FontAwesomeIcon glyphName="EDIT" layoutX="272.0" layoutY="220.0" size="10em" styleClass="gradient">
                      <fill>
@@ -203,7 +204,7 @@
                   </PasswordField>
                </children>
             </AnchorPane>
-                <AnchorPane fx:id="side_form" prefHeight="720.0" prefWidth="640.0" styleClass="gradient" stylesheets="@../Design/LaunchApplicationDesign.css">
+                <AnchorPane fx:id="side_form" prefHeight="720.0" prefWidth="640.0" styleClass="gradient" stylesheets="@../Design/LaunchApplicationDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <FontAwesomeIcon fill="WHITE" glyphName="BOOK" layoutX="206.0" layoutY="341.0" size="20em" />
                         <Button fx:id="side_CreateBtn" layoutX="174.0" layoutY="627.0" minHeight="50.0" mnemonicParsing="false" onAction="#switchForm" prefWidth="300.0" styleClass="create-btn" stylesheets="@../Design/LaunchApplicationDesign.css" text="Create new account">
@@ -271,5 +272,13 @@
             </Text>
          </children>
       </AnchorPane>
+      <Button fx:id="returnBtn" alignment="CENTER" contentDisplay="RIGHT" layoutX="10.0" mnemonicParsing="false" onAction="#handleReturnButton" prefHeight="48.0" prefWidth="55.0" styleClass="returnbtn" stylesheets="@../Design/LaunchApplicationDesign.css" textFill="WHITE" StackPane.alignment="BOTTOM_LEFT">
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="REPLY" size="3em" />
+         </graphic>
+         <StackPane.margin>
+            <Insets bottom="10.0" left="10.0" />
+         </StackPane.margin>
+      </Button>
     </children>
 </StackPane>
