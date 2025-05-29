@@ -115,7 +115,7 @@ public class UserHomeScreenController extends BaseHomeScreenController implement
 
     }
 
-    @FXML
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
         displayUsername();
         loadDashboard();
