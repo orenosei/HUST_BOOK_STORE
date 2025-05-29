@@ -1,5 +1,6 @@
 package sample.hustbookstore.controllers.admin;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import javafx.scene.control.*;
 import sample.hustbookstore.controllers.base.BaseLoginController;
 import sample.hustbookstore.models.Admin;
@@ -21,13 +22,16 @@ public class LoginController extends BaseLoginController {
 
     @Override
     public void regBtn() {
+        Dotenv dotenv = Dotenv.load();
+        String adminKey = dotenv.get("ADMIN_KEY");
+
         if (su_username.getText().isEmpty() || su_password.getText().isEmpty() ||
                 su_question.getSelectionModel().isEmpty() || su_answer.getText().isEmpty() ||
                 su_privacycode.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Please fill all the fields");
         } else if (adminList.isUsernameTaken(su_username.getText())) {
             showAlert(Alert.AlertType.ERROR, su_username.getText() + " is already taken");
-        } else if (!su_privacycode.getText().equals("abc123")) {
+        } else if (!su_privacycode.getText().equals(adminKey)) {
             showAlert(Alert.AlertType.ERROR, "Privacy code is incorrect");
         } else {
             Admin newAdmin = new Admin(

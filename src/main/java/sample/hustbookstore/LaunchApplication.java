@@ -33,6 +33,8 @@ public class LaunchApplication extends Application {
     @FXML
     private Button user_btn;
 
+    public static Scene welcomeScene;
+
     public static Admin localAdmin = new Admin();
 
     public static User localUser = new User();
@@ -98,6 +100,7 @@ public class LaunchApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 640, 720);
         stage.setTitle("HUST Book Store");
 
+        welcomeScene = scene;
         Image image = new Image(getClass().getResourceAsStream("/sample/hustbookstore/img/logo_meow.png"));
 
         stage.getIcons().add(image);

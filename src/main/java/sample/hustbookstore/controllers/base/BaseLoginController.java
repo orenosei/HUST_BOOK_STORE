@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import sample.hustbookstore.LaunchApplication;
 
 import java.io.IOException;
 
@@ -44,6 +45,8 @@ public abstract class BaseLoginController {
     @FXML protected Button side_alreadyHave;
     @FXML protected PasswordField su_privacycode;
     @FXML protected AnchorPane waitingScreen;
+    @FXML
+    protected Button returnBtn;
 
     protected Alert alert;
     protected final String[] questionList = {
@@ -156,6 +159,13 @@ public abstract class BaseLoginController {
         });
 
         new Thread(loadTask).start();
+    }
+
+    @FXML
+    protected void handleReturnButton(ActionEvent event) {
+        Stage stage = (Stage) returnBtn.getScene().getWindow();
+        stage.setScene(LaunchApplication.welcomeScene);
+        stage.centerOnScreen();
     }
 
     protected abstract void loginBtn();

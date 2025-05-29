@@ -13,6 +13,7 @@
     -fx-cursor: hand;
     -fx-text-fill: #fff;
     -fx-font-size: 14px;
+    -fx-border-radius: 5px;
 
 }
 .login-btn:hover{
@@ -23,6 +24,7 @@
     -fx-cursor: hand;
     -fx-text-fill: #fff;
     -fx-border-color: #fff;
+    -fx-border-radius: 5px;
 //-fx-border-width: 1px;
 }
 .create-btn:hover{
@@ -41,4 +43,12 @@
 }
 .signup-btn:hover{
     -fx-background-color: linear-gradient(to bottom right, #a6cff2, #8463ea);
+}
+
+.returnbtn{
+    -fx-background-color: #c7abdf;
+}
+
+.returnbtn:hover{
+    -fx-background-color: #b699d1;
 }
