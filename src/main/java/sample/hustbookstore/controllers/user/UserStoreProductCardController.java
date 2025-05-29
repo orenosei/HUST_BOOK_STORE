@@ -27,6 +27,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static sample.hustbookstore.LaunchApplication.localCart;
+import static sample.hustbookstore.controllers.user.UserStoreController.arya;
 
 public class UserStoreProductCardController implements Initializable {
 
@@ -113,6 +114,8 @@ public class UserStoreProductCardController implements Initializable {
 
             currenttype = 1;
         } else if (prodData instanceof Stationery){
+            askAIButton.setVisible(false);
+
             Stationery prod_to_stationery = (Stationery) prodData;
             this.stationeryData = prod_to_stationery;
 
@@ -126,6 +129,8 @@ public class UserStoreProductCardController implements Initializable {
 
             currenttype = 2;
         } else {
+            askAIButton.setVisible(false);
+
             Toy prod_to_toy = (Toy) prodData;
             this.toyData = prod_to_toy;
 
@@ -269,11 +274,7 @@ public class UserStoreProductCardController implements Initializable {
 
     @FXML
     private void handleAskAIButtonAction(ActionEvent event) {
-        if (event.getSource() == otherUp_btn) {
-            askedItem = productAddToCart.getID();
-            // To Do
-            // AryaChat.getPromptText(askedItem) {}
-        }
+        arya.askAi((Book) productAddToCart);
     }
 
 

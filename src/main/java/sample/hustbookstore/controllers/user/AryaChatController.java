@@ -95,7 +95,7 @@ public class AryaChatController {
     private void appendMessage(String message, boolean isUser) {
         Label label = new Label(message);
         label.setWrapText(true);
-        label.maxWidthProperty().bind(chatArea2.widthProperty().subtract(30));
+        label.maxWidthProperty().bind(chatArea2.widthProperty().subtract(60));
         label.setStyle("-fx-background-color: " + (isUser ? "#cce5ff" : "#f1f0f0") +
                 "; -fx-padding: 8 12; -fx-background-radius: 10;");
         HBox wrapper = new HBox(label);
@@ -108,7 +108,7 @@ public class AryaChatController {
         delay.play();
     }
 
-    private void askAi(Book book) {
+    public void askAi(Book book) {
         String author = book.getAuthor();
         String name = book.getName();
         StringBuilder builder = new StringBuilder();

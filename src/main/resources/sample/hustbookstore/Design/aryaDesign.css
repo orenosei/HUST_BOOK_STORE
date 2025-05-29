@@ -3,6 +3,7 @@
     -fx-control-inner-background: white;
     -fx-border-color: #0078d7;
     -fx-border-radius: 6;
+    -fx-border-width: 2;
     -fx-background-radius: 6;
     -fx-text-fill: black;
     -fx-prompt-text-fill: #999999;
