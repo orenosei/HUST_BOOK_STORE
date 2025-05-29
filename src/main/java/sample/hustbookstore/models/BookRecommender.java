@@ -46,9 +46,6 @@ public class BookRecommender {
             Book book = new Book(id, isbn, image, title, author, genre, description, price);
             recommendBooks.add(book);
 
-            //float score = scoreDoc.score;
-
-            //System.out.printf("%s - %s - %s - %s - %s - %s - %s (score: %.2f)\n", id, isbn, title, author, genre, description, price, score);
         }
 
         reader.close();

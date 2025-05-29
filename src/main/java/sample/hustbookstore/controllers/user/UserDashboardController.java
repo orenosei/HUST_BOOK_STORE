@@ -73,15 +73,6 @@ public class UserDashboardController {
         setupAutoSlideRecommend();
     }
 
-//    private void loadRecommendBooks() throws Exception {
-//        ObservableList<Book> AllBook = localInventory.getAllBooks();
-//        BookIndexer indexer = new BookIndexer();
-//        indexer.indexBooks(AllBook);
-//        BookRecommender recommender = new BookRecommender();
-//        Book book = new Book("bruh76", "Re: Zero - Bắt Đầu Lại Ở Thế Giới Khác - 2", "Re Zero tập 2", "Adventure, Dark Fantasy, Drama, Light Novel, Psychological, Romance", "Tappei Nagatsuki");
-//        recommender.searchSimilarBooks(book.getcombinedText(),3);
-//    }
-
     private void loadTrendingBooks() {
         BillList billList = new BillList();
         trendingBooks =  billList.getTrendingBooks();
@@ -269,14 +260,5 @@ public class UserDashboardController {
         currentIndexRecommend = (currentIndexRecommend + 1) % cardNodesRecommend.size();
         slideCardsRecommend(1100);
     }
-
-
-    // // todo: Recommendation
-    // Cho recommend
-    //WIP
-//    private void loadRecommendationBooks() {
-//        BillList billList = new BillList();
-//        recommendationBooks =  billList.getRecommendationBooks();
-//    }
 
 }

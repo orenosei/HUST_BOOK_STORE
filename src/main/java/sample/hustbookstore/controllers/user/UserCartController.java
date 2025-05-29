@@ -273,6 +273,17 @@ public class UserCartController implements CartUpdateListener{
             alert.showAndWait();
             return;
         }
+        if (selectedItems == null || selectedItems.isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Items Selected");
+            alert.setHeaderText("Please select an item before ordering!");
+            alert.setContentText("Use the checkbox to select item");
+            alert.showAndWait();
+            return;
+        }
+
+        percent = 0;
 
         // In bill lên màn hình để câu giờ cho các hành động tiếp theo:
         cartPane.setOpacity(0.2);

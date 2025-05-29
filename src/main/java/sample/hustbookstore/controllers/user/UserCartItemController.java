@@ -95,6 +95,20 @@ public class UserCartItemController {
     @FXML
     void handleSelectItem(ActionEvent event) {
         if(event.getSource() == itemCheckBox) {
+            int quantity = itemSpinner.getValue();
+
+            if (quantity == 0) {
+                itemCheckBox.setSelected(false);
+
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Invalid Selection");
+                alert.setHeaderText(null);
+                alert.setContentText("Cannot select this item.");
+                alert.showAndWait();
+
+                return;
+            }
+
             item.setSelected(itemCheckBox.isSelected());
             localCart.updateCartItem(item);
 
