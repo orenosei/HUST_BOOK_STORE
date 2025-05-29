@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import sample.hustbookstore.models.Book;
+import sample.hustbookstore.utils.CloudinaryService;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -45,22 +46,23 @@ public class UserRecommendCardController {
         priceField.setText(book.getSellPrice().toString());
 
         String imagePath = book.getImage();
-        Image image = null;
-        try {
-            if (imagePath != null && !imagePath.isEmpty()) {
-                URL imageUrl = new URL(imagePath);
-                image = new Image(imageUrl.toExternalForm(), 1000, 1600, true, true);
-            } else {
-                image = new Image(getClass().getResource("/sample/hustbookstore/img/notfound.jpg").toExternalForm(), 1000, 1600, true, true);
-            }
-        } catch (MalformedURLException e) {
-            URL resourceUrl = getClass().getResource("/" + imagePath);
-            if (resourceUrl != null) {
-                image = new Image(resourceUrl.toExternalForm(), 1000, 1600, true, true);
-            } else {
-                image = new Image(getClass().getResource("/sample/hustbookstore/img/notfound.jpg").toExternalForm(), 1000, 1600, true, true);
-            }
-        }
+//        Image image = null;
+//        try {
+//            if (imagePath != null && !imagePath.isEmpty()) {
+//                URL imageUrl = new URL(imagePath);
+//                image = new Image(imageUrl.toExternalForm(), 1000, 1600, true, true);
+//            } else {
+//                image = new Image(getClass().getResource("/sample/hustbookstore/img/notfound.jpg").toExternalForm(), 1000, 1600, true, true);
+//            }
+//        } catch (MalformedURLException e) {
+//            URL resourceUrl = getClass().getResource("/" + imagePath);
+//            if (resourceUrl != null) {
+//                image = new Image(resourceUrl.toExternalForm(), 1000, 1600, true, true);
+//            } else {
+//                image = new Image(getClass().getResource("/sample/hustbookstore/img/notfound.jpg").toExternalForm(), 1000, 1600, true, true);
+//            }
+//        }
+        Image image = CloudinaryService.loadImage(imagePath,1000,1600);
         imageField.setImage(image);
     }
 }
