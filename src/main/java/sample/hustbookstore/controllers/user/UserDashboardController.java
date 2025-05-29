@@ -1,30 +1,21 @@
 package sample.hustbookstore.controllers.user;
 
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.effect.MotionBlur;
 import javafx.scene.layout.AnchorPane;
-
 import javafx.scene.layout.StackPane;
-
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import sample.hustbookstore.models.*;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static sample.hustbookstore.LaunchApplication.localInventory;
-
 
 public class UserDashboardController {
 
