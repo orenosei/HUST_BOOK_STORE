@@ -15,7 +15,7 @@ import javafx.stage.FileChooser;
 import org.controlsfx.control.CheckComboBox;
 import sample.hustbookstore.models.Book;
 import sample.hustbookstore.models.Product;
-import sample.hustbookstore.utils.CloudinaryUploader;
+import sample.hustbookstore.utils.CloudinaryService;
 
 import java.io.File;
 import java.sql.Connection;
@@ -294,7 +294,7 @@ public class InventoryController {
     private String currentImageUrl;
 
     public String getImageUrl(File file) throws Exception {
-        CloudinaryUploader uploader = new CloudinaryUploader();
+        CloudinaryService uploader = new CloudinaryService();
         String imageUrl = uploader.uploadImage(file);
         System.out.println("Uploaded Image URL: " + imageUrl);
 
@@ -568,7 +568,8 @@ public class InventoryController {
         imageLoadingTask = new Task<>() {
             @Override
             protected Image call() throws Exception {
-                return new Image(imageUrl, 100, 160, true, true);
+                //return new Image(imageUrl, 100, 160, true, true);
+                return CloudinaryService.loadImage(imageUrl);
             }
         };
         imageLoadingTask.setOnSucceeded(e -> {
