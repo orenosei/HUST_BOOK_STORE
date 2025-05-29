@@ -1,5 +1,7 @@
 package sample.hustbookstore.models;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -19,7 +21,9 @@ public class BookRecommender {
     public BookRecommender() throws IOException {
     }
 
-    public void searchSimilarBooks(String processedQueryText, int topN) throws Exception {
+    public ObservableList<Book> searchSimilarBooks(String processedQueryText, int topN) throws Exception {
+        ObservableList<Book> recommendBooks = FXCollections.observableArrayList();
+
         DirectoryReader reader = DirectoryReader.open(indexDir);
         IndexSearcher searcher = new IndexSearcher(reader);
 
@@ -29,13 +33,25 @@ public class BookRecommender {
         TopDocs results = searcher.search(query, topN);
         for (ScoreDoc scoreDoc : results.scoreDocs) {
             Document doc = searcher.doc(scoreDoc.doc);
+
+            String id = doc.get("id");
+            String isbn = doc.get("isbn");
+            String image = doc.get("image");
             String title = doc.get("name");
             String author = doc.get("author");
-            float score = scoreDoc.score;
+            String genre = doc.get("genre");
+            String description = doc.get("description");
+            Double price = Double.parseDouble(doc.get("price"));
 
-            System.out.printf(" %s - %s (score: %.2f)\n", title, author, score);
+            Book book = new Book(id, isbn, image, title, author, genre, description, price);
+            recommendBooks.add(book);
+
+            //float score = scoreDoc.score;
+
+            //System.out.printf("%s - %s - %s - %s - %s - %s - %s (score: %.2f)\n", id, isbn, title, author, genre, description, price, score);
         }
 
         reader.close();
+        return recommendBooks;
     }
 }

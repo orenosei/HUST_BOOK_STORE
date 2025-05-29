@@ -27,11 +27,13 @@ public class BookIndexer {
             Document doc = new Document();
 
             doc.add(new StringField("id", book.getID(), Field.Store.YES));
+            doc.add(new StringField("isbn", book.getIsbn(), Field.Store.YES));
             doc.add(new StringField("image", book.getImage(), Field.Store.YES));
             doc.add(new TextField("name", book.getName(), Field.Store.YES));
             doc.add(new TextField("author", book.getAuthor(), Field.Store.YES));
             doc.add(new TextField("genre", book.getGenre(), Field.Store.YES));
             doc.add(new TextField("description", book.getDescription(), Field.Store.YES));
+            doc.add(new TextField("price", book.getSellPrice().toString(), Field.Store.YES));
 
             doc.add(new TextField("content", BookProcessor.tokenize(book.getcombinedText()), Field.Store.YES));
 
