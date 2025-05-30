@@ -1,6 +1,5 @@
 package sample.hustbookstore.controllers.admin;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -65,14 +64,9 @@ public class HomeScreenController extends BaseHomeScreenController implements In
 
     public void loadInventory() {
         try {
-            if (localInventoryScreen == null) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(getInventoryPath()));
-                localInventoryScreen = loader.load();
-                localInventoryController = loader.getController();
-            }
-
+            AnchorPane root = FXMLLoader.load(getClass().getResource(getInventoryPath()));
             inventoryScreen.getChildren().clear();
-            inventoryScreen.getChildren().add(localInventoryScreen);
+            inventoryScreen.getChildren().add(root);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -95,20 +89,6 @@ public class HomeScreenController extends BaseHomeScreenController implements In
             othersScreen.getChildren().clear();
             othersScreen.getChildren().add(root);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void loadStore() {
-        try {
-
-            AnchorPane root = localStoreScreen;
-            Platform.runLater(() -> {
-                storeScreen.getChildren().clear();
-                storeScreen.getChildren().add(root);
-            });
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -81,8 +81,6 @@ public class UserStoreProductCardController implements ProductCardSetData {
     private Stationery stationeryData;
     private Toy toyData;
 
-    private Image image;
-
     private SpinnerValueFactory<Integer> spin;
 
     private int currenttype;

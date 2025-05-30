@@ -127,13 +127,13 @@ public class UserCartController implements CartUpdateListener{
     private float percent = 0;
 
     public void showSubTotalValue(){
-        subTotalValue.setText(String.format("%.2f",localCart.calculateTotalPrice(localCart.getCartId())));
-        totalValue.setText(String.format("%.2f",localCart.calculateTotalPrice(localCart.getCartId())*(1-percent)));
+        subTotalValue.setText(String.format("%.2f",localCart.calculateTotalPrice()));
+        totalValue.setText(String.format("%.2f",localCart.calculateTotalPrice()*(1-percent)));
     }
 
     public void display() {
         try {
-            ObservableList<CartItem> itemList = localCart.getCartItemList(localCart.getCartId());
+            ObservableList<CartItem> itemList = localCart.getCartItemList();
             vboxPane.getChildren().clear();
 
             for (CartItem cartItem : itemList) {
@@ -233,7 +233,7 @@ public class UserCartController implements CartUpdateListener{
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            float total = localCart.calculateTotalPrice(localCart.getCartId());
+            float total = localCart.calculateTotalPrice();
             percent = voucher.getDiscount() / 100f;
 
             discountValue.setText(String.format("%.2f", total * percent));
@@ -251,7 +251,7 @@ public class UserCartController implements CartUpdateListener{
 
     @FXML
     public void handleOrderBtn(){
-        List<CartItem> selectedItems = localCart.getSelectedCartItems(localCart.getCartId());
+        List<CartItem> selectedItems = localCart.getSelectedCartItems();
         // check stock = 0 item => user phai bỏ select
         for(CartItem item: selectedItems){
             if(item.getProduct().getStock() == 0){

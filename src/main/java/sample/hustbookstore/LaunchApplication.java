@@ -22,10 +22,7 @@ import java.awt.Taskbar.Feature;
 public class LaunchApplication extends Application {
 
     public static Scene welcomeScene;
-    public static AnchorPane localInventoryScreen;
-    public static InventoryController localInventoryController;
-    public static AnchorPane localStoreScreen;
-    public static AnchorPane localUserStoreScreen;
+
     @FXML
     private Button admin_btn;
     @FXML
@@ -74,13 +71,6 @@ public class LaunchApplication extends Application {
         VoucherList.initialize();
         BillList.initialize();
         CartList.initialize();
-
-        FXMLLoader inventoryLoader = new FXMLLoader(getClass().getResource("/sample/hustbookstore/admin/inventory-view.fxml"));
-        localInventoryScreen = inventoryLoader.load();
-        localInventoryController = inventoryLoader.getController();
-
-        localStoreScreen = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/admin/store-view.fxml"));
-        localUserStoreScreen = FXMLLoader.load(getClass().getResource("/sample/hustbookstore/user/user-store-view.fxml"));
 
         FXMLLoader fxmlLoader = new FXMLLoader(LaunchApplication.class.getResource("LaunchApplication.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 640, 720);

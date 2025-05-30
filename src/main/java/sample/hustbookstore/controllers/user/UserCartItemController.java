@@ -35,7 +35,7 @@ public class UserCartItemController {
     private Spinner<Integer> itemSpinner;
 
     private CartItem item;
-    private Image image;
+
 
     public void setData(CartItem item) {
         this.item = item;
@@ -51,21 +51,6 @@ public class UserCartItemController {
         ));
 
         String imagePath = item.getProduct().getImage();
-//        try {
-//            if (imagePath != null && !imagePath.isEmpty()) {
-//                URL imageUrl = new URL(imagePath);
-//                image = new Image(imageUrl.toExternalForm(), 100, 160, true, true);
-//            } else {
-//                image = new Image(getClass().getResource("/sample/hustbookstore/img/notfound.jpg").toExternalForm(), 100, 160, true, true);
-//            }
-//        } catch (MalformedURLException e) {
-//            URL resourceUrl = getClass().getResource("/" + imagePath);
-//            if (resourceUrl != null) {
-//                image = new Image(resourceUrl.toExternalForm(), 100, 160, true, true);
-//            } else {
-//                image = new Image(getClass().getResource("/sample/hustbookstore/img/notfound.jpg").toExternalForm(), 100, 160, true, true);
-//            }
-//        }
         Image image = CloudinaryService.loadImage(imagePath);
 
         itemImage.setImage(image);
@@ -137,7 +122,7 @@ public class UserCartItemController {
             userCartController.showSubTotalValue();
         }
     }
-    private PauseTransition pause = new PauseTransition(Duration.millis(300));
+    private PauseTransition pause = new PauseTransition(Duration.millis(500));
 
     public void initialize() {
         if (userCartController != null) {

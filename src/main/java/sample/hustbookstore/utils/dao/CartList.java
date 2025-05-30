@@ -9,12 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import static sample.hustbookstore.LaunchApplication.localCart;
-
 
 public class CartList {
 
@@ -124,14 +118,14 @@ public class CartList {
         return cartItemList;
     }
 
-    public static boolean updateCartItem(CartItem cartItem) {
+    public static boolean updateCartItem(CartItem cartItem, int cartId) {
         String query = "UPDATE cart_item SET quantity = ?, is_selected = ? WHERE product_id = ? AND cart_id = ?";
 
         try (PreparedStatement statement = connect.prepareStatement(query)) {
             statement.setInt(1, cartItem.getQuantity());
             statement.setBoolean(2, cartItem.isSelected());
             statement.setString(3, cartItem.getProductId());
-            statement.setInt(4, localCart.getCartId());
+            statement.setInt(4, cartId);
 
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;
@@ -141,11 +135,11 @@ public class CartList {
         }
     }
 
-    public static boolean deleteCartItem(CartItem cartItem) {
+    public static boolean deleteCartItem(CartItem cartItem, int cartId) {
         String query = "DELETE FROM cart_item WHERE cart_id = ? AND product_id = ?";
 
         try (PreparedStatement statement = connect.prepareStatement(query)) {
-            statement.setInt(1, localCart.getCartId());
+            statement.setInt(1, cartId);
             statement.setString(2, cartItem.getProductId());
 
             int rowsAffected = statement.executeUpdate();
@@ -154,58 +148,6 @@ public class CartList {
             e.printStackTrace();
             return false;
         }
-    }
-
-    public static float calculateTotalPrice(int cartId) {
-        String query = """
-            SELECT SUM(p.sell_price * ci.quantity) AS total_price
-            FROM cart_item ci
-            JOIN product p ON ci.product_id = p.product_id
-            WHERE ci.cart_id = ? AND ci.is_selected = true
-    """;
-
-        try (PreparedStatement statement = connect.prepareStatement(query)) {
-            statement.setInt(1, cartId);
-
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    return resultSet.getFloat("total_price");
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return -1;
-    }
-
-    public static List<CartItem> getSelectedCartItems(int cartId) {
-        List<CartItem> selectedItems = new ArrayList<>();
-        String query = """
-        SELECT * FROM cart_item
-        WHERE cart_id = ? AND is_selected = true
-    """;
-
-        try (PreparedStatement statement = connect.prepareStatement(query)) {
-            statement.setInt(1, cartId);
-
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    CartItem item = new CartItem(
-                            resultSet.getString("product_id"),
-                            resultSet.getInt("quantity"),
-                            resultSet.getBoolean("is_selected")
-
-                    );
-                    selectedItems.add(item);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return Collections.emptyList();
-        }
-
-        return selectedItems;
     }
 
     public static void initialize() {

@@ -1,60 +1,162 @@
 package sample.hustbookstore.models;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sample.hustbookstore.controllers.user.CartUpdateListener;
 import sample.hustbookstore.utils.dao.CartList;
+import sample.hustbookstore.utils.dao.Inventory;
+import java.util.ArrayList;
 import java.util.List;
-
-import static sample.hustbookstore.LaunchApplication.localCart;
+import java.util.Optional;
 
 public class Cart {
-
-    private int cart_id;
-    private int user_id;
+    private int cartId;
+    private int userId;
     private ObservableList<CartItem> cartItemList;
-    private float totalPrice;
-    //private List<CartItem> selectedCartItems;
 
     private static CartUpdateListener listener;
+
     public static void setCartUpdateListener(CartUpdateListener cartListener) {
         listener = cartListener;
     }
-
-
-
     public Cart(){}
 
-    public Cart(int cart_id, int user_id) {
-        this.cart_id = cart_id;
-        this.user_id = user_id;
+    public Cart(int cartId, int userId) {
+        this.cartId = cartId;
+        this.userId = userId;
+        this.cartItemList = FXCollections.observableArrayList();
+        loadCartItemsFromDatabase();
     }
 
-    public Cart(int cart_id, int user_id, ObservableList<CartItem> cartItemList, float totalPrice) {
-        this.cart_id = cart_id;
-        this.user_id = user_id;
-        this.cartItemList = cartItemList;
-        this.totalPrice = totalPrice;
+    private void loadCartItemsFromDatabase() {
+        ObservableList<CartItem> items = CartList.getCartItemList(this.cartId);
+        cartItemList.setAll(items);
+    }
+
+    public boolean addProductToCart(String productId, int quantity) {
+        // check inventory
+        Product product = Inventory.getProductFromProductID(productId);
+        if (product == null || product.getStock() < quantity) {
+            return false;
+        }
+
+        // check gio hang xem da co chua
+        Optional<CartItem> existingItem = cartItemList.stream()
+                .filter(item -> item.getProductId().equals(productId))
+                .findFirst();
+
+        if (existingItem.isPresent()) {
+            // neu co -> cap nhat so luong
+            CartItem item = existingItem.get();
+            int newQuantity = item.getQuantity() + quantity;
+            item.setQuantity(newQuantity);
+            if (listener != null) {
+                Platform.runLater(listener::onCartUpdated);
+            }
+            return updateCartItem(item);
+        } else {
+            // neu chua -> them moi
+            CartItem newItem = new CartItem(productId, quantity, false);
+            newItem.setProduct(product);
+
+            boolean dbSuccess = CartList.addProduct(productId, quantity, cartId);
+            if (dbSuccess) {
+                cartItemList.add(newItem);
+                if (listener != null) {
+                    Platform.runLater(listener::onCartUpdated);
+                }
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public CartItem findCartItem(String productId) {
+        for (CartItem item : cartItemList) {
+            if (item.getProductId().equals(productId)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public boolean updateCartItem(CartItem updatedItem) {
+        CartItem existingItem = findCartItem(updatedItem.getProductId());
+
+        if (existingItem == null) {
+            return false;
+        }
+
+        Product product = updatedItem.getProduct();
+        if (product == null || product.getStock() < updatedItem.getQuantity()) {
+            return false;
+        }
+
+        existingItem.setQuantity(updatedItem.getQuantity());
+        existingItem.setSelected(updatedItem.isSelected());
+
+        boolean dbSuccess = CartList.updateCartItem(existingItem, cartId);
+
+        if (dbSuccess) {
+            calculateTotalPrice();
+            if (listener != null) {
+                Platform.runLater(listener::onCartUpdated);
+            }
+        }
+
+        return dbSuccess;
+    }
+
+    public boolean deleteCartItem(CartItem cartItem) {
+        boolean currentCartRemove = cartItemList.remove(cartItem);
+
+        boolean dbSuccess = false;
+        if (currentCartRemove) {
+            dbSuccess = CartList.deleteCartItem(cartItem, cartId);
+        }
+
+        if (dbSuccess && listener != null) {
+            Platform.runLater(listener::onCartUpdated);
+        }
+
+        return dbSuccess;
+    }
+
+    public float calculateTotalPrice() {
+        float total = 0.0f;
+        for (CartItem item : cartItemList) {
+            if (item.isSelected() && item.getProduct() != null) {
+                total += (float) (item.getProduct().getSellPrice() * item.getQuantity());
+            }
+        }
+        return total;
+    }
+
+    public List<CartItem> getSelectedCartItems() {
+        List<CartItem> selectedItems = new ArrayList<>();
+        for (CartItem item : cartItemList) {
+            if (item.isSelected()) {
+                selectedItems.add(item);
+            }
+        }
+        return selectedItems;
     }
 
     public int getCartId() {
-        return cart_id;
+        return cartId;
     }
 
-    public int getCart_id() {
-        return cart_id;
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
     }
 
-    public void setCart_id(int cart_id) {
-        this.cart_id = cart_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public float getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(float totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public ObservableList<CartItem> getCartItemList() {
@@ -65,40 +167,10 @@ public class Cart {
         this.cartItemList = cartItemList;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public float getTotalPrice() {
+        return calculateTotalPrice();
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setTotalPrice(float totalPrice) {
     }
-
-    public boolean addProductToCart(String product_id, int quantity) {
-        boolean success = CartList.addProduct(product_id, quantity, localCart.getCartId());
-        if (success && listener != null) {
-            Platform.runLater(listener::onCartUpdated);
-        }
-        return success;
-    }
-
-    public ObservableList<CartItem> getCartItemList(int cartId) {
-        return CartList.getCartItemList(cartId);
-    }
-
-    public boolean updateCartItem(CartItem cartItem) {
-        return CartList.updateCartItem(cartItem);
-    }
-
-    public boolean deleteCartItem(CartItem cartItem) {
-        return CartList.deleteCartItem(cartItem);
-    }
-
-    public float calculateTotalPrice(int cartId) {
-        return CartList.calculateTotalPrice(cartId);
-    }
-
-    public List<CartItem> getSelectedCartItems(int cartId) {
-        return CartList.getSelectedCartItems(cartId);
-    }
-
 }
