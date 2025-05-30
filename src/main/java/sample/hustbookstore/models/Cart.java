@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sample.hustbookstore.controllers.user.CartUpdateListener;
+import sample.hustbookstore.utils.cloud.database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,8 +32,8 @@ public class Cart {
         this.user_id = user_id;
     }
 
-
     private static CartUpdateListener listener;
+
     public static void setCartUpdateListener(CartUpdateListener cartListener) {
         listener = cartListener;
     }
@@ -165,8 +166,6 @@ public class Cart {
         }
     }
 
-
-
     public boolean deleteCartItem(CartItem cartItem) {
         String query = "DELETE FROM cart_item WHERE cart_id = ? AND product_id = ?";
 
@@ -234,92 +233,10 @@ public class Cart {
         return selectedItems;
     }
 
-    public ObservableList<Book> getTrendingBooks() {
-        ObservableList<Book> trendingBooks = FXCollections.observableArrayList();
-        String query = """
-        SELECT 
-            p.product_id, 
-            p.name,
-            p.distributor,
-            p.sell_price,
-            p.import_price,
-            p.stock,
-            p.type,
-            p.image,
-            p.description,
-            p.added_date,
-            p.age_restrict,
-            p.isbn,
-            p.genre,
-            p.author,
-            p.pub_date,
-            SUM(ci.quantity) AS total_ordered 
-        FROM cart_item ci
-        JOIN product p ON ci.product_id = p.product_id
-        WHERE p.type = 'Book' 
-        GROUP BY 
-            p.product_id, 
-            p.name,
-            p.distributor,
-            p.sell_price,
-            p.import_price,
-            p.stock,
-            p.type,
-            p.image,
-            p.description,
-            p.added_date,
-            p.age_restrict,
-            p.isbn,
-            p.genre,
-            p.author,
-            p.pub_date
-        ORDER BY total_ordered DESC
-        LIMIT 5
-    """;
-
-        try (PreparedStatement statement = connect.prepareStatement(query)) {
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                Book book = new Book(
-                        resultSet.getString("product_id"),
-                        resultSet.getString("name"),
-                        resultSet.getString("distributor"),
-                        resultSet.getDouble("sell_price"),
-                        resultSet.getDouble("import_price"),
-                        resultSet.getInt("stock"),
-                        resultSet.getString("type"),
-                        resultSet.getString("image"),
-                        resultSet.getString("description"),
-                        resultSet.getDate("added_date").toLocalDate(),
-                        resultSet.getInt("age_restrict"),
-                        resultSet.getString("isbn"),
-                        resultSet.getString("genre"),
-                        resultSet.getDate("pub_date").toLocalDate(),
-                        resultSet.getString("author")
-                );
-
-                trendingBooks.add(book);
-            }
-        } catch (SQLException e) {
-            System.err.println("Error loading trending books: " + e.getMessage());
-            e.printStackTrace();
-        }
-
-        return trendingBooks;
-    }
-
-
-    public static void closeConnection() throws SQLException {
-        connect.close();
-    }
-
     public static void initialize() {
         connect = database.connectDB();
         if (connect == null) {
             throw new IllegalStateException("Unable to connect to the database.");
         }
     }
-
-
 }

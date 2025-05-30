@@ -6,17 +6,13 @@ package sample.hustbookstore.controllers.admin;
     import javafx.fxml.FXML;
     import javafx.scene.control.*;
     import javafx.scene.control.cell.PropertyValueFactory;
-    import javafx.scene.image.Image;
     import sample.hustbookstore.models.*;
-
+    import sample.hustbookstore.utils.dao.VoucherList;
     import java.sql.Connection;
     import java.sql.Date;
     import java.sql.PreparedStatement;
     import java.sql.ResultSet;
     import java.util.Optional;
-
-
-    import static sample.hustbookstore.LaunchApplication.*;
 
     public class VoucherController {
         @FXML
@@ -70,7 +66,7 @@ package sample.hustbookstore.controllers.admin;
         private Alert alert;
 
         public void showData() {
-            ObservableList<Voucher> list = localVoucher.getAllVouchers();
+            ObservableList<Voucher> list = VoucherList.getAllVouchers();
 
             FilteredList<Voucher> filteredData = new FilteredList<>(list, voucher -> true);
 
@@ -102,7 +98,7 @@ package sample.hustbookstore.controllers.admin;
                 return;
             }
 
-            if (localVoucher.isVoucherExists(voucherCode.getText())) {
+            if (VoucherList.isVoucherExists(voucherCode.getText())) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Message");
                 alert.setHeaderText(null);
@@ -110,7 +106,7 @@ package sample.hustbookstore.controllers.admin;
                 alert.showAndWait();
             } else {
 
-                boolean success = localVoucher.addVoucher(
+                boolean success = VoucherList.addVoucher(
                         voucherCode.getText(),
                         Integer.parseInt(voucherRemain.getText()),
                         Float.parseFloat(voucherDiscount.getText()),
@@ -158,7 +154,7 @@ package sample.hustbookstore.controllers.admin;
             Optional<ButtonType> result = confirmAlert.showAndWait();
 
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                boolean isDeleted = localVoucher.deleteVoucher(voucherCode.getText());
+                boolean isDeleted = VoucherList.deleteVoucher(voucherCode.getText());
 
                 if (isDeleted) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -193,7 +189,7 @@ package sample.hustbookstore.controllers.admin;
                 return;
             }
 
-            boolean isUpdated = localVoucher.updateVoucher(
+            boolean isUpdated = VoucherList.updateVoucher(
                     voucherCode.getText(),
                     Integer.parseInt(voucherRemain.getText()),
                     Float.parseFloat(voucherDiscount.getText()),
@@ -223,11 +219,11 @@ package sample.hustbookstore.controllers.admin;
             int index = voucher_tableView.getSelectionModel().getSelectedIndex();
 
             if (index < 0 || vc == null) return;
-                    voucherCode.setText(vc.getCode());
-                    voucherRemain.setText(String.valueOf(vc.getRemaining()));
-                    voucherDiscount.setText(String.valueOf(vc.getDiscount()));
-                    voucherDuaration.setValue(vc.getDuration());
-                    voucher_label_ID.setText(String.valueOf(vc.getVoucher_id()));
+            voucherCode.setText(vc.getCode());
+            voucherRemain.setText(String.valueOf(vc.getRemaining()));
+            voucherDiscount.setText(String.valueOf(vc.getDiscount()));
+            voucherDuaration.setValue(vc.getDuration());
+            voucher_label_ID.setText(String.valueOf(vc.getVoucher_id()));
         }
 
         public void initialize() {

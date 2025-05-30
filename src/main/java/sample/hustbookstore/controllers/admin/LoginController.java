@@ -4,16 +4,15 @@ import io.github.cdimascio.dotenv.Dotenv;
 import javafx.scene.control.*;
 import sample.hustbookstore.controllers.base.BaseLoginController;
 import sample.hustbookstore.models.Admin;
-import sample.hustbookstore.models.AdminList;
+import sample.hustbookstore.utils.dao.AdminList;
 
 public class LoginController extends BaseLoginController {
-    private final AdminList adminList = new AdminList();
 
     @Override
     public void loginBtn() {
         if (si_username.getText().isEmpty() || si_password.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Incorrect Username or Password");
-        } else if (adminList.login(si_username.getText(), si_password.getText())) {
+        } else if (AdminList.login(si_username.getText(), si_password.getText())) {
             loadHomeScreen();
         } else {
             showAlert(Alert.AlertType.ERROR, "Incorrect Username or Password");
@@ -29,7 +28,7 @@ public class LoginController extends BaseLoginController {
                 su_question.getSelectionModel().isEmpty() || su_answer.getText().isEmpty() ||
                 su_privacycode.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Please fill all the fields");
-        } else if (adminList.isUsernameTaken(su_username.getText())) {
+        } else if (AdminList.isUsernameTaken(su_username.getText())) {
             showAlert(Alert.AlertType.ERROR, su_username.getText() + " is already taken");
         } else if (!su_privacycode.getText().equals(adminKey)) {
             showAlert(Alert.AlertType.ERROR, "Privacy code is incorrect");
@@ -40,7 +39,7 @@ public class LoginController extends BaseLoginController {
                     su_question.getSelectionModel().getSelectedItem(),
                     su_answer.getText()
             );
-            if (adminList.registerAdmin(newAdmin)) {
+            if (AdminList.registerAdmin(newAdmin)) {
                 showAlert(Alert.AlertType.INFORMATION, "Successfully Registered Account!");
                 clearRegForm();
             } else {

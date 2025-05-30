@@ -1,22 +1,19 @@
 package sample.hustbookstore;
 
 import javafx.application.Application;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
 import sample.hustbookstore.controllers.admin.InventoryController;
 import sample.hustbookstore.models.*;
+import sample.hustbookstore.utils.dao.*;
 
 import java.io.IOException;
-
 import java.awt.Taskbar;
 import java.awt.Toolkit;
 import java.awt.Taskbar.Feature;
@@ -24,35 +21,24 @@ import java.awt.Taskbar.Feature;
 
 public class LaunchApplication extends Application {
 
+    public static Scene welcomeScene;
+    public static AnchorPane localInventoryScreen;
+    public static InventoryController localInventoryController;
+    public static AnchorPane localStoreScreen;
+    public static AnchorPane localUserStoreScreen;
     @FXML
     private Button admin_btn;
-
     @FXML
     private StackPane welcomeScreen;
-
     @FXML
     private Button user_btn;
 
-    public static Scene welcomeScene;
 
     public static Admin localAdmin = new Admin();
 
     public static User localUser = new User();
 
     public static Cart localCart = new Cart();
-
-    public static VoucherList localVoucher = new VoucherList();
-
-    public static Inventory localInventory = new Inventory();
-
-    public static Store localStore = new Store();
-
-    public static AnchorPane localInventoryScreen;
-    public static InventoryController localInventoryController;
-    public static AnchorPane localStoreScreen;
-    public static AnchorPane localUserStoreScreen;
-
-
 
     public void switchAdminLogin() {
         try {
@@ -118,8 +104,6 @@ public class LaunchApplication extends Application {
 
         stage.setScene(scene);
         stage.show();
-
-
     }
 
     public static void main(String[] args) {

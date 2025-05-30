@@ -1,7 +1,9 @@
-package sample.hustbookstore.models;
+package sample.hustbookstore.utils.dao;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import sample.hustbookstore.models.*;
+import sample.hustbookstore.utils.cloud.database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,10 +15,6 @@ import java.util.List;
 public class Inventory {
     private static Connection connect;
 
-    public static void closeConnection() throws SQLException {
-        connect.close();
-    }
-
     public static void initialize() {
         connect = database.connectDB();
         if (connect == null) {
@@ -24,7 +22,7 @@ public class Inventory {
         }
     }
 
-    public ObservableList<Book> getAllProducts() {
+    public static ObservableList<Book> getAllProducts() {
         ObservableList<Book> productList = FXCollections.observableArrayList();
         String sql = "SELECT * FROM product";
 
@@ -57,7 +55,7 @@ public class Inventory {
         return productList;
     }
 
-    public boolean isProductExists(String productId) {
+    public static boolean isProductExists(String productId) {
         String query = "SELECT product_id FROM product WHERE product_id = ?";
         try (PreparedStatement statement = connect.prepareStatement(query)) {
             statement.setString(1, productId);
@@ -70,7 +68,7 @@ public class Inventory {
         return false;
     }
 
-    public boolean addProduct(String ID, String name, String distributor, Double sellPrice,
+    public static boolean addProduct(String ID, String name, String distributor, Double sellPrice,
                               Double importPrice, int stock, String type, String image, String description,
                               LocalDate addedDate, int restrictedAge, String isbn, String genre, LocalDate publishedDate, String author) {
         String insertQuery = "INSERT INTO product "
@@ -111,7 +109,7 @@ public class Inventory {
     }
 
 
-    public boolean updateProduct(
+    public static boolean updateProduct(
             String productId, String type, String name, String image, String distributor, String description,
             LocalDate addedDate, int stock, float importPrice, float sellPrice, int restrictedAge,
             String isbn, String author, String genre, LocalDate publishedDate) {
@@ -154,7 +152,7 @@ public class Inventory {
         }
     }
 
-    public boolean deleteProduct(String productId) {
+    public static boolean deleteProduct(String productId) {
         String deleteQuery = "DELETE FROM product WHERE product_id = ?";
 
         try (PreparedStatement prepare = connect.prepareStatement(deleteQuery)) {
@@ -167,8 +165,7 @@ public class Inventory {
         }
     }
 
-
-    public ObservableList<Book> getAllBooks() {
+    public static ObservableList<Book> getAllBooks() {
         String sql = "SELECT * FROM product WHERE type = 'Book'";
         ObservableList<Book> bookList = FXCollections.observableArrayList();
 
@@ -201,7 +198,7 @@ public class Inventory {
         return bookList;
     }
 
-    public ObservableList<Stationery> getAllStationery() {
+    public static ObservableList<Stationery> getAllStationery() {
         String sql = "SELECT * FROM product WHERE type = 'Stationery'";
         ObservableList<Stationery> stationeryList = FXCollections.observableArrayList();
 
@@ -230,7 +227,7 @@ public class Inventory {
         return stationeryList;
     }
 
-    public ObservableList<Toy> getAllToys() {
+    public static ObservableList<Toy> getAllToys() {
         String sql = "SELECT * FROM product WHERE type = 'Toy'";
         ObservableList<Toy> toyList = FXCollections.observableArrayList();
 
@@ -259,7 +256,7 @@ public class Inventory {
         return toyList;
     }
 
-    public Product getProductFromProductID(String productId) {
+    public static Product getProductFromProductID(String productId) {
         Product product = null;
         String query = "SELECT * FROM product WHERE product_id = ?";
 
@@ -290,7 +287,7 @@ public class Inventory {
         }
     }
 
-    public boolean updateProductStock(List<CartItem> itemList) {
+    public static boolean updateProductStock(List<CartItem> itemList) {
         for(CartItem item : itemList) {
             String sql = "UPDATE product SET " + " stock = stock - ? WHERE product_id = ?";
             try(PreparedStatement statement = connect.prepareStatement(sql)) {

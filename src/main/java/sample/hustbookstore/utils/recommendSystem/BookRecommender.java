@@ -1,4 +1,4 @@
-package sample.hustbookstore.utils;
+package sample.hustbookstore.utils.recommendSystem;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

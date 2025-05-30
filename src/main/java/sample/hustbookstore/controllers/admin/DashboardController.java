@@ -11,14 +11,11 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-import sample.hustbookstore.models.BillList;
+import sample.hustbookstore.utils.dao.BillList;
 import sample.hustbookstore.models.Book;
-import sample.hustbookstore.models.Cart;
-import sample.hustbookstore.models.UserList;
-import sample.hustbookstore.utils.CloudinaryService;
+import sample.hustbookstore.utils.dao.UserList;
+import sample.hustbookstore.utils.cloud.CloudinaryService;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
@@ -128,8 +125,7 @@ public class DashboardController {
     }
 
     public void loadTrendingBooks() {
-        BillList billList = new BillList();
-        trendingBooks =  billList.getTrendingBooks();
+        trendingBooks =  BillList.getTrendingBooks();
     }
 
     public void displayTrendingBooks() {
@@ -140,22 +136,6 @@ public class DashboardController {
             trendingPrice.setText(Double.toString(trendingBook.getSellPrice()));
 
             String imagePath = trendingBook.getImage();
-//            try {
-//                if (imagePath != null && !imagePath.isEmpty()) {
-//                    URL imageUrl = new URL(imagePath);
-//                    image = new Image(imageUrl.toExternalForm(), 80, 128, true, true);
-//                } else {
-//                    image = new Image(getClass().getResource("/sample/hustbookstore/img/notfound.jpg").toExternalForm(), 80, 128, true, true);
-//                }
-//            } catch (MalformedURLException e) {
-//                URL resourceUrl = getClass().getResource("/" + imagePath);
-//                if (resourceUrl != null) {
-//                    image = new Image(resourceUrl.toExternalForm(), 80, 128, true, true);
-//                } else {
-//                    image = new Image(getClass().getResource("/sample/hustbookstore/img/notfound.jpg").toExternalForm(), 80, 128, true, true);
-//                }
-//            }
-
             Image image = CloudinaryService.loadImage(imagePath);
             trendingImage.setImage(image);
         }

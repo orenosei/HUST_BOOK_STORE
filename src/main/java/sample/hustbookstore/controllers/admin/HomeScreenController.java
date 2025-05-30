@@ -8,11 +8,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import sample.hustbookstore.controllers.base.BaseHomeScreenController;
+import sample.hustbookstore.controllers.base.StoreUpdateListener;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import static sample.hustbookstore.LaunchApplication.*;
 
-public class HomeScreenController extends BaseHomeScreenController implements Initializable, StoreUpdateListener  {
+public class HomeScreenController extends BaseHomeScreenController implements Initializable, StoreUpdateListener {
 
     @FXML
     private Button customers_btn;
@@ -68,9 +70,6 @@ public class HomeScreenController extends BaseHomeScreenController implements In
                 localInventoryScreen = loader.load();
                 localInventoryController = loader.getController();
             }
-
-           // localInventoryController.setHomeScreenController(this);
-            InventoryController.setStoreUpdateListener(this);
 
             inventoryScreen.getChildren().clear();
             inventoryScreen.getChildren().add(localInventoryScreen);

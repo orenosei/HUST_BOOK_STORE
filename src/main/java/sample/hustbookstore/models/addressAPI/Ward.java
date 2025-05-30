@@ -1,4 +1,4 @@
-package sample.hustbookstore.models.address;
+package sample.hustbookstore.models.addressAPI;
 
 public class Ward {
     private String level3_id;

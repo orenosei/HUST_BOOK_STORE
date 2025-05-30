@@ -1,19 +1,19 @@
-package sample.hustbookstore.models.address;
+package sample.hustbookstore.models.addressAPI;
 
 import java.util.List;
 
-public class Province {
-    private String level1_id;
+public class District {
+    private String level2_id;
     private String name;
     private String type;
-    private List<District> level2s;
+    private List<Ward> level3s;
 
-    public String getLevel1_id() {
-        return level1_id;
+    public String getLevel2_id() {
+        return level2_id;
     }
 
-    public void setLevel1_id(String level1_id) {
-        this.level1_id = level1_id;
+    public void setLevel2_id(String level2_id) {
+        this.level2_id = level2_id;
     }
 
     public String getName() {
@@ -32,12 +32,12 @@ public class Province {
         this.type = type;
     }
 
-    public List<District> getLevel2s() {
-        return level2s;
+    public List<Ward> getLevel3s() {
+        return level3s;
     }
 
-    public void setLevel2s(List<District> level2s) {
-        this.level2s = level2s;
+    public void setLevel3s(List<Ward> level3s) {
+        this.level3s = level3s;
     }
     @Override
     public String toString() {

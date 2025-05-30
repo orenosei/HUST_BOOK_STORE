@@ -1,4 +1,4 @@
-package sample.hustbookstore.utils;
+package sample.hustbookstore.controllers.base;
 
 import sample.hustbookstore.models.Product;
 

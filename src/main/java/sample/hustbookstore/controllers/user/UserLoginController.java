@@ -3,17 +3,15 @@ package sample.hustbookstore.controllers.user;
 import javafx.scene.control.*;
 import sample.hustbookstore.controllers.base.BaseLoginController;
 import sample.hustbookstore.models.User;
-import sample.hustbookstore.models.UserList;
+import sample.hustbookstore.utils.dao.UserList;
 import static sample.hustbookstore.LaunchApplication.*;
 
 public class UserLoginController extends BaseLoginController {
-    private final UserList userList = new UserList();
-
     @Override
     public void loginBtn() {
         if (si_username.getText().isEmpty() || si_password.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Incorrect Username or Password");
-        } else if (userList.login(si_username.getText(), si_password.getText())) {
+        } else if (UserList.login(si_username.getText(), si_password.getText())) {
             localCart = localCart.getCartFromDatabase(localUser.getUserId());
             loadHomeScreen();
         } else {
@@ -26,7 +24,7 @@ public class UserLoginController extends BaseLoginController {
         if (su_username.getText().isEmpty() || su_password.getText().isEmpty() ||
                 su_question.getSelectionModel().isEmpty() || su_answer.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Please fill all the fields");
-        } else if (userList.isUsernameTaken(su_username.getText())) {
+        } else if (UserList.isUsernameTaken(su_username.getText())) {
             showAlert(Alert.AlertType.ERROR, su_username.getText() + " is already taken");
         } else {
             User newUser = new User(
@@ -35,7 +33,7 @@ public class UserLoginController extends BaseLoginController {
                     su_question.getSelectionModel().getSelectedItem(),
                     su_answer.getText()
             );
-            if (userList.registerUser(newUser)) {
+            if (UserList.registerUser(newUser)) {
                 showAlert(Alert.AlertType.INFORMATION, "Successfully Registered Account!");
                 clearRegForm();
             } else {

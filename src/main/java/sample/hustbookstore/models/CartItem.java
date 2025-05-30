@@ -1,6 +1,7 @@
 package sample.hustbookstore.models;
 
-import static sample.hustbookstore.LaunchApplication.localInventory;
+import sample.hustbookstore.utils.dao.Inventory;
+
 
 public class CartItem {
     private String productId;
@@ -12,7 +13,7 @@ public class CartItem {
         this.productId = productId;
         this.quantity = quantity;
         this.isSelected = isSelected;
-        this.product = localInventory.getProductFromProductID(productId);
+        this.product = Inventory.getProductFromProductID(productId);
     }
 
     public Product getProduct() {

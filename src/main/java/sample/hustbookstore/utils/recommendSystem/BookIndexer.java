@@ -1,4 +1,4 @@
-package sample.hustbookstore.utils;
+package sample.hustbookstore.utils.recommendSystem;
 
 import javafx.collections.ObservableList;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;

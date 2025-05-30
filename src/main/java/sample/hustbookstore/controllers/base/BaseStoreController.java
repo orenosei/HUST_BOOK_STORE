@@ -12,7 +12,6 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 import org.controlsfx.control.CheckComboBox;
 import sample.hustbookstore.models.*;
-import sample.hustbookstore.utils.ProductCardSetData;
 
 import java.util.ArrayList;
 import java.util.List;

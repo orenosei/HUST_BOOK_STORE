@@ -18,25 +18,21 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-
 import javafx.util.Duration;
+import sample.hustbookstore.controllers.base.StoreUpdateListener;
 import sample.hustbookstore.models.*;
-import sample.hustbookstore.models.address.District;
-import sample.hustbookstore.models.address.Province;
-import sample.hustbookstore.models.address.Ward;
-
+import sample.hustbookstore.models.addressAPI.District;
+import sample.hustbookstore.models.addressAPI.Province;
+import sample.hustbookstore.models.addressAPI.Ward;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import sample.hustbookstore.utils.dao.BillList;
+import sample.hustbookstore.utils.dao.Inventory;
+import sample.hustbookstore.utils.dao.VoucherList;
 import java.io.File;
-
 import java.time.LocalDate;
 import java.util.List;
-
 import static sample.hustbookstore.LaunchApplication.localCart;
-
-
 import java.util.Optional;
-
 import static sample.hustbookstore.LaunchApplication.*;
 
 public class UserCartController implements CartUpdateListener{
@@ -111,7 +107,6 @@ public class UserCartController implements CartUpdateListener{
     @FXML
     private TableColumn<CartItem, String> prodPriceCol;
 
-
     @FXML
     private Text subTotalValueInBill;
 
@@ -121,12 +116,15 @@ public class UserCartController implements CartUpdateListener{
     @FXML
     private Text customerNameField;
 
+    private static StoreUpdateListener listener;
+    public static void setStoreUpdateListener(StoreUpdateListener listener){
+        UserCartController.listener = listener;
+    }
+
 
     private Alert alert;
 
     private float percent = 0;
-
-    private BillList billList = new BillList();
 
     public void showSubTotalValue(){
         subTotalValue.setText(String.format("%.2f",localCart.calculateTotalPrice(localCart.getCartId())));
@@ -202,7 +200,6 @@ public class UserCartController implements CartUpdateListener{
         }
     }
 
-
     String voucherCode;
 
     public void pressVoucherBtn() {
@@ -212,11 +209,11 @@ public class UserCartController implements CartUpdateListener{
         }
 
         voucherCode = voucherField.getText();
-        if (!localVoucher.isVoucherExists(voucherCode)) {
+        if (!VoucherList.isVoucherExists(voucherCode)) {
             showErrorAlert("Voucher does not exist!");
             return;
         }
-        Voucher voucher = localVoucher.getVoucher(voucherCode);
+        Voucher voucher = VoucherList.getVoucher(voucherCode);
         if (voucher.getRemaining() <= 0) {
             showErrorAlert("This voucher has been used up!");
             return;
@@ -318,19 +315,19 @@ public class UserCartController implements CartUpdateListener{
 
                 float usedVoucher = 0;
                 if (voucherCode != null && !voucherCode.isEmpty()) {
-                    Voucher voucher = localVoucher.getVoucher(voucherCode);
+                    Voucher voucher = VoucherList.getVoucher(voucherCode);
                     if (voucher != null) {
                         usedVoucher = voucher.getDiscount();
                     }
                 }
 
-                Bill newBill = billList.prepareBill(localUser.getUserId(), selectedItems, usedVoucher);
-                billList.addBill(newBill, selectedItems);
+                Bill newBill = BillList.prepareBill(localUser.getUserId(), selectedItems, usedVoucher);
+                BillList.addBill(newBill, selectedItems);
 
-                localInventory.updateProductStock(selectedItems);
+                Inventory.updateProductStock(selectedItems);
 
                 if (voucherCode != null) {
-                    localVoucher.updateVoucherRemaining(voucherCode);
+                    VoucherList.updateVoucherRemaining(voucherCode);
                     discountValue.setText("00.00");
                 }
 
@@ -347,9 +344,7 @@ public class UserCartController implements CartUpdateListener{
 
         backgroundTask.setOnSucceeded(e -> {
             Platform.runLater(() -> {
-                if (userHomeScreenController != null) {
-                    userHomeScreenController.reloadStore();
-                }
+                listener.onStoreUpdated();
             });
         });
 
@@ -400,24 +395,12 @@ public class UserCartController implements CartUpdateListener{
         cartPane.setOpacity(1);
     }
 
-
-
-
-    private UserHomeScreenController userHomeScreenController;
-
-    public void setHomeScreenController(UserHomeScreenController userHomeScreenController) {
-        this.userHomeScreenController = userHomeScreenController;
-    }
-
-
     public void initialize(){
         selectAddress();
         Cart.setCartUpdateListener(this);
         display();
         customerNameField.setText(localUser.getName() == null ? "Trinh Minh Thanh" : localUser.getName() );
-
         billPane.setVisible(false);
-
         orderListTable.setPlaceholder(new Label("Not found"));
     }
 }

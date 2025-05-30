@@ -4,8 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import sample.hustbookstore.models.AdminList;
-import sample.hustbookstore.models.UserList;
 
 public abstract class BaseProfileController {
     @FXML
