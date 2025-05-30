@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import sample.hustbookstore.models.Book;
-import sample.hustbookstore.utils.CloudinaryService;
+import sample.hustbookstore.utils.cloud.CloudinaryService;
 
 public abstract class UserBaseFeatureCardController {
 

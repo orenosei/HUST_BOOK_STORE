@@ -26,8 +26,7 @@ module sample.hustbookstore {
     exports sample.hustbookstore;
     exports sample.hustbookstore.models;
     opens sample.hustbookstore.models to javafx.fxml;
-    exports sample.hustbookstore.utils;
-    opens sample.hustbookstore.utils to javafx.fxml;
+
     exports sample.hustbookstore.controllers.admin;
     opens sample.hustbookstore.controllers.admin to javafx.fxml;
     exports sample.hustbookstore.controllers.user;
@@ -35,5 +34,9 @@ module sample.hustbookstore {
     exports sample.hustbookstore.controllers.base;
     opens sample.hustbookstore.controllers.base to javafx.fxml;
     exports sample.hustbookstore.models.address;
+    exports sample.hustbookstore.utils.cloud;
+    opens sample.hustbookstore.utils.cloud to javafx.fxml;
+    exports sample.hustbookstore.utils.recommendSystem;
+    opens sample.hustbookstore.utils.recommendSystem to javafx.fxml;
 
 }

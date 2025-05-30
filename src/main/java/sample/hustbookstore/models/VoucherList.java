@@ -2,6 +2,7 @@ package sample.hustbookstore.models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import sample.hustbookstore.utils.cloud.database;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -15,9 +16,6 @@ public class VoucherList {
         if (connect == null) {
             throw new IllegalStateException("Unable to connect to the database.");
         }
-    }
-    public static void closeConnection() throws SQLException {
-        connect.close();
     }
 
     public static boolean updateVoucher(String code, int remaining, float discount, LocalDate duration, int voucher_id) {
@@ -50,7 +48,6 @@ public class VoucherList {
         }
         return false;
     }
-
 
     public ObservableList<Voucher> getAllVouchers() {
         ObservableList<Voucher> voucherList = FXCollections.observableArrayList();
@@ -87,7 +84,6 @@ public class VoucherList {
         }
         return false;
     }
-
 
     public boolean addVoucher(String code, int remaining, float discount, Date duration) {
         String insertQuery = "INSERT INTO voucher "

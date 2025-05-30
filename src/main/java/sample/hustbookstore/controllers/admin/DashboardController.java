@@ -13,12 +13,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import sample.hustbookstore.models.BillList;
 import sample.hustbookstore.models.Book;
-import sample.hustbookstore.models.Cart;
 import sample.hustbookstore.models.UserList;
-import sample.hustbookstore.utils.CloudinaryService;
+import sample.hustbookstore.utils.cloud.CloudinaryService;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;

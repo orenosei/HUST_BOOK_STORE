@@ -2,6 +2,7 @@ package sample.hustbookstore.models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import sample.hustbookstore.utils.cloud.database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,10 +13,6 @@ import java.util.List;
 
 public class Inventory {
     private static Connection connect;
-
-    public static void closeConnection() throws SQLException {
-        connect.close();
-    }
 
     public static void initialize() {
         connect = database.connectDB();
@@ -166,7 +163,6 @@ public class Inventory {
             return false;
         }
     }
-
 
     public ObservableList<Book> getAllBooks() {
         String sql = "SELECT * FROM product WHERE type = 'Book'";

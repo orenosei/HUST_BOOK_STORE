@@ -1,5 +1,7 @@
 package sample.hustbookstore.models;
 
+import sample.hustbookstore.utils.cloud.database;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -90,20 +92,6 @@ public class AdminList {
         }
     }
 
-    public static boolean changPassword(Admin admin) {
-        String query = "UPDATE admin SET password=? WHERE username=?";
-        try (PreparedStatement statement = connect.prepareStatement(query)) {
-            statement.setString(1, admin.getPassword());
-            statement.setString(2, admin.getUsername());
-
-            int rowsAffected = statement.executeUpdate();
-            return rowsAffected > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
     public static boolean verifySecurityInfo(String username, String question, String answer) {
         String sql = "SELECT 1 FROM admin WHERE username = ? AND question = ? AND answer = ?";
         try (PreparedStatement stmt = connect.prepareStatement(sql)) {
@@ -130,13 +118,4 @@ public class AdminList {
         }
     }
 
-    public static void closeConnection() {
-        if (connect != null) {
-            try {
-                connect.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

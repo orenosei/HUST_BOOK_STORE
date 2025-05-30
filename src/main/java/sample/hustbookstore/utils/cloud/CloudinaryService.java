@@ -1,4 +1,4 @@
-package sample.hustbookstore.utils;
+package sample.hustbookstore.utils.cloud;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
@@ -7,7 +7,6 @@ import javafx.scene.image.Image;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;

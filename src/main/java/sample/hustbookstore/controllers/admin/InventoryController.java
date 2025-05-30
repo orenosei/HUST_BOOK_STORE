@@ -15,7 +15,7 @@ import javafx.stage.FileChooser;
 import org.controlsfx.control.CheckComboBox;
 import sample.hustbookstore.models.Book;
 import sample.hustbookstore.models.Product;
-import sample.hustbookstore.utils.CloudinaryService;
+import sample.hustbookstore.utils.cloud.CloudinaryService;
 
 import java.io.File;
 import java.time.LocalDate;

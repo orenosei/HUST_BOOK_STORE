@@ -3,8 +3,9 @@ package sample.hustbookstore.models;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
-import sample.hustbookstore.utils.BookIndexer;
-import sample.hustbookstore.utils.BookRecommender;
+import sample.hustbookstore.utils.recommendSystem.BookIndexer;
+import sample.hustbookstore.utils.recommendSystem.BookRecommender;
+import sample.hustbookstore.utils.cloud.database;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -12,16 +13,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import static sample.hustbookstore.LaunchApplication.localInventory;
 import static sample.hustbookstore.LaunchApplication.localUser;
 
 public class BillList {
     private static Connection connect;
-
-    public static void closeConnection() throws SQLException {
-        connect.close();
-    }
 
     public Bill prepareBill(int userId, List<CartItem> cartItems, float discount) {
 
@@ -152,32 +148,6 @@ public class BillList {
             e.printStackTrace();
         }
         return dataList;
-    }
-
-    public static List<Map<String, Object>> getBillsWithUserName(LocalDate fromDate, LocalDate toDate) {
-        List<Map<String, Object>> bills = new ArrayList<>();
-        String sql = "SELECT b.bill_id, u.name, b.total_price, b.profit, b.purchase_date " +
-                "FROM bill b JOIN user u ON b.user_id = u.user_id " +
-                "WHERE b.purchase_date BETWEEN ? AND ?";
-        try (Connection conn = database.connectDB();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setDate(1, Date.valueOf(fromDate));
-            stmt.setDate(2, Date.valueOf(toDate));
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    Map<String, Object> bill = new HashMap<>();
-                    bill.put("bill_id", rs.getInt("bill_id"));
-                    bill.put("name", rs.getString("name"));
-                    bill.put("total_price", rs.getDouble("total_price"));
-                    bill.put("profit", rs.getDouble("profit"));
-                    bill.put("purchase_date", rs.getDate("purchase_date").toLocalDate());
-                    bills.add(bill);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return bills;
     }
 
     public static List<Map<String, Object>> getBillItemsWithProductName(int billId) {
@@ -335,6 +305,5 @@ public class BillList {
             throw new IllegalStateException("Unable to connect to the database.");
         }
     }
-
 
 }

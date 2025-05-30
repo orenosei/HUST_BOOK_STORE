@@ -2,12 +2,12 @@ package sample.hustbookstore.models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import sample.hustbookstore.utils.cloud.database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import static sample.hustbookstore.LaunchApplication.localCart;
 import static sample.hustbookstore.LaunchApplication.localUser;
 
 public class UserList {
@@ -178,13 +178,4 @@ public class UserList {
         return 0;
     }
 
-    public static void closeConnection() {
-        if (connect != null) {
-            try {
-                connect.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

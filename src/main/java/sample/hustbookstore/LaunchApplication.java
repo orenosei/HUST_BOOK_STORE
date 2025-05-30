@@ -1,22 +1,17 @@
 package sample.hustbookstore;
 
 import javafx.application.Application;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
 import sample.hustbookstore.controllers.admin.InventoryController;
 import sample.hustbookstore.models.*;
-
 import java.io.IOException;
-
 import java.awt.Taskbar;
 import java.awt.Toolkit;
 import java.awt.Taskbar.Feature;
@@ -45,13 +40,10 @@ public class LaunchApplication extends Application {
 
     public static Inventory localInventory = new Inventory();
 
-    public static Store localStore = new Store();
-
     public static AnchorPane localInventoryScreen;
     public static InventoryController localInventoryController;
     public static AnchorPane localStoreScreen;
     public static AnchorPane localUserStoreScreen;
-
 
 
     public void switchAdminLogin() {
@@ -118,8 +110,6 @@ public class LaunchApplication extends Application {
 
         stage.setScene(scene);
         stage.show();
-
-
     }
 
     public static void main(String[] args) {

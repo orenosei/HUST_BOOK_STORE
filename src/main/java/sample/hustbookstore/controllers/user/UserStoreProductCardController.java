@@ -18,8 +18,8 @@ import sample.hustbookstore.models.Book;
 import sample.hustbookstore.models.Product;
 import sample.hustbookstore.models.Stationery;
 import sample.hustbookstore.models.Toy;
-import sample.hustbookstore.utils.CloudinaryService;
-import sample.hustbookstore.utils.ProductCardSetData;
+import sample.hustbookstore.utils.cloud.CloudinaryService;
+import sample.hustbookstore.controllers.base.ProductCardSetData;
 
 import static sample.hustbookstore.LaunchApplication.localCart;
 import static sample.hustbookstore.controllers.user.UserStoreController.arya;
