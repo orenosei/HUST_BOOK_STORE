@@ -14,7 +14,7 @@ import javafx.scene.text.Text;
 import sample.hustbookstore.utils.dao.BillList;
 import sample.hustbookstore.models.Book;
 import sample.hustbookstore.utils.dao.UserList;
-import sample.hustbookstore.utils.cloud.CloudinaryService;
+import sample.hustbookstore.utils.cacheHandler.ImageCache;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -136,7 +136,7 @@ public class DashboardController {
             trendingPrice.setText(Double.toString(trendingBook.getSellPrice()));
 
             String imagePath = trendingBook.getImage();
-            Image image = CloudinaryService.loadImage(imagePath);
+            Image image = ImageCache.loadImage(imagePath);
             trendingImage.setImage(image);
         }
     }

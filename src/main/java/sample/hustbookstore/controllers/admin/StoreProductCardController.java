@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import sample.hustbookstore.models.Product;
-import sample.hustbookstore.utils.cloud.CloudinaryService;
+import sample.hustbookstore.utils.cacheHandler.ImageCache;
 import sample.hustbookstore.controllers.base.ProductCardSetData;
 
 public class StoreProductCardController implements ProductCardSetData {
@@ -39,7 +39,7 @@ public class StoreProductCardController implements ProductCardSetData {
         productImportPrice.setText(String.valueOf(prodData.getImportPrice()));
 
         String imagePath = prodData.getImage();
-        Image image = CloudinaryService.loadImage(imagePath);
+        Image image = ImageCache.loadImage(imagePath);
         productImage.setImage(image);
     }
 

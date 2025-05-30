@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import sample.hustbookstore.models.Book;
-import sample.hustbookstore.utils.cloud.CloudinaryService;
+import sample.hustbookstore.utils.cacheHandler.ImageCache;
 
 public abstract class UserBaseFeatureCardController {
 
@@ -41,7 +41,7 @@ public abstract class UserBaseFeatureCardController {
         priceField.setText(book.getSellPrice().toString());
 
         String imagePath = book.getImage();
-        Image image = CloudinaryService.loadImage(imagePath, 1000, 1600);
+        Image image = ImageCache.loadImage(imagePath, 1000, 1600);
         imageField.setImage(image);
     }
 }
