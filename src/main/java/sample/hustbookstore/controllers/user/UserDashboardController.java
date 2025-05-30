@@ -120,10 +120,18 @@ public class UserDashboardController {
         Rectangle clip = new Rectangle();
         clip.setArcWidth(20);
         clip.setArcHeight(20);
+
         clip.widthProperty().bind(trendingStackPane.widthProperty());
         clip.heightProperty().bind(trendingStackPane.heightProperty());
-
         trendingStackPane.setClip(clip);
+
+        clip = new Rectangle();
+        clip.setArcWidth(20);
+        clip.setArcHeight(20);
+
+        clip.widthProperty().bind(recommendStackPane.widthProperty());
+        clip.heightProperty().bind(recommendStackPane.heightProperty());
+        recommendStackPane.setClip(clip);
     }
 
     private void slideCardsTrending(double distance) {
