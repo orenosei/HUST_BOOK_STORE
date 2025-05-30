@@ -33,6 +33,7 @@ public class Cart {
     }
 
     private static CartUpdateListener listener;
+
     public static void setCartUpdateListener(CartUpdateListener cartListener) {
         listener = cartListener;
     }

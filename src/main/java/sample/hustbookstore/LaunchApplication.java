@@ -21,32 +21,24 @@ import java.awt.Taskbar.Feature;
 
 public class LaunchApplication extends Application {
 
+    public static Scene welcomeScene;
+    public static AnchorPane localInventoryScreen;
+    public static InventoryController localInventoryController;
+    public static AnchorPane localStoreScreen;
+    public static AnchorPane localUserStoreScreen;
     @FXML
     private Button admin_btn;
-
     @FXML
     private StackPane welcomeScreen;
-
     @FXML
     private Button user_btn;
 
-    public static Scene welcomeScene;
 
     public static Admin localAdmin = new Admin();
 
     public static User localUser = new User();
 
     public static Cart localCart = new Cart();
-
-    public static VoucherList localVoucher = new VoucherList();
-
-    public static Inventory localInventory = new Inventory();
-
-    public static AnchorPane localInventoryScreen;
-    public static InventoryController localInventoryController;
-    public static AnchorPane localStoreScreen;
-    public static AnchorPane localUserStoreScreen;
-
 
     public void switchAdminLogin() {
         try {

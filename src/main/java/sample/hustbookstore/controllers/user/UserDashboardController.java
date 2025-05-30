@@ -67,13 +67,11 @@ public class UserDashboardController {
     }
 
     private void loadTrendingBooks() {
-        BillList billList = new BillList();
-        trendingBooks =  billList.getTrendingBooks();
+        trendingBooks =  BillList.getTrendingBooks();
     }
 
     private void loadRecommendBooks() throws Exception {
-        BillList billList = new BillList();
-        recommendBooks = billList.getRecommendBooks();
+        recommendBooks = BillList.getRecommendBooks();
     }
 
     private void initializeTrendingCards() {

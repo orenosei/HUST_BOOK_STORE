@@ -17,14 +17,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static sample.hustbookstore.LaunchApplication.localInventory;
 import static sample.hustbookstore.LaunchApplication.localUser;
 
 public class BillList {
     private static Connection connect;
 
-    public Bill prepareBill(int userId, List<CartItem> cartItems, float discount) {
-
+    public static Bill prepareBill(int userId, List<CartItem> cartItems, float discount) {
         double totalPrice = 0;
         double totalProfit = 0;
 
@@ -48,7 +46,7 @@ public class BillList {
         );
     }
 
-    public boolean addBill(Bill bill, List<CartItem> selectedItems) {
+    public static boolean addBill(Bill bill, List<CartItem> selectedItems) {
         String sqlBill = "INSERT INTO bill (user_id, total_price, profit, purchase_date) VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement billStatement = connect.prepareStatement(sqlBill, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -202,7 +200,7 @@ public class BillList {
         return bills;
     }
 
-    public ObservableList<Book> getTrendingBooks() {
+    public static ObservableList<Book> getTrendingBooks() {
         ObservableList<Book> trendingBooks = FXCollections.observableArrayList();
         String query = """
         SELECT 
@@ -264,10 +262,10 @@ public class BillList {
         return trendingBooks;
     }
 
-    public ObservableList<Book> getRecommendBooks() throws Exception {
+    public static ObservableList<Book> getRecommendBooks() throws Exception {
         StringBuilder sb = new StringBuilder();
 
-        ObservableList<Book> AllBook = localInventory.getAllBooks();
+        ObservableList<Book> AllBook = Inventory.getAllBooks();
         BookIndexer indexer = new BookIndexer();
         indexer.indexBooks(AllBook);
 
@@ -298,9 +296,8 @@ public class BillList {
         }
 
         BookRecommender recommender = new BookRecommender();
-        ObservableList<Book> recommendbooks = recommender.searchSimilarBooks(sb.toString(),5);
 
-        return recommendbooks;
+        return recommender.searchSimilarBooks(sb.toString(),5);
     }
 
     public static void initialize() {

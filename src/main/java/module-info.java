@@ -33,7 +33,7 @@ module sample.hustbookstore {
     opens sample.hustbookstore.controllers.user to javafx.fxml;
     exports sample.hustbookstore.controllers.base;
     opens sample.hustbookstore.controllers.base to javafx.fxml;
-    exports sample.hustbookstore.models.address;
+    exports sample.hustbookstore.models.addressAPI;
     exports sample.hustbookstore.utils.cloud;
     opens sample.hustbookstore.utils.cloud to javafx.fxml;
     exports sample.hustbookstore.utils.recommendSystem;

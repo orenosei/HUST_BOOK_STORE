@@ -38,7 +38,7 @@ public class VoucherList {
         }
     }
 
-    public boolean updateVoucherRemaining(String code) {
+    public static boolean updateVoucherRemaining(String code) {
         String updateQuery = "UPDATE voucher SET remaining = remaining - 1 WHERE code = ?";
         try (PreparedStatement prepare = connect.prepareStatement(updateQuery)) {
             prepare.setString(1, code);
@@ -50,7 +50,7 @@ public class VoucherList {
         return false;
     }
 
-    public ObservableList<Voucher> getAllVouchers() {
+    public static ObservableList<Voucher> getAllVouchers() {
         ObservableList<Voucher> voucherList = FXCollections.observableArrayList();
         String sql = "SELECT * FROM voucher";
 
@@ -73,7 +73,7 @@ public class VoucherList {
         return voucherList;
     }
 
-    public boolean isVoucherExists(String voucherCode) {
+    public static boolean isVoucherExists(String voucherCode) {
         String query = "SELECT code FROM voucher WHERE code = ?";
         try (PreparedStatement statement = connect.prepareStatement(query)) {
             statement.setString(1, voucherCode);
@@ -86,7 +86,7 @@ public class VoucherList {
         return false;
     }
 
-    public boolean addVoucher(String code, int remaining, float discount, Date duration) {
+    public static boolean addVoucher(String code, int remaining, float discount, Date duration) {
         String insertQuery = "INSERT INTO voucher "
                 + "(code, remaining, discount, duration)"
                 + " VALUES (?, ?, ?, ?)";
@@ -106,7 +106,7 @@ public class VoucherList {
         return false;
     }
 
-    public boolean deleteVoucher(String voucherCode) {
+    public static boolean deleteVoucher(String voucherCode) {
         String deleteQuery = "DELETE FROM voucher WHERE code = ?";
 
         try (PreparedStatement prepare = connect.prepareStatement(deleteQuery)) {
@@ -119,7 +119,7 @@ public class VoucherList {
         }
     }
 
-    public Voucher getVoucher(String voucherCode) {
+    public static Voucher getVoucher(String voucherCode) {
         String query = "SELECT * FROM voucher WHERE code = ?";
         try (PreparedStatement prepare = connect.prepareStatement(query)) {
             prepare.setString(1, voucherCode);

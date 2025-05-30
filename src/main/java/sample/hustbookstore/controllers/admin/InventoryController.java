@@ -13,18 +13,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import org.controlsfx.control.CheckComboBox;
+import sample.hustbookstore.controllers.base.StoreUpdateListener;
 import sample.hustbookstore.models.Book;
 import sample.hustbookstore.models.Product;
 import sample.hustbookstore.utils.cloud.CloudinaryService;
+import sample.hustbookstore.utils.dao.Inventory;
 
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static sample.hustbookstore.LaunchApplication.localInventory;
-
 
 public class InventoryController {
 
@@ -210,22 +209,18 @@ public class InventoryController {
         genres.add("Web Novel");
         genres.add("Young Adult");
 
-        // Sắp xếp danh sách theo thứ tự từ điển
-//        Collections.sort(genres);
-
         ObservableList<String> genreList = FXCollections.observableArrayList(genres);
         inventory_genre.getItems().addAll(genreList);
     }
 
 
     public void showData() {
-        ObservableList<Book> list = localInventory.getAllProducts();
+        ObservableList<Book> list = Inventory.getAllProducts();
 
         FilteredList<Book> filteredData = new FilteredList<>(list, b -> true);
 
         search_bar.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(book -> {
-                // Nếu thanh tìm kiếm trống, hiển thị tất cả
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
@@ -263,7 +258,6 @@ public class InventoryController {
 
 
     public void handleProductTypeChange() {
-        // Kiểm tra xem loại sản phẩm có phải là Book không
         if ("Book".equals(inventory_type.getSelectionModel().getSelectedItem())) {
             inventory_genre_label.setDisable(false);
             inventory_isbn_label.setDisable(false);
@@ -338,7 +332,7 @@ public class InventoryController {
             return;
         }
 
-        if (localInventory.isProductExists(inventory_productID.getText())) {
+        if (Inventory.isProductExists(inventory_productID.getText())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);
@@ -347,7 +341,7 @@ public class InventoryController {
         } else {
             String type = inventory_type.getSelectionModel().getSelectedItem();
 
-            boolean success = localInventory.addProduct(
+            boolean success = Inventory.addProduct(
                     inventory_productID.getText(),
                     inventory_productName.getText(),
                     inventory_distributor.getText(),
@@ -372,9 +366,6 @@ public class InventoryController {
                 alert.setContentText("Product added successfully.");
                 alert.showAndWait();
 
-//                if (homeScreenController != null) {
-//                    homeScreenController.reloadStore();
-//                }
                 if(listener != null) listener.onStoreUpdated();
 
                 showData();
@@ -433,7 +424,7 @@ public class InventoryController {
         }
 
         String type = inventory_type.getSelectionModel().getSelectedItem();
-        boolean isUpdated = localInventory.updateProduct(
+        boolean isUpdated = Inventory.updateProduct(
                 inventory_productID.getText(),
                 type,
                 inventory_productName.getText(),
@@ -458,9 +449,6 @@ public class InventoryController {
             alert.setContentText("Product updated successfully.");
             alert.showAndWait();
 
-//            if (homeScreenController != null) {
-//                homeScreenController.reloadStore();
-//            }
             if(listener != null) listener.onStoreUpdated();
             showData();
         } else {
@@ -490,7 +478,7 @@ public class InventoryController {
         Optional<ButtonType> result = confirmAlert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            boolean isDeleted = localInventory.deleteProduct(inventory_productID.getText());
+            boolean isDeleted = Inventory.deleteProduct(inventory_productID.getText());
 
             if (isDeleted) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -500,9 +488,6 @@ public class InventoryController {
                 alert.showAndWait();
                 setClear_btn();
 
-//                if (homeScreenController != null) {
-//                    homeScreenController.reloadStore();
-//                }
                 if(listener != null) listener.onStoreUpdated();
                 showData();
             } else {
@@ -585,13 +570,6 @@ public class InventoryController {
         thread.setDaemon(true);
         thread.start();
     }
-
-    private HomeScreenController homeScreenController;
-
-    public void setHomeScreenController(HomeScreenController homeScreenController) {
-        this.homeScreenController = homeScreenController;
-    }
-
 
     public void initialize() {    // buộc phải có, giải thích trong buổi họp nhóm tiếp theo
         setTypeList();

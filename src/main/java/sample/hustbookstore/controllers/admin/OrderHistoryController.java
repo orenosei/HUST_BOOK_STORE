@@ -70,7 +70,6 @@ public class OrderHistoryController {
 
     private void setupSearchFunctionality() {
         searchBar.textProperty().addListener((obs, oldVal, newVal) -> filterBills());
-
         fromDate.valueProperty().addListener((obs, oldVal, newVal) -> filterBills());
         toDate.valueProperty().addListener((obs, oldVal, newVal) -> filterBills());
     }

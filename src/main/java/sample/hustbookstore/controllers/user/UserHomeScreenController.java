@@ -7,12 +7,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import sample.hustbookstore.controllers.base.StoreUpdateListener;
 import sample.hustbookstore.controllers.base.BaseHomeScreenController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import static sample.hustbookstore.LaunchApplication.*;
 
-public class UserHomeScreenController extends BaseHomeScreenController implements Initializable {
+public class UserHomeScreenController extends BaseHomeScreenController implements Initializable, StoreUpdateListener {
 
     @FXML
     private Button cart_btn;
@@ -39,6 +40,10 @@ public class UserHomeScreenController extends BaseHomeScreenController implement
         return "/sample/hustbookstore/user/user-profile-view.fxml";
     }
 
+    @Override
+    public void onStoreUpdated() {
+        reloadStore();
+    }
 
     public void loadCart(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource(getCartPath()));
@@ -49,8 +54,6 @@ public class UserHomeScreenController extends BaseHomeScreenController implement
         } catch (Exception e) {
             e.printStackTrace();
         }
-        UserCartController controller = loader.getController();
-        controller.setHomeScreenController(this);
     }
 
     @Override
@@ -117,6 +120,7 @@ public class UserHomeScreenController extends BaseHomeScreenController implement
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        UserCartController.setStoreUpdateListener(this);
         displayUsername();
         loadDashboard();
         dashboardScreen.setVisible(true);

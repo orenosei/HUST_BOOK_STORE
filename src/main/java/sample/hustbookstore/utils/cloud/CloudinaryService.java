@@ -22,6 +22,7 @@ public class CloudinaryService {
     private static final String NOT_FOUND_IMAGE_PATH = "/sample/hustbookstore/img/notfound.jpg";
     private static final Map<String, Image> memoryCache = new HashMap<>();
 
+    //init
     static {
         try {
             Files.createDirectories(Paths.get(CACHE_DIR));

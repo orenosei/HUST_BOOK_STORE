@@ -21,11 +21,6 @@ public class Book extends Product
     }
 
     //Cho recommend
-    public String getcombinedText() {
-        return this.getName() + " " + this.getAuthor() + " " + this.getGenre() + " " + this.getDescription();
-    }
-
-    //Cho recommend
     public Book(String ID, String name, String description, String genre, String author) {
         super(ID, name, description);
         this.author = author;
@@ -40,6 +35,10 @@ public class Book extends Product
         this.author = author;
         this.setSellPrice(price);
         this.setImage(image);
+    }
+    //Cho recommend
+    public String getcombinedText() {
+        return this.getName() + " " + this.getAuthor() + " " + this.getGenre() + " " + this.getDescription();
     }
 
     public String getIsbn() {
