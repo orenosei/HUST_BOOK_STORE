@@ -425,3 +425,14 @@
             5                          /* offset-y */
     );
 }
+
+#image_view2{
+     -fx-effect: dropshadow(
+             gaussian,
+             rgb(116, 60, 255),  /* tím nhạt từ #9178d1, 30% opacity */
+             20,                        /* radius */
+             0.3,                       /* spread */
+             0,                         /* offset-x */
+             5                          /* offset-y */
+     );
+ }

@@ -16,7 +16,7 @@
 
 <AnchorPane prefHeight="550.0" prefWidth="780.0" styleClass="trans-bg" stylesheets="@../Design/dashboardDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.user.UserRecommendCardController">
     <children>
-        <ImageView fx:id="imageField" fitHeight="530.0" fitWidth="366.0" layoutX="39.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+        <ImageView id="image_view2" fx:id="imageField" fitHeight="530.0" fitWidth="366.0" layoutX="39.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
             <image>
                 <Image url="@../img/notfound.jpg" />
             </image>
@@ -34,7 +34,7 @@
                             </color></DropShadow>
                     </input>
                     <color>
-                        <Color green="0.6225889325141907" blue="1.0" />
+                        <Color red="0.5137255191802979" green="0.1921568661928177" blue="1.0" />
                     </color>
                 </DropShadow>
             </effect>
@@ -51,46 +51,46 @@
                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label text="ISBN:" textFill="#1aa7f6">
+                <Label text="ISBN:" textFill="#8331ff">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font></Label>
-                <Label text="Author:" textFill="#1aa7f6" GridPane.rowIndex="1">
+                <Label text="Author:" textFill="#8331ff" GridPane.rowIndex="1">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font></Label>
-                <Label text="Genre:" textFill="#1aa7f6" GridPane.rowIndex="2">
+                <Label text="Genre:" textFill="#8331ff" GridPane.rowIndex="2">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font></Label>
-                <Label text="Description:" textFill="#1aa7f6" GridPane.rowIndex="3">
+                <Label text="Description:" textFill="#8331ff" GridPane.rowIndex="3">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font></Label>
-                <TextField fx:id="isbnField" styleClass="text-box-2" stylesheets="@../Design/inventoryDesign.css" text="978-604-2-37405-7" GridPane.columnIndex="1">
+                <TextField fx:id="isbnField" styleClass="text-box-4" stylesheets="@../Design/inventoryDesign.css" text="978-604-2-37405-7" GridPane.columnIndex="1">
                     <font>
                         <Font size="18.0" />
                     </font></TextField>
-                <TextField fx:id="authorField" styleClass="text-box-2" stylesheets="@../Design/inventoryDesign.css" text="Momoco" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <TextField fx:id="authorField" styleClass="text-box-4" stylesheets="@../Design/inventoryDesign.css" text="Momoco" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <font>
                         <Font size="18.0" />
                     </font></TextField>
-                <TextField fx:id="genreField" styleClass="text-box-2" stylesheets="@../Design/inventoryDesign.css" text="Romcom" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <TextField fx:id="genreField" styleClass="text-box-4" stylesheets="@../Design/inventoryDesign.css" text="Romcom" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <font>
                         <Font size="18.0" />
                     </font></TextField>
-                <TextArea fx:id="descriptionField" prefHeight="117.0" prefWidth="249.0" styleClass="text-box-2" stylesheets="@../Design/inventoryDesign.css" text="Arya bàn bên thỉnh thoảng lại trêu gheo tôi bằng tiếng nga" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <TextArea fx:id="descriptionField" prefHeight="117.0" prefWidth="249.0" styleClass="text-box-4" stylesheets="@../Design/inventoryDesign.css" text="Arya bàn bên thỉnh thoảng lại trêu gheo tôi bằng tiếng nga" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                     <font>
                         <Font size="18.0" />
                     </font></TextArea>
             </children>
         </GridPane>
-        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="411.0" layoutY="472.0" prefHeight="67.0" prefWidth="110.0" text="Price:" textFill="#1aa7f6">
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="411.0" layoutY="472.0" prefHeight="67.0" prefWidth="110.0" text="Price:" textFill="#8331ff">
             <font>
                 <Font name="System Bold Italic" size="34.0" />
             </font>
         </Label>
-        <Label layoutX="678.0" layoutY="499.0" text="VND" textFill="#4dacff">
+        <Label layoutX="678.0" layoutY="499.0" text="VND" textFill="#8331ff">
             <font>
                 <Font name="System Italic" size="19.0" />
             </font>
@@ -105,7 +105,7 @@
                         <DropShadow />
                     </input>
                     <color>
-                        <Color red="0.3019607961177826" green="0.6745098233222961" blue="1.0" />
+                        <Color red="0.5137255191802979" green="0.1921568661928177" blue="1.0" />
                     </color>
                 </DropShadow>
             </effect>

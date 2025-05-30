@@ -565,6 +565,16 @@
     -fx-text-fill: white;
 }
 
+.text-box-4 {
+    -fx-background-color: transparent;     /* nền chính trong suốt */
+    -fx-background-insets: 0;              /* bỏ mọi inset */
+    -fx-background-radius: 0;              /* không bo góc */
+    -fx-border-color: transparent;         /* bỏ khung viền */
+    -fx-padding: 0;                        /* bỏ padding */
+    -fx-focus-color: transparent;          /* remove focus ring */
+    -fx-faint-focus-color: transparent;    /* remove faint focus */
+    -fx-text-fill: #a31aff;
+}
 
 
 
@@ -619,3 +629,13 @@
     animation: gradient 15s ease infinite;
 }
 
+/*.image-view{*/
+/*    -fx-effect: dropshadow(*/
+/*            gaussian,*/
+/*            rgba(72, 0, 149, 0.5),  !* tím nhạt từ #9178d1, 30% opacity *!*/
+/*            20,                        !* radius *!*/
+/*            0.5,                       !* spread *!*/
+/*            0,                         !* offset-x *!*/
+/*            5                          !* offset-y *!*/
+/*    );*/
+/*}*/
