@@ -99,7 +99,7 @@
                             </font>
                         </PasswordField>
                         <Button fx:id="su_signupBtn" layoutX="340.0" layoutY="630.0" minHeight="40.0" mnemonicParsing="false" onAction="#regBtn" prefHeight="44.0" prefWidth="155.0" styleClass="signup-btn" stylesheets="@../Design/LaunchApplicationDesign.css" text="SIGN UP" />
-                        <ComboBox fx:id="su_question" layoutX="144.0" layoutY="467.0" prefHeight="50.0" prefWidth="350.0" promptText="Question" styleClass="question-btn" stylesheets="@../Design/LaunchApplicationDesign.css" />
+                        <ComboBox fx:id="su_question" layoutX="144.0" layoutY="467.0" prefHeight="50.0" prefWidth="350.0" promptText="Question" styleClass="question-btn" />
                         <TextField fx:id="su_answer" layoutX="144.0" layoutY="545.0" onAction="#regBtn" prefHeight="50.0" prefWidth="350.0" promptText="Answer">
                             <font>
                                 <Font size="21.0" />
