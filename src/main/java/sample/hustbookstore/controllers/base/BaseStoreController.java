@@ -95,7 +95,7 @@ public abstract class BaseStoreController {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(getProductCardPath()));
                 AnchorPane pane = loader.load();
-                ProductCardSetData controller = (ProductCardSetData) loader.getController();
+                ProductCardSetData controller = loader.getController();
                 controller.setData(product);
                 pane.setUserData(product);
 

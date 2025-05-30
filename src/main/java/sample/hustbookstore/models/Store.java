@@ -6,9 +6,9 @@ import sample.hustbookstore.utils.dao.Inventory;
 import java.util.stream.Collectors;
 
 public class Store {
-    private final ObservableList<Book> bookListData = FXCollections.observableArrayList();
-    private final ObservableList<Stationery> stationeryListData = FXCollections.observableArrayList();
-    private final ObservableList<Toy> toyListData = FXCollections.observableArrayList();
+    private ObservableList<Book> bookListData = FXCollections.observableArrayList();
+    private ObservableList<Stationery> stationeryListData = FXCollections.observableArrayList();
+    private ObservableList<Toy> toyListData = FXCollections.observableArrayList();
 
     public void refreshData() {
         bookListData.setAll(Inventory.getAllBooks()
