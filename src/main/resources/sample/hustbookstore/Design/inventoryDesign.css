@@ -629,13 +629,13 @@
     animation: gradient 15s ease infinite;
 }
 
-.image-view{
-    -fx-effect: dropshadow(
-            gaussian,
-            rgba(72, 0, 149, 0.5),  /* tím nhạt từ #9178d1, 30% opacity */
-            20,                        /* radius */
-            0.5,                       /* spread */
-            0,                         /* offset-x */
-            5                          /* offset-y */
-    );
-}
+/*.image-view{*/
+/*    -fx-effect: dropshadow(*/
+/*            gaussian,*/
+/*            rgba(72, 0, 149, 0.5),  !* tím nhạt từ #9178d1, 30% opacity *!*/
+/*            20,                        !* radius *!*/
+/*            0.5,                       !* spread *!*/
+/*            0,                         !* offset-x *!*/
+/*            5                          !* offset-y *!*/
+/*    );*/
+/*}*/
