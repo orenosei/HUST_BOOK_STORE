@@ -1,6 +1,5 @@
 package sample.hustbookstore.controllers.user;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,20 +50,6 @@ public class UserHomeScreenController extends BaseHomeScreenController implement
             AnchorPane root = loader.load();
             cartScreen.getChildren().clear();
             cartScreen.getChildren().add(root);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void loadStore() {
-        try {
-            AnchorPane root = localUserStoreScreen;
-            Platform.runLater(() -> {
-                storeScreen.getChildren().clear();
-                storeScreen.getChildren().add(root);
-                System.out.println("Heloooo");
-            });
         } catch (Exception e) {
             e.printStackTrace();
         }

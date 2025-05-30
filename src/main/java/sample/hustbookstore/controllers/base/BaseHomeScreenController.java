@@ -19,8 +19,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.util.Optional;
-import static sample.hustbookstore.LaunchApplication.localInventoryController;
-
 
 public abstract class BaseHomeScreenController implements Initializable{
 
@@ -44,7 +42,6 @@ public abstract class BaseHomeScreenController implements Initializable{
     protected abstract String getDashboardPath();
     protected abstract String getStorePath();
     protected abstract String getProfilePath();
-    public abstract void loadStore();
 
     @FXML
     public abstract void handleSidebarButtonAction(ActionEvent event);
@@ -62,7 +59,6 @@ public abstract class BaseHomeScreenController implements Initializable{
             Optional<ButtonType> option = alert.showAndWait();
 
             if (option.isPresent() && option.get() == ButtonType.OK) {
-                localInventoryController.showData();
                 Stage currentStage = (Stage) logout_btn.getScene().getWindow();
                 currentStage.close();
 
@@ -104,9 +100,8 @@ public abstract class BaseHomeScreenController implements Initializable{
         }
     }
 
-    public void loadNewStore() {
+    public void loadStore() {
         try {
-
             AnchorPane root = FXMLLoader.load(getClass().getResource(getStorePath()));
             Platform.runLater(() -> {
                 storeScreen.getChildren().clear();
@@ -116,6 +111,7 @@ public abstract class BaseHomeScreenController implements Initializable{
             e.printStackTrace();
         }
     }
+
 
     @FXML
     public void handleSyncButtonAction(ActionEvent event) {
@@ -133,7 +129,7 @@ public abstract class BaseHomeScreenController implements Initializable{
         Task<Void> loadTask = new Task<>() {
             @Override
             protected Void call() {
-                loadNewStore();
+                loadStore();
                 return null;
             }
 

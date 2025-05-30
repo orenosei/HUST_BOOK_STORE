@@ -81,15 +81,11 @@ public class UserStoreProductCardController implements ProductCardSetData {
     private Stationery stationeryData;
     private Toy toyData;
 
-    private Image image;
-
     private SpinnerValueFactory<Integer> spin;
 
     private int currenttype;
 
     private Product productAddToCart;
-
-    public String askedItem;
 
     public void setData(Product prodData) {
         this.productAddToCart = prodData;
@@ -256,7 +252,6 @@ public class UserStoreProductCardController implements ProductCardSetData {
     private void handleAskAIButtonAction(ActionEvent event) {
         arya.askAi((Book) productAddToCart);
     }
-
 
 
     @FXML

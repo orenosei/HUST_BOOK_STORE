@@ -3,6 +3,7 @@ package sample.hustbookstore.controllers.user;
 import javafx.scene.control.*;
 import sample.hustbookstore.controllers.base.BaseLoginController;
 import sample.hustbookstore.models.User;
+import sample.hustbookstore.utils.dao.CartList;
 import sample.hustbookstore.utils.dao.UserList;
 import static sample.hustbookstore.LaunchApplication.*;
 
@@ -12,7 +13,7 @@ public class UserLoginController extends BaseLoginController {
         if (si_username.getText().isEmpty() || si_password.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Incorrect Username or Password");
         } else if (UserList.login(si_username.getText(), si_password.getText())) {
-            localCart = localCart.getCartFromDatabase(localUser.getUserId());
+            localCart = CartList.getCartFromDatabase(localUser.getUserId());
             loadHomeScreen();
         } else {
             showAlert(Alert.AlertType.ERROR, "Incorrect Username or Password");
