@@ -17,6 +17,7 @@ import sample.hustbookstore.controllers.base.StoreUpdateListener;
 import sample.hustbookstore.models.Book;
 import sample.hustbookstore.models.Product;
 import sample.hustbookstore.utils.cloud.CloudinaryService;
+import sample.hustbookstore.utils.cacheHandler.ImageCache;
 import sample.hustbookstore.utils.dao.Inventory;
 
 import java.io.File;
@@ -213,7 +214,6 @@ public class InventoryController {
         inventory_genre.getItems().addAll(genreList);
     }
 
-
     public void showData() {
         ObservableList<Book> list = Inventory.getAllProducts();
 
@@ -299,7 +299,7 @@ public class InventoryController {
             try {
                 currentImageUrl = getImageUrl(file);
 
-                image = new Image(file.toURI().toString(), 100, 160, true, true);
+                image = new Image(file.toURI().toString(), 140, 220, true, true);
                 inventory_imageView.setImage(image);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -552,7 +552,7 @@ public class InventoryController {
             @Override
             protected Image call() throws Exception {
                 //return new Image(imageUrl, 100, 160, true, true);
-                return CloudinaryService.loadImage(imageUrl);
+                return ImageCache.loadImage(imageUrl);
             }
         };
         imageLoadingTask.setOnSucceeded(e -> {

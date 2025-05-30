@@ -18,7 +18,7 @@ import sample.hustbookstore.models.Book;
 import sample.hustbookstore.models.Product;
 import sample.hustbookstore.models.Stationery;
 import sample.hustbookstore.models.Toy;
-import sample.hustbookstore.utils.cloud.CloudinaryService;
+import sample.hustbookstore.utils.cacheHandler.ImageCache;
 import sample.hustbookstore.controllers.base.ProductCardSetData;
 
 import static sample.hustbookstore.LaunchApplication.localCart;
@@ -136,7 +136,7 @@ public class UserStoreProductCardController implements ProductCardSetData {
             currenttype = 3;
         }
 
-        Image image = CloudinaryService.loadImage(imagePath);
+        Image image = ImageCache.loadImage(imagePath);
         productImage.setImage(image);
     }
 

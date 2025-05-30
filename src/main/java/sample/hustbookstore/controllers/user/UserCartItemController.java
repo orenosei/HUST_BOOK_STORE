@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import sample.hustbookstore.models.CartItem;
-import sample.hustbookstore.utils.cloud.CloudinaryService;
+import sample.hustbookstore.utils.cacheHandler.ImageCache;
 
 import java.util.Optional;
 
@@ -51,7 +51,7 @@ public class UserCartItemController {
         ));
 
         String imagePath = item.getProduct().getImage();
-        Image image = CloudinaryService.loadImage(imagePath);
+        Image image = ImageCache.loadImage(imagePath);
 
         itemImage.setImage(image);
     }
