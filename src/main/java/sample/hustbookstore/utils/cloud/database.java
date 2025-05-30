@@ -1,5 +1,6 @@
 package sample.hustbookstore.utils.cloud;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -8,9 +9,11 @@ public class database {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            String url = "jdbc:mysql://db-mysql-nyc3-64236-do-user-21926172-0.f.db.ondigitalocean.com:25060/bookstore?sslMode=REQUIRED";
-            String user = "doadmin";
-            String password = "AVNS_AtgscO0H_d3fHTjyx6d";
+            Dotenv dotenv = Dotenv.load();
+
+            String url = dotenv.get("DB_URL");
+            String user = dotenv.get("DB_USER");
+            String password = dotenv.get("DB_PASSWORD");
 
             return DriverManager.getConnection(url, user, password);
         } catch (Exception e) {
