@@ -1,7 +1,8 @@
-package sample.hustbookstore.models;
+package sample.hustbookstore.utils.dao;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import sample.hustbookstore.models.Voucher;
 import sample.hustbookstore.utils.cloud.database;
 
 import java.sql.*;

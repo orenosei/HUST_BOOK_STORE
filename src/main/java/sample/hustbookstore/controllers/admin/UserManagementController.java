@@ -1,8 +1,6 @@
 package sample.hustbookstore.controllers.admin;
 
-import javafx.animation.PauseTransition;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableCell;
@@ -10,11 +8,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Duration;
 import sample.hustbookstore.models.User;
-import sample.hustbookstore.models.UserList;
-
-import java.util.Optional;
+import sample.hustbookstore.utils.dao.UserList;
 
 
 public class UserManagementController {

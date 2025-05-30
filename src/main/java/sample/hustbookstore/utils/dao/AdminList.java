@@ -1,5 +1,6 @@
-package sample.hustbookstore.models;
+package sample.hustbookstore.utils.dao;
 
+import sample.hustbookstore.models.Admin;
 import sample.hustbookstore.utils.cloud.database;
 
 import java.sql.Connection;

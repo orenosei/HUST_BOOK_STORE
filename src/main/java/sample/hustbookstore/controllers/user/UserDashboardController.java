@@ -13,6 +13,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import sample.hustbookstore.models.*;
+import sample.hustbookstore.utils.dao.BillList;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

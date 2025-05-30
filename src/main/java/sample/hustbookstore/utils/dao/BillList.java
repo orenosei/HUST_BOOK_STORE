@@ -1,8 +1,12 @@
-package sample.hustbookstore.models;
+package sample.hustbookstore.utils.dao;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
+import sample.hustbookstore.models.Bill;
+import sample.hustbookstore.models.Book;
+import sample.hustbookstore.models.CartItem;
+import sample.hustbookstore.models.Product;
 import sample.hustbookstore.utils.recommendSystem.BookIndexer;
 import sample.hustbookstore.utils.recommendSystem.BookRecommender;
 import sample.hustbookstore.utils.cloud.database;

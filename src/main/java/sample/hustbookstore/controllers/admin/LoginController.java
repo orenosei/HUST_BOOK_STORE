@@ -4,7 +4,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 import javafx.scene.control.*;
 import sample.hustbookstore.controllers.base.BaseLoginController;
 import sample.hustbookstore.models.Admin;
-import sample.hustbookstore.models.AdminList;
+import sample.hustbookstore.utils.dao.AdminList;
 
 public class LoginController extends BaseLoginController {
     private final AdminList adminList = new AdminList();

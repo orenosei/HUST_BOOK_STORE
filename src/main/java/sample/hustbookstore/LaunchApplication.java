@@ -11,6 +11,8 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import sample.hustbookstore.controllers.admin.InventoryController;
 import sample.hustbookstore.models.*;
+import sample.hustbookstore.utils.dao.*;
+
 import java.io.IOException;
 import java.awt.Taskbar;
 import java.awt.Toolkit;

@@ -3,7 +3,7 @@ package sample.hustbookstore.controllers.user;
 import javafx.scene.control.*;
 import sample.hustbookstore.controllers.base.BaseLoginController;
 import sample.hustbookstore.models.User;
-import sample.hustbookstore.models.UserList;
+import sample.hustbookstore.utils.dao.UserList;
 import static sample.hustbookstore.LaunchApplication.*;
 
 public class UserLoginController extends BaseLoginController {

@@ -11,9 +11,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-import sample.hustbookstore.models.BillList;
+import sample.hustbookstore.utils.dao.BillList;
 import sample.hustbookstore.models.Book;
-import sample.hustbookstore.models.UserList;
+import sample.hustbookstore.utils.dao.UserList;
 import sample.hustbookstore.utils.cloud.CloudinaryService;
 
 import java.sql.Date;

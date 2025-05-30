@@ -3,7 +3,7 @@ package sample.hustbookstore.controllers.admin;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import sample.hustbookstore.controllers.base.BaseProfileController;
-import sample.hustbookstore.models.AdminList;
+import sample.hustbookstore.utils.dao.AdminList;
 
 import static sample.hustbookstore.LaunchApplication.localAdmin;
 

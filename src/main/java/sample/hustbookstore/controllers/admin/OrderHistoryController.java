@@ -11,7 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import sample.hustbookstore.models.BillList;
+import sample.hustbookstore.utils.dao.BillList;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -136,7 +136,4 @@ public class OrderHistoryController {
         }
     }
 
-    private void showAlert(String message) {
-        new Alert(Alert.AlertType.WARNING, message).showAndWait();
-    }
 }

@@ -38,5 +38,7 @@ module sample.hustbookstore {
     opens sample.hustbookstore.utils.cloud to javafx.fxml;
     exports sample.hustbookstore.utils.recommendSystem;
     opens sample.hustbookstore.utils.recommendSystem to javafx.fxml;
+    exports sample.hustbookstore.utils.dao;
+    opens sample.hustbookstore.utils.dao to javafx.fxml;
 
 }
