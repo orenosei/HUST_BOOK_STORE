@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
@@ -14,11 +16,11 @@
 
 <AnchorPane prefHeight="720.0" prefWidth="1020.0" styleClass="invisible-bg" stylesheets="@../Design/inventoryDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.controllers.admin.UserManagementController">
    <children>
-      <AnchorPane prefHeight="720.0" prefWidth="1020.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+      <AnchorPane prefHeight="677.0" prefWidth="960.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
          <children>
-            <ScrollPane hbarPolicy="NEVER" layoutX="20.0" layoutY="99.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="89.0">
+            <ScrollPane hbarPolicy="NEVER" layoutX="20.0" layoutY="99.0" prefHeight="517.0" prefWidth="940.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="89.0">
                <content>
-                  <TableView fx:id="customerTable" prefHeight="556.0" prefWidth="936.0" styleClass="inventory-table-border" stylesheets="@../Design/inventoryDesign.css">
+                  <TableView fx:id="customerTable" prefHeight="515.0" prefWidth="936.0" styleClass="inventory-table-border" stylesheets="@../Design/inventoryDesign.css">
                      <columns>
                         <TableColumn fx:id="usernameColumn" prefWidth="158.0" text="Username" />
                         <TableColumn fx:id="nameColumn" prefWidth="210.0" text="Name" />
@@ -63,6 +65,18 @@
                      </fill></FontAwesomeIcon>
                </children>
             </AnchorPane>
+            <HBox layoutX="755.0" layoutY="634.0" spacing="30.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="30.0">
+               <children>
+                  <Button fx:id="banUserBtn" mnemonicParsing="false" onAction="#handleBanUser" prefHeight="40.0" prefWidth="100.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Ban" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font></Button>
+                  <Button fx:id="unbanUserBtn" mnemonicParsing="false" onAction="#handleUnbanUser" prefHeight="40.0" prefWidth="100.0" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css" text="Unban" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font></Button>
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
    </children>

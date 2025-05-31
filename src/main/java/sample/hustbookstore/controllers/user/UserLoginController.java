@@ -11,12 +11,17 @@ public class UserLoginController extends BaseLoginController {
     @Override
     public void loginBtn() {
         if (si_username.getText().isEmpty() || si_password.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Incorrect Username or Password");
-        } else if (UserList.login(si_username.getText(), si_password.getText())) {
-            localCart = CartList.getCartFromDatabase(localUser.getUserId());
-            loadHomeScreen();
+            showAlert(Alert.AlertType.ERROR, "Please enter both username and password.");
         } else {
-            showAlert(Alert.AlertType.ERROR, "Incorrect Username or Password");
+            int loginResult = UserList.login(si_username.getText(), si_password.getText());
+            if (loginResult == 1) {
+                localCart = CartList.getCartFromDatabase(localUser.getUserId());
+                loadHomeScreen();
+            } else if (loginResult == -1) { //banned acc
+                showAlert(Alert.AlertType.WARNING, "Your account has been banned. Please contact the administrator.");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Incorrect username or password.");
+            }
         }
     }
 

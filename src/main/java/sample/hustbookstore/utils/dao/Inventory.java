@@ -24,7 +24,7 @@ public class Inventory {
 
     public static ObservableList<Book> getAllProducts() {
         ObservableList<Book> productList = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM product";
+        String sql = "SELECT * FROM product WHERE isDeleted = FALSE";
 
         try (PreparedStatement prepare = connect.prepareStatement(sql);
              ResultSet result = prepare.executeQuery()) {
@@ -152,10 +152,21 @@ public class Inventory {
         }
     }
 
+//    public static boolean deleteProduct(String productId) {
+//        String deleteQuery = "DELETE FROM product WHERE product_id = ?";
+//
+//        try (PreparedStatement prepare = connect.prepareStatement(deleteQuery)) {
+//            prepare.setString(1, productId);
+//            int rowsAffected = prepare.executeUpdate();
+//            return rowsAffected > 0;
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+//    }
     public static boolean deleteProduct(String productId) {
-        String deleteQuery = "DELETE FROM product WHERE product_id = ?";
-
-        try (PreparedStatement prepare = connect.prepareStatement(deleteQuery)) {
+        String updateQuery = "UPDATE product SET stock = 0, isDeleted = TRUE WHERE product_id = ?";
+        try (PreparedStatement prepare = connect.prepareStatement(updateQuery)) {
             prepare.setString(1, productId);
             int rowsAffected = prepare.executeUpdate();
             return rowsAffected > 0;
@@ -166,7 +177,7 @@ public class Inventory {
     }
 
     public static ObservableList<Book> getAllBooks() {
-        String sql = "SELECT * FROM product WHERE type = 'Book'";
+        String sql = "SELECT * FROM product WHERE type = 'Book' AND isDeleted = FALSE";
         ObservableList<Book> bookList = FXCollections.observableArrayList();
 
         try (PreparedStatement prepare = connect.prepareStatement(sql);
@@ -199,7 +210,7 @@ public class Inventory {
     }
 
     public static ObservableList<Stationery> getAllStationery() {
-        String sql = "SELECT * FROM product WHERE type = 'Stationery'";
+        String sql = "SELECT * FROM product WHERE type = 'Stationery' AND isDeleted = FALSE";
         ObservableList<Stationery> stationeryList = FXCollections.observableArrayList();
 
         try (PreparedStatement prepare = connect.prepareStatement(sql);
@@ -228,7 +239,7 @@ public class Inventory {
     }
 
     public static ObservableList<Toy> getAllToys() {
-        String sql = "SELECT * FROM product WHERE type = 'Toy'";
+        String sql = "SELECT * FROM product WHERE type = 'Toy' AND isDeleted = FALSE";
         ObservableList<Toy> toyList = FXCollections.observableArrayList();
 
         try (PreparedStatement prepare = connect.prepareStatement(sql);
@@ -258,7 +269,7 @@ public class Inventory {
 
     public static Product getProductFromProductID(String productId) {
         Product product = null;
-        String query = "SELECT * FROM product WHERE product_id = ?";
+        String query = "SELECT * FROM product WHERE product_id = ? AND isDeleted = FALSE";
 
         try (PreparedStatement prepare = connect.prepareStatement(query)) {
             prepare.setString(1, productId);

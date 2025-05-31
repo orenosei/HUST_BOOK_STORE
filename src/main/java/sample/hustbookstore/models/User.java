@@ -3,12 +3,14 @@ package sample.hustbookstore.models;
 public class User extends Admin{
     private String address;
     private int userId;
+    private boolean isBanned;
 
 
-    public User(String username, String password, String question, String answer, String name, String phoneNumber, String email, String address, int userId) {
+    public User(String username, String password, String question, String answer, String name, String phoneNumber, String email, String address, int userId, boolean isBanned) {
         super(username, password, question, answer, name, phoneNumber, email);
         this.address = address;
         this.userId = userId;
+        this.isBanned = isBanned;
     }
 
     public User(String username, String password, String question, String answer, String name, String phoneNumber, String email, String address) {
@@ -38,6 +40,14 @@ public class User extends Admin{
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public boolean isBanned() {
+        return isBanned;
+    }
+
+    public void setBanned(boolean banned) {
+        isBanned = banned;
     }
 
 }
