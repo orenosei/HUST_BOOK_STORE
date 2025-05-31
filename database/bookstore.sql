@@ -22,6 +22,7 @@ CREATE TABLE `user` (
                         `phonenumber` varchar(255) DEFAULT NULL,
                         `email` varchar(255) DEFAULT NULL,
                         `address` varchar(255) DEFAULT NULL,
+                        `isBanned` BOOLEAN DEFAULT FALSE,
                         PRIMARY KEY (`user_id`)
 );
 
@@ -41,6 +42,7 @@ CREATE TABLE `product` (
                            `author` varchar(255) DEFAULT NULL,
                            `genre` varchar(255) DEFAULT NULL,
                            `pub_date` date DEFAULT NULL,
+                           `isDeleted` BOOLEAN DEFAULT FALSE,
                            PRIMARY KEY (`product_id`)
 );
 

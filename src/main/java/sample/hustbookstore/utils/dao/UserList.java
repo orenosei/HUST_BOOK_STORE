@@ -36,7 +36,8 @@ public class UserList {
                         rs.getString("phonenumber"),
                         rs.getString("email"),
                         rs.getString("address"),
-                        rs.getInt("user_id")
+                        rs.getInt("user_id"),
+                        rs.getBoolean("isBanned")
                 );
                 users.add(user);
             }
@@ -61,13 +62,17 @@ public class UserList {
         return 0.0;
     }
 
-    public static boolean login(String username, String password) {
+    public static int login(String username, String password) {
         String query = "SELECT * FROM user WHERE username = ? AND password = ?";
         try (PreparedStatement statement = connect.prepareStatement(query)) {
             statement.setString(1, username);
             statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
+                boolean isBanned = resultSet.getBoolean("isBanned");
+                if (isBanned) {
+                    return -1; // banned acc
+                }
                 localUser = new User(
                         resultSet.getString("username"),
                         resultSet.getString("password"),
@@ -77,15 +82,15 @@ public class UserList {
                         resultSet.getString("phonenumber"),
                         resultSet.getString("email"),
                         resultSet.getString("address"),
-                        resultSet.getInt("user_id")
+                        resultSet.getInt("user_id"),
+                        resultSet.getBoolean("isBanned")
                 );
-
-                return true;
+                return 1;
             }
-            return false;
+            return 0;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return 0;
         }
     }
 
@@ -179,4 +184,27 @@ public class UserList {
         return 0;
     }
 
+    public static boolean banUser(int userId) {
+        String query = "UPDATE user SET isBanned = TRUE WHERE user_id = ?";
+        try (PreparedStatement statement = connect.prepareStatement(query)) {
+            statement.setInt(1, userId);
+            int rowsUpdated = statement.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean unbanUser(int userId) {
+        String query = "UPDATE user SET isBanned = FALSE WHERE user_id = ?";
+        try (PreparedStatement statement = connect.prepareStatement(query)) {
+            statement.setInt(1, userId);
+            int rowsUpdated = statement.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
