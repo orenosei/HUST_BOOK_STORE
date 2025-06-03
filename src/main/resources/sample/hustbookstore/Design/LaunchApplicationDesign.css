@@ -52,3 +52,7 @@
 .returnbtn:hover{
     -fx-background-color: #bda2d4;
 }
+
+.login-bg {
+    -fx-background-image: url("../img/login.png");
+}

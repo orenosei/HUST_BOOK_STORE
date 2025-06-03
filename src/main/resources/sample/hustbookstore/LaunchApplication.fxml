@@ -7,33 +7,32 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <StackPane fx:id="welcomeScreen" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.hustbookstore.LaunchApplication">
    <children>
-      <AnchorPane prefHeight="720.0" prefWidth="640.0" styleClass="gradient" stylesheets="@Design/LaunchApplicationDesign.css">
+      <AnchorPane prefHeight="720.0" prefWidth="640.0" styleClass="login-bg" stylesheets="@Design/LaunchApplicationDesign.css">
          <children>
-            <FontAwesomeIcon fill="WHITE" glyphName="BOOK" layoutX="206.0" layoutY="341.0" size="20em" />
-            <Button fx:id="admin_btn" layoutX="174.0" layoutY="495.0" minHeight="50.0" mnemonicParsing="false" onAction="#switchAdminLogin" prefWidth="300.0" styleClass="create-btn" stylesheets="@Design/LaunchApplicationDesign.css" text="Admin">
+            <FontAwesomeIcon fill="WHITE" glyphName="BOOK" layoutX="206.0" layoutY="341.0" size="20em" visible="false" />
+            <Button fx:id="admin_btn" layoutX="56.0" layoutY="628.0" minHeight="50.0" mnemonicParsing="false" onAction="#switchAdminLogin" prefHeight="50.0" prefWidth="262.0" styleClass="create-btn" stylesheets="@Design/LaunchApplicationDesign.css" text="Admin">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold Italic" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="user_btn" layoutX="174.0" layoutY="565.0" minHeight="50.0" mnemonicParsing="false" onAction="#switchUserLogin" prefWidth="300.0" styleClass="create-btn" stylesheets="@Design/LaunchApplicationDesign.css" text="User">
+            <Button fx:id="user_btn" layoutX="330.0" layoutY="628.0" minHeight="50.0" mnemonicParsing="false" onAction="#switchUserLogin" prefWidth="262.0" styleClass="create-btn" stylesheets="@Design/LaunchApplicationDesign.css" text="User">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold Italic" size="18.0" />
                </font>
             </Button>
-            <Text fill="WHITE" layoutX="184.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HUST">
+            <Text fill="WHITE" layoutX="184.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HUST" visible="false">
                <font>
                   <Font name="Bauhaus 93" size="68.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="341.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOOK">
+            <Text fill="WHITE" layoutX="341.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOOK" visible="false">
                <font>
                   <Font name="Bauhaus 93" size="26.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="340.0" layoutY="435.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STORE">
+            <Text fill="WHITE" layoutX="340.0" layoutY="435.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STORE" visible="false">
                <font>
                   <Font name="Bauhaus 93" size="26.0" />
                </font>

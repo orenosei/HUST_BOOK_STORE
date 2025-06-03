@@ -205,10 +205,10 @@
                   </PasswordField>
                </children>
             </AnchorPane>
-                <AnchorPane fx:id="side_form" prefHeight="720.0" prefWidth="640.0" styleClass="gradient" stylesheets="@../Design/LaunchApplicationDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <AnchorPane fx:id="side_form" prefHeight="720.0" prefWidth="640.0" styleClass="login-bg" stylesheets="@../Design/LaunchApplicationDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <FontAwesomeIcon fill="WHITE" glyphName="BOOK" layoutX="206.0" layoutY="341.0" size="20em" />
-                        <Button fx:id="side_CreateBtn" layoutX="174.0" layoutY="627.0" minHeight="50.0" mnemonicParsing="false" onAction="#switchForm" prefWidth="300.0" styleClass="create-btn" stylesheets="@../Design/LaunchApplicationDesign.css" text="Create new account">
+                        <FontAwesomeIcon fill="WHITE" glyphName="BOOK" layoutX="206.0" layoutY="341.0" size="20em" visible="false" />
+                        <Button fx:id="side_CreateBtn" layoutX="167.0" layoutY="627.0" minHeight="50.0" mnemonicParsing="false" onAction="#switchForm" prefWidth="300.0" styleClass="create-btn" stylesheets="@../Design/LaunchApplicationDesign.css" text="Create new account">
                             <font>
                                 <Font size="18.0" />
                             </font>
@@ -218,17 +218,17 @@
                                 <Font size="18.0" />
                             </font>
                         </Button>
-                        <Text fill="WHITE" layoutX="184.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HUST">
+                        <Text fill="WHITE" layoutX="184.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HUST" visible="false">
                             <font>
                                 <Font name="Bauhaus 93" size="68.0" />
                             </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="341.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOOK">
+                        <Text fill="WHITE" layoutX="341.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOOK" visible="false">
                             <font>
                                 <Font name="Bauhaus 93" size="26.0" />
                             </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="340.0" layoutY="435.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STORE">
+                        <Text fill="WHITE" layoutX="340.0" layoutY="435.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STORE" visible="false">
                             <font>
                                 <Font name="Bauhaus 93" size="26.0" />
                             </font>
