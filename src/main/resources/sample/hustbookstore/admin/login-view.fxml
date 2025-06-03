@@ -237,7 +237,7 @@
                 </AnchorPane>
             </children>
         </AnchorPane>
-      <AnchorPane fx:id="waitingScreen" prefHeight="200.0" prefWidth="200.0" styleClass="gradient" stylesheets="@../Design/LaunchApplicationDesign.css">
+      <AnchorPane fx:id="waitingScreen" prefHeight="200.0" prefWidth="200.0" styleClass="gradient" stylesheets="@../Design/LaunchApplicationDesign.css" visible="false">
          <children>
             <AnchorPane prefHeight="720.0" prefWidth="640.0" styleClass="login-remove-bg" stylesheets="@../Design/LaunchApplicationDesign.css" />
             <FontAwesomeIcon fill="WHITE" glyphName="BOOK" layoutX="87.0" layoutY="414.0" size="25em" visible="false" wrappingWidth="313.42857360839844" />
