@@ -418,7 +418,7 @@
 .image-view{
     -fx-effect: dropshadow(
             gaussian,
-            rgba(9, 103, 174, 0.5),  /* tím nhạt từ #9178d1, 30% opacity */
+            rgba(9, 23, 174, 0.5),  /* tím nhạt từ #9178d1, 30% opacity */
             20,                        /* radius */
             0.5,                       /* spread */
             0,                         /* offset-x */
