@@ -56,3 +56,11 @@
 .login-bg {
     -fx-background-image: url("../img/login.png");
 }
+
+.login-remove-bg {
+    -fx-background-image: url("../img/login-rmbg.png");
+}
+
+.home-logo{
+    -fx-background-image: url("../img/home-logo.png");
+}

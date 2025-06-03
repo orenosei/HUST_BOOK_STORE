@@ -29,17 +29,18 @@
       </AnchorPane>
       <AnchorPane prefHeight="720.0" prefWidth="260.0" styleClass="side-bar" stylesheets="@../Design/homeDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Text fill="WHITE" layoutX="10.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HUST">
+            <AnchorPane layoutY="13.0" prefHeight="90.0" prefWidth="250.0" styleClass="home-logo" stylesheets="@../Design/LaunchApplicationDesign.css" />
+            <Text fill="WHITE" layoutX="10.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HUST" visible="false">
                <font>
                   <Font name="Martian Mono ExtraBold" size="50.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="156.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOOK">
+            <Text fill="WHITE" layoutX="156.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOOK" visible="false">
                <font>
                   <Font name="Martian Mono ExtraBold" size="22.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="155.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STORE">
+            <Text fill="WHITE" layoutX="155.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STORE" visible="false">
                <font>
                   <Font name="Martian Mono ExtraBold" size="22.0" />
                </font>
