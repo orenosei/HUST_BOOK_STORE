@@ -5,3 +5,7 @@
 .bg-radious{
     -fx-background-radius: 100px;
 }
+
+.avatar{
+    -fx-background-image: url("../img/ava-profile-2.png");
+}
