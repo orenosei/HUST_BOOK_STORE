@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -14,8 +15,6 @@ import javafx.scene.text.Text;
 import sample.hustbookstore.models.Bill;
 import sample.hustbookstore.models.BillItem;
 import sample.hustbookstore.utils.dao.BillList;
-import sample.hustbookstore.utils.dao.UserList;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -49,6 +48,7 @@ public class OrderHistoryController {
 
     private ObservableList<Bill> originalBillList = FXCollections.observableArrayList();
     private FilteredList<Bill> filteredBills;
+    private SortedList<Bill> sortedBills;
 
     @FXML
     public void initialize() {
@@ -61,8 +61,9 @@ public class OrderHistoryController {
     private void initializeData() {
         List<Bill> bills = BillList.getAllBills();
         originalBillList.setAll(bills);
-        filteredBills = new FilteredList<>(originalBillList);
-        billTable.setItems(filteredBills);
+        sortedBills = new SortedList<>(originalBillList);
+        sortedBills.comparatorProperty().bind(billTable.comparatorProperty());
+        billTable.setItems(sortedBills);
     }
 
     private void setupSearchFunctionality() {
