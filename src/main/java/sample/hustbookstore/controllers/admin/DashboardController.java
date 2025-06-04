@@ -20,7 +20,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
-//import static sample.hustbookstore.LaunchApplication.localCart;
 
 public class DashboardController {
     @FXML
@@ -88,7 +87,7 @@ public class DashboardController {
 
     private List<Book> trendingBooks;
     private Book trendingBook;
-    private Image image;
+
 
     private int tabTrendingId = 0;
 

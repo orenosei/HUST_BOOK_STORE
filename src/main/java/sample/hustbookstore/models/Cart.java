@@ -15,11 +15,14 @@ public class Cart {
     private int userId;
     private ObservableList<CartItem> cartItemList;
 
+    // giải thích hộ bố
     private static CartUpdateListener listener;
 
     public static void setCartUpdateListener(CartUpdateListener cartListener) {
         listener = cartListener;
     }
+    // ///////////
+
     public Cart(){}
 
     public Cart(int cartId, int userId) {
