@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
 import sample.hustbookstore.models.Bill;
+import sample.hustbookstore.models.BillItem;
 import sample.hustbookstore.models.Book;
 import sample.hustbookstore.models.CartItem;
 import sample.hustbookstore.models.Product;
@@ -14,9 +15,8 @@ import sample.hustbookstore.utils.cloud.database;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 import static sample.hustbookstore.LaunchApplication.localUser;
 
 public class BillList {
@@ -25,6 +25,7 @@ public class BillList {
     public static Bill prepareBill(int userId, List<CartItem> cartItems, float discount) {
         double totalPrice = 0;
         double totalProfit = 0;
+        List<BillItem> billItems = new ArrayList<>();
 
         for (CartItem item : cartItems) {
             Product product = item.getProduct();
@@ -35,14 +36,22 @@ public class BillList {
 
                 totalPrice += sellPrice * quantity;
                 totalProfit += (sellPrice - importPrice) * quantity;
+
+                billItems.add(new BillItem(
+                        product.getID(),
+                        quantity,
+                        sellPrice
+                ));
             }
         }
 
         return new Bill(
+                -1,
                 userId,
                 totalPrice,
                 totalProfit * (100 - discount) / 100,
-                LocalDate.now()
+                LocalDate.now(),
+                billItems
         );
     }
 
@@ -71,14 +80,9 @@ public class BillList {
                     try (PreparedStatement itemStatement = connect.prepareStatement(sqlItem)) {
                         itemStatement.setInt(1, billId);
                         itemStatement.setString(2, item.getProductId());
-                        itemStatement.setInt(3, item.getQuantity());
-
-                        Product product = item.getProduct();
-                        if (product == null) {
-                            return false;
-                        }
-                        itemStatement.setDouble(4, product.getSellPrice());
-
+                        itemStatement.setString(3, item.getProduct().getName());
+                        itemStatement.setInt(4, item.getQuantity());
+                        itemStatement.setDouble(5, item.getProduct().getSellPrice());
                         itemStatement.executeUpdate();
                     }
                 }
@@ -152,53 +156,47 @@ public class BillList {
         return dataList;
     }
 
-    public static List<Map<String, Object>> getBillItemsWithProductName(int billId) {
-        List<Map<String, Object>> items = new ArrayList<>();
-        String sql = "SELECT p.name, bi.quantity, bi.price_at_purchase "
-                + "FROM bill_item bi "
-                + "JOIN product p ON bi.product_id = p.product_id "
-                + "WHERE bi.bill_id = ?";
-
-        try (PreparedStatement stmt = connect.prepareStatement(sql)) {
-            stmt.setInt(1, billId);
-
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    Map<String, Object> item = new HashMap<>();
-                    item.put("product_name", rs.getString("name"));
-                    item.put("quantity", rs.getInt("quantity"));
-                    item.put("price", rs.getDouble("price_at_purchase"));
-                    items.add(item);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return items;
-    }
-
-    public static List<Map<String, Object>> getAllBillsWithUserName() {
-        List<Map<String, Object>> bills = new ArrayList<>();
-        String sql = "SELECT b.bill_id, u.name, b.total_price, b.profit, b.purchase_date "
+    public static List<Bill> getAllBills() {
+        List<Bill> bills = new ArrayList<>();
+        String sql = "SELECT b.bill_id, b.user_id, b.total_price, b.profit, b.purchase_date, u.name "
                 + "FROM bill b JOIN user u ON b.user_id = u.user_id";
 
         try (PreparedStatement stmt = connect.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                Map<String, Object> bill = new HashMap<>();
-                bill.put("bill_id", rs.getInt("bill_id"));
-                bill.put("name", rs.getString("name"));
-                bill.put("total_price", rs.getDouble("total_price"));
-                bill.put("profit", rs.getDouble("profit"));
-                bill.put("purchase_date", rs.getDate("purchase_date").toLocalDate());
-                bills.add(bill);
+                int billId = rs.getInt("bill_id");
+
+                List<BillItem> items = new ArrayList<>();
+                try (PreparedStatement itemsStmt = connect.prepareStatement(
+                        "SELECT product_id, quantity, price_at_purchase " +
+                                "FROM bill_item WHERE bill_id = ?")) {
+                    itemsStmt.setInt(1, billId);
+                    ResultSet itemsRs = itemsStmt.executeQuery();
+                    while (itemsRs.next()) {
+                        items.add(new BillItem(
+                                itemsRs.getString("product_id"),
+                                itemsRs.getInt("quantity"),
+                                itemsRs.getDouble("price_at_purchase")
+                        ));
+                    }
+                }
+
+                bills.add(new Bill(
+                        billId,
+                        rs.getInt("user_id"),
+                        rs.getDouble("total_price"),
+                        rs.getDouble("profit"),
+                        rs.getDate("purchase_date").toLocalDate(),
+                        items
+                ));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return bills;
     }
+
 
     public static ObservableList<Book> getTrendingBooks() {
         ObservableList<Book> trendingBooks = FXCollections.observableArrayList();

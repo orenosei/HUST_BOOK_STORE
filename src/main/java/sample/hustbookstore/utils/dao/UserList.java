@@ -8,6 +8,7 @@ import sample.hustbookstore.utils.cloud.database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import static sample.hustbookstore.LaunchApplication.localUser;
 
@@ -92,6 +93,31 @@ public class UserList {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    public static User getUserFromId(int userId) {
+        String sql = "SELECT * FROM user WHERE user_id = ?";
+        try (PreparedStatement stmt = connect.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new User(
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("question"),
+                        rs.getString("answer"),
+                        rs.getString("name"),
+                        rs.getString("phonenumber"),
+                        rs.getString("email"),
+                        rs.getString("address"),
+                        rs.getInt("user_id"),
+                        rs.getBoolean("isBanned")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static boolean isUsernameTaken(String username) {

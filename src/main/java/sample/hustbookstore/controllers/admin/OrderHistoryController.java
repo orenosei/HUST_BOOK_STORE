@@ -11,18 +11,18 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import sample.hustbookstore.models.Bill;
+import sample.hustbookstore.models.BillItem;
 import sample.hustbookstore.utils.dao.BillList;
+import sample.hustbookstore.utils.dao.UserList;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 
 public class OrderHistoryController {
 
     @FXML private AnchorPane billPane;
-
-    @FXML private TableView<Map<String, Object>> billTable;
 
     @FXML private DatePicker fromDate;
 
@@ -32,26 +32,23 @@ public class OrderHistoryController {
 
     @FXML private Button searchBtn;
 
-    @FXML private TableView<Map<String, Object>> showDetailTable;
-
-    @FXML private TableColumn<Map<String, Object>, String> nameDetailCol;
-
-    @FXML private TableColumn<Map<String, Object>, Integer> qtyDetailCol;
-
-    @FXML private TableColumn<Map<String, Object>, Double> priceDetailCol;
-
     @FXML private DatePicker toDate;
 
     @FXML private Text totalPriceField;
 
-    @FXML private TableColumn<Map<String, Object>, Integer> billIdCol;
+    @FXML private TableView<Bill> billTable;
+    @FXML private TableView<BillItem> showDetailTable;
 
-    @FXML private TableColumn<Map<String, Object>, String> orderByCol;
+    @FXML private TableColumn<Bill, Integer> billIdCol;
+    @FXML private TableColumn<Bill, String> orderByCol;
+    @FXML private TableColumn<Bill, LocalDate> purchaseDateCol;
 
-    @FXML private TableColumn<Map<String, Object>, LocalDate> purchaseDateCol;
+    @FXML private TableColumn<BillItem, String> nameDetailCol;
+    @FXML private TableColumn<BillItem, Integer> qtyDetailCol;
+    @FXML private TableColumn<BillItem, Double> priceDetailCol;
 
-    private ObservableList<Map<String, Object>> originalBillList = FXCollections.observableArrayList();
-    private FilteredList<Map<String, Object>> filteredBills;
+    private ObservableList<Bill> originalBillList = FXCollections.observableArrayList();
+    private FilteredList<Bill> filteredBills;
 
     @FXML
     public void initialize() {
@@ -62,7 +59,7 @@ public class OrderHistoryController {
     }
 
     private void initializeData() {
-        List<Map<String, Object>> bills = BillList.getAllBillsWithUserName();
+        List<Bill> bills = BillList.getAllBills();
         originalBillList.setAll(bills);
         filteredBills = new FilteredList<>(originalBillList);
         billTable.setItems(filteredBills);
@@ -78,12 +75,12 @@ public class OrderHistoryController {
         filteredBills.setPredicate(this::matchesFilters);
     }
 
-    private boolean matchesFilters(Map<String, Object> bill) {
+    private boolean matchesFilters(Bill bill) {
         String searchText = searchBar.getText().toLowerCase();
-        String userName = ((String) bill.get("name")).toLowerCase();
+        String userName = bill.getUser().getName().toLowerCase();
         if (!userName.contains(searchText)) return false;
 
-        LocalDate billDate = (LocalDate) bill.get("purchase_date");
+        LocalDate billDate = bill.getPurchasedDate();
         LocalDate from = fromDate.getValue();
         LocalDate to = toDate.getValue();
 
@@ -95,24 +92,24 @@ public class OrderHistoryController {
 
     private void setupTableColumns() {
         billIdCol.setCellValueFactory(data ->
-                new SimpleIntegerProperty((Integer) data.getValue().get("bill_id")).asObject());
+                new SimpleIntegerProperty(data.getValue().getBillId()).asObject());
 
         orderByCol.setCellValueFactory(data ->
-                new SimpleStringProperty((String) data.getValue().get("name")));
+                new SimpleStringProperty(data.getValue().getUser().getName()));
 
         purchaseDateCol.setCellValueFactory(data ->
-                new SimpleObjectProperty<>((LocalDate) data.getValue().get("purchase_date")));
+                new SimpleObjectProperty<>(data.getValue().getPurchasedDate()));
     }
 
     private void setupDetailTableColumns() {
         nameDetailCol.setCellValueFactory(data ->
-                new SimpleStringProperty(data.getValue().get("product_name").toString()));
+                new SimpleStringProperty(data.getValue().getProductName()));
 
         qtyDetailCol.setCellValueFactory(data ->
-                new SimpleIntegerProperty((Integer) data.getValue().get("quantity")).asObject());
+                new SimpleIntegerProperty(data.getValue().getQuantity()).asObject());
 
         priceDetailCol.setCellValueFactory(data ->
-                new SimpleDoubleProperty((Double) data.getValue().get("price")).asObject());
+                new SimpleDoubleProperty(data.getValue().getPriceAtPurchase()).asObject());
     }
 
     @FXML
@@ -122,16 +119,11 @@ public class OrderHistoryController {
 
     @FXML
     public void handleSelectData() {
-        Map<String, Object> selectedBill = billTable.getSelectionModel().getSelectedItem();
+        Bill selectedBill = billTable.getSelectionModel().getSelectedItem();
         if (selectedBill != null) {
-            int billId = (Integer) selectedBill.get("bill_id");
-            List<Map<String, Object>> items = BillList.getBillItemsWithProductName(billId);
-            showDetailTable.setItems(FXCollections.observableArrayList(items));
-
-            double total = (Double) selectedBill.get("total_price");
-            double profit = (Double) selectedBill.get("profit");
-            totalPriceField.setText(String.format("%.2f", total));
-            profitField.setText(String.format("%.2f", profit));
+            showDetailTable.setItems(FXCollections.observableArrayList(selectedBill.getItems()));
+            totalPriceField.setText(String.format("%.2f", selectedBill.getTotalPrice()));
+            profitField.setText(String.format("%.2f", selectedBill.getProfit()));
         }
     }
 
