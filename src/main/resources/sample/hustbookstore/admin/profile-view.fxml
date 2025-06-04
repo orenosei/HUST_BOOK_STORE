@@ -6,7 +6,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -17,10 +16,7 @@
    <children>
       <AnchorPane layoutX="50.0" layoutY="54.0" prefHeight="720.0" prefWidth="340.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane layoutX="60.0" layoutY="142.4" prefHeight="219.0" prefWidth="219.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="142.0">
-               <children>
-                  <ImageView fx:id="profile_circleimage" fitHeight="94.0" fitWidth="126.0" layoutX="83.2" layoutY="116.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="83.0" AnchorPane.topAnchor="116.0" />
-               </children>
+            <AnchorPane layoutX="60.0" layoutY="142.4" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="142.0">
                <stylesheets>
                   <URL value="@../Design/profileDesign.css" />
                   <URL value="@../Design/inventoryDesign.css" />
