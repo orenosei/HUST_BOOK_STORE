@@ -20,7 +20,7 @@
          <children>
             <AnchorPane stylesheets="@../Design/profileDesign.css" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="125.0">
                <children>
-                  <ImageView id="#profile-userAva" fx:id="profile_circleimage" fitHeight="200.0" fitWidth="200.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="-14.0" />
+                  <ImageView id="#profile-userAva" fx:id="profile_circleimage" fitHeight="186.0" fitWidth="166.0" layoutX="36.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="0.0" />
                </children>
                <styleClass>
                   <String fx:value="bg-radious" />
