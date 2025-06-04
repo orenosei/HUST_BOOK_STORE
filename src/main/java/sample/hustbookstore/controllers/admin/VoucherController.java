@@ -8,10 +8,7 @@ package sample.hustbookstore.controllers.admin;
     import javafx.scene.control.cell.PropertyValueFactory;
     import sample.hustbookstore.models.*;
     import sample.hustbookstore.utils.dao.VoucherList;
-    import java.sql.Connection;
     import java.sql.Date;
-    import java.sql.PreparedStatement;
-    import java.sql.ResultSet;
     import java.util.Optional;
 
     public class VoucherController {
@@ -60,10 +57,6 @@ package sample.hustbookstore.controllers.admin;
         @FXML
         private Label voucher_label_ID;
 
-        private Connection connect;
-        private PreparedStatement prepare;
-        private ResultSet result;
-        private Alert alert;
 
         public void showData() {
             ObservableList<Voucher> list = VoucherList.getAllVouchers();
@@ -173,7 +166,6 @@ package sample.hustbookstore.controllers.admin;
                 }
             }
         }
-
 
         public void voucherUpdateBtn() {
             if (voucherCode.getText().isEmpty()

@@ -79,6 +79,16 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@../Design/homeDesign.css">
                      <children>
+                        <FontAwesomeIcon fill="WHITE" glyphName="HISTORY" layoutX="14.0" layoutY="60.0" size="4em" />
+                        <Button fx:id="others_btn" alignment="BASELINE_CENTER" layoutX="77.0" mnemonicParsing="false" onAction="#handleSidebarButtonAction" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@../Design/homeDesign.css" text="ORDERS" textFill="WHITE">
+                           <font>
+                              <Font name="Chalkboard Bold" size="23.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="90.0" prefWidth="250.0" styleClass="function" stylesheets="@../Design/homeDesign.css">
+                     <children>
                         <FontAwesomeIcon fill="WHITE" glyphName="EDIT" layoutX="14.0" layoutY="60.0" size="4em" />
                         <Button fx:id="profile_btn" alignment="BASELINE_CENTER" layoutX="77.0" mnemonicParsing="false" onAction="#handleSidebarButtonAction" prefHeight="83.0" prefWidth="169.0" styleClass="trans-bg" stylesheets="@../Design/homeDesign.css" text="PROFILE" textFill="WHITE">
                            <font>
