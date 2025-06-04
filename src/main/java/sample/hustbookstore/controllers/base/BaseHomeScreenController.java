@@ -27,11 +27,13 @@ public abstract class BaseHomeScreenController implements Initializable{
     @FXML protected Button logout_btn;
     @FXML protected Button profile_btn;
     @FXML protected Button store_btn;
+    @FXML protected Button others_btn;
     @FXML protected Text username;
     @FXML protected AnchorPane headerPane;
     @FXML protected AnchorPane dashboardScreen;
     @FXML protected AnchorPane storeScreen;
     @FXML protected AnchorPane profileScreen;
+    @FXML protected AnchorPane othersScreen;
     @FXML protected Button sync_btn;
     @FXML protected Button dashboard_btn;
     @FXML protected FontAwesomeIcon syncIcon;
@@ -42,6 +44,7 @@ public abstract class BaseHomeScreenController implements Initializable{
     public abstract String getDashboardPath();
     public abstract String getStorePath();
     public abstract String getProfilePath();
+    public abstract String getOrderHistoryPath();
 
     @FXML
     public abstract void handleSidebarButtonAction(ActionEvent event);
@@ -112,6 +115,16 @@ public abstract class BaseHomeScreenController implements Initializable{
         }
     }
 
+    public void loadOrderHistory() {
+        try {
+            AnchorPane root = FXMLLoader.load(getClass().getResource(getOrderHistoryPath()));
+            othersScreen.getChildren().clear();
+            othersScreen.getChildren().add(root);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     public void handleSyncButtonAction(ActionEvent event) {

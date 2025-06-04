@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import java.lang.String?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -29,8 +25,8 @@
             </Label>
             <TableView fx:id="billTable" layoutX="58.0" layoutY="105.0" onMouseClicked="#handleSelectData" prefHeight="580.0" prefWidth="468.0" stylesheets="@../Design/inventoryDesign.css" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="502.0" AnchorPane.topAnchor="100.0">
               <columns>
-                <TableColumn fx:id="billIdCol" prefWidth="51.9888916015625" text="Bill ID" />
-                <TableColumn fx:id="orderByCol" prefWidth="286.9303283691406" text="Order By" />
+                <TableColumn fx:id="billIdCol" prefWidth="67.0" text="Bill ID" />
+                <TableColumn fx:id="orderByCol" prefWidth="241.0" text="Order By" />
                   <TableColumn fx:id="purchaseDateCol" prefWidth="142.8094482421875" text="Purchase Date" />
               </columns>
                <columnResizePolicy>
@@ -62,23 +58,11 @@
                   <Label text="To:" textFill="#9178d1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <Button fx:id="searchBtn" layoutX="926.0" layoutY="36.0" mnemonicParsing="false" onAction="#handleSearch" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css">
-               <graphic>
-                  <FontAwesomeIcon fill="WHITE" glyphName="SEARCH" size="2em" />
-               </graphic>
-               <effect>
-                  <DropShadow blurType="TWO_PASS_BOX" height="15.0" radius="7.0" spread="0.7" width="15.0">
-                     <color>
-                        <Color red="0.37037035822868347" green="0.7481481432914734" blue="1.0" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </Button>
             <TableView fx:id="showDetailTable" layoutX="567.0" layoutY="117.0" prefHeight="454.0" prefWidth="428.0" stylesheets="@../Design/inventoryDesign.css" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0">
                <columns>
-                  <TableColumn fx:id="nameDetailCol" prefWidth="257.1942138671875" text="Product Name" />
-                  <TableColumn fx:id="qtyDetailCol" prefWidth="55.56048583984375" text="Quantity" />
-                  <TableColumn fx:id="priceDetailCol" prefWidth="112.43951416015625" text="Price" />
+                  <TableColumn fx:id="nameDetailCol" prefWidth="229.0" text="Product Name" />
+                  <TableColumn fx:id="qtyDetailCol" prefWidth="68.0" text="Quantity" />
+                  <TableColumn fx:id="priceDetailCol" prefWidth="112.0" text="Price" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

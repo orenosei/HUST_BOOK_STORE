@@ -39,6 +39,11 @@ public class UserHomeScreenController extends BaseHomeScreenController implement
     }
 
     @Override
+    public String getOrderHistoryPath() {
+        return "/sample/hustbookstore/user/user-orderHistory-view.fxml";
+    }
+
+    @Override
     public void onStoreUpdated() {
         reloadStore();
     }
@@ -75,6 +80,7 @@ public class UserHomeScreenController extends BaseHomeScreenController implement
             profileScreen.setVisible(false);
             storeScreen.setVisible(false);
             cartScreen.setVisible(false);
+            othersScreen.setVisible(false);
             showHeaderAnimation();
 
         } else if (event.getSource() == store_btn) {
@@ -83,6 +89,7 @@ public class UserHomeScreenController extends BaseHomeScreenController implement
             storeScreen.setVisible(true);
             headerPane.setVisible(false);
             cartScreen.setVisible(false);
+            othersScreen.setVisible(false);
 
         } else if (event.getSource() == profile_btn) {
             dashboardScreen.setVisible(false);
@@ -90,7 +97,7 @@ public class UserHomeScreenController extends BaseHomeScreenController implement
             storeScreen.setVisible(false);
             headerPane.setVisible(false);
             cartScreen.setVisible(false);
-
+            othersScreen.setVisible(false);
         }
         else if (event.getSource() == cart_btn) {
             dashboardScreen.setVisible(false);
@@ -98,6 +105,15 @@ public class UserHomeScreenController extends BaseHomeScreenController implement
             storeScreen.setVisible(false);
             cartScreen.setVisible(true);
             headerPane.setVisible(false);
+            othersScreen.setVisible(false);
+        }
+        else if (event.getSource() == others_btn) {
+            dashboardScreen.setVisible(false);
+            profileScreen.setVisible(false);
+            storeScreen.setVisible(false);
+            cartScreen.setVisible(false);
+            headerPane.setVisible(false);
+            othersScreen.setVisible(true);
         }
 
     }
@@ -111,10 +127,12 @@ public class UserHomeScreenController extends BaseHomeScreenController implement
         profileScreen.setVisible(false);
         storeScreen.setVisible(false);
         cartScreen.setVisible(false);
+        othersScreen.setVisible(false);
 
         loadStore();
         loadProfile();
         loadCart();
+        loadOrderHistory();
     }
 
 }

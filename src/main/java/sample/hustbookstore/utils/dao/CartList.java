@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sample.hustbookstore.models.Cart;
 import sample.hustbookstore.models.CartItem;
+import sample.hustbookstore.models.Product;
 import sample.hustbookstore.utils.cloud.database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +15,7 @@ public class CartList {
 
     private static Connection connect;
 
-    public static boolean addProduct(String product_id, int quantity, int cartId ) {
+    public static boolean addProduct(Product product, int quantity, int cartId ) {
         String checkQuery = "SELECT quantity FROM cart_item WHERE cart_id = ? AND product_id = ?";
         String stockQuery = "SELECT stock FROM product WHERE product_id = ?";
         String updateQuery = "UPDATE cart_item SET quantity = ? WHERE cart_id = ? AND product_id = ?";
@@ -26,7 +27,7 @@ public class CartList {
 
             try (PreparedStatement checkStatement = connect.prepareStatement(checkQuery)) {
                 checkStatement.setInt(1, cartId);
-                checkStatement.setString(2, product_id);
+                checkStatement.setString(2, product.getID());
                 ResultSet rs = checkStatement.executeQuery();
                 if (rs.next()) {
                     currentQuantity = rs.getInt("quantity");
@@ -34,7 +35,7 @@ public class CartList {
             }
 
             try (PreparedStatement stockStatement = connect.prepareStatement(stockQuery)) {
-                stockStatement.setString(1, product_id);
+                stockStatement.setString(1, product.getID());
                 ResultSet rs = stockStatement.executeQuery();
                 if (rs.next()) {
                     stock = rs.getInt("stock");
@@ -52,14 +53,14 @@ public class CartList {
                 try (PreparedStatement updateStatement = connect.prepareStatement(updateQuery)) {
                     updateStatement.setInt(1, currentQuantity + quantity);
                     updateStatement.setInt(2, cartId);
-                    updateStatement.setString(3, product_id);
+                    updateStatement.setString(3, product.getID());
                     updateStatement.executeUpdate();
                     success = true;
                 }
             } else {
                 try (PreparedStatement insertStatement = connect.prepareStatement(insertQuery)) {
                     insertStatement.setInt(1, cartId);
-                    insertStatement.setString(2, product_id);
+                    insertStatement.setString(2, product.getID());
                     insertStatement.setInt(3, quantity);
                     insertStatement.executeUpdate();
                     success = true;
@@ -85,7 +86,8 @@ public class CartList {
             if (resultSet.next()) {
                 cart = new Cart(
                         resultSet.getInt("cart_id"),
-                        resultSet.getInt("user_id")
+                        UserList.getUserFromId(resultSet.getInt("user_id")),
+                        CartList.getCartItemList(resultSet.getInt("cart_id"))
                 );
                 return cart;
             }
@@ -106,7 +108,7 @@ public class CartList {
             try (ResultSet result = prepare.executeQuery()) {
                 while (result.next()) {
                     cartItemList.add(new CartItem(
-                            result.getString("product_id"),
+                            Inventory.getProductFromProductID(result.getString("product_id")),
                             result.getInt("quantity"),
                             result.getBoolean("is_selected")
                     ));
@@ -124,7 +126,7 @@ public class CartList {
         try (PreparedStatement statement = connect.prepareStatement(query)) {
             statement.setInt(1, cartItem.getQuantity());
             statement.setBoolean(2, cartItem.isSelected());
-            statement.setString(3, cartItem.getProductId());
+            statement.setString(3, cartItem.getProduct().getID());
             statement.setInt(4, cartId);
 
             int rowsAffected = statement.executeUpdate();
@@ -140,7 +142,7 @@ public class CartList {
 
         try (PreparedStatement statement = connect.prepareStatement(query)) {
             statement.setInt(1, cartId);
-            statement.setString(2, cartItem.getProductId());
+            statement.setString(2, cartItem.getProduct().getID());
 
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;

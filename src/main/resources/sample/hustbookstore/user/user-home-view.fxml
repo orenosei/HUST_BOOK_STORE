@@ -129,6 +129,7 @@
             <AnchorPane fx:id="dashboardScreen" prefHeight="720.0" prefWidth="1020.0" />
             <AnchorPane fx:id="storeScreen" layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="1020.0" />
             <AnchorPane fx:id="cartScreen" layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="1020.0" />
+            <AnchorPane fx:id="othersScreen" prefHeight="720.0" prefWidth="1020.0" />
             <AnchorPane fx:id="profileScreen" layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="1020.0" />
          </children>
       </StackPane>
