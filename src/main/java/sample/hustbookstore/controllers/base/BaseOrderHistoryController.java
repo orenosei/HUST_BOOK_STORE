@@ -13,14 +13,14 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import sample.hustbookstore.models.Bill;
 import sample.hustbookstore.models.BillItem;
-
 import java.time.LocalDate;
-import java.util.List;
 
 public abstract class BaseOrderHistoryController {
     @FXML protected DatePicker fromDate;
+    @FXML protected AnchorPane billPane;
     @FXML protected TextField searchBar;
     @FXML protected DatePicker toDate;
     @FXML protected TableView<Bill> billTable;
