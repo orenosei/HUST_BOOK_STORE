@@ -39,14 +39,14 @@ public abstract class BaseHomeScreenController implements Initializable{
     protected Alert alert;
 
     public abstract void displayUsername();
-    protected abstract String getDashboardPath();
-    protected abstract String getStorePath();
-    protected abstract String getProfilePath();
+    public abstract String getDashboardPath();
+    public abstract String getStorePath();
+    public abstract String getProfilePath();
 
     @FXML
     public abstract void handleSidebarButtonAction(ActionEvent event);
 
-    protected String getLaunchApplicationPath() {
+    public String getLaunchApplicationPath() {
         return "/sample/hustbookstore/LaunchApplication.fxml";
     }
 
@@ -152,7 +152,7 @@ public abstract class BaseHomeScreenController implements Initializable{
         new Thread(loadTask).start();
     }
 
-    protected void showHeaderAnimation() {
+    public void showHeaderAnimation() {
         headerPane.setTranslateY(-70);
         headerPane.setVisible(true);
         TranslateTransition tt = new TranslateTransition(Duration.seconds(0.5), headerPane);

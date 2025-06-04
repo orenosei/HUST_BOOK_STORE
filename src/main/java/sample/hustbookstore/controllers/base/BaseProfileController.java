@@ -39,18 +39,18 @@ public abstract class BaseProfileController {
 
     protected Alert alert;
 
-    protected abstract void updateProfile();
-    protected abstract void changePassword();
-    protected abstract void loadProfileFields();
-    protected abstract void loadProfileLabels();
+    public abstract void updateProfile();
+    public abstract void changePassword();
+    public abstract void loadProfileFields();
+    public abstract void loadProfileLabels();
 
     @FXML
-    protected void initialize() {
+    public void initialize() {
         loadProfileLabels();
         loadProfileFields();
     }
 
-    protected void showAlert(Alert.AlertType type, String title, String content) {
+    public void showAlert(Alert.AlertType type, String title, String content) {
         alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(null);

@@ -233,28 +233,28 @@ public class UserDashboardController {
     }
 
     @FXML
-    private void handleTrendingLeftBtn() {
+    public void handleTrendingLeftBtn() {
         if (cardNodesTrending.isEmpty() || trendingLeftBtn.isDisabled()) return;
         currentIndexTrending = (currentIndexTrending - 1 + cardNodesTrending.size()) % cardNodesTrending.size();
         slideCardsTrending(-1100);
     }
 
     @FXML
-    private void handleTrendingRightBtn() {
+    public void handleTrendingRightBtn() {
         if (cardNodesTrending.isEmpty() || trendingRightBtn.isDisabled()) return;
         currentIndexTrending = (currentIndexTrending + 1) % cardNodesTrending.size();
         slideCardsTrending(1100);
     }
 
     @FXML
-    private void handleRecommendLeftBtn() {
+    public void handleRecommendLeftBtn() {
         if (cardNodesRecommend.isEmpty() || recommendLeftBtn.isDisabled()) return;
         currentIndexRecommend = (currentIndexRecommend - 1 + cardNodesRecommend.size()) % cardNodesRecommend.size();
         slideCardsRecommend(-1100);
     }
 
     @FXML
-    private void handleRecommendRightBtn() {
+    public void handleRecommendRightBtn() {
         if (cardNodesRecommend.isEmpty() || recommendRightBtn.isDisabled()) return;
         currentIndexRecommend = (currentIndexRecommend + 1) % cardNodesRecommend.size();
         slideCardsRecommend(1100);

@@ -42,7 +42,7 @@ public class UserManagementController {
     private final FilteredList<User> filteredUsers = new FilteredList<>(UserList.getAllUsers());
 
     @FXML
-    private void handleBanUser() {
+    public void handleBanUser() {
         User selectedUser = customerTable.getSelectionModel().getSelectedItem();
         if (selectedUser != null) {
             boolean success = UserList.banUser(selectedUser.getUserId());
@@ -57,7 +57,7 @@ public class UserManagementController {
     }
 
     @FXML
-    private void handleUnbanUser() {
+    public void handleUnbanUser() {
         User selectedUser = customerTable.getSelectionModel().getSelectedItem();
         if (selectedUser != null) {
             boolean success = UserList.unbanUser(selectedUser.getUserId());

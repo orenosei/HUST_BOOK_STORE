@@ -29,20 +29,21 @@ public class AryaChatController {
     @FXML private ScrollPane scrollPane;
 
     @FXML
-    private void handleEnterKey(KeyEvent event) {
+    public void handleEnterKey(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
             handleSendMessage();
         }
     }
 
     @FXML
-    private void handleSendMessage() {
+    public void handleSendMessage() {
         String userMessage = inputField.getText().trim();
         if (userMessage.isEmpty()) return;
         appendMessage(userMessage, true);
         inputField.clear();
         sendAndReceiveMessage(userMessage);
     }
+
     private void sendAndReceiveMessage(String message) {
         StringBuilder builder = new StringBuilder();
         builder.append("Only answer the below question in plain text.\n");

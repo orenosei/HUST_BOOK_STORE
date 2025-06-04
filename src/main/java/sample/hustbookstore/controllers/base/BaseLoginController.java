@@ -91,7 +91,7 @@ public abstract class BaseLoginController {
         np_newPassForm.setVisible(false);
     }
 
-    protected void showAlert(Alert.AlertType type, String content) {
+    public void showAlert(Alert.AlertType type, String content) {
         alert = new Alert(type);
         alert.setTitle(type == Alert.AlertType.ERROR ? "Error Message" : "Information Message");
         alert.setHeaderText(null);
@@ -99,7 +99,7 @@ public abstract class BaseLoginController {
         alert.showAndWait();
     }
 
-    protected void clearRegForm() {
+    public void clearRegForm() {
         su_username.setText("");
         su_password.setText("");
         su_question.getSelectionModel().clearSelection();
@@ -123,7 +123,7 @@ public abstract class BaseLoginController {
         regQuestionList();
     }
 
-    protected void loadHomeScreen() {
+    public void loadHomeScreen() {
         waitingScreen.setVisible(true);
 
         Task<AnchorPane> loadTask = new Task<>() {
@@ -162,15 +162,15 @@ public abstract class BaseLoginController {
     }
 
     @FXML
-    protected void handleReturnButton(ActionEvent event) {
+    public void handleReturnButton(ActionEvent event) {
         Stage stage = (Stage) returnBtn.getScene().getWindow();
         stage.setScene(LaunchApplication.welcomeScene);
         stage.centerOnScreen();
     }
 
-    protected abstract void loginBtn();
-    protected abstract void regBtn();
-    protected abstract void proceedBtn();
-    protected abstract void changePassBtn();
-    protected abstract String getHomeScreenPath();
+    public abstract void loginBtn();
+    public abstract void regBtn();
+    public abstract void proceedBtn();
+    public abstract void changePassBtn();
+    public abstract String getHomeScreenPath();
 }

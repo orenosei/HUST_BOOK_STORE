@@ -57,7 +57,7 @@ public class UserCartItemController {
     }
 
     @FXML
-    void handleDeleteButton(ActionEvent event) {
+    public void handleDeleteButton(ActionEvent event) {
         if(event.getSource() == itemDelete) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Error Message");
@@ -74,7 +74,7 @@ public class UserCartItemController {
 
 
     @FXML
-    void handleSelectItem(ActionEvent event) {
+    public void handleSelectItem(ActionEvent event) {
         if(event.getSource() == itemCheckBox) {
             int quantity = itemSpinner.getValue();
 

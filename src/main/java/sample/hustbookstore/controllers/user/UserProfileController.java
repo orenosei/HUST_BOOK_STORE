@@ -9,7 +9,7 @@ import static sample.hustbookstore.LaunchApplication.localUser;
 
 public class UserProfileController extends BaseProfileController {
     @Override
-    protected void loadProfileFields() {
+    public void loadProfileFields() {
         profile_adminName.setText(localUser.getName());
         profile_adminPassword.setText(localUser.getPassword());
         profile_adminPhone.setText(localUser.getPhoneNumber());
@@ -18,7 +18,7 @@ public class UserProfileController extends BaseProfileController {
     }
 
     @Override
-    protected void loadProfileLabels() {
+    public void loadProfileLabels() {
         profile_label_adminID.setText(String.valueOf(localUser.getUserId()));
         profile_label_adminName.setText(localUser.getName());
         profile_label_adminUser.setText(localUser.getUsername());
@@ -28,7 +28,7 @@ public class UserProfileController extends BaseProfileController {
     }
 
     @Override
-    protected void updateProfile() {
+    public void updateProfile() {
         if (profile_adminName.getText().isEmpty()
                 || profile_adminPhone.getText().isEmpty()
                 || profile_adminEmail.getText().isEmpty()
@@ -46,7 +46,7 @@ public class UserProfileController extends BaseProfileController {
     }
 
     @Override
-    protected void changePassword() {
+    public void changePassword() {
         if (profile_adminPassword.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Error Message", "Please enter new password");
         } else {
@@ -58,12 +58,12 @@ public class UserProfileController extends BaseProfileController {
     }
 
     @FXML
-    private void handleUpdateBtn() {
+    public void handleUpdateBtn() {
         updateProfile();
     }
 
     @FXML
-    private void handleChangePasswordBtn() {
+    public void handleChangePasswordBtn() {
         changePassword();
     }
 }

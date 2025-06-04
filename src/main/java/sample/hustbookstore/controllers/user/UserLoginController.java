@@ -97,7 +97,7 @@ public class UserLoginController extends BaseLoginController {
     }
 
     @Override
-    protected String getHomeScreenPath() {
+    public String getHomeScreenPath() {
         return "/sample/hustbookstore/user/user-home-view.fxml";
     }
 

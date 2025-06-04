@@ -69,8 +69,8 @@ public abstract class BaseStoreController {
     protected TextField restrictAgeField;
 
 
-    protected abstract String getRightPanelPath();
-    protected abstract String getProductCardPath();
+    public abstract String getRightPanelPath();
+    public abstract String getProductCardPath();
 
     protected final Store store = new Store();
     protected final List<AnchorPane> allBookCards = new ArrayList<>();
@@ -79,13 +79,13 @@ public abstract class BaseStoreController {
 
     protected PauseTransition pause = new PauseTransition(Duration.millis(300));
 
-    private void clearGrids() {
+    public void clearGrids() {
         tabBookGrid.getChildren().clear();
         tabStationeryGrid.getChildren().clear();
         tabToyGrid.getChildren().clear();
     }
 
-    protected void displayProducts(GridPane grid, List<AnchorPane> cards, List<? extends Product> products) {
+    public void displayProducts(GridPane grid, List<AnchorPane> cards, List<? extends Product> products) {
         cards.clear();
         grid.getChildren().clear();
 
@@ -111,7 +111,7 @@ public abstract class BaseStoreController {
         }
     }
 
-    protected void searchApplyToGridPane(GridPane gridPane, List<AnchorPane> allCards, String keyword) {
+    public void searchApplyToGridPane(GridPane gridPane, List<AnchorPane> allCards, String keyword) {
         gridPane.getChildren().clear();
         int column = 0;
         int row = 0;
@@ -129,7 +129,7 @@ public abstract class BaseStoreController {
         }
     }
 
-    private String getSearchData(Object userData) {
+    public String getSearchData(Object userData) {
         if (userData instanceof Book book) {
             return book.getName() + " " + book.getDescription() + " " + book.getAuthor();
         } else if (userData instanceof Product product) {
@@ -138,7 +138,7 @@ public abstract class BaseStoreController {
         return "";
     }
 
-    protected void resetGridPane(GridPane gridPane, List<AnchorPane> allCards) {
+    public void resetGridPane(GridPane gridPane, List<AnchorPane> allCards) {
         gridPane.getChildren().clear();
         int column = 0;
         int row = 0;
@@ -151,7 +151,7 @@ public abstract class BaseStoreController {
         }
     }
 
-    protected void setGenreList() {
+    public void setGenreList() {
         List<String> genres = List.of(
                 "Adventure", "Alternate History", "Autobiography", "Biography", "Business",
                 "Children's Books", "Classic Literature", "Comedy", "Cooking", "Crime",
@@ -169,13 +169,13 @@ public abstract class BaseStoreController {
         genreCheckComboBox.getItems().addAll(genreList);
     }
 
-    protected void handleTabBook() {
+    public void handleTabBook() {
         boolean isBookTab = tabStore.getSelectionModel().getSelectedItem() == tabBook;
         genreCheckComboBox.setDisable(!isBookTab);
         if (!isBookTab) genreCheckComboBox.getCheckModel().clearChecks();
     }
 
-    protected void filterApplyToGridPane(GridPane gridPane, List<AnchorPane> allCards,
+    public void filterApplyToGridPane(GridPane gridPane, List<AnchorPane> allCards,
                                          List<String> genres, int restrictedAge,
                                          float priceFrom, float priceTo) {
         gridPane.getChildren().clear();
@@ -194,7 +194,7 @@ public abstract class BaseStoreController {
         }
     }
 
-    private boolean shouldShowCard(Object userData, List<String> genres,
+    public boolean shouldShowCard(Object userData, List<String> genres,
                                    int restrictedAge, float priceFrom, float priceTo) {
         if (userData instanceof Book book) {
             return checkBookConditions(book, genres, restrictedAge, priceFrom, priceTo);
@@ -204,7 +204,7 @@ public abstract class BaseStoreController {
         return false;
     }
 
-    private boolean checkBookConditions(Book book, List<String> genres,
+    public boolean checkBookConditions(Book book, List<String> genres,
                                         int restrictedAge, float priceFrom, float priceTo) {
         boolean genreMatch = genres.isEmpty() || genres.stream()
                 .anyMatch(genre -> book.getGenre().toLowerCase().contains(genre.toLowerCase()));
@@ -215,14 +215,14 @@ public abstract class BaseStoreController {
                 book.getSellPrice() <= priceTo;
     }
 
-    private boolean checkGeneralConditions(Product product,
+    public boolean checkGeneralConditions(Product product,
                                            int restrictedAge, float priceFrom, float priceTo) {
         return product.getRestrictedAge() >= restrictedAge &&
                 product.getSellPrice() >= priceFrom &&
                 product.getSellPrice() <= priceTo;
     }
 
-    protected void initializeCommon() {
+    public void initializeCommon() {
         store.refreshData();
         displayProducts(tabBookGrid, allBookCards, store.getBookListData());
         displayProducts(tabStationeryGrid, allStationeryCards, store.getStationeryListData());
@@ -231,7 +231,7 @@ public abstract class BaseStoreController {
         setupEventListeners();
     }
 
-    private void setupEventListeners() {
+    public void setupEventListeners() {
         tabStore.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldTab, newTab) -> handleTabBook()
         );
@@ -251,14 +251,14 @@ public abstract class BaseStoreController {
         );
     }
 
-    private void setupPauseTransition(Runnable action) {
+    public void setupPauseTransition(Runnable action) {
         pause.setOnFinished(e -> action.run());
         pause.playFromStart();
     }
 
 
     public abstract void loadRightPane();
-    protected abstract void onSearch();
-    protected abstract void onFilter();
+    public abstract void onSearch();
+    public abstract void onFilter();
 
 }
