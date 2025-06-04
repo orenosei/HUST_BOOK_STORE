@@ -75,10 +75,9 @@ public class BillList {
                 for (CartItem item : selectedItems) {
                     try (PreparedStatement itemStatement = connect.prepareStatement(sqlItem)) {
                         itemStatement.setInt(1, billId);
-                        itemStatement.setString(2, item.getProductId());
-                        itemStatement.setString(3, item.getProduct().getName());
-                        itemStatement.setInt(4, item.getQuantity());
-                        itemStatement.setDouble(5, item.getProduct().getSellPrice());
+                        itemStatement.setString(2, item.getProduct().getID());
+                        itemStatement.setInt(3, item.getQuantity());
+                        itemStatement.setDouble(4, item.getProduct().getSellPrice());
                         itemStatement.executeUpdate();
                     }
                 }

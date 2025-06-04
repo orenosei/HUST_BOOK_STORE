@@ -1,18 +1,16 @@
 package sample.hustbookstore.models;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sample.hustbookstore.controllers.user.CartUpdateListener;
 import sample.hustbookstore.utils.dao.CartList;
-import sample.hustbookstore.utils.dao.Inventory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class Cart {
     private int cartId;
-    private int userId;
+    private User user;
     private ObservableList<CartItem> cartItemList;
 
     // giải thích hộ bố
@@ -25,28 +23,21 @@ public class Cart {
 
     public Cart(){}
 
-    public Cart(int cartId, int userId) {
+    public Cart(int cartId, User user, ObservableList<CartItem> cartItemList) {
         this.cartId = cartId;
-        this.userId = userId;
-        this.cartItemList = FXCollections.observableArrayList();
-        loadCartItemsFromDatabase();
+        this.user = user;
+        this.cartItemList = cartItemList;
     }
 
-    private void loadCartItemsFromDatabase() {
-        ObservableList<CartItem> items = CartList.getCartItemList(this.cartId);
-        cartItemList.setAll(items);
-    }
-
-    public boolean addProductToCart(String productId, int quantity) {
+    public boolean addProductToCart(Product product, int quantity) {
         // check inventory
-        Product product = Inventory.getProductFromProductID(productId);
         if (product == null || product.getStock() < quantity) {
             return false;
         }
 
         // check gio hang xem da co chua
         Optional<CartItem> existingItem = cartItemList.stream()
-                .filter(item -> item.getProductId().equals(productId))
+                .filter(item -> item.getProduct().getID().equals(product.getID()))
                 .findFirst();
 
         if (existingItem.isPresent()) {
@@ -60,10 +51,10 @@ public class Cart {
             return updateCartItem(item);
         } else {
             // neu chua -> them moi
-            CartItem newItem = new CartItem(productId, quantity, false);
+            CartItem newItem = new CartItem(product, quantity, false);
             newItem.setProduct(product);
 
-            boolean dbSuccess = CartList.addProduct(productId, quantity, cartId);
+            boolean dbSuccess = CartList.addProduct(product, quantity, cartId);
             if (dbSuccess) {
                 cartItemList.add(newItem);
                 if (listener != null) {
@@ -77,7 +68,7 @@ public class Cart {
 
     public CartItem findCartItem(String productId) {
         for (CartItem item : cartItemList) {
-            if (item.getProductId().equals(productId)) {
+            if (item.getProduct().getID().equals(productId)) {
                 return item;
             }
         }
@@ -85,7 +76,7 @@ public class Cart {
     }
 
     public boolean updateCartItem(CartItem updatedItem) {
-        CartItem existingItem = findCartItem(updatedItem.getProductId());
+        CartItem existingItem = findCartItem(updatedItem.getProduct().getID());
 
         if (existingItem == null) {
             return false;
@@ -152,14 +143,6 @@ public class Cart {
 
     public void setCartId(int cartId) {
         this.cartId = cartId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public ObservableList<CartItem> getCartItemList() {

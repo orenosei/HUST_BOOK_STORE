@@ -265,7 +265,7 @@ public class UserStoreProductCardController implements ProductCardSetData {
             Task<Boolean> task = new Task<>() {
                 @Override
                 protected Boolean call() {
-                    return localCart.addProductToCart(productAddToCart.getID(), productSpinner.getValue());
+                    return localCart.addProductToCart(productAddToCart, productSpinner.getValue());
                 }
             };
 
