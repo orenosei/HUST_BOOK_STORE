@@ -3,11 +3,7 @@ package sample.hustbookstore.utils.dao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
-import sample.hustbookstore.models.Bill;
-import sample.hustbookstore.models.BillItem;
-import sample.hustbookstore.models.Book;
-import sample.hustbookstore.models.CartItem;
-import sample.hustbookstore.models.Product;
+import sample.hustbookstore.models.*;
 import sample.hustbookstore.utils.recommendSystem.BookIndexer;
 import sample.hustbookstore.utils.recommendSystem.BookRecommender;
 import sample.hustbookstore.utils.cloud.database;
@@ -22,7 +18,7 @@ import static sample.hustbookstore.LaunchApplication.localUser;
 public class BillList {
     private static Connection connect;
 
-    public static Bill prepareBill(int userId, List<CartItem> cartItems, float discount) {
+    public static Bill prepareBill(User user, List<CartItem> cartItems, float discount) {
         double totalPrice = 0;
         double totalProfit = 0;
         List<BillItem> billItems = new ArrayList<>();
@@ -38,7 +34,7 @@ public class BillList {
                 totalProfit += (sellPrice - importPrice) * quantity;
 
                 billItems.add(new BillItem(
-                        product.getID(),
+                        product,
                         quantity,
                         sellPrice
                 ));
@@ -47,11 +43,11 @@ public class BillList {
 
         return new Bill(
                 -1,
-                userId,
                 totalPrice,
                 totalProfit * (100 - discount) / 100,
                 LocalDate.now(),
-                billItems
+                billItems,
+                user
         );
     }
 
@@ -60,7 +56,7 @@ public class BillList {
 
         try (PreparedStatement billStatement = connect.prepareStatement(sqlBill, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
-            billStatement.setInt(1, bill.getUserID());
+            billStatement.setInt(1, bill.getUser().getUserId());
             billStatement.setDouble(2, bill.getTotalPrice());
             billStatement.setDouble(3, bill.getProfit());
             billStatement.setDate(4, Date.valueOf(bill.getPurchasedDate()));
@@ -175,7 +171,7 @@ public class BillList {
                     ResultSet itemsRs = itemsStmt.executeQuery();
                     while (itemsRs.next()) {
                         items.add(new BillItem(
-                                itemsRs.getString("product_id"),
+                                Inventory.getProductFromProductID(itemsRs.getString("product_id")),
                                 itemsRs.getInt("quantity"),
                                 itemsRs.getDouble("price_at_purchase")
                         ));
@@ -184,11 +180,11 @@ public class BillList {
 
                 bills.add(new Bill(
                         billId,
-                        rs.getInt("user_id"),
                         rs.getDouble("total_price"),
                         rs.getDouble("profit"),
                         rs.getDate("purchase_date").toLocalDate(),
-                        items
+                        items,
+                        UserList.getUserFromId(rs.getInt("user_id"))
                 ));
             }
         } catch (SQLException e) {

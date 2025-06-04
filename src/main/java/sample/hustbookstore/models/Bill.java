@@ -1,13 +1,10 @@
 package sample.hustbookstore.models;
 
-import sample.hustbookstore.utils.dao.UserList;
-
 import java.time.LocalDate;
 import java.util.List;
 
 public class Bill {
     private int billId;
-    private int userID;
     private User user;
     private double totalPrice;
     private double profit;
@@ -15,25 +12,18 @@ public class Bill {
     private List<BillItem> items;
 
 
-    public Bill(int billId, int userID, double totalPrice, double profit, LocalDate purchasedDate, List<BillItem> items) {
+    public Bill(int billId, double totalPrice, double profit, LocalDate purchasedDate, List<BillItem> items, User user) {
         this.billId = billId;
-        this.userID = userID;
         this.totalPrice = totalPrice;
         this.profit = profit;
         this.purchasedDate = purchasedDate;
         this.items = items;
-        this.user = UserList.getUserFromId(userID);
+        this.user = user;
     }
 
     public int getBillId() { return billId; }
     public void setBillId(int billId) { this.billId = billId; }
 
-    public int getUserID() {
-        return userID;
-    }
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
 
     public double getTotalPrice() {
         return totalPrice;

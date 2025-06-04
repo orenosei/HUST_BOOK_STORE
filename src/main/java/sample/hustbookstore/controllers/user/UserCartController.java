@@ -321,7 +321,7 @@ public class UserCartController implements CartUpdateListener{
                     }
                 }
 
-                Bill newBill = BillList.prepareBill(localUser.getUserId(), selectedItems, usedVoucher);
+                Bill newBill = BillList.prepareBill(localUser, selectedItems, usedVoucher);
                 BillList.addBill(newBill, selectedItems);
 
                 Inventory.updateProductStock(selectedItems);

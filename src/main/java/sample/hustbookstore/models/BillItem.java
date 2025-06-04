@@ -1,23 +1,16 @@
 package sample.hustbookstore.models;
 
-import sample.hustbookstore.utils.dao.Inventory;
-
 public class BillItem {
-    private String productId;
     private Product product;
     private int quantity;
     private double priceAtPurchase;
 
-    public BillItem(String productId, int quantity, double priceAtPurchase) {
-        this.productId = productId;
+    public BillItem(Product product, int quantity, double priceAtPurchase) {
         this.quantity = quantity;
         this.priceAtPurchase = priceAtPurchase;
-        this.product = Inventory.getProductFromProductID(productId);
+        this.product = product;
     }
 
-
-    public String getProductId() { return productId; }
-    public void setProductId(String productId) { this.productId = productId; }
     public Product getProduct() { return product; }
     public void setProduct(Product product) { this.product = product; }
     public int getQuantity() { return quantity; }
