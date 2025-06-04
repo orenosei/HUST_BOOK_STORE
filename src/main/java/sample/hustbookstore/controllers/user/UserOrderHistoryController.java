@@ -1,4 +1,4 @@
-package sample.hustbookstore.controllers.admin;
+package sample.hustbookstore.controllers.user;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -18,26 +18,22 @@ import sample.hustbookstore.utils.dao.BillList;
 import java.time.LocalDate;
 import java.util.List;
 
+import static sample.hustbookstore.LaunchApplication.localUser;
 
-public class OrderHistoryController {
+public class UserOrderHistoryController {
 
     @FXML private AnchorPane billPane;
 
     @FXML private DatePicker fromDate;
 
-    @FXML private Text profitField;
-
     @FXML private TextField searchBar;
 
     @FXML private DatePicker toDate;
-
-    @FXML private Text totalPriceField;
 
     @FXML private TableView<Bill> billTable;
     @FXML private TableView<BillItem> showDetailTable;
 
     @FXML private TableColumn<Bill, Integer> billIdCol;
-    @FXML private TableColumn<Bill, String> orderByCol;
     @FXML private TableColumn<Bill, LocalDate> purchaseDateCol;
 
     @FXML private TableColumn<BillItem, String> nameDetailCol;
@@ -46,7 +42,6 @@ public class OrderHistoryController {
 
     private ObservableList<Bill> originalBillList = FXCollections.observableArrayList();
     private FilteredList<Bill> filteredBills;
-
     @FXML
     public void initialize() {
         setupTableColumns();
@@ -56,7 +51,7 @@ public class OrderHistoryController {
     }
 
     private void initializeData() {
-        List<Bill> bills = BillList.getAllBills();
+        List<Bill> bills = BillList.getUserBills(localUser.getUserId());
         originalBillList.setAll(bills);
         filteredBills = new FilteredList<>(originalBillList);
         SortedList<Bill> sortedBills = new SortedList<>(filteredBills);
@@ -93,9 +88,6 @@ public class OrderHistoryController {
         billIdCol.setCellValueFactory(data ->
                 new SimpleIntegerProperty(data.getValue().getBillId()).asObject());
 
-        orderByCol.setCellValueFactory(data ->
-                new SimpleStringProperty(data.getValue().getUser().getName()));
-
         purchaseDateCol.setCellValueFactory(data ->
                 new SimpleObjectProperty<>(data.getValue().getPurchasedDate()));
     }
@@ -117,9 +109,6 @@ public class OrderHistoryController {
         Bill selectedBill = billTable.getSelectionModel().getSelectedItem();
         if (selectedBill != null) {
             showDetailTable.setItems(FXCollections.observableArrayList(selectedBill.getItems()));
-            totalPriceField.setText(String.format("%.2f", selectedBill.getTotalPrice()));
-            profitField.setText(String.format("%.2f", selectedBill.getProfit()));
         }
     }
-
 }

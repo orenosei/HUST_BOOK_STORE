@@ -192,6 +192,50 @@ public class BillList {
         return bills;
     }
 
+    public static List<Bill> getUserBills(int userId) {
+        List<Bill> bills = new ArrayList<>();
+        String sql = "SELECT b.bill_id, b.user_id, b.total_price, b.profit, b.purchase_date, u.name "
+                + "FROM bill b JOIN user u ON b.user_id = u.user_id "
+                + "WHERE b.user_id = ?";
+
+        try (PreparedStatement stmt = connect.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    int billId = rs.getInt("bill_id");
+
+                    List<BillItem> items = new ArrayList<>();
+                    String itemsSql = "SELECT product_id, quantity, price_at_purchase FROM bill_item WHERE bill_id = ?";
+                    try (PreparedStatement itemsStmt = connect.prepareStatement(itemsSql)) {
+                        itemsStmt.setInt(1, billId);
+                        try (ResultSet itemsRs = itemsStmt.executeQuery()) {
+                            while (itemsRs.next()) {
+                                items.add(new BillItem(
+                                        Inventory.getProductFromProductID(itemsRs.getString("product_id")),
+                                        itemsRs.getInt("quantity"),
+                                        itemsRs.getDouble("price_at_purchase")
+                                ));
+                            }
+                        }
+                    }
+
+                    bills.add(new Bill(
+                            billId,
+                            rs.getDouble("total_price"),
+                            rs.getDouble("profit"),
+                            rs.getDate("purchase_date").toLocalDate(),
+                            items,
+                            UserList.getUserFromId(rs.getInt("user_id"))
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bills;
+    }
+
+
 
     public static ObservableList<Book> getTrendingBooks() {
         ObservableList<Book> trendingBooks = FXCollections.observableArrayList();

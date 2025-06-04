@@ -18,13 +18,9 @@ public class HomeScreenController extends BaseHomeScreenController implements In
     @FXML
     private Button customers_btn;
     @FXML
-    private Button others_btn;
-    @FXML
     private Button inventory_btn;
     @FXML
     private AnchorPane inventoryScreen;
-    @FXML
-    private AnchorPane othersScreen;
     @FXML
     private AnchorPane customersScreen;
 
@@ -47,6 +43,7 @@ public class HomeScreenController extends BaseHomeScreenController implements In
         return "/sample/hustbookstore/admin/customers-view.fxml";
     }
 
+    @Override
     public String getOrderHistoryPath() {
         return "/sample/hustbookstore/admin/orderHistory-view.fxml";
     }
@@ -83,16 +80,7 @@ public class HomeScreenController extends BaseHomeScreenController implements In
         }
     }
 
-    public void loadOrderHistory() {
-        try {
-            AnchorPane root = FXMLLoader.load(getClass().getResource(getOrderHistoryPath()));
-            othersScreen.getChildren().clear();
-            othersScreen.getChildren().add(root);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public void displayUsername() {

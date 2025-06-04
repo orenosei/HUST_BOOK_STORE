@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import java.lang.String?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -62,18 +58,6 @@
                   <Label text="To:" textFill="#9178d1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <Button fx:id="searchBtn" layoutX="926.0" layoutY="36.0" mnemonicParsing="false" onAction="#handleSearch" styleClass="inventory-button" stylesheets="@../Design/inventoryDesign.css">
-               <graphic>
-                  <FontAwesomeIcon fill="WHITE" glyphName="SEARCH" size="2em" />
-               </graphic>
-               <effect>
-                  <DropShadow blurType="TWO_PASS_BOX" height="15.0" radius="7.0" spread="0.7" width="15.0">
-                     <color>
-                        <Color red="0.37037035822868347" green="0.7481481432914734" blue="1.0" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </Button>
             <TableView fx:id="showDetailTable" layoutX="567.0" layoutY="117.0" prefHeight="454.0" prefWidth="428.0" stylesheets="@../Design/inventoryDesign.css" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0">
                <columns>
                   <TableColumn fx:id="nameDetailCol" prefWidth="229.0" text="Product Name" />
