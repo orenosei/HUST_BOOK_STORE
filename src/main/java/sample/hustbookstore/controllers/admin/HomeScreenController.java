@@ -30,29 +30,29 @@ public class HomeScreenController extends BaseHomeScreenController implements In
 
 
     @Override
-    protected String getDashboardPath() {
+    public String getDashboardPath() {
         return "/sample/hustbookstore/admin/dashboard-view.fxml";
     }
 
-    protected String getInventoryPath() {
+    public String getInventoryPath() {
         return "/sample/hustbookstore/admin/inventory-view.fxml";
     }
 
     @Override
-    protected String getStorePath() {
+    public String getStorePath() {
         return "/sample/hustbookstore/admin/store-view.fxml";
     }
 
-    protected String getCustomersPath() {
+    public String getCustomersPath() {
         return "/sample/hustbookstore/admin/customers-view.fxml";
     }
 
-    protected String getOrderHistoryPath() {
+    public String getOrderHistoryPath() {
         return "/sample/hustbookstore/admin/orderHistory-view.fxml";
     }
 
     @Override
-    protected String getProfilePath() {
+    public String getProfilePath() {
         return "/sample/hustbookstore/admin/profile-view.fxml";
     }
 
@@ -106,7 +106,6 @@ public class HomeScreenController extends BaseHomeScreenController implements In
         } else {
         }
     }
-
 
     @FXML
     @Override

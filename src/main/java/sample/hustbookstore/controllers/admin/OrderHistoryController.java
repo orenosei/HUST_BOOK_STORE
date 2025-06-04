@@ -116,7 +116,7 @@ public class OrderHistoryController {
     }
 
     @FXML
-    private void handleSearch() {
+    public void handleSearch() {
         filterBills();
     }
 

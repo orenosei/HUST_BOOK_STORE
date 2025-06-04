@@ -224,7 +224,7 @@ public class UserStoreProductCardController implements ProductCardSetData {
     }
 
     @FXML
-    private void handleCardButtonAction(ActionEvent event) {
+    public void handleCardButtonAction(ActionEvent event) {
         if (event.getSource() == down_btn) {
             if (currenttype == 1) {
                 showBookInfoAnimation();
@@ -235,21 +235,21 @@ public class UserStoreProductCardController implements ProductCardSetData {
     }
 
     @FXML
-    private void handleBookMoreInfoButtonAction(ActionEvent event) {
+    public void handleBookMoreInfoButtonAction(ActionEvent event) {
         if (event.getSource() == bookUp_btn) {
             hideBookInfoAnimation();
         }
     }
 
     @FXML
-    private void handleOtherMoreInfoButtonAction(ActionEvent event) {
+    public void handleOtherMoreInfoButtonAction(ActionEvent event) {
         if (event.getSource() == otherUp_btn) {
             hideOtherInfoAnimation();
         }
     }
 
     @FXML
-    private void handleAskAIButtonAction(ActionEvent event) {
+    public void handleAskAIButtonAction(ActionEvent event) {
         arya.askAi((Book) productAddToCart);
     }
 

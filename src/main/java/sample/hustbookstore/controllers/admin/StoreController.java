@@ -10,12 +10,12 @@ import java.util.List;
 public class StoreController extends BaseStoreController {
 
     @Override
-    protected String getRightPanelPath() {
+    public String getRightPanelPath() {
         return "/sample/hustbookstore/admin/voucher-view.fxml";
     }
 
     @Override
-    protected String getProductCardPath() {
+    public String getProductCardPath() {
         return "/sample/hustbookstore/admin/productCard-view.fxml";
     }
 
@@ -30,7 +30,7 @@ public class StoreController extends BaseStoreController {
     }
 
     @Override
-    protected void onSearch() {
+    public void onSearch() {
         String keyword = searchBar.getText().trim();
         if (keyword.isEmpty()) {
             resetAllGrids();
@@ -39,20 +39,20 @@ public class StoreController extends BaseStoreController {
         }
     }
 
-    private void searchProducts(String keyword) {
+    public void searchProducts(String keyword) {
         searchApplyToGridPane(tabBookGrid, allBookCards, keyword);
         searchApplyToGridPane(tabStationeryGrid, allStationeryCards, keyword);
         searchApplyToGridPane(tabToyGrid, allToyCards, keyword);
     }
 
-    private void resetAllGrids() {
+    public void resetAllGrids() {
         resetGridPane(tabBookGrid, allBookCards);
         resetGridPane(tabStationeryGrid, allStationeryCards);
         resetGridPane(tabToyGrid, allToyCards);
     }
 
     @Override
-    protected void onFilter() {
+    public void onFilter() {
         List<String> genres = genreCheckComboBox.getCheckModel().getCheckedItems();
         int restrictedAge = parseAge();
         float[] priceRange = parsePriceRange();
@@ -60,13 +60,13 @@ public class StoreController extends BaseStoreController {
         filterProducts(genres, restrictedAge, priceRange[0], priceRange[1]);
     }
 
-    private void filterProducts(List<String> genres, int restrictedAge, float priceFrom, float priceTo) {
+    public void filterProducts(List<String> genres, int restrictedAge, float priceFrom, float priceTo) {
         filterApplyToGridPane(tabBookGrid, allBookCards, genres, restrictedAge, priceFrom, priceTo);
         filterApplyToGridPane(tabStationeryGrid, allStationeryCards, genres, restrictedAge, priceFrom, priceTo);
         filterApplyToGridPane(tabToyGrid, allToyCards, genres, restrictedAge, priceFrom, priceTo);
     }
 
-    private int parseAge() {
+    public int parseAge() {
         try {
             return Integer.parseInt(restrictAgeField.getText());
         } catch (NumberFormatException e) {
@@ -74,7 +74,7 @@ public class StoreController extends BaseStoreController {
         }
     }
 
-    private float[] parsePriceRange() {
+    public float[] parsePriceRange() {
         float priceFrom = 0;
         float priceTo = Float.MAX_VALUE;
 

@@ -19,23 +19,22 @@ public class UserHomeScreenController extends BaseHomeScreenController implement
     @FXML
     private AnchorPane cartScreen;
 
-
-    protected String getCartPath() {
+    public String getCartPath() {
         return "/sample/hustbookstore/user/user-cart-view.fxml";
     }
 
     @Override
-    protected String getDashboardPath() {
+    public String getDashboardPath() {
         return "/sample/hustbookstore/user/user-dashboard-view.fxml";
     }
     
     @Override
-    protected String getStorePath() {
+    public String getStorePath() {
         return "/sample/hustbookstore/user/user-store-view.fxml";
     }
     
     @Override
-    protected String getProfilePath() {
+    public String getProfilePath() {
         return "/sample/hustbookstore/user/user-profile-view.fxml";
     }
 
@@ -117,6 +116,5 @@ public class UserHomeScreenController extends BaseHomeScreenController implement
         loadProfile();
         loadCart();
     }
-
 
 }

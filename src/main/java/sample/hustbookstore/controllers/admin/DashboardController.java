@@ -141,7 +141,7 @@ public class DashboardController {
     }
 
     @FXML
-    private void handleLeftIncomeButton(ActionEvent event) {
+    public void handleLeftIncomeButton(ActionEvent event) {
         if (event.getSource() == leftIncomeButton) {
             tabIncomeId++;
             calculateTabIncome();
@@ -150,7 +150,7 @@ public class DashboardController {
     }
 
     @FXML
-    private void handleRightIncomeButton(ActionEvent event) {
+    public void handleRightIncomeButton(ActionEvent event) {
         if (event.getSource() == rightIncomeButton && tabIncomeId > 0) {
             tabIncomeId--;
             calculateTabIncome()   ;
@@ -159,7 +159,7 @@ public class DashboardController {
     }
 
     @FXML
-    private void handleLeftOrderButton(ActionEvent event) {
+    public void handleLeftOrderButton(ActionEvent event) {
         if (event.getSource() == leftOrderButton) {
             tabOrderId++;
             calculateTabOrder();
@@ -168,7 +168,7 @@ public class DashboardController {
     }
 
     @FXML
-    private void handleRightOrderButton(ActionEvent event) {
+    public void handleRightOrderButton(ActionEvent event) {
         if (event.getSource() == rightOrderButton && tabOrderId > 0) {
             tabOrderId--;
             calculateTabOrder();
@@ -177,7 +177,7 @@ public class DashboardController {
     }
 
     @FXML
-    private void handleLeftTrendingButton(ActionEvent event) {
+    public void handleLeftTrendingButton(ActionEvent event) {
         if (event.getSource() == leftTrendingButton) {
             if (tabTrendingId < (trendingBooks.size() - 1)) {
                 tabTrendingId++;
@@ -189,7 +189,7 @@ public class DashboardController {
     }
 
     @FXML
-    private void handleRightTrendingButton(ActionEvent event) {
+    public void handleRightTrendingButton(ActionEvent event) {
         if (event.getSource() == rightTrendingButton) {
             if (tabTrendingId > 0) {
                 tabTrendingId--;
@@ -201,7 +201,7 @@ public class DashboardController {
     }
 
     @FXML
-    private void handleConfirmButton(ActionEvent event) {
+    public void handleConfirmButton(ActionEvent event) {
         if (event.getSource() == confirmButton) {
             if (datePickerFrom.getValue() == null || datePickerTo.getValue() == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

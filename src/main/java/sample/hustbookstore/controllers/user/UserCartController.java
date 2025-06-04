@@ -390,7 +390,7 @@ public class UserCartController implements CartUpdateListener{
     }
 
     @FXML
-    private void handleBillOk() {
+    public void handleBillOk() {
         billPane.setVisible(false);
         cartPane.setOpacity(1);
     }

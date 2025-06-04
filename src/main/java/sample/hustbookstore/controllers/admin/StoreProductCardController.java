@@ -28,8 +28,6 @@ public class StoreProductCardController implements ProductCardSetData {
     @FXML
     private TextField productSellPrice;
 
-
-
     private Product prodData;
 
     public void setData(Product prodData) {
