@@ -19,7 +19,14 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class AryaChatController {
+public class AryaChatController implements AryaChatUpdateListener{
+
+    @Override
+    public void onAryaChatUpdated(Book book) {
+        askAi(book);
+    }
+
+
     Dotenv dotenv = Dotenv.load();
     private final String API_KEY = dotenv.get("API_KEY");
     private final String API_URL = dotenv.get("API_URL");
@@ -127,6 +134,7 @@ public class AryaChatController {
     public void initialize() {
         inputField.setOnKeyPressed(this::handleEnterKey);
         sendButton.setOnAction(event -> handleSendMessage());
+        UserStoreProductCardController.setAryaChatUpdateListener(this);
     }
 
 }

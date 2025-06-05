@@ -37,10 +37,7 @@ import static sample.hustbookstore.LaunchApplication.*;
 
 public class UserCartController implements CartUpdateListener{
 
-    @Override
-    public void onCartUpdated() {
-        Platform.runLater(this::display);
-    }
+
 
     @FXML
     private Button applyVoucherBtn;
@@ -116,14 +113,17 @@ public class UserCartController implements CartUpdateListener{
     @FXML
     private Text customerNameField;
 
+    @Override
+    public void onCartUpdated() {
+        Platform.runLater(this::display);
+    }
+
     private static StoreUpdateListener listener;
     public static void setStoreUpdateListener(StoreUpdateListener listener){
         UserCartController.listener = listener;
     }
 
-
     private Alert alert;
-
     private float percent = 0;
 
     public void showSubTotalValue(){

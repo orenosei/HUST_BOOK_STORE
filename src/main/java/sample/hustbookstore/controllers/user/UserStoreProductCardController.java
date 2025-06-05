@@ -22,7 +22,6 @@ import sample.hustbookstore.utils.cacheHandler.ImageCache;
 import sample.hustbookstore.controllers.base.ProductCardSetData;
 
 import static sample.hustbookstore.LaunchApplication.localCart;
-import static sample.hustbookstore.controllers.user.UserStoreController.arya;
 
 public class UserStoreProductCardController implements ProductCardSetData {
 
@@ -85,10 +84,15 @@ public class UserStoreProductCardController implements ProductCardSetData {
 
     private int currenttype;
 
-    private Product productAddToCart;
+    private Product currentProduct;
+
+    private static AryaChatUpdateListener listener;
+    public static void setAryaChatUpdateListener(AryaChatUpdateListener chatListener) {
+        listener = chatListener;
+    }
 
     public void setData(Product prodData) {
-        this.productAddToCart = prodData;
+        this.currentProduct = prodData;
         String imagePath;
         if (prodData instanceof Book) {
             Book prod_to_book = (Book) prodData;
@@ -145,7 +149,7 @@ public class UserStoreProductCardController implements ProductCardSetData {
         productSpinner.setValueFactory(spin);
     }
 
-    protected void showBookInfoAnimation() {
+    public void showBookInfoAnimation() {
         Rectangle clip = new Rectangle();
         clip.setWidth(bookInfoPopup.getPrefWidth());
         clip.setHeight(0);
@@ -161,7 +165,7 @@ public class UserStoreProductCardController implements ProductCardSetData {
         timeline.play();
     }
 
-    protected void showOtherInfoAnimation() {
+    public void showOtherInfoAnimation() {
         Rectangle clip = new Rectangle();
         clip.setWidth(otherInfoPopup.getPrefWidth());
         clip.setHeight(0);
@@ -177,7 +181,7 @@ public class UserStoreProductCardController implements ProductCardSetData {
         timeline.play();
     }
 
-    protected void hideBookInfoAnimation() {
+    public void hideBookInfoAnimation() {
         Node clip = bookInfoPopup.getClip();
 
         if (clip == null || !(clip instanceof Rectangle)) {
@@ -200,7 +204,7 @@ public class UserStoreProductCardController implements ProductCardSetData {
         timeline.play();
     }
 
-    protected void hideOtherInfoAnimation() {
+    public void hideOtherInfoAnimation() {
         Node clip = otherInfoPopup.getClip();
 
         if (clip == null || !(clip instanceof Rectangle)) {
@@ -250,9 +254,10 @@ public class UserStoreProductCardController implements ProductCardSetData {
 
     @FXML
     public void handleAskAIButtonAction(ActionEvent event) {
-        arya.askAi((Book) productAddToCart);
+        if(listener != null) {
+            listener.onAryaChatUpdated((Book) currentProduct);
+        }
     }
-
 
     @FXML
     public void handleAddToCartButton(ActionEvent event) {
@@ -265,7 +270,7 @@ public class UserStoreProductCardController implements ProductCardSetData {
             Task<Boolean> task = new Task<>() {
                 @Override
                 protected Boolean call() {
-                    return localCart.addProductToCart(productAddToCart, productSpinner.getValue());
+                    return localCart.addProductToCart(currentProduct, productSpinner.getValue());
                 }
             };
 
