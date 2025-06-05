@@ -8,7 +8,7 @@ import sample.hustbookstore.utils.cloud.database;
 import java.sql.*;
 import java.time.LocalDate;
 
-public class VoucherList {
+public class VoucherListDAO {
 
     private static Connection connect;
 

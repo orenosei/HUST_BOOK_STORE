@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import sample.hustbookstore.models.User;
-import sample.hustbookstore.utils.dao.UserList;
+import sample.hustbookstore.utils.dao.UserListDAO;
 
 
 public class UserManagementController {
@@ -39,13 +39,13 @@ public class UserManagementController {
     private Button unbanUserBtn;
 
 
-    private final FilteredList<User> filteredUsers = new FilteredList<>(UserList.getAllUsers());
+    private final FilteredList<User> filteredUsers = new FilteredList<>(UserListDAO.getAllUsers());
 
     @FXML
     public void handleBanUser() {
         User selectedUser = customerTable.getSelectionModel().getSelectedItem();
         if (selectedUser != null) {
-            boolean success = UserList.banUser(selectedUser.getUserId());
+            boolean success = UserListDAO.banUser(selectedUser.getUserId());
             if (success) {
                 selectedUser.setBanned(true);
                 customerTable.refresh();
@@ -60,7 +60,7 @@ public class UserManagementController {
     public void handleUnbanUser() {
         User selectedUser = customerTable.getSelectionModel().getSelectedItem();
         if (selectedUser != null) {
-            boolean success = UserList.unbanUser(selectedUser.getUserId());
+            boolean success = UserListDAO.unbanUser(selectedUser.getUserId());
             if (success) {
                 selectedUser.setBanned(false);
                 customerTable.refresh();
@@ -85,7 +85,7 @@ public class UserManagementController {
 
         totalColumn.setCellValueFactory(cellData -> {
             int userId = cellData.getValue().getUserId();
-            double total = UserList.getTotalSpentByUserId(userId);
+            double total = UserListDAO.getTotalSpentByUserId(userId);
             return new ReadOnlyObjectWrapper<>(total);
         });
 

@@ -6,10 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import sample.hustbookstore.controllers.admin.InventoryController;
 import sample.hustbookstore.models.*;
 import sample.hustbookstore.utils.dao.*;
 
@@ -64,13 +62,13 @@ public class LaunchApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        AdminList.initialize();
-        UserList.initialize();
-        Inventory.initialize();
+        AdminListDAO.initialize();
+        UserListDAO.initialize();
+        InventoryDAO.initialize();
 
-        VoucherList.initialize();
-        BillList.initialize();
-        CartList.initialize();
+        VoucherListDAO.initialize();
+        BillListDAO.initialize();
+        CartListDAO.initialize();
 
         FXMLLoader fxmlLoader = new FXMLLoader(LaunchApplication.class.getResource("LaunchApplication.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 640, 720);

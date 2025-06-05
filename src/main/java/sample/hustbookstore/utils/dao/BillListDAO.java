@@ -15,7 +15,7 @@ import java.util.List;
 
 import static sample.hustbookstore.LaunchApplication.localUser;
 
-public class BillList {
+public class BillListDAO {
     private static Connection connect;
 
     public static Bill prepareBill(User user, List<CartItem> cartItems, float discount) {
@@ -170,7 +170,7 @@ public class BillList {
                     ResultSet itemsRs = itemsStmt.executeQuery();
                     while (itemsRs.next()) {
                         items.add(new BillItem(
-                                Inventory.getProductFromProductID(itemsRs.getString("product_id")),
+                                InventoryDAO.getProductFromProductID(itemsRs.getString("product_id")),
                                 itemsRs.getInt("quantity"),
                                 itemsRs.getDouble("price_at_purchase")
                         ));
@@ -183,7 +183,7 @@ public class BillList {
                         rs.getDouble("profit"),
                         rs.getDate("purchase_date").toLocalDate(),
                         items,
-                        UserList.getUserFromId(rs.getInt("user_id"))
+                        UserListDAO.getUserFromId(rs.getInt("user_id"))
                 ));
             }
         } catch (SQLException e) {
@@ -211,7 +211,7 @@ public class BillList {
                         try (ResultSet itemsRs = itemsStmt.executeQuery()) {
                             while (itemsRs.next()) {
                                 items.add(new BillItem(
-                                        Inventory.getProductFromProductID(itemsRs.getString("product_id")),
+                                        InventoryDAO.getProductFromProductID(itemsRs.getString("product_id")),
                                         itemsRs.getInt("quantity"),
                                         itemsRs.getDouble("price_at_purchase")
                                 ));
@@ -225,7 +225,7 @@ public class BillList {
                             rs.getDouble("profit"),
                             rs.getDate("purchase_date").toLocalDate(),
                             items,
-                            UserList.getUserFromId(rs.getInt("user_id"))
+                            UserListDAO.getUserFromId(rs.getInt("user_id"))
                     ));
                 }
             }
@@ -302,7 +302,7 @@ public class BillList {
     public static ObservableList<Book> getRecommendBooks() throws Exception {
         StringBuilder sb = new StringBuilder();
 
-        ObservableList<Book> AllBook = Inventory.getAllBooks();
+        ObservableList<Book> AllBook = InventoryDAO.getAllBooks();
         BookIndexer indexer = new BookIndexer();
         indexer.indexBooks(AllBook);
 

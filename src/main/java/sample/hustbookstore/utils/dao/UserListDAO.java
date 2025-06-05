@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 import static sample.hustbookstore.LaunchApplication.localUser;
 
-public class UserList {
+public class UserListDAO {
     private static Connection connect;
 
     public static void initialize() {

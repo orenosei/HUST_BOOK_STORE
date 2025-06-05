@@ -13,7 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import sample.hustbookstore.models.*;
-import sample.hustbookstore.utils.dao.BillList;
+import sample.hustbookstore.utils.dao.BillListDAO;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,11 +67,11 @@ public class UserDashboardController {
     }
 
     private void loadTrendingBooks() {
-        trendingBooks =  BillList.getTrendingBooks();
+        trendingBooks =  BillListDAO.getTrendingBooks();
     }
 
     private void loadRecommendBooks() throws Exception {
-        recommendBooks = BillList.getRecommendBooks();
+        recommendBooks = BillListDAO.getRecommendBooks();
     }
 
     private void initializeTrendingCards() {

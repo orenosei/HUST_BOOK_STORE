@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 
 import static sample.hustbookstore.LaunchApplication.localAdmin;
 
-public class AdminList {
+public class AdminListDAO {
     private static Connection connect;
 
     public static void initialize() {

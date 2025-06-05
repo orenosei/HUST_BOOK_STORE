@@ -3,8 +3,8 @@ package sample.hustbookstore.controllers.user;
 import javafx.scene.control.*;
 import sample.hustbookstore.controllers.base.BaseLoginController;
 import sample.hustbookstore.models.User;
-import sample.hustbookstore.utils.dao.CartList;
-import sample.hustbookstore.utils.dao.UserList;
+import sample.hustbookstore.utils.dao.CartListDAO;
+import sample.hustbookstore.utils.dao.UserListDAO;
 import static sample.hustbookstore.LaunchApplication.*;
 
 public class UserLoginController extends BaseLoginController {
@@ -13,9 +13,9 @@ public class UserLoginController extends BaseLoginController {
         if (si_username.getText().isEmpty() || si_password.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Please enter both username and password.");
         } else {
-            int loginResult = UserList.login(si_username.getText(), si_password.getText());
+            int loginResult = UserListDAO.login(si_username.getText(), si_password.getText());
             if (loginResult == 1) {
-                localCart = CartList.getCartFromDatabase(localUser.getUserId());
+                localCart = CartListDAO.getCartFromDatabase(localUser.getUserId());
                 loadHomeScreen();
             } else if (loginResult == -1) { //banned acc
                 showAlert(Alert.AlertType.WARNING, "Your account has been banned. Please contact the administrator.");
@@ -30,7 +30,7 @@ public class UserLoginController extends BaseLoginController {
         if (su_username.getText().isEmpty() || su_password.getText().isEmpty() ||
                 su_question.getSelectionModel().isEmpty() || su_answer.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Please fill all the fields");
-        } else if (UserList.isUsernameTaken(su_username.getText())) {
+        } else if (UserListDAO.isUsernameTaken(su_username.getText())) {
             showAlert(Alert.AlertType.ERROR, su_username.getText() + " is already taken");
         } else {
             User newUser = new User(
@@ -39,7 +39,7 @@ public class UserLoginController extends BaseLoginController {
                     su_question.getSelectionModel().getSelectedItem(),
                     su_answer.getText()
             );
-            if (UserList.registerUser(newUser)) {
+            if (UserListDAO.registerUser(newUser)) {
                 showAlert(Alert.AlertType.INFORMATION, "Successfully Registered Account!");
                 clearRegForm();
             } else {
@@ -55,7 +55,7 @@ public class UserLoginController extends BaseLoginController {
                 || fp_answer.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Please fill all blank fields");
         } else {
-            boolean ok = UserList.verifySecurityInfo(
+            boolean ok = UserListDAO.verifySecurityInfo(
                     fp_username.getText(),
                     fp_question.getSelectionModel().getSelectedItem(),
                     fp_answer.getText()
@@ -77,7 +77,7 @@ public class UserLoginController extends BaseLoginController {
         } else if (!np_newPassword.getText().equals(np_confirmPassword.getText())) {
             showAlert(Alert.AlertType.ERROR, "Passwords do not match");
         } else {
-            boolean updated = UserList.updatePassword(
+            boolean updated = UserListDAO.updatePassword(
                     fp_username.getText(),
                     np_newPassword.getText()
             );
