@@ -3,7 +3,7 @@ package sample.hustbookstore.models;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import sample.hustbookstore.controllers.user.CartUpdateListener;
-import sample.hustbookstore.utils.dao.CartList;
+import sample.hustbookstore.utils.dao.CartListDAO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -54,7 +54,7 @@ public class Cart {
             CartItem newItem = new CartItem(product, quantity, false);
             newItem.setProduct(product);
 
-            boolean dbSuccess = CartList.addProduct(product, quantity, cartId);
+            boolean dbSuccess = CartListDAO.addProduct(product, quantity, cartId);
             if (dbSuccess) {
                 cartItemList.add(newItem);
                 if (listener != null) {
@@ -90,7 +90,7 @@ public class Cart {
         existingItem.setQuantity(updatedItem.getQuantity());
         existingItem.setSelected(updatedItem.isSelected());
 
-        boolean dbSuccess = CartList.updateCartItem(existingItem, cartId);
+        boolean dbSuccess = CartListDAO.updateCartItem(existingItem, cartId);
 
         if (dbSuccess) {
             calculateTotalPrice();
@@ -107,7 +107,7 @@ public class Cart {
 
         boolean dbSuccess = false;
         if (currentCartRemove) {
-            dbSuccess = CartList.deleteCartItem(cartItem, cartId);
+            dbSuccess = CartListDAO.deleteCartItem(cartItem, cartId);
         }
 
         if (dbSuccess && listener != null) {

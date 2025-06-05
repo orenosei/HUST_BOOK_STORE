@@ -3,7 +3,7 @@ package sample.hustbookstore.controllers.admin;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import sample.hustbookstore.controllers.base.BaseProfileController;
-import sample.hustbookstore.utils.dao.AdminList;
+import sample.hustbookstore.utils.dao.AdminListDAO;
 
 import static sample.hustbookstore.LaunchApplication.localAdmin;
 
@@ -35,7 +35,7 @@ public class ProfileController extends BaseProfileController {
             localAdmin.setName(profile_adminName.getText());
             localAdmin.setPhoneNumber(profile_adminPhone.getText());
             localAdmin.setEmail(profile_adminEmail.getText());
-            AdminList.updateAdmin(localAdmin);
+            AdminListDAO.updateAdmin(localAdmin);
             loadProfileLabels();
             showAlert(Alert.AlertType.INFORMATION, "Information Message", "Your information updated successfully.");
         }
@@ -47,7 +47,7 @@ public class ProfileController extends BaseProfileController {
             showAlert(Alert.AlertType.ERROR, "Error Message", "Please enter new password");
         } else {
             localAdmin.setPassword(profile_adminPassword.getText());
-            AdminList.updateAdmin(localAdmin);
+            AdminListDAO.updateAdmin(localAdmin);
             loadProfileLabels();
             showAlert(Alert.AlertType.INFORMATION, "Information Message", "Your password updated successfully.");
         }

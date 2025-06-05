@@ -11,9 +11,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-import sample.hustbookstore.utils.dao.BillList;
+import sample.hustbookstore.utils.dao.BillListDAO;
 import sample.hustbookstore.models.Book;
-import sample.hustbookstore.utils.dao.UserList;
+import sample.hustbookstore.utils.dao.UserListDAO;
 import sample.hustbookstore.utils.cacheHandler.ImageCache;
 
 import java.sql.Date;
@@ -102,11 +102,11 @@ public class DashboardController {
     }
 
     public void loadCount() {
-        customerCount.setText(Integer.toString(UserList.countUser()));
-        orderCount.setText(Integer.toString(BillList.countBill()));
+        customerCount.setText(Integer.toString(UserListDAO.countUser()));
+        orderCount.setText(Integer.toString(BillListDAO.countBill()));
         Date today = Date.valueOf(todayLocalDate);
         Date weekLater = Date.valueOf(todayLocalDate.minusWeeks(1));
-        incomeCount.setText(String.format("%.2f",BillList.calculateIncome(weekLater,today)));
+        incomeCount.setText(String.format("%.2f", BillListDAO.calculateIncome(weekLater,today)));
     }
 
     public void loadIncomeChart(List<XYChart.Data<String, Float>> dataList) {
@@ -124,7 +124,7 @@ public class DashboardController {
     }
 
     public void loadTrendingBooks() {
-        trendingBooks =  BillList.getTrendingBooks();
+        trendingBooks =  BillListDAO.getTrendingBooks();
     }
 
     public void displayTrendingBooks() {
@@ -145,7 +145,7 @@ public class DashboardController {
         if (event.getSource() == leftIncomeButton) {
             tabIncomeId++;
             calculateTabIncome();
-            loadIncomeChart(BillList.getIncomeDataByDate(tabIncomeLeft,tabIncomeRight));
+            loadIncomeChart(BillListDAO.getIncomeDataByDate(tabIncomeLeft,tabIncomeRight));
         }
     }
 
@@ -154,7 +154,7 @@ public class DashboardController {
         if (event.getSource() == rightIncomeButton && tabIncomeId > 0) {
             tabIncomeId--;
             calculateTabIncome()   ;
-            loadIncomeChart(BillList.getIncomeDataByDate(tabIncomeLeft,tabIncomeRight));
+            loadIncomeChart(BillListDAO.getIncomeDataByDate(tabIncomeLeft,tabIncomeRight));
         }
     }
 
@@ -163,7 +163,7 @@ public class DashboardController {
         if (event.getSource() == leftOrderButton) {
             tabOrderId++;
             calculateTabOrder();
-            loadOrderChart(BillList.getOrderDataByDate(tabOrderLeft,tabOrderRight));
+            loadOrderChart(BillListDAO.getOrderDataByDate(tabOrderLeft,tabOrderRight));
         }
     }
 
@@ -172,7 +172,7 @@ public class DashboardController {
         if (event.getSource() == rightOrderButton && tabOrderId > 0) {
             tabOrderId--;
             calculateTabOrder();
-            loadOrderChart(BillList.getOrderDataByDate(tabOrderLeft,tabOrderRight));
+            loadOrderChart(BillListDAO.getOrderDataByDate(tabOrderLeft,tabOrderRight));
         }
     }
 
@@ -218,7 +218,7 @@ public class DashboardController {
             } else {
                 Date dayFrom = Date.valueOf(datePickerFrom.getValue());
                 Date dayTo = Date.valueOf(datePickerTo.getValue());
-                incomeCount.setText(String.format("%.2f",BillList.calculateIncome(dayFrom,dayTo)));
+                incomeCount.setText(String.format("%.2f", BillListDAO.calculateIncome(dayFrom,dayTo)));
             }
         }
     }
@@ -228,9 +228,9 @@ public class DashboardController {
         datePickerTo.setValue(todayLocalDate);
         loadCount();
         calculateTabIncome();
-        loadIncomeChart(BillList.getIncomeDataByDate(tabIncomeLeft,tabIncomeRight));
+        loadIncomeChart(BillListDAO.getIncomeDataByDate(tabIncomeLeft,tabIncomeRight));
         calculateTabOrder();
-        loadOrderChart(BillList.getOrderDataByDate(tabOrderLeft,tabOrderRight));
+        loadOrderChart(BillListDAO.getOrderDataByDate(tabOrderLeft,tabOrderRight));
         loadTrendingBooks();
         displayTrendingBooks();
     }

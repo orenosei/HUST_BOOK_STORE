@@ -18,7 +18,7 @@ import sample.hustbookstore.models.Book;
 import sample.hustbookstore.models.Product;
 import sample.hustbookstore.utils.cloud.CloudinaryService;
 import sample.hustbookstore.utils.cacheHandler.ImageCache;
-import sample.hustbookstore.utils.dao.Inventory;
+import sample.hustbookstore.utils.dao.InventoryDAO;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -215,7 +215,7 @@ public class InventoryController {
     }
 
     public void showData() {
-        ObservableList<Book> list = Inventory.getAllProducts();
+        ObservableList<Book> list = InventoryDAO.getAllProducts();
 
         FilteredList<Book> filteredData = new FilteredList<>(list, b -> true);
 
@@ -332,7 +332,7 @@ public class InventoryController {
             return;
         }
 
-        if (Inventory.isProductExists(inventory_productID.getText())) {
+        if (InventoryDAO.isProductExists(inventory_productID.getText())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);
@@ -341,7 +341,7 @@ public class InventoryController {
         } else {
             String type = inventory_type.getSelectionModel().getSelectedItem();
 
-            boolean success = Inventory.addProduct(
+            boolean success = InventoryDAO.addProduct(
                     inventory_productID.getText(),
                     inventory_productName.getText(),
                     inventory_distributor.getText(),
@@ -424,7 +424,7 @@ public class InventoryController {
         }
 
         String type = inventory_type.getSelectionModel().getSelectedItem();
-        boolean isUpdated = Inventory.updateProduct(
+        boolean isUpdated = InventoryDAO.updateProduct(
                 inventory_productID.getText(),
                 type,
                 inventory_productName.getText(),
@@ -478,7 +478,7 @@ public class InventoryController {
         Optional<ButtonType> result = confirmAlert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            boolean isDeleted = Inventory.deleteProduct(inventory_productID.getText());
+            boolean isDeleted = InventoryDAO.deleteProduct(inventory_productID.getText());
 
             if (isDeleted) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);

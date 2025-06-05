@@ -7,7 +7,7 @@ package sample.hustbookstore.controllers.admin;
     import javafx.scene.control.*;
     import javafx.scene.control.cell.PropertyValueFactory;
     import sample.hustbookstore.models.*;
-    import sample.hustbookstore.utils.dao.VoucherList;
+    import sample.hustbookstore.utils.dao.VoucherListDAO;
     import java.sql.Date;
     import java.util.Optional;
 
@@ -59,7 +59,7 @@ package sample.hustbookstore.controllers.admin;
 
 
         public void showData() {
-            ObservableList<Voucher> list = VoucherList.getAllVouchers();
+            ObservableList<Voucher> list = VoucherListDAO.getAllVouchers();
 
             FilteredList<Voucher> filteredData = new FilteredList<>(list, voucher -> true);
 
@@ -91,7 +91,7 @@ package sample.hustbookstore.controllers.admin;
                 return;
             }
 
-            if (VoucherList.isVoucherExists(voucherCode.getText())) {
+            if (VoucherListDAO.isVoucherExists(voucherCode.getText())) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Message");
                 alert.setHeaderText(null);
@@ -99,7 +99,7 @@ package sample.hustbookstore.controllers.admin;
                 alert.showAndWait();
             } else {
 
-                boolean success = VoucherList.addVoucher(
+                boolean success = VoucherListDAO.addVoucher(
                         voucherCode.getText(),
                         Integer.parseInt(voucherRemain.getText()),
                         Float.parseFloat(voucherDiscount.getText()),
@@ -147,7 +147,7 @@ package sample.hustbookstore.controllers.admin;
             Optional<ButtonType> result = confirmAlert.showAndWait();
 
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                boolean isDeleted = VoucherList.deleteVoucher(voucherCode.getText());
+                boolean isDeleted = VoucherListDAO.deleteVoucher(voucherCode.getText());
 
                 if (isDeleted) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -181,7 +181,7 @@ package sample.hustbookstore.controllers.admin;
                 return;
             }
 
-            boolean isUpdated = VoucherList.updateVoucher(
+            boolean isUpdated = VoucherListDAO.updateVoucher(
                     voucherCode.getText(),
                     Integer.parseInt(voucherRemain.getText()),
                     Float.parseFloat(voucherDiscount.getText()),

@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CartList {
+public class CartListDAO {
 
     private static Connection connect;
 
@@ -86,8 +86,8 @@ public class CartList {
             if (resultSet.next()) {
                 cart = new Cart(
                         resultSet.getInt("cart_id"),
-                        UserList.getUserFromId(resultSet.getInt("user_id")),
-                        CartList.getCartItemList(resultSet.getInt("cart_id"))
+                        UserListDAO.getUserFromId(resultSet.getInt("user_id")),
+                        CartListDAO.getCartItemList(resultSet.getInt("cart_id"))
                 );
                 return cart;
             }
@@ -108,7 +108,7 @@ public class CartList {
             try (ResultSet result = prepare.executeQuery()) {
                 while (result.next()) {
                     cartItemList.add(new CartItem(
-                            Inventory.getProductFromProductID(result.getString("product_id")),
+                            InventoryDAO.getProductFromProductID(result.getString("product_id")),
                             result.getInt("quantity"),
                             result.getBoolean("is_selected")
                     ));

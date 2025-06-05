@@ -25,9 +25,9 @@ import sample.hustbookstore.models.addressAPI.District;
 import sample.hustbookstore.models.addressAPI.Province;
 import sample.hustbookstore.models.addressAPI.Ward;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import sample.hustbookstore.utils.dao.BillList;
-import sample.hustbookstore.utils.dao.Inventory;
-import sample.hustbookstore.utils.dao.VoucherList;
+import sample.hustbookstore.utils.dao.BillListDAO;
+import sample.hustbookstore.utils.dao.InventoryDAO;
+import sample.hustbookstore.utils.dao.VoucherListDAO;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
@@ -209,11 +209,11 @@ public class UserCartController implements CartUpdateListener{
         }
 
         voucherCode = voucherField.getText();
-        if (!VoucherList.isVoucherExists(voucherCode)) {
+        if (!VoucherListDAO.isVoucherExists(voucherCode)) {
             showErrorAlert("Voucher does not exist!");
             return;
         }
-        Voucher voucher = VoucherList.getVoucher(voucherCode);
+        Voucher voucher = VoucherListDAO.getVoucher(voucherCode);
         if (voucher.getRemaining() <= 0) {
             showErrorAlert("This voucher has been used up!");
             return;
@@ -315,19 +315,19 @@ public class UserCartController implements CartUpdateListener{
 
                 float usedVoucher = 0;
                 if (voucherCode != null && !voucherCode.isEmpty()) {
-                    Voucher voucher = VoucherList.getVoucher(voucherCode);
+                    Voucher voucher = VoucherListDAO.getVoucher(voucherCode);
                     if (voucher != null) {
                         usedVoucher = voucher.getDiscount();
                     }
                 }
 
-                Bill newBill = BillList.prepareBill(localUser, selectedItems, usedVoucher);
-                BillList.addBill(newBill, selectedItems);
+                Bill newBill = BillListDAO.prepareBill(localUser, selectedItems, usedVoucher);
+                BillListDAO.addBill(newBill, selectedItems);
 
-                Inventory.updateProductStock(selectedItems);
+                InventoryDAO.updateProductStock(selectedItems);
 
                 if (voucherCode != null) {
-                    VoucherList.updateVoucherRemaining(voucherCode);
+                    VoucherListDAO.updateVoucherRemaining(voucherCode);
                     discountValue.setText("00.00");
                 }
 

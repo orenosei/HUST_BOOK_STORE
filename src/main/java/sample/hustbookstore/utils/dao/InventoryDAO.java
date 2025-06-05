@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Inventory {
+public class InventoryDAO {
     private static Connection connect;
 
     public static void initialize() {
@@ -152,18 +152,6 @@ public class Inventory {
         }
     }
 
-//    public static boolean deleteProduct(String productId) {
-//        String deleteQuery = "DELETE FROM product WHERE product_id = ?";
-//
-//        try (PreparedStatement prepare = connect.prepareStatement(deleteQuery)) {
-//            prepare.setString(1, productId);
-//            int rowsAffected = prepare.executeUpdate();
-//            return rowsAffected > 0;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            return false;
-//        }
-//    }
     public static boolean deleteProduct(String productId) {
         String updateQuery = "UPDATE product SET stock = 0, isDeleted = TRUE WHERE product_id = ?";
         try (PreparedStatement prepare = connect.prepareStatement(updateQuery)) {

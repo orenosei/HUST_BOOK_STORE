@@ -3,7 +3,7 @@ package sample.hustbookstore.controllers.user;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import sample.hustbookstore.controllers.base.BaseProfileController;
-import sample.hustbookstore.utils.dao.UserList;
+import sample.hustbookstore.utils.dao.UserListDAO;
 
 import static sample.hustbookstore.LaunchApplication.localUser;
 
@@ -39,7 +39,7 @@ public class UserProfileController extends BaseProfileController {
             localUser.setPhoneNumber(profile_adminPhone.getText());
             localUser.setEmail(profile_adminEmail.getText());
             localUser.setAddress(profile_adminAddress.getText());
-            UserList.updateUser(localUser);
+            UserListDAO.updateUser(localUser);
             loadProfileLabels();
             showAlert(Alert.AlertType.INFORMATION, "Information Message", "Your information updated successfully.");
         }
@@ -51,7 +51,7 @@ public class UserProfileController extends BaseProfileController {
             showAlert(Alert.AlertType.ERROR, "Error Message", "Please enter new password");
         } else {
             localUser.setPassword(profile_adminPassword.getText());
-            UserList.updateUser(localUser);
+            UserListDAO.updateUser(localUser);
             loadProfileLabels();
             showAlert(Alert.AlertType.INFORMATION, "Information Message", "Your password updated successfully.");
         }

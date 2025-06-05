@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import sample.hustbookstore.controllers.base.BaseOrderHistoryController;
 import sample.hustbookstore.models.Bill;
-import sample.hustbookstore.utils.dao.BillList;
+import sample.hustbookstore.utils.dao.BillListDAO;
 import javafx.scene.control.TableColumn;
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class OrderHistoryController extends BaseOrderHistoryController {
 
     @Override
     public void initializeData() {
-        List<Bill> bills = BillList.getAllBills();
+        List<Bill> bills = BillListDAO.getAllBills();
         originalBillList.setAll(bills);
     }
 

@@ -2,7 +2,7 @@ package sample.hustbookstore.models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import sample.hustbookstore.utils.dao.Inventory;
+import sample.hustbookstore.utils.dao.InventoryDAO;
 import java.util.stream.Collectors;
 
 public class Store {
@@ -11,17 +11,17 @@ public class Store {
     private ObservableList<Toy> toyListData = FXCollections.observableArrayList();
 
     public void refreshData() {
-        bookListData.setAll(Inventory.getAllBooks()
+        bookListData.setAll(InventoryDAO.getAllBooks()
                 .stream()
                 .filter(book -> book.getStock() > 0)
                 .collect(Collectors.toList()));
 
-        stationeryListData.setAll(Inventory.getAllStationery()
+        stationeryListData.setAll(InventoryDAO.getAllStationery()
                 .stream()
                 .filter(stationery -> stationery.getStock() > 0)
                 .collect(Collectors.toList()));
 
-        toyListData.setAll(Inventory.getAllToys()
+        toyListData.setAll(InventoryDAO.getAllToys()
                 .stream()
                 .filter(toy -> toy.getStock() > 0)
                 .collect(Collectors.toList()));
