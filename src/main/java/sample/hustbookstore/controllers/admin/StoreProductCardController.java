@@ -30,6 +30,7 @@ public class StoreProductCardController implements ProductCardSetData {
 
     private Product prodData;
 
+    @Override
     public void setData(Product prodData) {
         this.prodData = prodData;
         productName.setText(prodData.getName());
