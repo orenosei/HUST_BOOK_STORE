@@ -91,6 +91,7 @@ public class UserStoreProductCardController implements ProductCardSetData {
         listener = chatListener;
     }
 
+    @Override
     public void setData(Product prodData) {
         this.currentProduct = prodData;
         String imagePath;
