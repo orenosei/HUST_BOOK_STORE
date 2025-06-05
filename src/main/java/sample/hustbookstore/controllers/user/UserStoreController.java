@@ -9,7 +9,6 @@ import java.util.List;
 
 public class UserStoreController extends BaseStoreController {
 
-    public static AryaChatController arya;
 
     @Override
     public String getRightPanelPath() {
@@ -26,7 +25,6 @@ public class UserStoreController extends BaseStoreController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(getRightPanelPath()));
             AnchorPane pane = loader.load();
-            arya = loader.getController();
             rightPane.getChildren().setAll(pane);
         } catch (Exception e) {
             e.printStackTrace();

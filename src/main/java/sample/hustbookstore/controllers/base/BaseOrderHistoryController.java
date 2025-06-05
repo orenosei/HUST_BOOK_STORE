@@ -25,10 +25,8 @@ public abstract class BaseOrderHistoryController {
     @FXML protected DatePicker toDate;
     @FXML protected TableView<Bill> billTable;
     @FXML protected TableView<BillItem> showDetailTable;
-
     @FXML protected TableColumn<Bill, Integer> billIdCol;
     @FXML protected TableColumn<Bill, LocalDate> purchaseDateCol;
-
     @FXML protected TableColumn<BillItem, String> nameDetailCol;
     @FXML protected TableColumn<BillItem, Integer> qtyDetailCol;
     @FXML protected TableColumn<BillItem, Double> priceDetailCol;
@@ -38,7 +36,6 @@ public abstract class BaseOrderHistoryController {
     protected SortedList<Bill> sortedBills;
 
     public abstract void initializeData();
-
 
     public void setupTableColumns() {
         billIdCol.setCellValueFactory(data ->
