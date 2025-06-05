@@ -13,15 +13,16 @@ import javafx.geometry.Pos;
 import javafx.util.Duration;
 import org.cloudinary.json.JSONObject;
 import sample.hustbookstore.models.Book;
-
+import io.github.cdimascio.dotenv.Dotenv;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class AryaChatController {
-    private final String API_KEY = "AIzaSyAv-OyfoHUo9Vh2xifmvbzXNdiM195ai9c";
-    private final String API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+    Dotenv dotenv = Dotenv.load();
+    private final String API_KEY = dotenv.get("API_KEY");
+    private final String API_URL = dotenv.get("API_URL");
 
     @FXML private TextArea inputField;
     @FXML private Button sendButton;
@@ -120,7 +121,6 @@ public class AryaChatController {
         builder.append(", give me a short overview about the book.");
         String message = builder.toString();
         sendAndReceiveMessage(message);
-
     }
 
     @FXML
