@@ -283,10 +283,8 @@ public class InventoryController {
     private String currentImageUrl;
 
     public String getImageUrl(File file) throws Exception {
-        CloudinaryService uploader = new CloudinaryService();
-        String imageUrl = uploader.uploadImage(file);
+        String imageUrl = CloudinaryService.uploadImage(file);
         System.out.println("Uploaded Image URL: " + imageUrl);
-
         return imageUrl;
     }
 
