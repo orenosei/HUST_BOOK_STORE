@@ -501,7 +501,7 @@ public class InventoryController {
     }
 
     public void inventorySelectData() {
-        Book prod = inventory_tableView.getSelectionModel().getSelectedItem();
+        Product prod = inventory_tableView.getSelectionModel().getSelectedItem();
         int index = inventory_tableView.getSelectionModel().getSelectedIndex();
 
         if (index < 0 || prod == null) return;
@@ -518,13 +518,13 @@ public class InventoryController {
 
         loadImageAsync(prod.getImage());
 
-        if ("Book".equals(prod.getType())) {
-            inventory_author.setText(prod.getAuthor() != null ? prod.getAuthor() : "");
-            inventory_publishedDate.setValue(prod.getPublishedDate());
-            inventory_ISBN.setText(prod.getIsbn() != null ? prod.getIsbn() : "");
+        if (prod instanceof Book book) {
+            inventory_author.setText(book.getAuthor() != null ? book.getAuthor() : "");
+            inventory_publishedDate.setValue(book.getPublishedDate());
+            inventory_ISBN.setText(book.getIsbn() != null ? book.getIsbn() : "");
             inventory_genre.getCheckModel().clearChecks();
-            if (prod.getGenre() != null) {
-                String[] genres = prod.getGenre().split(",");
+            if (book.getGenre() != null) {
+                String[] genres = book.getGenre().split(",");
                 for (String g : genres) {
                     inventory_genre.getCheckModel().check(g.trim());
                 }
@@ -536,6 +536,7 @@ public class InventoryController {
             inventory_genre.getCheckModel().clearChecks();
         }
     }
+
 
     private Task<Image> imageLoadingTask;
     private void loadImageAsync(String imageUrl) {
