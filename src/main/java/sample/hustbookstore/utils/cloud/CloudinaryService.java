@@ -28,7 +28,7 @@ public class CloudinaryService {
         }
     }
 
-    public String uploadImage(File file) throws Exception {
+    public static String uploadImage(File file) throws Exception {
         if (cloudinary == null) throw new IllegalStateException("Cloudinary not initialized");
         if (file == null || !file.exists()) {
             throw new IllegalArgumentException("File not found");
