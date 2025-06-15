@@ -119,3 +119,5 @@ fabric.properties
 /book_index
 
 /src/cache/images/
+
+.env
