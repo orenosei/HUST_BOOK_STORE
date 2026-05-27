@@ -23,7 +23,7 @@ The **HUST_BOOK_STORE** project focuses on developing a comprehensive management
 4. **Operational Cost Tracking**: Manage and monitor additional expenses.  
 5. **AI Integration**:  
    - AI Chatbot (Genemi Flash 2.0) for interactive customer support and in-depth book information.  
-   - Book recommendations powered by deep learning based on user purchasing habits.  
+   - Book recommendations powered by deep learning based on user purchasing habits (requires models/ from VNCoreNLP)
 
 ---
 
@@ -46,8 +46,8 @@ The **HUST_BOOK_STORE** project focuses on developing a comprehensive management
 - Cloudinary  
 
 ### AI Integration:
-- Genemi Flash 2.0 API  
-- Deep learning algorithms  
+- Gemini Flash 2.0 API  
+- Recommendation system using VNCoreNLP
 
 ---
 
