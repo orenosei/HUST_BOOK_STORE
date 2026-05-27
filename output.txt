@@ -1,0 +1,15 @@
+1	Duy_Vũ	V	O	0	root
+2	bàn	N	O	1	vmod
+3	bên	N	O	2	nmod
+4	thỉnh_thoảng	R	O	6	adv
+5	lại	R	O	6	adv
+6	trêu_ghẹo	V	O	1	vmod
+7	Minh_Thành	Np	B-LOC	6	dob
+8	bằng	E	O	6	mnr
+9	Java	Np	O	8	pob
+10	.	CH	O	1	punct
+1	Tên	N	O	0	root
+2	nhóm	N	O	1	nmod
+3	xàm	V	O	2	nmod
+4	vãi	N	O	3	vmod
+5	.	CH	O	1	punct
