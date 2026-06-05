@@ -23,14 +23,19 @@ The **HUST_BOOK_STORE** project focuses on developing a comprehensive management
 4. **Operational Cost Tracking**: Manage and monitor additional expenses.  
 5. **AI Integration**:  
    - AI Chatbot (Gemini Flash 2.0) for interactive customer support and in-depth book information.  
-   - Book recommendations powered by deep learning (requires models from VNCoreNLP) based on user purchasing habits.  
+   - Book recommendation system powered by Apache Lucene (requires word segmenter from VNCoreNLP) based on user purchasing habits.  
+
+---
+
+## Demo
+https://github.com/user-attachments/assets/fe5f7266-05c6-4147-b8b0-f21345a3320e
 
 ---
 
 ## Technologies Used
 ### UI/UX Design:
-- Adobe Photoshop 2024  
-- Adobe Illustrator 2024  
+- Adobe Photoshop  
+- Adobe Illustrator 
 
 ### User Interface Development:
 - JavaFX  
@@ -40,16 +45,11 @@ The **HUST_BOOK_STORE** project focuses on developing a comprehensive management
 - Java  
 
 ### Database:
-- MySQL (deployed on Digital Ocean)  
+- MySQL (on Digital Ocean)  
 
 ### Image Storage:
 - Cloudinary  
 
 ### AI Integration:
-- Gemini Flash 2.0 API  
-- Recommendation system using VNCoreNLP
-
----
-
-## Contact
-For further information or inquiries, please feel free to reach out to any team member.  
+- Gemini Flash API  
+- Recommendation system using Apache Lucene and VNCoreNLP
