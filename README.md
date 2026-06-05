@@ -28,7 +28,7 @@ The **HUST_BOOK_STORE** project focuses on developing a comprehensive management
 ---
 
 ## Demo
-https://github.com/user-attachments/assets/fe5f7266-05c6-4147-b8b0-f21345a3320e
+https://github.com/user-attachments/assets/92ac6731-19b4-4e82-befc-8f92701edf7d
 
 ---
 
